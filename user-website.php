@@ -40,11 +40,12 @@
       }
 
       .sidebar {
-         width: 30%;
+         width: 23%;
          background-color: #ffbf10;
          /* padding-top: 20px; */
          margin: 10px;
-         border-radius: 10px;
+         border-bottom-right-radius: 10px;
+         border-bottom-left-radius: 10px;
          overflow: hidden;
       }
 
@@ -92,8 +93,8 @@
          border-radius: 0px;
       }
 
-      #myTabs{
-         margin-bottom: -8px;
+      #myTabs {
+         margin-bottom: -7px;
       }
    </style>
 </head>
@@ -113,49 +114,75 @@
       <div class="sidebar">
          <ul class="nav nav-tabs border-0 row" id="myTabs">
             <li class="nav-item col p-0 ">
-               <a class="nav-link active m-0 w-100 h-100 d-flex" id="tab1-tab" data-toggle="tab" href="#" data-target="#tab1" onclick="showRoute('link13')">
+               <a class="nav-link active m-0 w-100 h-100 d-flex" id="tab1-tab" data-toggle="tab" href="#"
+                  data-target="#tab1" onclick="showRoute('link13')">
                   <img src="assets/images/svg/hamburger.svg" alt="Link 1 Icon">
-                  <p class="text-white ms-2">My Account</p></a>
+                  <p class="text-white ms-2">My Account</p>
+               </a>
             </li>
             <li class="nav-item col p-0">
-               <a class="nav-link m-0 w-100 h-100 d-flex" id="tab2-tab" data-toggle="tab" href="#" data-target="#tab2" onclick="showRoute('link14')"> <img
-                     src="assets/images/svg/settings.svg" alt="Link 1 Icon">
-                  <p class="text-white ms-2">Tools</p></a>
+               <a class="nav-link m-0 w-100 h-100 d-flex" id="tab2-tab" data-toggle="tab" href="#" data-target="#tab2"
+                  onclick="showRoute('link14')"> <img src="assets/images/svg/settings.svg" alt="Link 1 Icon">
+                  <p class="text-white ms-2">Tools</p>
+               </a>
             </li>
          </ul>
          <div class="tab-content mt-2">
             <div class="tab-pane fade show active" id="tab1">
                <a class="d-flex" href="#" onclick="showRoute('link1')"> <img src="assets/images/sidebar/image9.svg"
                      alt="Link 1 Icon">
-                  <h4 class="text-white ms-3 mt-2">Account Overview</h4></a>
+                  <h4 class="text-white ms-3 mt-2">Account Overview</h4>
+               </a>
                <a class="d-flex" href="#" onclick="showRoute('link2')"> <img src="assets/images/sidebar/image12.svg"
-                     alt="Link 1 Icon"> <h4 class="text-white ms-3 mt-2">Open Live Account</h4></a>
-               <a class="d-flex" href="#" onclick="showRoute('link3')"> <img src="assets/images/sidebar/image6.svg" alt="Link 1 Icon">
-               <h4 class="text-white ms-3 mt-2">Open Demo Account</h4></a>
+                     alt="Link 1 Icon">
+                  <h4 class="text-white ms-3 mt-2">Open Live Account</h4>
+               </a>
+               <a class="d-flex" href="#" onclick="showRoute('link3')"> <img src="assets/images/sidebar/image6.svg"
+                     alt="Link 1 Icon">
+                  <h4 class="text-white ms-3 mt-2">Open Demo Account</h4>
+               </a>
                <a class="d-flex" href="#" onclick="showRoute('link4')"> <img src="assets/images/sidebar/image1.svg"
-                     alt="Link 1 Icon"><h4 class="text-white ms-3 mt-2">Add Existing Account</h4></a>
+                     alt="Link 1 Icon">
+                  <h4 class="text-white ms-3 mt-2">Add Existing Account</h4>
+               </a>
 
                <a class="d-flex" href="#" onclick="showRoute('link5')"> <img src="assets/images/sidebar/image11.svg"
-                     alt="Link 1 Icon"><h4 class="text-white ms-3 mt-2">Live Accounts</h4></a>
+                     alt="Link 1 Icon">
+                  <h4 class="text-white ms-3 mt-2">Live Accounts</h4>
+               </a>
 
-               <a class="d-flex" href="#" onclick="showRoute('link6')"> <img src="assets/images/sidebar/image3.svg" alt="Link 1 Icon">
-               <h4 class="text-white ms-3 ps-1 mt-2">Deposit</h4></a>
+               <a class="d-flex" href="#" onclick="showRoute('link6')"> <img src="assets/images/sidebar/image3.svg"
+                     alt="Link 1 Icon">
+                  <h4 class="text-white ms-3 ps-1 mt-2">Deposit</h4>
+               </a>
 
-               <a class="d-flex" href="#" onclick="showRoute('link7')"> <img src="assets/images/sidebar/image4.svg" alt="Link 1 Icon">
-               <h4 class="text-white ms-3 ps-1 mt-2">Withdraw</h4></a>
+               <a class="d-flex" href="#" onclick="showRoute('link7')"> <img src="assets/images/sidebar/image4.svg"
+                     alt="Link 1 Icon">
+                  <h4 class="text-white ms-3 ps-1 mt-2">Withdraw</h4>
+               </a>
 
                <a class="d-flex" href="#" onclick="showRoute('link8')"> <img src="assets/images/sidebar/image10.svg"
-                     alt="Link 1 Icon"><h4 class="text-white ms-3 mt-2">Internal Transfers</h4></a>
+                     alt="Link 1 Icon">
+                  <h4 class="text-white ms-3 mt-2">Internal Transfers</h4>
+               </a>
 
                <a class="d-flex" href="#" onclick="showRoute('link9')"> <img src="assets/images/sidebar/image8.svg"
-                     alt="Link 1 Icon" class="my-1"><h4 class="text-white ms-3 ps-1 mt-2">Copy Trade</h4></a>
+                     alt="Link 1 Icon" class="my-1">
+                  <h4 class="text-white ms-3 ps-1 mt-2">Copy Trade</h4>
+               </a>
 
                <a class="d-flex" href="#" onclick="showRoute('link10')"> <img src="assets/images/sidebar/image10.svg"
-                     alt="Link 1 Icon"><h4 class="text-white ms-2 ps-1 mt-2">Transaction History</h4></a>
+                     alt="Link 1 Icon">
+                  <h4 class="text-white ms-2 ps-1 mt-2">Transaction History</h4>
+               </a>
                <a class="d-flex" href="#" onclick="showRoute('link11')"> <img src="assets/images/sidebar/image2.svg"
-                     alt="Link 1 Icon" class="my-1"><h4 class="text-white ms-3 ps-1 mt-2">Referral System</h4></a>
+                     alt="Link 1 Icon" class="my-1">
+                  <h4 class="text-white ms-3 ps-1 mt-2">Referral System</h4>
+               </a>
                <a class="d-flex" href="#" onclick="showRoute('link12')"> <img src="assets/images/sidebar/image7.svg"
-                     alt="Link 1 Icon"><h4 class="text-white ms-3 ps-1 mt-2">My Referrals</h4></a>
+                     alt="Link 1 Icon">
+                  <h4 class="text-white ms-3 ps-1 mt-2">My Referrals</h4>
+               </a>
                <!-- Add more links as needed -->
             </div>
             <div class="tab-pane fade" id="tab2">
@@ -164,6 +191,7 @@
          </div>
 
       </div>
+      
       <div class="content">
          <div class="route-content" id="link1">
             <?php include("control-panel/account-overview.php"); ?>
@@ -206,8 +234,7 @@
       </div>
    </div>
 
-
-   </div>
+   
 
    <?php
    $isUserWebsitePage = true;
