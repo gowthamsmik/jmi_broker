@@ -1,55 +1,43 @@
 <html>
-
 <head>
     <?php include("includes/style.php"); ?>
     <style>
         .body {
             background-color: #F0F0;
         }
-
         .border-bottom-80 {
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1px solid #DEE2E6;
             /* or your preferred border color */
             height: 80%;
         }
-
         .btn {
             background-color: #FFBF10;
-
         }
-
         .custom-input {
             border: 2px solid black;
             margin: 5px;
             width: 300px;
             border-radius: 10px;
         }
-
         table {
             border-collapse: collapse;
             width: 100%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 5%;
             font-size: 12px;
-            background-color: white;
         }
-
         th,
         td {
             border-bottom: 1px solid #DFDFDF;
         }
-
         th,
         td {
             padding: 10px;
             text-align: left;
-
         }
-
         th {
             background-color: #FFFFFF;
         }
-
         .serial {
             background-color: #DFDFDF;
             color: #053C9E;
@@ -59,7 +47,6 @@
             margin: 15px 15px 15px 15px;
             font-weight: bolder;
         }
-
         .status {
             background-color: #053C9E;
             color: #FFFFFF;
@@ -69,7 +56,6 @@
             margin: 15px 15px 15px 15px;
             font-weight: bolder;
         }
-
         .description {
             background-color: #E9ECFF;
             padding: 2%;
@@ -77,7 +63,6 @@
     </style>
 </head>
   <body>
-
                 <h2>Transactiona History</h2>
                 <div class=" d-flex my-2">
                     <button class="btn mx-1">All</button>
@@ -131,11 +116,8 @@
                                         "details": "Deposit of $500 failed",
                                         "date": "2023-01-03"
                                     }
-                                
                                 ]';
-
                             $dataArray = json_decode($jsonData, true);
-
                             if (is_array($dataArray)) {
                                 foreach ($dataArray as $data) {
                                     echo "<tr>";
@@ -150,15 +132,9 @@
                                 }
                             }
                             ?>
-
                         </tbody>
                     </table>
                 </div>
             </body>
-
-            </html>
-        </table>
-    </div>
 </body>
-
 </html>
