@@ -74,8 +74,10 @@
 
       .content {
          flex: 1;
-         padding: 16px;
-         margin: 10px;
+         padding: 1%;
+         margin: 1%;
+         width: 60%;
+         overflow-x: auto;
       }
 
       .nav-tabs .nav-item .nav-link {
@@ -115,7 +117,7 @@
       <div class="dashboard-subheader-box">
          <div class="position">
             <h5 class="text-white">Control Panel | Account Overview</h5>
-            <p class="text-white font-size">Home > Dashboard</p>
+            <p class="text-white font-size">Home > Dashboard ><span id="routeText"></span></p>
          </div>
       </div>
    </div>
@@ -197,7 +199,24 @@
                   <!-- Add more links as needed -->
                </div>
                <div class="tab-pane fade" id="tab2">
-                  <h2>jj</h2>
+               <a class="d-flex" href="#" onclick="showRoute('link15')">  <i class="fa fa-key fa-lg" aria-hidden="true"></i>
+                     <h4 class="text-white ms-3 mt-2">Password Change</h4>
+                  </a>
+                  <a class="d-flex" href="#" onclick="showRoute('link16')"><i class="fa fa-download fa-lg" aria-hidden="true"></i>
+                     <h4 class="text-white ms-3 mt-2">Download Center</h4>
+                  </a>
+                  <a class="d-flex" href="#" onclick="showRoute('link17')"><i class="fa fa-book fa-lg"></i>
+                     <h4 class="text-white ms-3 mt-2">Ebooks</h4>
+                  </a>
+                  <a class="d-flex" href="#" onclick="showRoute('link18')">   <i class="fa fa-calendar fa-lg"></i>
+                     <h4 class="text-white ms-3 mt-2">Economic Calendar</h4>
+                  </a>
+                  <a class="d-flex" href="#" onclick="showRoute('link19')"> <i class="fa fa-calculator fa-lg"></i>
+                     <h4 class="text-white ms-3 mt-2">PIP Calculators</h4>
+                  </a>
+                  <a class="d-flex" href="#" onclick="showRoute('link20')"> <i class="fa fa-fire fa-lg"></i>
+                     <h4 class="text-white ms-3 mt-2">Forex Heatmap</h4>
+                  </a>
                </div>
             </div>
          </div>
@@ -244,6 +263,24 @@
          <div class="route-content" id="link12">
             <?php include("control-panel/my-referral.php"); ?>
          </div>
+         <div class="route-content" id="link15">
+         <p>Password Change</p>
+         </div>
+         <div class="route-content" id="link16">
+         <p>Download Center</p>
+         </div>
+         <div class="route-content" id="link17">
+         <p>Ebooks</p>
+         </div>
+         <div class="route-content" id="link18">
+         <p>Economic Calendar</p>
+         </div>
+         <div class="route-content" id="link19">
+         <p>PIP Calculators</p>
+         </div>
+         <div class="route-content" id="link20">
+           <p>Forex Heatmap</p>
+         </div>
       </div>
    </div>
 
@@ -270,6 +307,52 @@
       if (selectedRoute) {
          selectedRoute.style.display = 'block';
       }
+
+      var routeText = document.getElementById('routeText');
+      if (routeText) {
+         switch (routeId) {
+            case 'link1':
+               routeText.innerText = 'Accounts Overview';
+               break;
+            case 'link2':
+               routeText.innerText = 'Open Live Account';
+               break;
+            case 'link3':
+               routeText.innerText = 'Open Demo Account';
+               break;
+            case 'link4':
+               routeText.innerText = 'Add Existing Account';
+               break;
+            case 'link5':
+               routeText.innerText = 'Live Accounts';
+               break;
+            case 'link6':
+               routeText.innerText = 'Deposit';
+               break;
+            case 'link7':
+               routeText.innerText = 'Withdraw';
+               break;
+            case 'link8':
+               routeText.innerText = 'Internal Transfers';
+               break;
+            case 'link9':
+               routeText.innerText = 'Copy Trade';
+               break;
+            case 'link10':
+               routeText.innerText = 'Transaction History';
+               break;
+            case 'link11':
+               routeText.innerText = 'Referral System';
+               break;
+            case 'link12':
+               routeText.innerText = 'My Referrals';
+               break;
+            default:
+               routeText.innerText = '';
+               break;
+         }
+      }
+      window.scrollTo(0, 0);
    }
    window.onload = function () {
       showRoute("link1")
