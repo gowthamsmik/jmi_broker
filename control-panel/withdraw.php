@@ -38,7 +38,7 @@
         }
         .button {
             background-color: #007BFF !important; /* Primary color */
-            color: #fff !important;
+            color: #fff;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
@@ -47,14 +47,13 @@
         }
         .button:hover {
             background-color: #FFC107 !important; /* Yellow hover color */
-            color: #000000 !important;
         }
     </style>
 </head>
 <body>
     <div>
-    <div class="d-flex">
-            <h2 class="fs-4">Withdraw Account</h2>
+        <div class="d-flex">
+            <h2>Deposit Account</h2>
             <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
                 <p class="mt-1 ms-2">Welcome, <?php echo $_SESSION['sessionusername']; ?></p>
             </div>

@@ -19,9 +19,6 @@
             height: 30px;
             width: 30px;
         }
-        .custom-button{
-            background-color: #0342AB;
-        }
     </style>
 </head>
 
@@ -38,7 +35,7 @@
 
         <div class="input-group mb-3 mt-5">
             <input type="text" class="form-control border" placeholder="https://www.jmibrokers.com/en?myref=10441">
-            <button class="btn btn-success custom-button" type="submit">Copy Link</button>
+            <button class="btn btn-success custom-button bg-primary" type="submit">Copy Link</button>
         </div>
     </div>
 </body>

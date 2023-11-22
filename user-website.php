@@ -261,7 +261,6 @@
                   <!-- Add more links as needed -->
                </div>
                <div class="tab-pane fade" id="tab2">
-<<<<<<< HEAD
                   <a class="d-flex" href="#" onclick="showRoute('link15')"> <i class="fa fa-key fa-lg"
                         aria-hidden="true"></i>
                      <h4 class="text-white ms-3 mt-2 my_account">Password Change</h4>
@@ -281,25 +280,6 @@
                   </a>
                   <a class="d-flex" href="#" onclick="showRoute('link20')"> <i class="fa fa-fire fa-lg"></i>
                      <h4 class="text-white ms-3 mt-2 my_account">Forex Heatmap</h4>
-=======
-               <a class="d-flex" href="#" onclick="showRoute('link15')">  <i class="fa fa-key fa-lg" aria-hidden="true"></i>
-                     <h4 class="text-white ms-3 mt-2">Password Change</h4>
-                  </a>
-                  <a class="d-flex" href="#" onclick="showRoute('link16')"><i class="fa fa-download fa-lg" aria-hidden="true"></i>
-                     <h4 class="text-white ms-3 mt-2">Download Center</h4>
-                  </a>
-                  <a class="d-flex" href="#" onclick="showRoute('link17')"><i class="fa fa-book fa-lg"></i>
-                     <h4 class="text-white ms-3 mt-2">Ebooks</h4>
-                  </a>
-                  <a class="d-flex" href="#" onclick="showRoute('link18')">   <i class="fa fa-calendar fa-lg"></i>
-                     <h4 class="text-white ms-3 mt-2">Economic Calendar</h4>
-                  </a>
-                  <a class="d-flex" href="#" onclick="showRoute('link19')"> <i class="fa fa-calculator fa-lg"></i>
-                     <h4 class="text-white ms-3 mt-2">PIP Calculators</h4>
-                  </a>
-                  <a class="d-flex" href="#" onclick="showRoute('link20')"> <i class="fa fa-fire fa-lg"></i>
-                     <h4 class="text-white ms-3 mt-2">Forex Heatmap</h4>
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
                   </a>
                </div>
             </div>
@@ -354,7 +334,6 @@
             <?php include("control-panel/my-referral.php"); ?>
          </div>
          <div class="route-content" id="link15">
-<<<<<<< HEAD
             <?php include("control-panel/password-change.php"); ?>
          </div>
          <div class="route-content" id="link16">
@@ -371,24 +350,6 @@
          </div>
          <div class="route-content" id="link20">
             <?php include("control-panel/forex-heatmap.php"); ?>
-=======
-         <p>Password Change</p>
-         </div>
-         <div class="route-content" id="link16">
-         <p>Download Center</p>
-         </div>
-         <div class="route-content" id="link17">
-         <p>Ebooks</p>
-         </div>
-         <div class="route-content" id="link18">
-         <p>Economic Calendar</p>
-         </div>
-         <div class="route-content" id="link19">
-         <p>PIP Calculators</p>
-         </div>
-         <div class="route-content" id="link20">
-           <p>Forex Heatmap</p>
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
          </div>
       </div>
    </div>

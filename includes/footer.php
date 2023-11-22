@@ -2,50 +2,16 @@
 <html lang='en'>
 
 <head>
-<<<<<<< HEAD
 	<link rel="stylesheet" href="assets/css/phoneCode.css">
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.min.js"></script> -->
 	<style>
 
-=======
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.css">  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.min.js"></script> -->
-	<style>
-		.meg_box {
-			background-color: #0342ab;
-		}
-		.hand_box {
-			background-color: #DFDFDF;
-			margin-right: 5%;
-		}
-		.msghand_box {
-			background-color: #F0F0F0;
-		}
-		.hand_box p , .meg_box p {
-			font-size: 20px !important;
-		}
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
 	</style>
 </head>
 
 <body>
-<<<<<<< HEAD
-=======
-	<div class="d-flex gap-5 msghand_box justify-content-end">
-		<div class="meg_box p-3 rounded-top-4 text-center">
-			<img src="assets/images/svg/msg.svg" alt="404">
-			<p class="text-white">Live Chat</p>
-		</div>
-		<div class="hand_box p-3 rounded-top-4 text-center">
-			<img src="assets/images/svg/hand.svg" alt="404">
-			<p>Contact Us</p>
-		</div>
-	</div>
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
 	<footer>
 		<div class="container">
 			<?php if (!$isUserWebsitePage): ?>
@@ -303,7 +269,6 @@
 								</div>
 							</div>
 
-<<<<<<< HEAD
 
 							<div class="col-md-4">
 								<div class="popupfeild">
@@ -337,15 +302,6 @@
 											</div>
 										</div>
 									</div>
-=======
-							<div class="col-md-4">
-								<div class="popupfeild">
-									<label for="phone">Phone Number</label>
-									<div id="phone-input-container">
-										<input type="tel" id="phone" name="phone" placeholder="Type Phone Number">
-									</div>
-									<!-- <div id="phone-dropdown-container"></div> -->
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
 								</div>
 							</div>
 
@@ -487,7 +443,6 @@
 
 		// var input = document.querySelector("#phone");
 		// intlTelInput(input, {
-<<<<<<< HEAD
 		// 	initialCountry: "in",
 		// 	separateDialCode: true, // Optional: Show dial code separately
 		// 	utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js",
@@ -600,116 +555,6 @@
 				}
 
 
-=======
-		//     initialCountry: "in",
-		//     separateDialCode: true, // Optional: Show dial code separately
-		//     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js",
-
-		// });
-
-
-		$(document).ready(function () {
-
-			//Register Ajax
-			$('#registerButton ').on('click', function (e) {
-				console.log("juileb")
-				e.preventDefault(); // Prevent the default form submission
-				// window.location.href = "home.php";
-				// Perform your validation here
-				var userName = $('input[name="userName"]').val();
-				var password = $('input[name="password"]').val();
-				var email = $('input[name="email"]').val();
-				var gender = $('select[name="gender"]').val();
-				var fullName = $('input[name="fullName"]').val();
-				var phone = $('input[name="phone"]').val();
-				var confirmPassword = $('input[name="confirmpassword"]').val();
-
-				console.log("poil", userName, password, email, gender, fullName, phone, confirmPassword)
-				var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-				// Regular expression for a valid phone number (assuming a simple format)
-				var phoneRegex = /^\d{10}$/;
-				var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
-
-
-				// Example: Check if the fields are not empty
-				if (userName.trim() === '' || password.trim() === '' || email.trim() === '' || gender.trim() === '' || fullName.trim() === '' || phone.trim() === '') {
-					alert('Please fill in all fields.');
-					return;
-				}
-
-				// Example: Check if the email is valid using regex
-				if (!emailRegex.test(email)) {
-					alert('Please enter a valid email address.');
-					return;
-				}
-
-				// Example: Check if the phone number is valid using regex
-				if (!phoneRegex.test(phone)) {
-					alert('Please enter a valid phone number.');
-					return;
-				}
-				if (!passwordRegex.test(password)) {
-					alert('Password must be at least 8 characters long and include at least one number, one special character (!@#$%^&*), and one uppercase letter.');
-					return;
-				}
-				if (password != confirmPassword) {
-					alert('Password Doesnt Match with confirm Password');
-					return;
-				}
-
-				// If validation passes, you can proceed with further actions or AJAX call
-				console.log("Validation successful. Proceed with further actions or AJAX call.");
-
-
-				// If validation passes, make the AJAX call
-				$.ajax({
-					url: 'includes/softwareinclude/register.php',
-					type: 'POST',
-					data: {
-						email: email,
-						password: password,
-						name: fullName,
-						gender: gender,
-						userName: userName,
-						phone: phone,
-						// Add other data fields as needed
-					},
-					success: function (response) {
-						alert(response);
-						if (response == "User successfully registered!") {
-							console.log("Success", response);
-							$('.signUppopup-waper').fadeOut();
-							$('.overlay').fadeOut();
-						} else (
-							console.log('error', response)
-						)
-					},
-					error: function (xhr, status, error) {
-						console.log("terter", xhr.responseText);
-						// Handle error response
-					}
-				});
-			});
-			//Login Ajax
-			$('#loginButton').on('click', function (e) {
-				console.log("juileb")
-				e.preventDefault(); // Prevent the default form submission
-
-				var userNameorPhone = $('input[name="loginUserorPhone"]').val();
-				var password = $('input[name="loginPassword"]').val();
-
-				console.log("poil", userNameorPhone, password)
-
-
-				// Example: Check if the fields are not empty
-				if (userNameorPhone.trim() === '' || password.trim() === '') {
-					alert('Please fill in all fields.');
-					return;
-				}
-
-
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
 				// If validation passes, you can proceed with further actions or AJAX call
 				console.log("Validation successful. Proceed with further actions or AJAX call.");
 
@@ -726,18 +571,11 @@
 						alert(response);
 
 						console.log("Success", response);
-<<<<<<< HEAD
 						if (response == 'Login Successful') {
 							$('.loginpopup-waper').fadeOut();
 							$('.overlay').fadeOut();
 							window.location.href = 'user-website.php';
 						}
-=======
-						$('.loginpopup-waper').fadeOut();
-						$('.overlay').fadeOut();
-						window.location.href = 'user-website.php';
-
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
 					},
 					error: function (xhr, status, error) {
 						console.log("terter", xhr.responseText);

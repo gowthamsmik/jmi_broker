@@ -1,73 +1,59 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <?php include("includes/style.php"); ?>
     <style>
         .body {
             background-color: #F0F0F0;
         }
-
         .border-bottom-80 {
             border-bottom: 1px solid #DEE2E6;
             /* or your preferred border color */
             height: 80%;
         }
-
         .card {
             border-radius: 10px;
         }
-
         .account_circle {
             height: 30px;
             width: 30px;
         }
-
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
         }
-
         .grid-item {
             background-color: white;
             padding: 20px;
             border-radius: 10px;
         }
-
         .row-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .row-item {
             margin: 10px;
         }
-
         .button {
-            background-color: #007BFF !important;
-            /* Primary color */
-            color: #fff !important;
+            background-color: #007BFF !important; /* Primary color */
+            color: #fff;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
         .button:hover {
-            background-color: #FFC107 !important;
-            color: #000000 !important;
-            /* Yellow hover color */
+            background-color: #FFC107 !important; /* Yellow hover color */
         }
     </style>
 </head>
-
 <body>
     <div>
         <div class="d-flex">
-            <h2 class="fs-4">Deposit Account</h2>
+            <h2>Deposit Account</h2>
             <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
                 <p class="mt-1 ms-2">Welcome,  <?php echo $_SESSION['sessionusername']; ?></p>
             </div>
@@ -87,23 +73,18 @@
                 // Add more data as needed
             ];
             foreach ($data as $item) {
-                ?>
+            ?>
                 <div class="grid-item card bg-white  rounded box mx-auto">
                     <div class="w-100 h-100 p-5">
                         <img src="<?php echo $item['image']; ?>" class="mx-auto" alt="Image">
                     </div>
-                    <p class="font-weight-bold  text-center mt-3">
-                        <?php echo $item['text']; ?>
-                    </p>
-                    <button class='btn button mt-3 '>
-                        <?php echo $item['button_text']; ?>
-                    </button>
+                    <p class="font-weight-bold  text-center mt-3"> <?php echo $item['text']; ?> </p>
+                    <button class='btn button mt-3 '><?php echo $item['button_text']; ?></button>
                 </div>
-                <?php
+            <?php
             }
             ?>
         </div>
     </div>
 </body>
-
 </html>

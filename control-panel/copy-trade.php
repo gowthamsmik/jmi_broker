@@ -10,10 +10,6 @@
         form .row {
             border: 0px solid;
         }
-        .custom-button{
-            background-color: #0342AB;
-            
-        }
     </style>
 </head>
 
@@ -65,7 +61,7 @@
                 </div>
             </div>
         </form>
-        <button type="button" class="btn custom-button text-light w-25 mt-4">Submit</button>
+        <button type="button" class="btn btn-primary w-25 mt-4">Submit</button>
     </div>
 </body>
 

@@ -10,9 +10,6 @@
         form .row {
             border: 0px solid;
         }
-        .btn_color{
-            background-color: #0342ab !important;
-        }
     </style>
 </head>
 
@@ -73,7 +70,7 @@
                 </div>
             </div>
         </form>
-        <button type="button" class="btn btn_color w-25 mt-4 text-white">Add Account </button>
+        <button type="button" class="btn btn-primary w-25 mt-4">Add Account </button>
     </div>
 </body>
 

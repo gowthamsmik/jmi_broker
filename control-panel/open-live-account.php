@@ -18,7 +18,6 @@
             width: 23%;
             background-color: #053B9E;
             border-radius: 8px;
-            margin-top:5%
         }
 
         .log {
@@ -82,7 +81,8 @@
             margin-top: 6%;
             margin-bottom: 6%;
             border-radius: 8px;
-            background-image: linear-gradient(to right, #FEDC18,#FFF7C5);
+            background-color: #FFBF10;
+            ;
         }
 
         .fm {
@@ -105,6 +105,7 @@
 
         .p11 {
             font-family: Poppins;
+
             font-weight: bold;
             font-size: 24px;
             color: #FFFFFF;
@@ -115,46 +116,17 @@
             width: 98%;
             background-color: #FFFFFF;
         }
-        .buttonprimary {
-            background-color: #07348F;
-            color:white;
-        }
-        .pl .usd {
-            background: linear-gradient(to right, #FEDC18, 
-                    #FEDC18, #FFF7C5, #FFF7C5); 
-            -webkit-text-fill-color: transparent; 
-            -webkit-background-clip: text; 
-            font-weight: bold;
-        }
-        .pl .fs {
-            color: #FEDC18;
-            font-weight: bold;
-            opacity: 70%;
-        }
-        .box_list{
-            list-style-type: disc;
-            font-size:12px;
-            line-height: 18px;
-        }
     </style>
 </head>
 
 <body>
     <div>
-<<<<<<< HEAD
         <div>
             <p>Open Live Account</p>
         </div>
         <div>
             <p class="wel">Welcome,  <?php echo $_SESSION['sessionusername']; ?></p>
-=======
-    <div class="d-flex">
-        <h2 class="fs-4">Open Live Account</h2>
-        <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
-            <p class="mt-1 ms-2">Welcome, Ameer Ameer</p>
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
         </div>
-    </div>
         <div class="fsa fm">
             <div class="pl">
                 <img src="assets/images/group.png" alt="" class="log">
@@ -163,11 +135,7 @@
                 <h1 class="fs">FIXED SPREAD ACCOUNT</h1>
                 <p class="be">Benefit from industry-leading entry prices</p>
                 <p class="li"></p>
-<<<<<<< HEAD
                 <ul class=" p-4" style="list-style-type: disc;font-size:12px">
-=======
-                <ul class=" p-4 box_list">
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
                     <li>1 PIP fixed spread</li>
                     <li>Up To 1:500 Leverage</li>
                     <li>100$ Minimum funding</li>
@@ -193,11 +161,7 @@
                 <p class="be">Benefit from industry-leading entry prices</p>
                 <p class="li"></p>
 
-<<<<<<< HEAD
                 <ul class=" p-4" style="list-style-type: disc;font-size:12px">
-=======
-                <ul class=" p-4 box_list">
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
                     <li>0.1 PIP spread</li>
                     <li>Up To 1:200 Leverage</li>
                     <li>500$ Minimum funding</li>
@@ -224,11 +188,7 @@
                 <h1 class="fs">SCALPING ACCOUNT</h1>
                 <p class="be">Benefit from industry-leading entry prices</p>
                 <p class="li"></p>
-<<<<<<< HEAD
                 <ul  class=" p-4" style="list-style-type: disc;font-size:12px">
-=======
-                <ul  class=" p-4 box_list">
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
                     <li>1.7 PIP</li>
                     <li>Up to 1:100 Leverage</li>
                     <li>1000$ Minimum funding</li>
@@ -255,11 +215,7 @@
                 <h1 class="fs">BONUS ACCOUNT</h1>
                 <p class="be">Benefit from industry-leading entry prices</p>
                 <p class="li"></p>
-<<<<<<< HEAD
                 <ul class=" p-4" style="list-style-type: disc;font-size:12px">
-=======
-                <ul class=" p-4 box_list">
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
                     <li>1 PIP fixed spread</li>
                     <li>Up To 1:500 Leverage</li>
                     <li>100$ Minimum funding</li>
@@ -311,26 +267,16 @@
         </div>
 
         <button class="caa my-3">
-<<<<<<< HEAD
             <p class="p11
             ">Customer Account Agreement</p>
         </button>
         <div class="foo rounded">
             <div class="px-2">
-=======
-            <p class="p11">Customer Account Agreement</p>
-        </button>
-        <div class="foo rounded">
-            <div class="p-4">
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
                 <p class="fw-bold mb-2">JMI Brokers LTD is licensed broker from Vanuatu Financial Services Commission as Dealers in Securities under license number 15010</p>
                 <p class="fw-bold mb-2 text-primary">Risk Disclosure Statement</p>
                 <p class="mb-2" style="color:grey">Before engaging in the products offered by JMI Brokers LTD you should be aware of the risks which may be involved in such trading.</p>
                 <p class="fw-bold">You should not enter into a transaction unless you fully understand:...</p>
-<<<<<<< HEAD
                 <p class="p11">Customer Account Agreement</p>
-=======
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
             </div>
         </div>
     </div>
@@ -342,11 +288,7 @@
                     <label class="form-check-label mt-1" for="check1">I agree the terms and conditions</label>
                 </div>
             </div>
-<<<<<<< HEAD
             <button type="button" class="btn btn-primary w-25 mt-4">Open Account</button>
-=======
-            <button type="button" class="buttonprimary rounded py-2 w-25 mt-4">Open Account</button>
->>>>>>> f239a09fb02f978e65709fbbf17ac98d000e5583
 
 </body>
 
