@@ -9,6 +9,193 @@
 	<style>
 
 	</style>
+	<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+
+<script>
+var firebaseConfig = {
+    apiKey: "AIzaSyCFVvsn6dt0WsVQljltQiW-ed-NOLRN9J8",
+    authDomain: "jmibrokers.com",
+    projectId: "jmi-brokers",
+    storageBucket: "jmibrokers.com",
+    messagingSenderId: "698047998267",
+    appId: "1:698047998267:web:3f68d50ce3c78ef29e2f1e",
+    measurementId: "G-FTZC0TXY4K"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script type="text/javascript">
+
+                                      window.onload=function () {
+                                        render();
+                                      };
+
+                                      function render() {
+                                        //  window.recaptchaVerifier=new firebase.auth.RecaptchaVerifier('recaptcha-container');
+                                        //  recaptchaVerifier.render();
+                                        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+                                          "recaptcha-container",
+                                          {
+                                            size: "invisible",
+                                            callback: function(response) {
+                                              submitPhoneNumberAuth();
+                                            }
+                                          }
+                                        );
+                                      }
+
+                                      function phoneSendAuth() {
+										//'+'+$("#countryCode").val()
+                                        var number ='+91'+$("#phone").val();
+										const applicationVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container',
+										{
+                                            size: "invisible",
+                                            callback: function(response) {
+                                              submitPhoneNumberAuth();
+                                            }
+                                          }
+										);
+                                          firebase.auth().signInWithPhoneNumber(number,applicationVerifier).then(function (confirmationResult) {
+
+                                              window.confirmationResult=confirmationResult;
+                                              coderesult=confirmationResult;
+                                              console.log(coderesult);
+
+                                              $("#sentSuccess").text("????????? ??????? ??????????.");
+                                              $("#sentSuccess").show();
+                                              $("#successRegsiter").hide();
+                                              $("#send_code").prop('readonly', true);
+                                              $("#number").prop('readonly', true);
+                                              $("#countryCode").prop('readonly', true);
+                                              $("#verificationCode").show();
+                                              $("#verify_code").show();
+                                              $("#error").hide();
+
+                                          }).catch(function (error) {
+                                              $("#error").text(error.message);
+                                              $("#error").show();
+                                          });
+
+                                      }
+
+                                      function codeverify() {
+
+                                          var code = $("#verificationCode").val();
+
+                                          coderesult.confirm(code).then(function (result) {
+                                              var user=result.user;
+                                              console.log(user);
+
+                                              $("#successRegsiter").text("??? ????????, ?? ?????? ?????????????????? ??????.");
+                                              $("#successRegsiter").show();
+                                              $("#sentSuccess").hide();
+                                              $("#number").prop('readonly', true);
+                                              $("button#register").prop('disabled', false);
+                                              $("#verify_code").prop('readonly', true);
+                                              $("#verificationCode").prop('readonly', true);
+
+                                          }).catch(function (error) {
+                                              $("#error").text(error.message);
+                                              $("#error").show();
+                                          });
+                                      }
+
+
+                                              function emailSendAuth() {
+                                                var email = $("#email").val();
+												
+                                                  $.ajax({
+                                                    type: "get",
+                                                      url :"http://localhost/jmi/verificationemail.php?email="+email+"/",
+                                                      success:function(result){
+                                                          if(result=='true'){
+
+                                                                        $("#emailsentSuccess").text("Email Sent Successfully.");
+                                                                        $("#emailsentSuccess").show();
+                                                                        $("#emailsuccessRegsiter").hide();
+                                                                        $("#email").prop('readonly', true);
+                                                                        $("#email_send_code").prop('disabled', true);
+                                                                        $("#emailverificationCode").show();
+                                                                        $("#email_verify_code").show();
+                                                                        $("#emailerror").hide();
+
+
+                                                          }else if(result=='false'){
+                                                            $("#emailerror").text('Invalid Code');
+                                                            $("#emailerror").show();
+                                                          }
+                                                      },
+                                                        error:function(result){
+                                                          $("#emailerror").text('An error has occured');
+                                                          $("#emailerror").show();
+                                                      }
+                                                  });
+
+
+
+
+                                                  }
+
+                                        function emailcodeverify() {
+
+                                          var emailcode = $("#emailverificationCode").val();
+                                          var email = $("#email").val();
+
+
+                                            $.ajax({
+                                              type: "get",
+                                                url :"/verificationmailCode/"+email+"/"+emailcode,
+                                                success:function(result){
+                                                    if(result=='true'){
+
+                                                      $("#emailsuccessRegsiter").text("Code Verified, you can resume now.");
+                                                      $("#emailsuccessRegsiter").show();
+                                                      $("#emailsentSuccess").hide();
+                                                      $("#emailverify_code").prop('disabled', true);
+                                                      $("#emailverificationCode").prop('readonly', true);
+
+
+                                                    }else if(result=='false'){
+                                                      $("#emailerror").text('Invalid Code');
+                                                      $("#emailerror").show();
+                                                    }
+                                                },
+                                                  error:function(result){
+                                                    $("#emailerror").text('An error has occured');
+                                                    $("#emailerror").show();
+                                                }
+                                            });
+
+
+
+                                        }
+
+
+
+                                          		$.getJSON('https://ipinfo.io/json', function(result) {
+                                          		$('option[data-countryCode="'+result.country+'"]').prop('selected', true);
+                                          		  });
+
+
+                                                $('select#countryCode option').each(function(){
+                                                  _val=$(this).val();
+                                                  _attVal=$(this).attr('data-countryCode');
+                                                  $(this).text(_attVal+'('+_val+')');
+                                                });
+                                                $(function() {
+                                                    // choose target dropdown
+                                                    var select = $('select#countryCode');
+                                                    select.html(select.find('option').sort(function(x, y) {
+                                                      // to change to descending order switch "<" for ">"
+                                                      return $(x).text() > $(y).text() ? 1 : -1;
+                                                    }));
+
+                                                    // select default item after sorting (first item)
+                                                    // $('select').get(0).selectedIndex = 0;
+                                                  });
+                                    </script>
+
+                                  {!! NoCaptcha::renderJs() !!}
 </head>
 
 <body>
@@ -234,6 +421,7 @@
 					<p>Fill up the form and tour team will get back to you within 24 hours</p>
 
 					<form action="#">
+					<div id="recaptcha-container"></div>
 						<div class="row justify-content-center">
 							<div class="col-md-4">
 								<div class="popupfeild">
@@ -257,8 +445,8 @@
 							<div class="col-md-4">
 								<div class="popupfeild">
 									<label for="">Email Address</label>
-									<input name='email' type="email" placeholder="Type Email" class="pdmoreinput">
-									<a href="#">Send Code</a>
+									<input name='email' type="email" placeholder="Type Email" class="pdmoreinput" id="email">
+									<a href="#" onclick="emailSendAuth();">Send Code</a>
 								</div>
 							</div>
 
@@ -300,6 +488,8 @@
 												<input type="tel" id="phone" name="phone" class="form-control"
 													placeholder="Type Phone Number">
 											</div>
+												<a href="#" onclick="phoneSendAuth();">Send Code</a>
+								                               <!-- <div id="phone-dropdown-container"></div> -->
 										</div>
 									</div>
 								</div>
