@@ -101,7 +101,7 @@
         <div class="d-flex">
             <p class="font-weight-bold">Forex Account</p>
             <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
-                <p class="mt-1 ms-2">Welcome, Ameer Ameer</p>
+                <p class="mt-1 ms-2">Welcome,  <?php echo $_SESSION['sessionusername']; ?></p>
             </div>
         </div>
         <h2 class="mt-5">Your account opening request is currently under review</h2>

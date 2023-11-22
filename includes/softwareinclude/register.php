@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name=$_POST['name'];
     $gender=$_POST['gender'];
     $phone=$_POST['phone'];
+    $dialCode=$_POST['dialCode'];
 
 
     // Check if the email already exists
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         // Perform your SQL query to insert the new user
-        $insertUserSql = "INSERT INTO users (email, password,user_role,name,gender,is_active,phone,user_name) VALUES ('$email', '$password','$userRole','$name','$gender',1,'$phone','$userName')";
+        $insertUserSql = "INSERT INTO users (email, password,user_role,name,gender,is_active,phone,user_name,dial_code) VALUES ('$email', '$password','$userRole','$name','$gender',1,'$phone','$userName','$dialCode')";
         $res = $conn->query($insertUserSql);
         if ($res === TRUE) {
             // Insert successful

@@ -37,9 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $key = rand(111111111, 999999999);
             $_SESSION['sessionkey'] = $key;
             $_SESSION['sessionuser'] = $userName;
+            $_SESSION['sessionusername'] = $name;
+
             $usertype =$userRole;
            
-            echo "Login Successful" . $_SESSION['sessionkey'].$_SESSION['sessionuser'];
+            echo "Login Successful" ;
         } else {
             // Password is incorrect
             echo "Incorrect Password";

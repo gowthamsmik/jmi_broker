@@ -1,4 +1,5 @@
 <header>
+
 	<div class="top-header">
 		<div class="container-fluid d-flex align-items-center justify-content-between">
 			<div class="topHeader-cont">
@@ -17,12 +18,21 @@
 					<div class="tpBtn-language">
 						<a href="#">English <i class="fas fa-caret-down"></i></a>
 					</div>
+					
+					<?php if(!isset($_SESSION['sessionkey'])) { ?> 
 					<div class="tpBtn-login">
 						<a href="#" class="loginUp">Login</a>
 					</div>
 					<div class="tpBtn-register">
 						<a href="#" class="signUp">Register</a>
 					</div>
+					<?php } else { ?>
+					<div class="tpBtn-language">
+					
+						<a> <?php echo $_SESSION['sessionuser']	?> </a>
+						<a href="#"  id="logout" >Logout</a>
+					</div>	
+					<?php } ?>
 				</div>
 			</div>
 		</div>
@@ -200,3 +210,24 @@
 		</div>
 	</div>
 </header>
+
+<script>
+   $(document).ready(function(){
+	$('#logout').on('click',function(e){
+		 
+	$.ajax({
+         url: 'includes/softwareinclude/logout.php',
+		 type:'POST',
+		 success: function(response)
+		 {
+			alert(response);
+			window.location.href = "index.php";
+		 },
+		 error: function(xhr,status,error){
+			console.log("error",error);
+		 }
+
+	});
+});
+})
+</script>

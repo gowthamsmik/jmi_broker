@@ -107,7 +107,7 @@
             font-family: Poppins;
 
             font-weight: bold;
-            font-size: 30px;
+            font-size: 24px;
             color: #FFFFFF;
             padding: 10px;
         }
@@ -125,7 +125,7 @@
             <p>Open Live Account</p>
         </div>
         <div>
-            <p class="wel">Welcome, Ameer Ameer</p>
+            <p class="wel">Welcome,  <?php echo $_SESSION['sessionusername']; ?></p>
         </div>
         <div class="fsa fm">
             <div class="pl">
@@ -135,7 +135,7 @@
                 <h1 class="fs">FIXED SPREAD ACCOUNT</h1>
                 <p class="be">Benefit from industry-leading entry prices</p>
                 <p class="li"></p>
-                <ul style="list-style-type: disc;">
+                <ul class=" p-4" style="list-style-type: disc;font-size:12px">
                     <li>1 PIP fixed spread</li>
                     <li>Up To 1:500 Leverage</li>
                     <li>100$ Minimum funding</li>
@@ -161,7 +161,7 @@
                 <p class="be">Benefit from industry-leading entry prices</p>
                 <p class="li"></p>
 
-                <ul style="list-style-type: disc;">
+                <ul class=" p-4" style="list-style-type: disc;font-size:12px">
                     <li>0.1 PIP spread</li>
                     <li>Up To 1:200 Leverage</li>
                     <li>500$ Minimum funding</li>
@@ -188,7 +188,7 @@
                 <h1 class="fs">SCALPING ACCOUNT</h1>
                 <p class="be">Benefit from industry-leading entry prices</p>
                 <p class="li"></p>
-                <ul style="list-style-type: disc;">
+                <ul  class=" p-4" style="list-style-type: disc;font-size:12px">
                     <li>1.7 PIP</li>
                     <li>Up to 1:100 Leverage</li>
                     <li>1000$ Minimum funding</li>
@@ -215,7 +215,7 @@
                 <h1 class="fs">BONUS ACCOUNT</h1>
                 <p class="be">Benefit from industry-leading entry prices</p>
                 <p class="li"></p>
-                <ul style="list-style-type: disc;">
+                <ul class=" p-4" style="list-style-type: disc;font-size:12px">
                     <li>1 PIP fixed spread</li>
                     <li>Up To 1:500 Leverage</li>
                     <li>100$ Minimum funding</li>
@@ -266,19 +266,29 @@
             </form>
         </div>
 
-        <button class="caa">
-            <p class="p11">Customer Account Agreement</p>
+        <button class="caa my-3">
+            <p class="p11
+            ">Customer Account Agreement</p>
         </button>
-        <div class="foo">
-            <div>
-                <p>JMI Brokers LTD is licensed broker from Vanuatu Financial Services Commission as Dealers in Securities under license number 15010</p>
-                <p>Risk Disclosure Statement</p>
-                <p>Before engaging in the products offered by JMI Brokers LTD you should be aware of the risks which may be involved in such trading.</p>
-                <p>You should not enter into a transaction unless you fully understand:...</p>
+        <div class="foo rounded">
+            <div class="px-2">
+                <p class="fw-bold mb-2">JMI Brokers LTD is licensed broker from Vanuatu Financial Services Commission as Dealers in Securities under license number 15010</p>
+                <p class="fw-bold mb-2 text-primary">Risk Disclosure Statement</p>
+                <p class="mb-2" style="color:grey">Before engaging in the products offered by JMI Brokers LTD you should be aware of the risks which may be involved in such trading.</p>
+                <p class="fw-bold">You should not enter into a transaction unless you fully understand:...</p>
                 <p class="p11">Customer Account Agreement</p>
             </div>
         </div>
     </div>
+
+    <div class="row mt-4">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something"
+                        checked>
+                    <label class="form-check-label mt-1" for="check1">I agree the terms and conditions</label>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary w-25 mt-4">Open Account</button>
 
 </body>
 

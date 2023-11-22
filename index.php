@@ -4,9 +4,12 @@
       <?php include("includes/compatibility.php"); ?>
       <meta name="description" content="">
       <title>Title Here</title>
+      
       <?php include("includes/style.php"); ?>
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
    </head>
    <body>
+      
       <?php include("includes/header.php"); ?>
 
       <section class="mainBanner" style="background-image: url('<?php echo getPageMetaByIDKeyGroup(1,'Banner Background','Banner');?>');">
@@ -596,4 +599,5 @@
       <?php include("includes/footer.php"); ?>
       <?php include("includes/scripts.php"); ?>
    </body>
+  
 </html>

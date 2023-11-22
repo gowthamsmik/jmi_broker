@@ -9,7 +9,7 @@ $webeurl = 'http://localhost/jmi-cms/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'digitalwebtestde_jmi_cms';
+$dbname = 'jmi';
 global $conn;
 $conn = new mysqli( $servername, $username, $password, $dbname );
 // Check connection
