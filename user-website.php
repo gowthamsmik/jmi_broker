@@ -166,7 +166,11 @@
          .popup-content {
             max-width: 600px;
             margin: 0 auto;
-         }  
+         }
+
+         .popup{
+            display: none !important;
+         }
       }
    </style>
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -290,9 +294,28 @@
             <?php include("user-tab.php") ?>
          </div>
 
-         <div class="slidebar_table" id="display_sidetable2" onclick="openPopup()">
+         <button class="slidebar_table" id="display_sidetable2" onclick="openPopup()">
             <p>Table</p>
+         </button>
+
+         
+         <!-- <div class="popup" id="userPopup" >
+            <div class="popup-content">
+               <?php include("user-tab.php") ?>
+               <button onclick="closePopup()">Close</button>
+            </div>
          </div>
+      
+         <script>
+            
+            function openPopup() {
+               document.getElementById("userPopup").style.display = "block";
+            }
+
+            function closePopup() {
+               document.getElementById("userPopup").style.display = "none";
+            }
+         </script> -->
       </div>
       <div class="content">
          <div class="route-content" id="link1">
@@ -417,6 +440,24 @@
             case 'link12':
                routeText.innerText = 'My Referrals';
                break;
+            case 'link15':
+               routeText.innerText = 'Password Change';
+               break;
+            case 'link16':
+               routeText.innerText = 'Download Center';
+               break;
+            case 'link17':
+               routeText.innerText = 'Ebooks';
+               break;
+            case 'link18':
+               routeText.innerText = 'Economic Calendar';
+               break;
+            case 'link19':
+               routeText.innerText = 'PIP Calculators';
+               break;
+            case 'link20':
+               routeText.innerText = 'Forex Heatmap';
+               break;
             default:
                routeText.innerText = '';
                break;
@@ -431,21 +472,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
-      function getScreenSize() {
-            // Get the screen width using JavaScript
-            var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-            // Update styles based on screen width
-            console.log("lopsid",screenWidth);
-            var sidebarregular = document.getElementById('display_sidetable1');
-            var sidebarmini = document.getElementById('display_sidetable2');
-            console.log("lopsid",sidebarregular,sidebarmini);
-            if (screenWidth >= 300 && screenWidth <=880) {
-               sidebarregular.style.display = 'none';
-               sidebarmini.style.display = 'block';
-            } else {
-               sidebarmini.style.display = 'none';
-               sidebarregular.style.display = 'block';
-            }
+   function getScreenSize() {
+      // Get the screen width using JavaScript
+      var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      // Update styles based on screen width
+      console.log("lopsid", screenWidth);
+      var sidebarregular = document.getElementById('display_sidetable1');
+      var sidebarmini = document.getElementById('display_sidetable2');
+      // console.log("lopsid", sidebarregular, sidebarmini);
+      if (screenWidth >= 300 && screenWidth <= 880) {
+         sidebarregular.style.display = 'none';
+         sidebarmini.style.display = 'block';
+      } else {
+         sidebarmini.style.display = 'none';
+         sidebarregular.style.display = 'block';
+      }
 
             //console.log("lopsid",sidebarmini);
         }

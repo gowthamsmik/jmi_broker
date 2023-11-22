@@ -49,6 +49,7 @@
 
         .round-bullets li {
             margin-bottom: 8px; /* Adjust the margin between list items as needed */
+            color:black;
         }
 
         .input-container {
@@ -70,6 +71,9 @@
             padding: 10px;
             cursor: pointer;
             width: 150px; /* Set the width of the button as needed */
+        }
+        .custom-button{
+            background-color: #0342AB;
         }
     </style>
 </head>
@@ -99,7 +103,7 @@
 
             <div class="input-group mb-3 mt-4">
                 <input type="text" class="form-control border" placeholder="https://www.jmibrokers.com/en?myref=10441">
-                <button class="btn btn-success custom-button bg-primary" type="submit">Copy Link</button>
+                <button class="btn btn-success custom-button" type="submit">Copy Link</button>
             </div>
 
         </div>

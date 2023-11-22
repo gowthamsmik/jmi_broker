@@ -2,6 +2,7 @@
 
 <head>
     <?php include("includes/style.php"); ?>
+    <?php include ("includes/softwareinclude/functions.php")?>;
     <style>
         .body {
             background-color: #F0F0;
@@ -18,58 +19,58 @@
         }
 
         .custom-input {
-            border: 2px solid black;
-            margin: 5px;
-            width: 300px;
-            border-radius: 10px;
+            border: 1.5px solid black;
+            border-radius: 8px;
         }
 
         table {
-            border-collapse: collapse;
             width: 100%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 5%;
             font-size: 12px;
-        }
-
-        th,
-        td {
-            border-bottom: 1px solid #DFDFDF;
-        }
-
-        th,
-        td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #FFFFFF;
         }
 
         .serial {
             background-color: #DFDFDF;
             color: #053C9E;
-            border-radius: 2px;
+            border-radius: 5px;
             justify-content: center;
             align-items: center;
             margin: 15px 15px 15px 15px;
             font-weight: bolder;
         }
 
-        .status {
+        .status1 {
             background-color: #053C9E;
             color: #FFFFFF;
             border-radius: 2px;
             justify-content: center;
             align-items: center;
-            margin: 15px 15px 15px 15px;
+            font-weight: bolder;
+        }
+
+        .status2 {
+            background: linear-gradient(to right, #FEDC18, #FFF7C5); 
+            font-weight: bold;
+            border-radius: 2px;
+            justify-content: center;
+            align-items: center;
             font-weight: bolder;
         }
 
         .description {
-            background-color: #E9ECFF;
+            background-color: #F8F8F8;
+            border: .5px solid #E9ECFF;
             padding: 2%;
+            border-radius: 5px;
+        }
+
+        .active_but {
+            background-color: #FFBF10 !important;
+        }
+
+        .active_button {
+            background-color: #0342AB !important;
+            color: white !important;
         }
     </style>
 </head>
@@ -77,7 +78,7 @@
 <body>
 
     <div class="d-flex">
-        <h2>Transactiona History</h2>
+        <h2 class="fs-4">Transactional History</h2>
         <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
             <p class="mt-1 ms-2">Welcome,
                 <?php echo $_SESSION['sessionusername']; ?>
@@ -85,16 +86,29 @@
         </div>
     </div>
     <div class=" d-flex my-2">
-        <button class="btn mx-1">All</button>
-        <button class="btn mx-1">Deposit</button>
-        <button class="btn mx-1">Withdraw</button>
-        <button class="btn mx-1">Internal Transfers</button>
-        <div class="custom-input p-1 ms-5">
+        <button class="btn mx-1  px-3 active_but" onclick="makeActive(this)">All</button>
+        <button class="btn mx-1 active_but" onclick="makeActive(this)">Deposit</button>
+        <button class="btn mx-1 active_but" onclick="makeActive(this)">Withdraw</button>
+        <button class="btn mx-1 active_but" onclick="makeActive(this)">Internal Transfers</button>
+        <div class="custom-input p-1 ms-auto">
             <input type="text" placeholder="Search" />
+            <img src="assets/images/svg/Shape.svg" alt="404">
         </div>
     </div>
+    <script>
+        function makeActive(button) {
+            // Remove 'active_but' class from all buttons
+            var buttons = document.querySelectorAll('.btn');
+            buttons.forEach(function (btn) {
+                btn.classList.remove('active_button');
+            });
+
+            // Add 'active_but' class to the clicked button
+            button.classList.add('active_button');
+        }
+    </script>
     <div>
-        <table class='gap-3'>
+        <table class='gap-3 bg-white table mt-3'>
             <thead>
                 <tr>
                     <th>#</th>
@@ -108,49 +122,26 @@
             </thead>
             <tbody>
                 <?php
-                $jsonData = '[
-                                    {
-                                        "serial": "01",
-                                        "type": "Inter Transfer",
-                                        "via": "9190",
-                                        "account": "7890",
-                                        "status": "Success",
-                                        "details": "Learn new skills, feed your creativity, and boost your career in sessions and labs across these tracks:",
-                                        "date": "2023-01-01"
-                                    },
-                                    {
-                                        "serial": "02",
-                                        "type": "Withdrawal",
-                                        "via": "PayPal",
-                                        "account": "9876",
-                                        "status": "Pending",
-                                        "details": "Withdrawal request",
-                                        "date": "2023-01-02"
-                                    },
-                                    {
-                                        "serial": "03",
-                                        "type": "Deposit",
-                                        "via": "Bank Transfer",
-                                        "account": "1234",
-                                        "status": "Error",
-                                        "details": "Deposit of $500 failed",
-                                        "date": "2023-01-03"
-                                    }
-                                ]';
-                $dataArray = json_decode($jsonData, true);
-                if (is_array($dataArray)) {
-                    foreach ($dataArray as $data) {
+                 $transactionArray=getAlltransactions();
+                if (is_array($transactionArray)) {
+                    foreach ($transactionArray as $data) {
                         echo "<tr>";
-                        echo "<td class=''><div  class=' m-2 serial py-1 px-2'>" . htmlspecialchars($data['serial']) . "</div></td>";
-                        echo "<td>" . htmlspecialchars($data['type']) . "</td>";
-                        echo "<td>" . htmlspecialchars($data['via']) . "</td>";
-                        echo "<td>" . htmlspecialchars($data['account']) . "</td>";
-                        echo "<td class=''><div class='status m-2 py-2 px-2'>" . htmlspecialchars($data['status']) . "</td>";
-                        echo "<td class=''><div class='description m-1 p-4'>" . htmlspecialchars($data['details']) . "</div></td>";
-                        echo "<td>" . htmlspecialchars($data['date']) . "</td>";
+                        echo "<td class='align-middle'><div  class=' m-2 serial py-1 px-2'>" . htmlspecialchars($data['id']) . "</div></td>";
+                        echo "<td class='align-middle'>" . htmlspecialchars($data['type']) . "</td>";
+                        echo "<td class='align-middle'>" . htmlspecialchars($data['via']) . "</td>";
+                        echo "<td class='align-middle'>" . htmlspecialchars($data['account']) . "</td>";
+  			if($data['status'] == 1)
+                        {
+                        echo "<td class='align-middle'><div class='status1 m-2 py-2 px-2'>" . htmlspecialchars('Success') . "</td>";
+			 } else {
+ 			 echo "<td class='align-middle'><div class='status2 m-2 py-2 px-2'>" . htmlspecialchars('Pending') . "</td>";
+  			}
+                        echo "<td class='align-middle'><div class='description m-1 p-4'>" . htmlspecialchars($data['details_user']) . "</div></td>";
+                        echo "<td class='align-middle'>" . htmlspecialchars($data['created_at']) . "</td>";
                         echo "</tr>";
                     }
                 }
+
                 ?>
             </tbody>
         </table>
