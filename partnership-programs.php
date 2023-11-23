@@ -93,6 +93,8 @@
          </div>
       </section>
 
+      <?php include('become-partner.php'); ?>
+
       <?php include('includes/footer-cta.php'); ?>
 
       <?php include('includes/footer-apparea.php'); ?>

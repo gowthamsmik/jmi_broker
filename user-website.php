@@ -176,7 +176,7 @@
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
    </head>
 <body>
-   <?php include("includes/header.php"); ?>
+   <?php include("includes/header.php") ?>
    <div class="dashboard-subheader-bg">
       <div class="dashboard-subheader-box">
          <div class="position">
@@ -472,21 +472,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
-   function getScreenSize() {
-      // Get the screen width using JavaScript
-      var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-      // Update styles based on screen width
-      console.log("lopsid", screenWidth);
-      var sidebarregular = document.getElementById('display_sidetable1');
-      var sidebarmini = document.getElementById('display_sidetable2');
-      // console.log("lopsid", sidebarregular, sidebarmini);
-      if (screenWidth >= 300 && screenWidth <= 880) {
-         sidebarregular.style.display = 'none';
-         sidebarmini.style.display = 'block';
-      } else {
-         sidebarmini.style.display = 'none';
-         sidebarregular.style.display = 'block';
-      }
+      function getScreenSize() {
+            // Get the screen width using JavaScript
+            var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            // Update styles based on screen width
+            console.log("lopsid",screenWidth);
+            var sidebarregular = document.getElementById('display_sidetable1');
+            var sidebarmini = document.getElementById('display_sidetable2');
+            console.log("lopsid",sidebarregular,sidebarmini);
+            if (screenWidth >= 300 && screenWidth <=880) {
+               sidebarregular.style.display = 'none';
+               sidebarmini.style.display = 'block';
+            } else {
+               sidebarmini.style.display = 'none';
+               sidebarregular.style.display = 'block';
+            }
 
             //console.log("lopsid",sidebarmini);
         }

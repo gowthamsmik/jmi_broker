@@ -30,19 +30,14 @@
                 <div class="col border-0">
                     <label for="">Copy From:</label>
                     <select class="form-select mt-2" id="sel1" name="sellist1">
-                        <option>Select</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option>-Select-</option>
+                        <option>Other</option>
                     </select>
                 </div>
                 <div class="col border-0">
-                    <label for="">Copy From:</label>
+                    <label for="">Copy To:</label>
                     <select class="form-select mt-2" id="sel1" name="sellist1">
-                        <option>Select</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option>-Select-</option>
                     </select>
                 </div>
             </div>

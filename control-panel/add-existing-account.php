@@ -29,28 +29,25 @@
                 <div class="col border-0">
                     <label for="">Account Type:</label>
                     <select class="form-select mt-2" id="sel1" name="sellist1">
-                        <option>Select</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option>-Select-</option>
+                        <option>Individual</option>
+                        <option>IB</option>
                     </select>
                 </div>
                 <div class="col border-0">
                     <label for="">Account Group::</label>
                     <select class="form-select mt-2" id="sel1" name="sellist1">
-                        <option>Select</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option>-Select-</option>
+                        <option>Fixed Spread Account</option>
+                        <option>Scalping Account</option>
+                        <option>Variable Spread Account</option>
+                        <option>Bonus Account</option>
                     </select>
                 </div>
                 <div class="col border-0">
                     <label for="">Currency base:</label>
                     <select class="form-select mt-2" id="sel1" name="sellist1">
-                        <option>Select</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option>USD</option>
                     </select>
                 </div>
             </div>

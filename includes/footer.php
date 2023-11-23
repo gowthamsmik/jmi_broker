@@ -1,3 +1,5 @@
+<?php $isUserWebsitePage = false; ?>
+
 <!DOCTYPE html>
 <html lang='en'>
 
@@ -7,195 +9,256 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.min.js"></script> -->
 	<style>
-
+		.phonecheckbtn {
+			width: "10px";
+		}
 	</style>
 	<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
 
-<script>
-var firebaseConfig = {
-    apiKey: "AIzaSyCFVvsn6dt0WsVQljltQiW-ed-NOLRN9J8",
-    authDomain: "jmibrokers.com",
-    projectId: "jmi-brokers",
-    storageBucket: "jmibrokers.com",
-    messagingSenderId: "698047998267",
-    appId: "1:698047998267:web:3f68d50ce3c78ef29e2f1e",
-    measurementId: "G-FTZC0TXY4K"
-  };
+	<script>
+		var firebaseConfig = {
+			apiKey: "AIzaSyCFVvsn6dt0WsVQljltQiW-ed-NOLRN9J8",
+			authDomain: "jmibrokers.com",
+			projectId: "jmi-brokers",
+			storageBucket: "jmibrokers.com",
+			messagingSenderId: "698047998267",
+			appId: "1:698047998267:web:3f68d50ce3c78ef29e2f1e",
+			measurementId: "G-FTZC0TXY4K"
+		};
 
-  firebase.initializeApp(firebaseConfig);
-</script>
-<script type="text/javascript">
+		firebase.initializeApp(firebaseConfig);
+	</script>
+	<script type="text/javascript">
 
-                                      window.onload=function () {
-                                        render();
-                                      };
+		window.onload = function () {
+			render();
+		};
 
-                                      function render() {
-                                        //  window.recaptchaVerifier=new firebase.auth.RecaptchaVerifier('recaptcha-container');
-                                        //  recaptchaVerifier.render();
-                                        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-                                          "recaptcha-container",
-                                          {
-                                            size: "invisible",
-                                            callback: function(response) {
-                                              submitPhoneNumberAuth();
-                                            }
-                                          }
-                                        );
-                                      }
+		function render() {
+			//  window.recaptchaVerifier=new firebase.auth.RecaptchaVerifier('recaptcha-container');
+			//  recaptchaVerifier.render();
+			window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+				"recaptcha-container",
+				{
+					size: "invisible",
+					callback: function (response) {
+						submitPhoneNumberAuth();
+					}
+				}
+			);
+		}
 
-                                      function phoneSendAuth() {
-										//'+'+$("#countryCode").val()
-                                        var number ='+91'+$("#phone").val();
-										const applicationVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container',
-										{
-                                            size: "invisible",
-                                            callback: function(response) {
-                                              submitPhoneNumberAuth();
-                                            }
-                                          }
-										);
-                                          firebase.auth().signInWithPhoneNumber(number,applicationVerifier).then(function (confirmationResult) {
-
-                                              window.confirmationResult=confirmationResult;
-                                              coderesult=confirmationResult;
-                                              console.log(coderesult);
-
-                                              $("#sentSuccess").text("????????? ??????? ??????????.");
-                                              $("#sentSuccess").show();
-                                              $("#successRegsiter").hide();
-                                              $("#send_code").prop('readonly', true);
-                                              $("#number").prop('readonly', true);
-                                              $("#countryCode").prop('readonly', true);
-                                              $("#verificationCode").show();
-                                              $("#verify_code").show();
-                                              $("#error").hide();
-
-                                          }).catch(function (error) {
-                                              $("#error").text(error.message);
-                                              $("#error").show();
-                                          });
-
-                                      }
-
-                                      function codeverify() {
-
-                                          var code = $("#verificationCode").val();
-
-                                          coderesult.confirm(code).then(function (result) {
-                                              var user=result.user;
-                                              console.log(user);
-
-                                              $("#successRegsiter").text("??? ????????, ?? ?????? ?????????????????? ??????.");
-                                              $("#successRegsiter").show();
-                                              $("#sentSuccess").hide();
-                                              $("#number").prop('readonly', true);
-                                              $("button#register").prop('disabled', false);
-                                              $("#verify_code").prop('readonly', true);
-                                              $("#verificationCode").prop('readonly', true);
-
-                                          }).catch(function (error) {
-                                              $("#error").text(error.message);
-                                              $("#error").show();
-                                          });
-                                      }
+		function phoneSendAuth() {
+			var phone = $("#phone").val();
+			var phoneCode = $('#dialcode').val();
+			var phoneRegex = /^\d{7,18}$/;
 
 
-                                              function emailSendAuth() {
-                                                var email = $("#email").val();
-												
-                                                  $.ajax({
-                                                    type: "get",
-                                                      url :"http://localhost/jmi/verificationemail.php?email="+email+"/",
-                                                      success:function(result){
-                                                          if(result=='true'){
+			if (!phoneRegex.test(phone)) {
+				alert("Invalid phone number. Please enter a valid phone number with 7 to 18 digits.");
+				return;
+			}
 
-                                                                        $("#emailsentSuccess").text("Email Sent Successfully.");
-                                                                        $("#emailsentSuccess").show();
-                                                                        $("#emailsuccessRegsiter").hide();
-                                                                        $("#email").prop('readonly', true);
-                                                                        $("#email_send_code").prop('disabled', true);
-                                                                        $("#emailverificationCode").show();
-                                                                        $("#email_verify_code").show();
-                                                                        $("#emailerror").hide();
+			if (phoneCode === "" || phoneCode === null) {
+				alert("Invalid dial code. Please Select a valid numeric dial code based on your country!.");
+				return
+			}
+			var number = '+' + phoneCode + phone;
 
+			console.log("klop", phoneCode, phone, number, "+91" + $("#phone").val());
+			const applicationVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container',
+				{
+					size: "invisible",
+					callback: function (response) {
+						submitPhoneNumberAuth();
+					}
+				}
+			);
+			$.ajax({
+				type: "get",
+				url: "http://localhost/jmi-new/jmi_broker/checkmobileexist.php?phone=" + phone,
 
-                                                          }else if(result=='false'){
-                                                            $("#emailerror").text('Invalid Code');
-                                                            $("#emailerror").show();
-                                                          }
-                                                      },
-                                                        error:function(result){
-                                                          $("#emailerror").text('An error has occured');
-                                                          $("#emailerror").show();
-                                                      }
-                                                  });
+				success: function (result) {
+					console.log("return result",result)
+					if (result.trim()=="0") {
+						firebase.auth().signInWithPhoneNumber(number, applicationVerifier).then(function (confirmationResult) {
+							$element = document.getElementById("phoneVerification");
+							$element.style.display = "block";
+							window.confirmationResult = confirmationResult;
+							coderesult = confirmationResult;
+							console.log(coderesult);
 
-
-
-
-                                                  }
-
-                                        function emailcodeverify() {
-
-                                          var emailcode = $("#emailverificationCode").val();
-                                          var email = $("#email").val();
-
-
-                                            $.ajax({
-                                              type: "get",
-                                                url :"/verificationmailCode/"+email+"/"+emailcode,
-                                                success:function(result){
-                                                    if(result=='true'){
-
-                                                      $("#emailsuccessRegsiter").text("Code Verified, you can resume now.");
-                                                      $("#emailsuccessRegsiter").show();
-                                                      $("#emailsentSuccess").hide();
-                                                      $("#emailverify_code").prop('disabled', true);
-                                                      $("#emailverificationCode").prop('readonly', true);
+							$("#sentSuccess").text("????????? ??????? ??????????.");
+							$("#sentSuccess").show();
+							$("#successRegsiter").hide();
+							$("#send_code").prop('readonly', true);
+							$("#number").prop('readonly', true);
+							$("#countryCode").prop('readonly', true);
+							$("#verificationCode").show();
+							$("#verify_code").show();
+							$("#error").hide();
 
 
-                                                    }else if(result=='false'){
-                                                      $("#emailerror").text('Invalid Code');
-                                                      $("#emailerror").show();
-                                                    }
-                                                },
-                                                  error:function(result){
-                                                    $("#emailerror").text('An error has occured');
-                                                    $("#emailerror").show();
-                                                }
-                                            });
+						}).catch(function (error) {
+							$("#error").text(error.message);
+							$("#error").show();
+						});
+
+					} else {
+						alert("Mobile Number Already Exists!, Try a different number.")
+					}
+
+
+				},
+				error: function (result) {
+					$("#emailerror").text('An error has occured');
+					$("#emailerror").show();
+				}
+			});
+
+
+		}
+
+		function codeverify() {
+			var code = $("#phoneCode").val();
+			console.log("code", code)
+			coderesult.confirm(code).then(function (result) {
+				var user = result.user;
+				$element = document.getElementById("phoneVerification");
+				$element.style.display = "none";
+				$sendPhone = document.getElementById("SendphoneCode");
+				$sendPhone.style.display = "none";
+				$phoneVerified = document.getElementById("phoneverifiedLink");
+				$phoneVerified.style.display = "block";
+				smsverified = true;
+
+				$("#successRegsiter").text("??? ????????, ?? ?????? ?????????????????? ??????.");
+				$("#successRegsiter").show();
+				$("#sentSuccess").hide();
+				$("#number").prop('readonly', true);
+				$("button#register").prop('disabled', false);
+				$("#verify_code").prop('readonly', true);
+				$("#verificationCode").prop('readonly', true);
+
+			}).catch(function (error) {
+				$("#error").text(error.message);
+				$("#error").show();
+				alert("Invalid OTP!")
+			});
+		}
+
+
+		function emailSendAuth() {
+			var email = $("#email").val();
+			var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+			if (!emailRegex.test(email)) {
+				alert('Please enter a valid email address.');
+				return;
+			}
+			$.ajax({
+				type: "get",
+				url: "http://localhost/jmi-new/jmi_broker/verificationemail.php?email=" + email,
+
+				success: function (result) {
+					console.log("result email", result)
+					if (result == "true") {
+						console.log("result1 email", result)
+						$element = document.getElementById("emailVerification");
+						$element.style.display = "block";
+						$("#emailsentSuccess").text("Email Sent Successfully.");
+						$("#emailsentSuccess").show();
+						$("#emailsuccessRegsiter").hide(); x
+						$("#emailverificationCode").show();
+						$("#email_verify_code").show();
+						$("#emailerror").hide();
+
+
+					} else if (result == "false") {
+						alert("Invalid Verification Code for Email")
+						$("#emailerror").text('Invalid Code');
+						$("#emailerror").show();
+					} else if (result == "Available") {
+						alert("Email Already Registered!, Try to Login!")
+					}
+
+				},
+				error: function (result) {
+					$("#emailerror").text('An error has occured');
+					$("#emailerror").show();
+				}
+			});
+		}
+
+		function emailcodeverify() {
+			//var emailverified = false;
+			var emailcode = $("#emailcode").val();
+			var email = $("#email").val();
+			console.log("lkop", email, emailcode);
+			$.ajax({
+				type: "get",
+				url: "verificationemailcode.php/?email=" + email + "&emailcode=" + emailcode,
+				success: function (result) {
+					console.log("res..", result)
+					if (result == "true") {
+						$element = document.getElementById("emailVerification");
+						$element.style.display = "none";
+						$emailverifiedLink = document.getElementById("emailverifiedLink");
+						$emailverifiedLink.style.display = "block";
+						$sendEmail = document.getElementById("SencodeEmail");
+						$sendEmail.style.display = "none";
+						emailverified = true;
+
+						$("#emailsuccessRegsiter").text("Code Verified, you can resume now.");
+						$("#emailsuccessRegsiter").show();
+						$("#emailsentSuccess").hide();
+						$("#emailverify_code").prop('disabled', true);
+						$("#emailverificationCode").prop('readonly', true);
+						console.log("success", result)
+
+					} else if (result == "false") {
+						$("#emailerror").text('Invalid Code');
+						$("#emailerror").show();
+						alert("Invalid Email Verification Code!")
+						console.log("failed", result)
+					}
+				},
+				error: function (result) {
+					$("#emailerror").text('An error has occured');
+					$("#emailerror").show();
+				}
+			});
 
 
 
-                                        }
+		}
 
 
 
-                                          		$.getJSON('https://ipinfo.io/json', function(result) {
-                                          		$('option[data-countryCode="'+result.country+'"]').prop('selected', true);
-                                          		  });
+		$.getJSON('https://ipinfo.io/json', function (result) {
+			$('option[data-countryCode="' + result.country + '"]').prop('selected', true);
+		});
 
 
-                                                $('select#countryCode option').each(function(){
-                                                  _val=$(this).val();
-                                                  _attVal=$(this).attr('data-countryCode');
-                                                  $(this).text(_attVal+'('+_val+')');
-                                                });
-                                                $(function() {
-                                                    // choose target dropdown
-                                                    var select = $('select#countryCode');
-                                                    select.html(select.find('option').sort(function(x, y) {
-                                                      // to change to descending order switch "<" for ">"
-                                                      return $(x).text() > $(y).text() ? 1 : -1;
-                                                    }));
+		$('select#countryCode option').each(function () {
+			_val = $(this).val();
+			_attVal = $(this).attr('data-countryCode');
+			$(this).text(_attVal + '(' + _val + ')');
+		});
+		$(function () {
+			// choose target dropdown
+			var select = $('select#countryCode');
+			select.html(select.find('option').sort(function (x, y) {
+				// to change to descending order switch "<" for ">"
+				return $(x).text() > $(y).text() ? 1 : -1;
+			}));
 
-                                                    // select default item after sorting (first item)
-                                                    // $('select').get(0).selectedIndex = 0;
-                                                  });
-                                    </script>
+			// select default item after sorting (first item)
+			// $('select').get(0).selectedIndex = 0;
+		});
+	</script>
 
-                                  {!! NoCaptcha::renderJs() !!}
+	{!! NoCaptcha::renderJs() !!}
 </head>
 
 <body>
@@ -415,13 +478,13 @@ var firebaseConfig = {
 	<div class="signUppopup-waper">
 		<div class="signUppopup">
 			<div class="myPopup">
-				<div class="closePop">X</div>
+				<div class="closePop" id='registerClose'>X</div>
 				<div class="popupcont">
 					<h6>Registration</h6>
 					<p>Fill up the form and tour team will get back to you within 24 hours</p>
 
-					<form action="#">
-					<div id="recaptcha-container"></div>
+					<form action="#" method="post" onsubmit="return validate()" id="registerform">
+						<div id="recaptcha-container"></div>
 						<div class="row justify-content-center">
 							<div class="col-md-4">
 								<div class="popupfeild">
@@ -445,12 +508,21 @@ var firebaseConfig = {
 							<div class="col-md-4">
 								<div class="popupfeild">
 									<label for="">Email Address</label>
-									<input name='email' type="email" placeholder="Type Email" class="pdmoreinput" id="email">
-									<a href="#" onclick="emailSendAuth();">Send Code</a>
+									<input name='email' type="email" placeholder="Type Email" class="pdmoreinput"
+										id="email" oninput="changeStyle('email')">
+									<a href="#" onclick="emailSendAuth();" id="SencodeEmail">Send Code</a>
+									<a href="#" id="emailverifiedLink"
+										style="background-color:green;color:white;display:none">Verified</a>
+
+								</div>
+								<div class="popupfeild" id="emailVerification" style="display:none">
+									<input name='emailVerification' type="text"
+										placeholder="Enter Email Verification Code" class="pdmoreinput" id="emailcode">
+									<a href="#" onclick="emailcodeverify();">Verify</a>
 								</div>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-2">
 								<div class="popupfeild">
 									<label for="">User Name</label>
 									<input name='userName' type="text" placeholder="Type User Name">
@@ -458,12 +530,13 @@ var firebaseConfig = {
 							</div>
 
 
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="popupfeild">
 									<label for="phone">Phone Number</label>
 									<div class="row">
-										<div class="col-sm-5">
-											<select class="form-select" style="width: 100%;" name="country">
+										<div class="col-sm-3">
+											<select class="form-select" style="width: 100%;" name="country"
+												id='dialcode'>
 												<option value="0" selected disabled>Select Dial Code</option>
 												<?php
 
@@ -483,13 +556,22 @@ var firebaseConfig = {
 												?>
 											</select>
 										</div>
-										<div class="col-sm-7">
-											<div id="phone-input-container">
-												<input type="tel" id="phone" name="phone" class="form-control"
-													placeholder="Type Phone Number">
+										<div class="col-sm-8">
+											<div class="popupfeild">
+												<input type="tel" id="phone" name="phone" class="pdmoreinput"
+													placeholder="Type Phone Number" oninput="changeStyle(' phone')">
+												<a href="#" onclick="phoneSendAuth();" id="SendphoneCode">Send Code</a>
+												<a href="#" id="phoneverifiedLink"
+													style="background-color:green;color:white;display:none">Verified</a>
+
 											</div>
-												<a href="#" onclick="phoneSendAuth();">Send Code</a>
-								                               <!-- <div id="phone-dropdown-container"></div> -->
+											<div class="popupfeild" style="display:none" id="phoneVerification">
+												<input type="tel" name="phone" class="pdmoreinput" id="phoneCode"
+													placeholder="Enter OTP">
+												<a href="#" onclick="codeverify();">Verify OTP</a>
+											</div>
+
+											<!-- <div id="phone-dropdown-container"></div> -->
 										</div>
 									</div>
 								</div>
@@ -592,8 +674,8 @@ var firebaseConfig = {
 							</div>
 
 							<div class="col-md-4">
-								<div class="popupbutton d-flex align-items-end h-100" id='registerButton'>
-									<button>Register Now </button>
+								<div class="popupbutton d-flex align-items-end h-100">
+									<button id='registerButton'>Register Now </button>
 								</div>
 							</div>
 
@@ -640,92 +722,119 @@ var firebaseConfig = {
 		// });
 
 
+
+		function validate() {
+			if (emailverified && smsverified) {
+				return true;
+			}
+			return false;
+		}
+
+
 		$(document).ready(function () {
 
 			//Register Ajax
+			emailverified = false;
+			smsverified = false;
+			$('#registerClose').on('click', function (e) {
+				console.log("asda")
+				$("#SendphoneCode").css("display", 'block');
+				$('#phoneverifiedLink').css("display", 'none');
+				smsverified = false;
+				$("#SencodeEmail").css("display", 'block');
+				$('#emailverifiedLink').css("display", 'none');
+				emailverified = false;
+				$('#phoneVerification').css("display", "none");
+				$('#emailVerification').css("display", "none");
+
+			})
+
 			$('#registerButton ').on('click', function (e) {
 				console.log("juileb")
-				e.preventDefault(); // Prevent the default form submission
-				// window.location.href = "home.php";
-				// Perform your validation here
-				var userName = $('input[name="userName"]').val();
-				var password = $('input[name="password"]').val();
-				var email = $('input[name="email"]').val();
-				var gender = $('select[name="gender"]').val();
-				var fullName = $('input[name="fullName"]').val();
-				var phone = $('input[name="phone"]').val();
-				var confirmPassword = $('input[name="confirmpassword"]').val();
-				var country=$('select[name="country"]').val();
+				if (emailverified && smsverified) {
+					e.preventDefault(); // Prevent the default form submission
+					// window.location.href = "home.php";
+					// Perform your validation here
+					var userName = $('input[name="userName"]').val();
+					var password = $('input[name="password"]').val();
+					var email = $('input[name="email"]').val();
+					var gender = $('select[name="gender"]').val();
+					var fullName = $('input[name="fullName"]').val();
+					var phone = $('input[name="phone"]').val();
+					var confirmPassword = $('input[name="confirmpassword"]').val();
+					var country = $('select[name="country"]').val();
 
-				console.log("poil", userName, password, email, gender, fullName, phone, confirmPassword,country)
-				var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+					console.log("poil", userName, password, email, gender, fullName, phone, confirmPassword, country)
+					var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-				// Regular expression for a valid phone number (assuming a simple format)
-				var phoneRegex = /^\d{7,18}$/;
-				var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
-
-
-				// Example: Check if the fields are not empty
-				if (!userName || !password || !email || !gender || !fullName ||  !phone ||!country) {
-					alert('Please fill in all fields.');
-					return;
-				}
-				// if(country.trim()==='' || country===null||country===undefined){
-				// 	alert('Please fill in all fields.');
-				// }
-				// Example: Check if the email is valid using regex
-				if (!emailRegex.test(email)) {
-					alert('Please enter a valid email address.');
-					return;
-				}
-	
-				// Example: Check if the phone number is valid using regex
-				if (!phoneRegex.test(phone)) {
-					alert('Please enter a valid phone number.');
-					return;
-				}
-				if (!passwordRegex.test(password)) {
-					alert('Password must be at least 8 characters long and include at least one number, one special character (!@#$%^&*), and one uppercase letter.');
-					return;
-				}
-				if (password != confirmPassword) {
-					alert('Password Doesnt Match with confirm Password');
-					return;
-				}
-
-				// If validation passes, you can proceed with further actions or AJAX call
-				console.log("Validation successful. Proceed with further actions or AJAX call.");
+					// Regular expression for a valid phone number (assuming a simple format)
+					var phoneRegex = /^\d{7,18}$/;
+					var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
 
 
-				// If validation passes, make the AJAX call
-				$.ajax({
-					url: 'includes/softwareinclude/register.php',
-					type: 'POST',
-					data: {
-						email: email,
-						password: password,
-						name: fullName,
-						gender: gender,
-						userName: userName,
-						phone: phone,
-						dialCode:country
-						// Add other data fields as needed
-					},
-					success: function (response) {
-						alert(response);
-						if (response == "User successfully registered!") {
-							console.log("Success", response);
-							$('.signUppopup-waper').fadeOut();
-							$('.overlay').fadeOut();
-						} else (
-							console.log('errorrrt', response)
-						)
-					},
-					error: function (xhr, status, error) {
-						console.log("terter", xhr.responseText);
-						// Handle error response
+					// Example: Check if the fields are not empty
+					if (!userName || !password || !email || !gender || !fullName || !phone || !country) {
+						alert('Please fill in all fields.');
+						return;
 					}
-				});
+					if (!emailRegex.test(email)) {
+						alert('Please enter a valid email address.');
+						return;
+					}
+					if (!phoneRegex.test(phone)) {
+						alert('Please enter a valid phone number.');
+						return;
+					}
+					if (!passwordRegex.test(password)) {
+						alert('Password must be at least 8 characters long and include at least one number, one special character (!@#$%^&*), and one uppercase letter.');
+						return;
+					}
+					if (password != confirmPassword) {
+						alert('Password Doesnt Match with confirm Password');
+						return;
+					}
+
+					$.ajax({
+						url: 'includes/softwareinclude/register.php',
+						type: 'POST',
+						data: {
+							email: email,
+							password: password,
+							name: fullName,
+							gender: gender,
+							userName: userName,
+							phone: phone,
+							dialCode: country
+							// Add other data fields as needed
+						},
+						success: function (response) {
+							alert(response);
+							if (response == "User successfully registered!") {
+								console.log("Success", response);
+								$('.signUppopup-waper').fadeOut();
+								$('.overlay').fadeOut();
+								$('#registerform').trigger("reset");
+								emailverified = false;
+								smsverified = false;
+								$("#SencodeEmail").css("display", 'block');
+								$("#SendphoneCode").css("display", 'block');
+								$('#phoneverifiedLink').css("display", 'none');
+								$('#emailverifiedLink').css("display", 'none');
+
+
+							} else (
+								console.log('errorrrt', response)
+							)
+						},
+						error: function (xhr, status, error) {
+							console.log("terter", xhr.responseText);
+							// Handle error response
+						}
+					});
+				}
+				else {
+					alert("email and sms are not verified");
+				}
 			});
 			//Login Ajax
 			$('#loginButton').on('click', function (e) {
@@ -774,6 +883,19 @@ var firebaseConfig = {
 				});
 			});
 		});
+		function changeStyle(type) {
+			console.log("phone changed");
+			if (type == 'phone') {
+
+				$("#SendphoneCode").css("display", 'block');
+				$('#phoneverifiedLink').css("display", 'none');
+				smsverified = false;
+			} else {
+				$("#SencodeEmail").css("display", 'block');
+				$('#emailverifiedLink').css("display", 'none');
+				emailverified = false;
+			}
+		}
 
 
 
