@@ -53,6 +53,9 @@
 							<ul class="dropdown">
 								<li><a href="about-us.php">About JMI</a></li>
 								<li><a href="licenses.php">Licenses and Regulations</a></li>
+								<li><a href="risk-management.php">Risk Management</a></li>
+								<li><a href="our-culture.php">Our Culture</a></li>
+								<li><a href="ourphilosophy.php">Our Philosophy</a></li>
 								<li><a href="brokers.php">Advantages of JMI Brokers Platform</a></li>
 								<li><a href="contact-us.php">Contact us</a></li>
 								<li><a href="policy.php">Conflict Of Interest Policy</a></li>

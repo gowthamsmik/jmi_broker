@@ -76,14 +76,14 @@
 			);
 			$.ajax({
 				type: "get",
-				url: "http://localhost/jmi-new/jmi_broker/checkmobileexist.php?phone=" + phone,
+				url: "https://173.212.204.10/jmi-cms/checkmobileexist.php?phone=" + phone,
 
 				success: function (result) {
 					console.log("return result",result)
 					if (result.trim()=="0") {
 						firebase.auth().signInWithPhoneNumber(number, applicationVerifier).then(function (confirmationResult) {
 							$element = document.getElementById("phoneVerification");
-							$element.style.display = "block";
+							$element.style.display = "flex";
 							window.confirmationResult = confirmationResult;
 							coderesult = confirmationResult;
 							console.log(coderesult);
@@ -129,7 +129,7 @@
 				$sendPhone = document.getElementById("SendphoneCode");
 				$sendPhone.style.display = "none";
 				$phoneVerified = document.getElementById("phoneverifiedLink");
-				$phoneVerified.style.display = "block";
+				$phoneVerified.style.display = "flex";
 				smsverified = true;
 
 				$("#successRegsiter").text("??? ????????, ?? ?????? ?????????????????? ??????.");
@@ -151,14 +151,14 @@
 		function emailSendAuth() {
 			var email = $("#email").val();
 			var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+                        //e.preventDefault();
 			if (!emailRegex.test(email)) {
 				alert('Please enter a valid email address.');
 				return;
 			}
 			$.ajax({
 				type: "get",
-				url: "http://localhost/jmi-new/jmi_broker/verificationemail.php?email=" + email,
+				url: "https://173.212.204.10/jmi-cms/verificationemail.php?email=" + email,
 
 				success: function (result) {
 					console.log("result email", result)
@@ -168,17 +168,18 @@
 						$element.style.display = "block";
 						$("#emailsentSuccess").text("Email Sent Successfully.");
 						$("#emailsentSuccess").show();
-						$("#emailsuccessRegsiter").hide(); x
+						$("#emailsuccessRegsiter").hide(); 
 						$("#emailverificationCode").show();
 						$("#email_verify_code").show();
 						$("#emailerror").hide();
-
-
-					} else if (result == "false") {
-						alert("Invalid Verification Code for Email")
+					}
+					 else if (result == "false") {
+						//alert("Invalid Verification Code for Email")
+						console.log("Email verification table is missing");
 						$("#emailerror").text('Invalid Code');
-						$("#emailerror").show();
-					} else if (result == "Available") {
+						$("#emailerror").show(); 
+					} 
+					else if (result == "Available") {
 						alert("Email Already Registered!, Try to Login!")
 					}
 
@@ -194,6 +195,7 @@
 			//var emailverified = false;
 			var emailcode = $("#emailcode").val();
 			var email = $("#email").val();
+			//e.preventDefault();
 			console.log("lkop", email, emailcode);
 			$.ajax({
 				type: "get",
@@ -204,7 +206,7 @@
 						$element = document.getElementById("emailVerification");
 						$element.style.display = "none";
 						$emailverifiedLink = document.getElementById("emailverifiedLink");
-						$emailverifiedLink.style.display = "block";
+						$emailverifiedLink.style.display = "flex";
 						$sendEmail = document.getElementById("SencodeEmail");
 						$sendEmail.style.display = "none";
 						emailverified = true;
@@ -258,7 +260,7 @@
 		});
 	</script>
 
-	{!! NoCaptcha::renderJs() !!}
+	<!-- {!! NoCaptcha::renderJs() !!} -->
 </head>
 
 <body>
@@ -522,7 +524,7 @@
 								</div>
 							</div>
 
-							<div class="col-md-2">
+							<div class="col-md-4">
 								<div class="popupfeild">
 									<label for="">User Name</label>
 									<input name='userName' type="text" placeholder="Type User Name">
@@ -530,11 +532,11 @@
 							</div>
 
 
-							<div class="col-md-6">
+							<div class="col-md-8">
 								<div class="popupfeild">
 									<label for="phone">Phone Number</label>
 									<div class="row">
-										<div class="col-sm-3">
+										<div class="col-sm-6">
 											<select class="form-select" style="width: 100%;" name="country"
 												id='dialcode'>
 												<option value="0" selected disabled>Select Dial Code</option>
@@ -556,7 +558,7 @@
 												?>
 											</select>
 										</div>
-										<div class="col-sm-8">
+										<div class="col-sm-6">
 											<div class="popupfeild">
 												<input type="tel" id="phone" name="phone" class="pdmoreinput"
 													placeholder="Type Phone Number" oninput="changeStyle(' phone')">
@@ -578,7 +580,7 @@
 							</div>
 
 
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<div class="popupfeild d-flex align-items-end h-100">
 									<ul>
 										<li class="done">
@@ -738,10 +740,10 @@
 			smsverified = false;
 			$('#registerClose').on('click', function (e) {
 				console.log("asda")
-				$("#SendphoneCode").css("display", 'block');
+				$("#SendphoneCode").css("display", 'flex');
 				$('#phoneverifiedLink').css("display", 'none');
 				smsverified = false;
-				$("#SencodeEmail").css("display", 'block');
+				$("#SencodeEmail").css("display", 'flex');
 				$('#emailverifiedLink').css("display", 'none');
 				emailverified = false;
 				$('#phoneVerification').css("display", "none");
@@ -816,8 +818,8 @@
 								$('#registerform').trigger("reset");
 								emailverified = false;
 								smsverified = false;
-								$("#SencodeEmail").css("display", 'block');
-								$("#SendphoneCode").css("display", 'block');
+								$("#SencodeEmail").css("display", 'flex');
+								$("#SendphoneCode").css("display", 'flex');
 								$('#phoneverifiedLink').css("display", 'none');
 								$('#emailverifiedLink').css("display", 'none');
 
@@ -887,11 +889,11 @@
 			console.log("phone changed");
 			if (type == 'phone') {
 
-				$("#SendphoneCode").css("display", 'block');
+				$("#SendphoneCode").css("display", 'flex');
 				$('#phoneverifiedLink').css("display", 'none');
 				smsverified = false;
 			} else {
-				$("#SencodeEmail").css("display", 'block');
+				$("#SencodeEmail").css("display", 'flex');
 				$('#emailverifiedLink').css("display", 'none');
 				emailverified = false;
 			}

@@ -20,7 +20,7 @@ try {
   $message = (new Swift_Message('Wonderful Subject'))
     ->setFrom(['support@jmibrokers.com' => 'Jmi brokers'])
     ->setTo($email)
-    ->setBody('Here is the verification code for email verification is' . $token)
+    ->setBody('Here is the verification code for email verification = ' . $token)
   ;
 
 $checkInUserSql= "SELECT * FROM users WHERE email = '$email'";
@@ -31,7 +31,7 @@ if ($checkInUserSql->num_rows <= 0) {
   $result = $mailer->send($message);
 
   $columnToCheck='email';
-  $checkExistingSql = "SELECT * FROM email_verification WHERE $columnToCheck = '$email'";
+  $checkExistingSql = "SELECT * FROM email_verification WHERE email = '$email'";
   $checkExistingResult = $conn->query($checkExistingSql);
   if($result){
   if($checkExistingResult->num_rows > 0){
