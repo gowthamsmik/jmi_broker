@@ -5,9 +5,7 @@
 		//$user= "select * from website_accounts where username = $username or email = $username limit 1"; 
     $userId = $_SESSION['userId'];
 		$notifications_all = "select * from Notifications where website_accounts_id = $userId order by id desc";
- 
-        $notifications_unseen = "select * from Notifications where website_accounts_id = $userId and notification_status = 0";
-
+    $notifications_unseen = "select * from Notifications where website_accounts_id = $userId and notification_status = 0";
 		$accountsqry = "select * from website_accounts where id = $userId and account_radio_type=1";
 
 
