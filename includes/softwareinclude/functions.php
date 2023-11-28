@@ -2,7 +2,7 @@
 include('config.php');
 function getAlltransactions(){
     global $conn;
-    $sql = "SELECT * FROM transactions";
+    $sql = "SELECT * FROM transactions order by created_at desc";
     $res = $conn->query($sql);
     $result = array(); // Initialize an array to store all rows
 

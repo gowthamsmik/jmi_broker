@@ -1,8 +1,5 @@
 <?php
-error_reporting(0);
-session_start();
-
-$sessionUser = $_SESSION['user'];
+$sessionUser = $_SESSION['sessionuser'];
 $stmtUser = $conn->prepare("SELECT * FROM website_accounts WHERE username = ? OR email = ?");
 $stmtUser->bind_param("ss", $sessionUser, $sessionUser);
 $stmtUser->execute();
@@ -122,5 +119,5 @@ if (isset($_GET['neteller--']) && $_GET['neteller--'] == 'success' && $_SESSION[
     }
 }
 
-$conn->close();
+ 
 ?>

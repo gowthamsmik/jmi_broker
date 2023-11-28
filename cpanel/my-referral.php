@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
 
@@ -26,6 +27,8 @@
 </head>
 
 <body>
+    <?php include("control-panel/includes/my-refferrals.php"); ?>
+    <?php if (count($allReferrals)<1) {?>
     <div class="d-flex">
         <h2 class="fs-4">Control Panel|My Referrals</h2>
         <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
@@ -37,10 +40,20 @@
             Yet</h3>
 
         <div class="input-group mb-3 mt-5">
-            <input type="text" class="form-control border" placeholder="https://www.jmibrokers.com/en?myref=10441">
-            <button class="btn btn-success custom-button" type="submit">Copy Link</button>
+            <input type="text" class="form-control border" id="MyRef" placeholder="https://www.jmibrokers.net?myref=<?php echo $_SESSION['userId']+10000?>">
+            <button class="btn btn-success custom-button"   onclick = "copyText()" type="submit">Copy Link</button>
+            <script type="text/javascript">
+                function copyText()
+                {
+                $('input#MyRef').val('https://www.jmibrokers.net?myref=<?php echo $_SESSION['userId']+10000 ?>');
+                var copyText = document.getElementById("MyRef");
+                copyText.select();
+                document.execCommand("Copy");
+                }
+            </script>
         </div>
     </div>
+    <?php } ?>
 </body>
 
 </html>

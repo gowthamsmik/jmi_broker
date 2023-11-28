@@ -9,13 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    // Check if the input is a valid phone number
    if (preg_match('/^[0-9]+$/', $userNameorPhone)) {
-     $columnToCheck = 'phone';
+     $columnToCheck = 'mobile';
     } else {
-     $columnToCheck = 'user_name';
+     $columnToCheck = 'username';
     }
 
     // Check if the username or phone exists in the database
-    $checkExistingSql = "SELECT * FROM users WHERE $columnToCheck = '$userNameorPhone'";
+    $checkExistingSql = "SELECT * FROM website_accounts WHERE $columnToCheck = '$userNameorPhone'";
     $checkExistingResult = $conn->query($checkExistingSql);
 
     if ($checkExistingResult->num_rows > 0) {
@@ -27,11 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $userId = $user['id'];
             $userEmail = $user['email'];
             $gender = $user['gender'];
-            $status = $user['is_active'];
-            $userName = $user['user_name'];
-            $name=$user['name'];
-            $userRole=$user['user_role'];
-            $userPhone=$user['phone'];
+            $status = $user['account_status'];
+            $userName = $user['username'];
+            $name=$user['fullname'];
+            //$userRole=$user['user_role'];
+            $userPhone=$user['mobile'];
 
             $usersession = $userId;
             $key = rand(111111111, 999999999);

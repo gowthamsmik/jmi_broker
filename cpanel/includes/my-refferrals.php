@@ -1,8 +1,6 @@
 <?php
-error_reporting(0);
-session_start();
-
-
+error_reporting(3);
+//session_start();
 function getUserReferrals($userId, $conn)
 {
     $directRef = [];
@@ -10,7 +8,7 @@ function getUserReferrals($userId, $conn)
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+     
     while ($row = $result->fetch_assoc()) {
         $directRef[] = $row;
     }
@@ -27,14 +25,14 @@ function getUserReferrals($userId, $conn)
 
     return $allRef;
 }
-
-$sessionUser = $_SESSION['user'];
+ 
+$sessionUser = isset($_SESSION) ? $_SESSION['sessionuser']:"";
 $stmtUser = $conn->prepare("SELECT * FROM website_accounts WHERE username = ? OR email = ?");
 $stmtUser->bind_param("ss", $sessionUser, $sessionUser);
 $stmtUser->execute();
 $resultUser = $stmtUser->get_result();
 $user = $resultUser->fetch_assoc();
-
+ 
 $stmtNotificationsAll = $conn->prepare("SELECT * FROM Notifications WHERE website_accounts_id = ? ORDER BY id DESC LIMIT 8");
 $stmtNotificationsAll->bind_param("i", $user['id']);
 $stmtNotificationsAll->execute();
@@ -53,7 +51,7 @@ while ($row = $resultNotificationsUnseen->fetch_assoc()) {
     $notificationsUnseen[] = $row;
 }
 
-$stmtLiveAccounts = $conn->prepare("SELECT * FROM fx_accounts_live WHERE website_accounts_id = ?");
+$stmtLiveAccounts = $conn->prepare("SELECT * FROM fx_accounts WHERE website_accounts_id = ?");
 $stmtLiveAccounts->bind_param("i", $user['id']);
 $stmtLiveAccounts->execute();
 $resultLiveAccounts = $stmtLiveAccounts->get_result();
@@ -95,16 +93,13 @@ foreach ($allReferrals as $ref) {
     }
 }
 
-$stmtReferralsStatics = $conn->prepare("SELECT * FROM referrals_statics WHERE ref_id = ?");
-$stmtReferralsStatics->bind_param("i", $user['id'] + 10000);
+$stmtReferralsStatics = $conn->prepare("SELECT * FROM referral_statics WHERE ref_id = ?");
+$stmtReferralsStatics->bind_param("i", $user['id']);
 $stmtReferralsStatics->execute();
 $resultReferralsStatics = $stmtReferralsStatics->get_result();
 $referralsStatics = [];
 while ($row = $resultReferralsStatics->fetch_assoc()) {
     $referralsStatics[] = $row;
 }
-
 $title = "Control Panel | My Referrals";
-include('cpanel.my-referrals.php');
-$conn->close();
 ?>

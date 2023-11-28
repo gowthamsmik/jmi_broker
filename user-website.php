@@ -303,25 +303,6 @@
          <button class="slidebar_table" id="display_sidetable2" onclick="openPopup()">
             <p>Table</p>
          </button>
-
-         
-         <!-- <div class="popup" id="userPopup" >
-            <div class="popup-content">
-               <?php include("user-tab.php") ?>
-               <button onclick="closePopup()">Close</button>
-            </div>
-         </div>
-      
-         <script>
-            
-            function openPopup() {
-               document.getElementById("userPopup").style.display = "block";
-            }
-
-            function closePopup() {
-               document.getElementById("userPopup").style.display = "none";
-            }
-         </script> -->
       </div>
       <div class="content">
          <div class="route-content" id="link1">
@@ -382,9 +363,6 @@
          </div>
       </div>
    </div>
-
-
-
    <?php
    $isUserWebsitePage = true;
    include("includes/footer.php");
