@@ -1,10 +1,5 @@
 <?php $isUserWebsitePage = false; ?>
-
-<!DOCTYPE html>
-<html lang='en'>
-
-<head>
-	<link rel="stylesheet" href="assets/css/phoneCode.css">
+	<link rel="stylesheet" href=<?php $siteurl."assets/css/phoneCode.css" ?> />
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/intlTelInput.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.min.js"></script> -->
@@ -261,9 +256,7 @@
 	</script>
 
 	<!-- {!! NoCaptcha::renderJs() !!} -->
-</head>
-
-<body>
+ 
 	<footer>
 		<div class="container">
 			<?php if (!$isUserWebsitePage): ?>
@@ -356,30 +349,30 @@
 					<div class="footer-sponser">
 						<div class="sponser1">
 							<div class="spon1-cont1">
-								<img src="cms/<?php echo getSectionMetaByIDKeyGroup('1', 'Logo 1', 'Logos'); ?>" alt="">
+								<img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Logo 1', 'Logos'); ?> alt="">
 							</div>
 							<div class="spon1-cont2">
-								<img src="cms/<?php echo getSectionMetaByIDKeyGroup('1', 'Logo 2', 'Logos'); ?>" alt="">
-								<img src="cms/<?php echo getSectionMetaByIDKeyGroup('1', 'Logo 3', 'Logos'); ?>" alt="">
+								<img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Logo 2', 'Logos'); ?> alt="">
+								<img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Logo 3', 'Logos'); ?> alt="">
 							</div>
 						</div>
 
 						<div class="sponser2">
 							<ul>
 								<li>
-									<img src="cms/<?php echo getSectionMetaByIDKeyGroup('1', 'Logo 4', 'Logos'); ?>" alt="">
+									<img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Logo 4', 'Logos'); ?> alt="">
 								</li>
 
 								<li>
-									<img src="cms/<?php echo getSectionMetaByIDKeyGroup('1', 'Logo 5', 'Logos'); ?>" alt="">
+									<img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Logo 5', 'Logos'); ?> alt="">
 								</li>
 
 								<li>
-									<img src="cms/<?php echo getSectionMetaByIDKeyGroup('1', 'Logo 6', 'Logos'); ?>" alt="">
+									<img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Logo 6', 'Logos'); ?> alt="">
 								</li>
 
 								<li>
-									<img src="cms/<?php echo getSectionMetaByIDKeyGroup('1', 'Logo 7', 'Logos'); ?>" alt="">
+									<img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Logo 7', 'Logos'); ?> alt="">
 								</li>
 							</ul>
 						</div>
@@ -392,7 +385,7 @@
 					<div class="mn-hd">
 						<div class="cont-title">
 							<span>
-								<img src="cms/<?php echo getSectionMetaByIDKeyGroup('1', 'Image 1', 'Bottom'); ?>"
+								<img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Image 1', 'Bottom'); ?>
 									alt="">
 							</span>
 							<p class="tx-grey-new3 p-fs7">
@@ -407,7 +400,7 @@
 					<div class="mn-hd">
 						<div class="cont-title">
 							<span>
-								<img src="cms/<?php echo getSectionMetaByIDKeyGroup('1', 'Image 2', 'Bottom'); ?>"
+								<img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Image 2', 'Bottom'); ?>
 									alt="">
 							</span>
 							<p class="tx-grey-new3 p-fs7">
@@ -685,7 +678,7 @@
 								<div class="googlebtn otherbtn">
 									<button>
 										<div class="icon">
-											<img src="assets/images/google-icon.png" alt="">
+											<img src=<?php echo $siteurl."assets/images/google-icon.png" ?> alt="">
 										</div>
 										Sign in with Google
 									</button>
@@ -695,7 +688,7 @@
 								<div class="facebookbtn otherbtn">
 									<button>
 										<div class="icon">
-											<img src="assets/images/facebook-icon.png" alt="">
+											<img src=<?php echo $siteurl."assets/images/facebook-icon.png" ?> alt="">
 										</div>
 										Sign in with Facebook
 									</button>
@@ -902,6 +895,28 @@
 
 
 	</script>
-</body>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+      function getScreenSize() {
+            // Get the screen width using JavaScript
+            var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            // Update styles based on screen width
+            console.log("lopsid",screenWidth);
+            var sidebarregular = document.getElementById('display_sidetable1');
+            var sidebarmini = document.getElementById('display_sidetable2');
+            console.log("lopsid",sidebarregular,sidebarmini);
+            if (screenWidth >= 300 && screenWidth <=880) {
+               sidebarregular.style.display = 'none';
+               sidebarmini.style.display = 'block';
+            } else {
+               sidebarmini.style.display = 'none';
+               sidebarregular.style.display = 'block';
+            }
+
+            //console.log("lopsid",sidebarmini);
+        }
+        window.addEventListener('resize', getScreenSize);
+   </script>
 
 </html>

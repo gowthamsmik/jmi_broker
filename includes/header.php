@@ -1,5 +1,4 @@
 <header>
-
 	<div class="top-header">
 		<div class="container-fluid d-flex align-items-center justify-content-between">
 			<div class="topHeader-cont">
@@ -91,7 +90,7 @@
 				</div>
 				<div class="col-md-4 text-center">
 					<a href="./" class="logo">
-						<img src="assets/images/logo.png" alt="">
+						<img src=<?php echo $siteurl."assets/images/logo.png"; ?> alt="">
 					</a>
 				</div>
 				<div class="col-md-4 text-end">
@@ -138,7 +137,7 @@
 			<div class="row align-items-center">
 				<div class="col-md-12 text-center">
 					<a href="./" class="logo">
-						<img src="assets/images/logo.png" alt="">
+						<img src=<?php echo $siteurl."assets/images/logo.png" ?> alt="">
 					</a>
 				</div>
 				<div class="col-md-4 text-end">
@@ -216,7 +215,14 @@
 		</div>
 	</div>
 </header>
-
+<div class="dashboard-subheader-bg">
+      <div class="dashboard-subheader-box">
+         <div class="position">
+            <h5 class="text-white">Control Panel | Account Overview</h5>
+            <p class="text-white font-size">Home > Dashboard ><span id="routeText"></span></p>
+         </div>
+      </div>
+    </div>
 <script>
    $(document).ready(function(){
 	$('#logout').on('click',function(e){

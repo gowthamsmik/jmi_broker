@@ -1,4 +1,179 @@
 /*Main Css */
+
+.dashboard-subheader-bg {
+  height: 130px;
+  width: 100%;
+  background: url(../images/svg/Gradient.png);
+  background-size: 100% 100%;
+  overflow: hidden;
+}
+
+.dashboard-subheader-box {
+  height: 232px;
+  width: auto;
+  background: url(../images/svg/2.svg);
+  background-size: 100% 100%;
+}
+.position {
+  text-align: center;
+  padding-top: 4%;
+}
+
+.font-size {
+  font-size: 12px;
+  opacity: 70%;
+}
+
+.layout {
+  display: flex;
+  width: 100%;
+  background-color: #F0F0F0;
+}
+
+.sidebar-box {
+  width: 25%;
+}
+
+@media screen and (min-width:700px) and (max-width:800px) {
+  .sidebar-box {
+     width: 30%;
+  }
+}
+
+.sidebar {
+  background-color: #ffbf10;
+  margin: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  overflow: hidden;
+}
+
+.sidebar a {
+  padding: 5px;
+  /* justify-content: center; */
+  text-decoration: none;
+  font-size: 18px;
+  color: #818181;
+  border: 1px solid white;
+  display: block;
+  color: white;
+}
+
+.sidebar a:hover {
+  color: white;
+  background-color: #0342ab;
+}
+
+.sidebar a:active {
+  color: white;
+  background-color: #0342ab;
+}
+
+.sidebar .tab-pane .active{
+  color: white;
+  background-color: #0342ab; 
+}
+
+.content {
+  flex: 1;
+  padding: 1%;
+  margin: 1%;
+  width: 60%;
+  overflow-x: auto;
+}
+
+.nav-tabs .nav-item .nav-link {
+  color: white;
+  border-radius: 0px;
+}
+
+.nav-tabs .nav-item .nav-link:hover {
+  color: white;
+  border-color: #0342ab;
+  border-radius: 0px;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+  background-color: #0342ab;
+  color: white;
+  border-color: #0342ab;
+  border-radius: 0px;
+}
+
+#myTabs {
+  margin-bottom: -7px;
+}
+
+.slidebar_table {
+  background-color: white;
+  margin: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tab-pane a {
+  padding: 10px;
+  /* justify-content: center; */
+}
+
+@media screen and (min-width:700px) and (max-width:1236px) {
+  .tool_img {
+     max-width: 25%;
+  }
+}
+
+@media screen and (min-width:300px) and (max-width:700px) {
+
+  .my_account,
+  #my_account {
+     display: none !important;
+  }
+
+  .sidebar-box {
+     width: 20%;
+  }
+
+  .slidebar_table {
+     justify-content: center;
+  }
+
+  .sidebar a {
+     justify-content: center;
+  }
+
+  .tool_img {
+     max-width: 100%;
+  }
+
+  .popup {
+     display: none !important;
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: white;
+     padding: 20px;
+     border: 1px solid #ccc;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     z-index: 2;
+  }
+
+  .popup-content {
+     max-width: 600px;
+     margin: 0 auto;
+  }
+
+  .popup{
+     display: none !important;
+  }
+}
+ form .row {
+     border: 0px solid;
+ }
+ .custom-button{
+     background-color: #0342AB !important;
+     
+ }
 ::-moz-selection {
   background: #87ceeb;
   color: #fff;
