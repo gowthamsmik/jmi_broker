@@ -32,9 +32,8 @@
         }
     </style>
 </head>
-
 <body>
-<!-- <?php //include ("control-panel/accountOverviewclass.php"); ?> -->
+    <?php include ("accountOverviewclass.php"); ?>
     <div>
         <div class="d-flex">
             <h2 class="fs-4">Control Panel|Account OverView</h2>

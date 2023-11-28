@@ -5,11 +5,6 @@
       <meta name='description' content=''>
       <title>Title Here</title>
       <?php include('includes/style.php'); ?>
-	<style>
-         .grey-section{
-            padding: 60px 0 !important;
-         }
-	</style>
    </head>
    <body>
       <?php include('includes/header.php'); ?>

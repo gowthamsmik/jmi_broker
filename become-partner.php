@@ -6,22 +6,23 @@
     <title>Title Here</title>
     <?php include("includes/style.php"); ?>
     <style>
-        .Button_color {
+        .Button_color{
             background-color: #0342ab;
             color: #ffbf10;
         }
-
         .Button_color:hover {
             background-color: #ffbf10;
             color: #0342ab;
         }
+        
     </style>
 </head>
 
 <body>
 
-    <div class="container row mx-auto justify-content-center">
-        <div class="col-md-6">
+    <div class="container row mx-5">
+        <div class="col-6">
+            <p class="text-center">Become Partner</p>
             <form action="">
                 <div class="row">
                     <div class="col-3">
@@ -59,12 +60,10 @@
                 <div class="">
                     <input type="password" class="form-control border rounded-3" placeholder="Phone *" name="pswd">
                 </div>
-                <div class="text-center">
-                    <button type="submit" class="btn Button_color my-3 px-5">Become Our Partner</button>
-                </div>
-
+                <button type="submit" class="btn Button_color my-3">Become Our Partner</button>
             </form>
         </div>
+        <div class="col"></div>
     </div>
 
     <script>

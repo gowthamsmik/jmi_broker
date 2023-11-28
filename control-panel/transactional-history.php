@@ -2,7 +2,7 @@
 
 <head>
     <?php include("includes/style.php"); ?>
-    <?php include ("includes/softwareinclude/functions.php")?>
+    <?php include ("includes/softwareinclude/functions.php")?>;
     <style>
         .body {
             background-color: #F0F0;
@@ -123,7 +123,7 @@
             <tbody>
                 <?php
                  $transactionArray=getAlltransactions();
-                if (is_array($transactionArray)&& count($transactionArray)>0) {
+                if (is_array($transactionArray) && count($transactionArray)> 0) {
                     foreach ($transactionArray as $data) {
                         echo "<tr>";
                         echo "<td class='align-middle'><div  class=' m-2 serial py-1 px-2'>" . htmlspecialchars($data['id']) . "</div></td>";
