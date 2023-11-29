@@ -1,6 +1,3 @@
-<div>
-    <p>Open Demo Account</p>
-</div>
 <?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
