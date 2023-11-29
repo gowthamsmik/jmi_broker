@@ -1,8 +1,17 @@
+<?php if(!isset($_SESSION['sessionuser']))session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include("includes/style.php"); ?>
+    <?php include("../includes/softwareinclude/config.php") ?>
+    <?php include("../includes/compatibility.php"); ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/host-style.css">
+    <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <style>
         .body {
             background-color: #F0F0F0;
@@ -65,10 +74,14 @@
 </head>
 
 <body>
-    <div>
+<?php include("../includes/header.php"); ?>
+    <div class='layout'>
+        <?php include("sidebar.php"); ?>
+        <div class="content">
+            <div class="route-content" id="link1">
         <div class="d-flex">
             <h2 class="fs-4">Downloaad Center</h2>
-            <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
+            <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
                 <p class="mt-1 ms-2">Welcome, <?php echo $_SESSION['sessionusername']; ?></p>
             </div>
         </div>
@@ -77,10 +90,10 @@
             <?php
             // Sample data (replace this with data fetched from your source)
             $data = [
-                ['image' => 'assets/images/mt4-windows.jpg', 'texthed' => 'MT4 for Windows', 'textpara' => 'Supported OS: Windows 98, 98SE, 2000, XP, Windows Vista, Windows 7', 'button_text' => 'Downloaad Now'],
-                ['image' => 'assets/images/mt4-iphone.png', 'texthed' => 'MT4 for IPhone', 'textpara' => 'Supported OS: iPhone 3GS, 4, 4S, iOS 4.0 and later', 'button_text' => 'Downloaad Now'],
-                ['image' => 'assets/images/mt4-ipad.png', 'texthed' => 'MT4 for IPad', 'textpara' => 'Supported OS: iPod touch, iPad1, iOS 4.0 and later','button_text' => 'Downloaad Now'],
-                ['image' => 'assets/images/mt4-android.png', 'texthed' => 'MT4 for Android', 'textpara' => 'Supported OS: Touchscreen smartphone or tablet, Android 2.1 and', 'button_text' => 'Downloaad Now'],
+                ['image' => '../assets/images/mt4-windows.jpg', 'texthed' => 'MT4 for Windows', 'textpara' => 'Supported OS: Windows 98, 98SE, 2000, XP, Windows Vista, Windows 7', 'button_text' => 'Downloaad Now'],
+                ['image' => '../assets/images/mt4-iphone.png', 'texthed' => 'MT4 for IPhone', 'textpara' => 'Supported OS: iPhone 3GS, 4, 4S, iOS 4.0 and later', 'button_text' => 'Downloaad Now'],
+                ['image' => '../assets/images/mt4-ipad.png', 'texthed' => 'MT4 for IPad', 'textpara' => 'Supported OS: iPod touch, iPad1, iOS 4.0 and later','button_text' => 'Downloaad Now'],
+                ['image' => '../assets/images/mt4-android.png', 'texthed' => 'MT4 for Android', 'textpara' => 'Supported OS: Touchscreen smartphone or tablet, Android 2.1 and', 'button_text' => 'Downloaad Now'],
                 // Add more data as needed
             ];
             foreach ($data as $item) {
@@ -103,7 +116,11 @@
             }
             ?>
         </div>
+        </div>
     </div>
+    </div>
+    <?php include("../includes/footer.php"); ?>
+    <?php include("../includes/scripts.php"); ?>
 </body>
 
 </html>

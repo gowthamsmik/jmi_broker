@@ -4,7 +4,7 @@
       <?php include("includes/compatibility.php"); ?>
       <meta name="description" content="">
       <title>Title Here</title>
-      
+      <?php include("includes/softwareinclude/config.php"); ?>
       <?php include("includes/style.php"); ?>
       <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
    </head>

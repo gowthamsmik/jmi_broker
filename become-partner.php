@@ -4,6 +4,7 @@
 <head>
     <meta name="description" content="">
     <title>Title Here</title>
+    <?php include("includes/softwareinclude/config.php"); ?>
     <?php include("includes/style.php"); ?>
     <style>
         .Button_color {

@@ -4,6 +4,7 @@
       <?php include("includes/compatibility.php"); ?>
       <meta name="description" content="">
       <title>Title Here</title>
+      <?php include("includes/softwareinclude/config.php"); ?>
       <?php include("includes/style.php"); ?>
    </head>
    <body>

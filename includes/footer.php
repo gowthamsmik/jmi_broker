@@ -868,7 +868,7 @@
 						if (response == 'Login Successful') {
 							$('.loginpopup-waper').fadeOut();
 							$('.overlay').fadeOut();
-							window.location.href = 'user-website.php';
+							window.location.href = 'cpanel/account-overview.php';
 						}
 					},
 					error: function (xhr, status, error) {

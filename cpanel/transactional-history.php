@@ -1,6 +1,19 @@
-<html>
+<?php if(!isset($_SESSION['sessionuser']))session_start(); ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <?php include("../includes/softwareinclude/config.php") ?>
+    <?php include("../includes/compatibility.php"); ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/host-style.css">
+    <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <?php include("includes/style.php"); ?>
     <?php include ("includes/softwareinclude/functions.php")?>
     <style>
@@ -76,10 +89,14 @@
 </head>
 
 <body>
-
+<?php include("../includes/header.php"); ?>
+    <div class='layout'>
+        <?php include("sidebar.php"); ?>
+        <div class="content">
+            <div class="route-content" id="link1">
     <div class="d-flex">
         <h2 class="fs-4">Transactional History</h2>
-        <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
+        <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
             <p class="mt-1 ms-2">Welcome,
                 <?php echo $_SESSION['sessionusername']; ?>
             </p>
@@ -92,7 +109,7 @@
         <button class="btn mx-1 active_but" onclick="makeActive(this)">Internal Transfers</button>
         <div class="custom-input p-1 ms-auto">
             <input type="text" placeholder="Search" />
-            <img src="assets/images/svg/Shape.svg" alt="404">
+            <img src="../assets/images/svg/Shape.svg" alt="404">
         </div>
     </div>
     <script>
@@ -130,12 +147,13 @@
                         echo "<td class='align-middle'>" . htmlspecialchars($data['type']) . "</td>";
                         echo "<td class='align-middle'>" . htmlspecialchars($data['via']) . "</td>";
                         echo "<td class='align-middle'>" . htmlspecialchars($data['account']) . "</td>";
-  			if($data['status'] == 1)
-                        {
+                        if($data['status'] == 1)
+                                    {
                         echo "<td class='align-middle'><div class='status1 m-2 py-2 px-2'>" . htmlspecialchars('Success') . "</td>";
-			 } else {
- 			 echo "<td class='align-middle'><div class='status2 m-2 py-2 px-2'>" . htmlspecialchars('Pending') . "</td>";
-  			}
+			            } 
+                        else {
+                            echo "<td class='align-middle'><div class='status2 m-2 py-2 px-2'>" . htmlspecialchars('Pending') . "</td>";
+                        }
                         echo "<td class='align-middle'><div class='description m-1 p-4'>" . htmlspecialchars($data['details_user']) . "</div></td>";
                         echo "<td class='align-middle'>" . htmlspecialchars($data['created_at']) . "</td>";
                         echo "</tr>";
@@ -146,7 +164,12 @@
             </tbody>
         </table>
     </div>
+    </div>
+    </div>
+    </div>
+    <?php include("../includes/footer.php"); ?>
+    <?php include("../includes/scripts.php"); ?>
 </body>
-</body>
+ 
 
 </html>

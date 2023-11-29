@@ -1,7 +1,18 @@
+<?php if(!isset($_SESSION['sessionuser']))session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <?php include("includes/style.php"); ?>
+    <?php include("../includes/softwareinclude/config.php") ?>
+    <?php include("../includes/compatibility.php"); ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/host-style.css">
+    <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .body {
@@ -97,10 +108,15 @@
     </style>
 </head>
 <body>
+    <?php include("../includes/header.php"); ?>
+    <div class='layout'>
+        <?php include("sidebar.php"); ?>
+        <div class="content">
+            <div class="route-content" id="link1">
     <div>
         <div class="d-flex">
             <h2 class="fs-4">Forex Account</h2>
-            <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
+            <div class="d-flex ml-auto"><img src='<?php echo $siteurl ."assets/images/svg/account_circle.svg" ?>' class="account_circle" alt="">
                 <p class="mt-1 ms-2">Welcome,  <?php echo $_SESSION['sessionusername']; ?></p>
             </div>
         </div>
@@ -165,7 +181,7 @@
                             else if ($index === 3) {
                                 echo '<td class="bold-cell">
                                         <div class="image-cell-container">
-                                            <img src="assets/images/image 2.png" alt="404" class="align-middle">
+                                            <img src="../assets/images/image 2.png"  alt="404" class="align-middle">
                                             ' . $cell . '
                                         </div>
                                       </td>';
@@ -220,5 +236,11 @@
         </table>
     </div>
     </div>
+    
+    </div>
+    </div>
+    </div>
+    <?php include("../includes/footer.php"); ?>
+    <?php include("../includes/scripts.php"); ?>
 </body>
 </html>

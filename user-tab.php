@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>Tab</title>
-    <?php include("includes/style.php"); ?>
-
+ 
     <style>
         .tab-text {
             color: #0342ab !important;
@@ -24,9 +15,7 @@
             font-weight: bold;
         }
     </style>
-</head>
-
-<body>
+ 
     <div class="bg-white py-3 my-3">
         <ul class="nav nav-tabs d-flex w-100" id="myTabs">
             <li class="nav-item">
@@ -64,28 +53,28 @@
                     <tbody>
                         <tr>
                             <td>EURUSD</td>
-                            <td><img src="assets/images/svg/call_made_blue.svg" alt="404"> 1.1018</td>
-                            <td><img src="assets/images/svg/call_made_yellow.svg" alt="404"> 1.1018</td>
+                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018</td>
+                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018</td>
                         </tr>
                         <tr>
                             <td>EURUSD</td>
-                            <td><img src="assets/images/svg/call_made_blue.svg" alt="404"> 1.1018</td>
-                            <td><img src="assets/images/svg/call_made_yellow.svg" alt="404"> 1.1018</td>
+                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018</td>
+                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018</td>
                         </tr>
                         <tr>
                             <td>EURUSD</td>
-                            <td><img src="assets/images/svg/call_made_blue.svg" alt="404"> 1.1018</td>
-                            <td><img src="assets/images/svg/call_made_yellow.svg" alt="404"> 1.1018</td>
+                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018</td>
+                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018</td>
                         </tr>
                         <tr>
                             <td>EURUSD</td>
-                            <td><img src="assets/images/svg/call_made_blue.svg" alt="404"> 1.1018</td>
-                            <td><img src="assets/images/svg/call_made_yellow.svg" alt="404"> 1.1018</td>
+                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018</td>
+                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018</td>
                         </tr>
                         <tr>
                             <td>EURUSD</td>
-                            <td><img src="assets/images/svg/call_made_blue.svg" alt="404"> 1.1018</td>
-                            <td><img src="assets/images/svg/call_made_yellow.svg" alt="404"> 1.1018</td>
+                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018</td>
+                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018</td>
                         </tr>
                     </tbody>
                 </table>
@@ -108,9 +97,4 @@
             </div>
         </div>
     </div>
-</body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-</html>
+ 
