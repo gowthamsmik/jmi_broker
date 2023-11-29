@@ -4,7 +4,7 @@ session_start();
 
 global $siteurl;
 global $webeurl;
-$siteurl = 'http://localhost/jmi/cms/';
+$siteurl = 'http://localhost/jmi/';
 $webeurl = 'http://localhost/jmi/';
 $servername = 'localhost';
 $username = 'root';

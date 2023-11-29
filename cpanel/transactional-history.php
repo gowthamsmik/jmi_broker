@@ -1,4 +1,6 @@
-<?php if(!isset($_SESSION['sessionuser']))session_start(); ?>
+<?php if(!isset($_SESSION['sessionuser']))session_start();
+$type = isset($_GET['type'])?$_GET['type']:'all';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <?php include("includes/style.php"); ?>
-    <?php include ("includes/softwareinclude/functions.php")?>
+       <?php include ("../includes/softwareinclude/functions.php")?>
     <style>
         .body {
             background-color: #F0F0;
@@ -69,6 +70,14 @@
             align-items: center;
             font-weight: bolder;
         }
+        .status3 {
+            background:  red; 
+            font-weight: bold;
+            border-radius: 2px;
+            justify-content: center;
+            align-items: center;
+            font-weight: bolder;
+        }
 
         .description {
             background-color: #F8F8F8;
@@ -103,17 +112,17 @@
         </div>
     </div>
     <div class=" d-flex my-2">
-        <button class="btn mx-1  px-3 active_but" onclick="makeActive(this)">All</button>
-        <button class="btn mx-1 active_but" onclick="makeActive(this)">Deposit</button>
-        <button class="btn mx-1 active_but" onclick="makeActive(this)">Withdraw</button>
-        <button class="btn mx-1 active_but" onclick="makeActive(this)">Internal Transfers</button>
+        <button class="btn mx-1  px-3 active_but <?php echo $type=='all' ? 'active_button':'' ?>" onclick="makeActive(this,'all')">All</button>
+        <button class="btn mx-1 active_but <?php echo $type=='deposit' ? 'active_button':'' ?>" onclick="makeActive(this,'deposit')">Deposit</button>
+        <button class="btn mx-1 active_but <?php echo $type=='withdraw' ? 'active_button':'' ?>" onclick="makeActive(this,'withdraw')">Withdraw</button>
+        <button class="btn mx-1 active_but <?php echo $type=='internal' ? 'active_button':'' ?>" onclick="makeActive(this,'internal')">Internal Transfers</button>
         <div class="custom-input p-1 ms-auto">
             <input type="text" placeholder="Search" />
             <img src="../assets/images/svg/Shape.svg" alt="404">
         </div>
     </div>
     <script>
-        function makeActive(button) {
+        function makeActive(button,type) {
             // Remove 'active_but' class from all buttons
             var buttons = document.querySelectorAll('.btn');
             buttons.forEach(function (btn) {
@@ -122,6 +131,7 @@
 
             // Add 'active_but' class to the clicked button
             button.classList.add('active_button');
+            window.location.href='<?php echo $siteurl."cpanel/transactional-history.php?tab=1&type=" ?>'+type;
         }
     </script>
     <div>
@@ -139,7 +149,7 @@
             </thead>
             <tbody>
                 <?php
-                 $transactionArray=getAlltransactions();
+                 $transactionArray=getAlltransactions($type);
                 if (is_array($transactionArray)&& count($transactionArray)>0) {
                     foreach ($transactionArray as $data) {
                         echo "<tr>";
@@ -147,12 +157,19 @@
                         echo "<td class='align-middle'>" . htmlspecialchars($data['type']) . "</td>";
                         echo "<td class='align-middle'>" . htmlspecialchars($data['via']) . "</td>";
                         echo "<td class='align-middle'>" . htmlspecialchars($data['account']) . "</td>";
-                        if($data['status'] == 1)
-                                    {
+                         
+                        if($data['status'] == '1')
+                                    { 
                         echo "<td class='align-middle'><div class='status1 m-2 py-2 px-2'>" . htmlspecialchars('Success') . "</td>";
 			            } 
-                        else {
+                        elseif ($data['status'] == '0')
+                        {
                             echo "<td class='align-middle'><div class='status2 m-2 py-2 px-2'>" . htmlspecialchars('Pending') . "</td>";
+                        }
+                        else
+                        {
+                            echo "<td class='align-middle'><div class='status3 m-2 py-2 px-2'>" . htmlspecialchars('Rejected') . "</td>";
+   
                         }
                         echo "<td class='align-middle'><div class='description m-1 p-4'>" . htmlspecialchars($data['details_user']) . "</div></td>";
                         echo "<td class='align-middle'>" . htmlspecialchars($data['created_at']) . "</td>";

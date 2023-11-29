@@ -1,26 +1,27 @@
 <?php
 include('config.php');
-error_reporting(0);
+error_reporting(3);
 session_start();
 
 // Check if the user is logged in
-if ($_SESSION['user']) {
-    $session_user = $_SESSION['user'];
-
+if ($_SESSION['sessionuser']) {
+    $session_user = $_SESSION['sessionuser'];
+    
     // Get user data
     $userQuery = "SELECT * FROM website_accounts WHERE username = ? OR email = ?";
     $userStmt = $conn->prepare($userQuery);
     $userStmt->bind_param("ss", $session_user, $session_user);
     $userStmt->execute();
     $userResult = $userStmt->get_result();
-
+    
     if ($userResult && $userResult->num_rows > 0) {
         $user = $userResult->fetch_assoc();
 
         // Get user notifications
+        $userId = (int) $user['id'];
         $notificationsQuery = "SELECT * FROM Notifications WHERE website_accounts_id = ? ORDER BY id DESC LIMIT 8";
         $notificationsStmt = $conn->prepare($notificationsQuery);
-        $notificationsStmt->bind_param("i", $user['id']);
+        $notificationsStmt->bind_param("i", $userId);
         $notificationsStmt->execute();
         $notificationsResult = $notificationsStmt->get_result();
         $notifications_all = $notificationsResult->fetch_all(MYSQLI_ASSOC);
@@ -28,23 +29,23 @@ if ($_SESSION['user']) {
         // Get unseen notifications
         $notificationsUnseenQuery = "SELECT * FROM Notifications WHERE website_accounts_id = ? AND notification_status = 0";
         $notificationsUnseenStmt = $conn->prepare($notificationsUnseenQuery);
-        $notificationsUnseenStmt->bind_param("i", $user['id']);
+        $notificationsUnseenStmt->bind_param("i", $userId);
         $notificationsUnseenStmt->execute();
         $notificationsUnseenResult = $notificationsUnseenStmt->get_result();
         $notifications_unseen = $notificationsUnseenResult->fetch_all(MYSQLI_ASSOC);
 
         // Get user live accounts
-        $accountsQuery = "SELECT * FROM fx_accounts_live WHERE website_accounts_id = ?";
+        $accountsQuery = "SELECT * FROM fx_accounts WHERE website_accounts_id = ?";
         $accountsStmt = $conn->prepare($accountsQuery);
-        $accountsStmt->bind_param("i", $user['id']);
+        $accountsStmt->bind_param("i", $userId);
         $accountsStmt->execute();
         $accountsResult = $accountsStmt->get_result();
         $accounts = $accountsResult->fetch_all(MYSQLI_ASSOC);
 
         // Get input data
-        $input = $_REQUEST;
+        $input = $_POST;
         $copy_from = $input['copy_from'];
-
+         
         // Validate input
         if ($input['copy_from'] == 'other') {
             $copy_from = $input['other_account'];
@@ -80,21 +81,21 @@ if ($_SESSION['user']) {
 
         $ret = rtrim($ret, "\r\n");
         $result = json_decode($ret);
-
+        var_dump($result);exit(0);
         // Check the result
         if (is_object($result) && isset($result->result) && $result->result == 0) {
             // Insert copy trade record
             $transactionQuery = "INSERT INTO CopyTrade (website_accounts_id, copy_from, copy_to, percentage, status, details_user, details_admin)
                                  VALUES (?, ?, ?, ?, 0, '', '')";
             $transactionStmt = $conn->prepare($transactionQuery);
-            $transactionStmt->bind_param("iiid", $user['id'], $copy_from, $input['copy_to'], $input['percentage']);
+            $transactionStmt->bind_param("iiid", $userId, $copy_from, $input['copy_to'], $input['percentage']);
             $transactionStmt->execute();
 
             // Insert user notification
             $notificationQuery = "INSERT INTO Notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link)
                                  VALUES (?, 0, 'Your copy trade request has been received successfully.', 'Your copy trade request has been received successfully.', 'تم استلام طلب نسخ التداول الخاص بك بنجاح.', 'تم استلام طلب نسخ التداول الخاص بك بنجاح.', 'Ваш запрос на копирование был успешно получен.', 'Ваш запрос на копирование был успешно получен.', '/cpanel/copy-trade')";
             $notificationStmt = $conn->prepare($notificationQuery);
-            $notificationStmt->bind_param("i", $user['id']);
+            $notificationStmt->bind_param("i", $userId);
             $notificationStmt->execute();
 
             // Insert admin notification
@@ -107,7 +108,7 @@ if ($_SESSION['user']) {
             // Redirect based on language segment
             $languageSegment = isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'ar') !== false ? 'ar' : (strpos($_SERVER['REQUEST_URI'], 'ru') !== false ? 'ru' : 'en');
 
-            header("Location: $languageSegment/cpanel/copy-trade");
+            header("Location: ../copy-trade.php?tab=1");
             exit();
         } else {
             // Redirect on failure
@@ -166,7 +167,7 @@ function redirectOnFailure()
     } elseif (isset($languageSegment) && $languageSegment == 'ru') {
         header("Location: ru/cpanel/copy-trade")->with($errorMessageKey, $errorMessage);
     } else {
-        header("Location: en/cpanel/copy-trade")->with($errorMessageKey, $errorMessage);
+        header("Location: ../copy-trade.php?tab=1")->with($errorMessageKey, $errorMessage);
     }
 
     exit();

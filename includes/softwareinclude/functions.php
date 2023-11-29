@@ -1,8 +1,19 @@
 <?php
 include('config.php');
-function getAlltransactions(){
+function getAlltransactions($type){
+    $newtype ='';
     global $conn;
-    $sql = "SELECT * FROM transactions order by created_at desc";
+    switch($type)
+    {
+        case 'all': $newtype='';break;
+        case 'deposit': $newtype=0;break;
+        case 'withdraw': $newtype=1;break;
+        case 'internal': $newtype=2;break;
+    }
+    if($type!='all')
+        $sql = "SELECT * FROM transactions where type=$newtype order by created_at desc";
+    else
+        $sql = "SELECT * FROM transactions  order by created_at desc";
     $res = $conn->query($sql);
     $result = array(); // Initialize an array to store all rows
 

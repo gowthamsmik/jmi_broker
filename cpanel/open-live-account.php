@@ -5,15 +5,15 @@
 <head>
     <?php include("../includes/softwareinclude/config.php") ?>
     <?php include("../includes/compatibility.php"); ?>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!--     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="../assets/css/layout.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/host-style.css">
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
     <style>
         .wel {
             font-style: Poppins;
@@ -158,7 +158,7 @@
     <div>
         <div class="d-flex mb-3">
             <h2 class="fs-4">Open Live Account</h2>
-            <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
+            <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
                 <p class="mt-1 ms-2">Welcome,
                     <?php echo $_SESSION['sessionusername']; ?>
                 </p>
@@ -192,7 +192,7 @@
 
         <div class="fsa fm">
             <div class="pl">
-                <img src="assets/images/group.png" alt="" class="log">
+                <img src="../assets/images/group.png" alt="" class="log">
                 <h1 class="min">MINIMUM FUNDING</h1>
                 <h1 class="usd">500 USD</h1>
                 <h1 class="fs">VARIABLE SPREAD ACCOUNT</h1>
@@ -220,7 +220,7 @@
 
         <div class="fsa fm">
             <div class="pl">
-                <img src="assets/images/group.png" alt="" class="log">
+                <img src="../assets/images/group.png" alt="" class="log">
                 <h1 class="min">MINIMUM FUNDING</h1>
                 <h1 class="usd">1000 USD</h1>
                 <h1 class="fs">SCALPING ACCOUNT</h1>
@@ -247,7 +247,7 @@
 
         <div class="fsa fm">
             <div class="pl">
-                <img src="assets/images/group.png" alt="" class="log">
+                <img src="../assets/images/group.png" alt="" class="log">
                 <h1 class="min">MINIMUM FUNDING</h1>
                 <h1 class="usd">100 USD</h1>
                 <h1 class="fs">BONUS ACCOUNT</h1>

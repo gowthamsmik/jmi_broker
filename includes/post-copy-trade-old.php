@@ -44,7 +44,7 @@ if ($_SESSION['user']) {
         // Get input data
         $input = $_REQUEST;
         $copy_from = $input['copy_from'];
-
+         
         // Validate input
         if ($input['copy_from'] == 'other') {
             $copy_from = $input['other_account'];
@@ -166,7 +166,7 @@ function redirectOnFailure()
     } elseif (isset($languageSegment) && $languageSegment == 'ru') {
         header("Location: ru/cpanel/copy-trade")->with($errorMessageKey, $errorMessage);
     } else {
-        header("Location: en/cpanel/copy-trade")->with($errorMessageKey, $errorMessage);
+        header("Location: cpanel/copy-trade")->with($errorMessageKey, $errorMessage);
     }
 
     exit();

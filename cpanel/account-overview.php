@@ -22,7 +22,7 @@
             <div class="route-content" id="link1">
         <div class="d-flex">
             <h2 class="fs-4">Control Panel|Account OverView</h2>
-            <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
+            <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
                 <p class="mt-1 ms-2">Welcome,
                     <?php echo $_SESSION['sessionusername']; ?>
                 </p>

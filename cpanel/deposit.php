@@ -71,7 +71,7 @@
             <div class="route-content" id="link1">
         <div class="d-flex">
             <h2 class="fs-4">Deposit Account</h2>
-            <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
+            <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
                 <p class="mt-1 ms-2">Welcome,  <?php echo $_SESSION['sessionusername']; ?></p>
             </div>
         </div>
@@ -80,13 +80,13 @@
             <?php
             // Sample data (replace this with data fetched from your source)
             $data = [
-                ['image' => '../assets/images/pay-methods/8.png', 'text' => 'Bank Wire', 'button_text' => 'Deposit'],
+                //['image' => '../assets/images/pay-methods/8.png', 'text' => 'Bank Wire', 'button_text' => 'Deposit'],
                 ['image' => '../assets/images/pay-methods/2.png', 'text' => 'Epay', 'button_text' => 'Deposit'],
-                ['image' => '../assets/images/pay-methods/3.png', 'text' => 'Advcash', 'button_text' => 'Deposit'],
-                ['image' => '../assets/images/pay-methods/5.png', 'text' => 'Perfect Money', 'button_text' => 'Deposit'],
+                //['image' => '../assets/images/pay-methods/3.png', 'text' => 'Advcash', 'button_text' => 'Deposit'],
+                //['image' => '../assets/images/pay-methods/5.png', 'text' => 'Perfect Money', 'button_text' => 'Deposit'],
                 ['image' => '../assets/images/pay-methods/1.png', 'text' => 'Coin Base', 'button_text' => 'Deposit'],
-                ['image' => '../assets/images/pay-methods/7.png', 'text' => 'Western Union', 'button_text' => 'Deposit'],
-                ['image' => '../assets/images/pay-methods/6.png', 'text' => 'Money Gram', 'button_text' => 'Deposit'],
+                //['image' => '../assets/images/pay-methods/7.png', 'text' => 'Western Union', 'button_text' => 'Deposit'],
+                //['image' => '../assets/images/pay-methods/6.png', 'text' => 'Money Gram', 'button_text' => 'Deposit'],
                 // Add more data as needed
             ];
             foreach ($data as $item) {

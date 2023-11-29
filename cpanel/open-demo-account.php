@@ -158,7 +158,7 @@
      
         <div class="d-flex mb-3">
             <h2 class="fs-4">Open Demo Account</h2>
-            <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
+            <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
                 <p class="mt-1 ms-2">Welcome,
                     <?php echo $_SESSION['sessionusername']; ?>
                 </p>

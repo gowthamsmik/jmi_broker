@@ -42,7 +42,7 @@
             <div class="route-content" id="link1">
     <div class="d-flex">
         <h2 class="fs-4">Password Change</h2>
-        <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
+        <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
             <p class="mt-1 ms-2">Welcome, <?php echo $_SESSION['sessionusername']; ?></p>
         </div>
     </div>
@@ -51,11 +51,11 @@
             <div class="col">
                 <div class="row">
                     <div class="row mt-3"><label for="" class="form-label">Current Password <img
-                                src="assets/images/asterisk.png" alt="" class="asterisk"></label></div>
+                                src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
                     <div class="row my-4"><label for="" class="form-label">New Password <img
-                                src="assets/images/asterisk.png" alt="" class="asterisk"></label></div>
+                                src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
                     <div class="row"><label for="" class="form-label">Confirm Password <img
-                                src="assets/images/asterisk.png" alt="" class="asterisk"></label></div>
+                                src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
                 </div>
             </div>
             <div class="col">
