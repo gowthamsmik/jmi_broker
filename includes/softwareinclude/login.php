@@ -9,18 +9,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    // Check if the input is a valid phone number
    if (preg_match('/^[0-9]+$/', $userNameorPhone)) {
-     $columnToCheck = 'mobile';
+     $columnToCheck = 'phone';
     } else {
-     $columnToCheck = 'username';
+     $columnToCheck = 'user_name';
     }
 
     // Check if the username or phone exists in the database
-    $checkExistingSql = "SELECT * FROM website_accounts WHERE $columnToCheck = '$userNameorPhone'";
+    $checkExistingSql = "SELECT * FROM users WHERE $columnToCheck = '$userNameorPhone'";
     $checkExistingResult = $conn->query($checkExistingSql);
-
+    // $userr = $checkExistingResult->fetch_assoc();
+    // echo $checkExistingResult,$checkExistingSql,$checkExistingResult->num_rows,"tiger ka hukum";
     if ($checkExistingResult->num_rows > 0) {
         $user = $checkExistingResult->fetch_assoc();
-
+      
         // Verify the password
         if (md5($password) == $user['password']) {
             // Password is correct, you can fetch user details here
@@ -44,11 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Login Successful" ;
         } else {
             // Password is incorrect
-            echo "Incorrect Password";
+            echo "Incorrect Password".$user['password'].",,lop...",md5($password);
         }
     } else {
         // Username or phone doesn't exist
-        echo "User not found!, Please Register to login.";
+        echo "User not found!, Please Register to login."  ;
     
     }
    } else {

@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php include("includes/style.php"); ?>
+<?php include("../cpanel/includes/config.php"); ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/host-style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         .body {
             background-color: #F0F0F0;
@@ -52,6 +58,11 @@
     </style>
 </head>
 <body>
+<?php include("../includes/header.php"); ?>
+  
+    <div class='layout'>
+        <?php include("sidebar.php"); ?>
+        <div class="content">
     <div>
     <div class="d-flex">
             <h2 class="fs-4">Withdraw Account</h2>
@@ -64,13 +75,13 @@
             <?php
             // Sample data (replace this with data fetched from your source)
             $data = [
-                ['image' => 'assets/images/pay-methods/8.png', 'text' => 'Bank Wire', 'button_text' => 'Withdraw'],
-                ['image' => 'assets/images/pay-methods/2.png', 'text' => 'Epay', 'button_text' => 'Withdraw'],
-                ['image' => 'assets/images/pay-methods/3.png', 'text' => 'Advcash', 'button_text' => 'Withdraw'],
-                ['image' => 'assets/images/pay-methods/5.png', 'text' => 'Perfect Money', 'button_text' => 'Withdraw'],
-                ['image' => 'assets/images/pay-methods/1.png', 'text' => 'Coin Base', 'button_text' => 'Withdraw'],
-                ['image' => 'assets/images/pay-methods/7.png', 'text' => 'Western Union', 'button_text' => 'Withdraw'],
-                ['image' => 'assets/images/pay-methods/6.png', 'text' => 'Money Gram', 'button_text' => 'Withdraw'],
+                ['image' => '../assets/images/pay-methods/8.png', 'text' => 'Bank Wire', 'button_text' => 'Withdraw'],
+                ['image' => '../assets/images/pay-methods/2.png', 'text' => 'Epay', 'button_text' => 'Withdraw'],
+                ['image' => '../assets/images/pay-methods/3.png', 'text' => 'Advcash', 'button_text' => 'Withdraw'],
+                ['image' => '../assets/images/pay-methods/5.png', 'text' => 'Perfect Money', 'button_text' => 'Withdraw'],
+                ['image' => '../assets/images/pay-methods/1.png', 'text' => 'Coin Base', 'button_text' => 'Withdraw'],
+                ['image' => '../assets/images/pay-methods/7.png', 'text' => 'Western Union', 'button_text' => 'Withdraw'],
+                ['image' => '../assets/images/pay-methods/6.png', 'text' => 'Money Gram', 'button_text' => 'Withdraw'],
                 // Add more data as needed
             ];
             foreach ($data as $item) {
@@ -87,5 +98,9 @@
             ?>
         </div>
     </div>
+        </div>
+    </div>
+    <?php include("../includes/footer.php"); ?>
+    <?php include("../includes/scripts.php"); ?>
 </body>
 </html>

@@ -434,34 +434,34 @@
 			<div class="myPopup">
 				<div class="closePop">X</div>
 				<div class="popupcont">
-					<h6>Login</h6>
+					<h6><?php  echo $lang['login']?></h6>
 
 					<form action="#">
 						<div class="popupfeild">
-							<label for="">User Name / Phone Number</label>
-							<input type="text" name='loginUserorPhone' placeholder="Type User Name or Phone">
+							<label for=""><?php echo $lang['user_name_placeholder']?></label>
+							<input type="text" name='loginUserorPhone' placeholder="<?php echo $lang['user_name_placeholder']?>">
 						</div>
 
 						<div class="popupfeild">
-							<label for="">Password</label>
+							<label for=""><?php echo $lang['password_placeholder']?></label>
 							<input name='loginPassword' type="password" placeholder="********">
 						</div>
 
 						<div class="loginforgot">
 							<label for="remenber">
 								<input type="checkbox" id="remenber">
-								Remember me
+								<?php echo $lang['remember_me']?>
 							</label>
 
-							<a href="#">Forgot your Password?</a>
+							<a href="#"><?php echo $lang['forgot_password']?></a>
 						</div>
 
 						<div class="popupbutton" id='loginButton'>
-							<button>Login Now</button>
+							<button><?php echo $lang['login_now']?></button>
 						</div>
 
 						<div class="popupsingUp">
-							<span>Don't have an account?</span> <a href="#">Sign Up</a>
+							<span><?php echo $lang['no_account']?></span> <a href="#"><?php echo $lang['sign_up']?></a>
 						</div>
 					</form>
 				</div>
@@ -706,18 +706,6 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<!-- Add this script after including jQuery -->
 	<script>
-
-
-		// var input = document.querySelector("#phone");
-		// intlTelInput(input, {
-		// 	initialCountry: "in",
-		// 	separateDialCode: true, // Optional: Show dial code separately
-		// 	utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js",
-
-		// });
-
-
-
 		function validate() {
 			if (emailverified && smsverified) {
 				return true;
@@ -868,7 +856,7 @@
 						if (response == 'Login Successful') {
 							$('.loginpopup-waper').fadeOut();
 							$('.overlay').fadeOut();
-							window.location.href = 'user-website.php';
+							window.location.href = 'cpanel/account-overview.php';
 						}
 					},
 					error: function (xhr, status, error) {
@@ -895,28 +883,6 @@
 
 
 	</script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script>
-      function getScreenSize() {
-            // Get the screen width using JavaScript
-            var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-            // Update styles based on screen width
-            console.log("lopsid",screenWidth);
-            var sidebarregular = document.getElementById('display_sidetable1');
-            var sidebarmini = document.getElementById('display_sidetable2');
-            console.log("lopsid",sidebarregular,sidebarmini);
-            if (screenWidth >= 300 && screenWidth <=880) {
-               sidebarregular.style.display = 'none';
-               sidebarmini.style.display = 'block';
-            } else {
-               sidebarmini.style.display = 'none';
-               sidebarregular.style.display = 'block';
-            }
-
-            //console.log("lopsid",sidebarmini);
-        }
-        window.addEventListener('resize', getScreenSize);
-   </script>
+</body>
 
 </html>

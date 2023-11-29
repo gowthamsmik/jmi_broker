@@ -3,7 +3,13 @@
 <html>
 
 <head>
-    <?php include("includes/style.php"); ?>
+<?php include("../cpanel/includes/config.php"); ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/host-style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         .white-box {
             background-color: #FFFFFF;
@@ -27,7 +33,12 @@
 </head>
 
 <body>
-    <?php include("control-panel/includes/my-refferrals.php"); ?>
+<?php include("../includes/header.php"); ?>
+
+    <div class='layout'>
+        <?php include("sidebar.php"); ?>
+        <div class="content">
+    <?php include("cpanel/includes/my-refferrals.php"); ?>
     <?php if (count($allReferrals)<1) {?>
     <div class="d-flex">
         <h2 class="fs-4">Control Panel|My Referrals</h2>
@@ -54,6 +65,10 @@
         </div>
     </div>
     <?php } ?>
+        </div>
+    </div>
+    <?php include("../includes/footer.php"); ?>
+    <?php include("../includes/scripts.php"); ?>
 </body>
 
 </html>

@@ -1,8 +1,15 @@
 <html>
 
 <head>
-    <?php include("includes/style.php"); ?>
-    <?php include ("includes/softwareinclude/functions.php")?>
+    <?php include("../includes/style.php"); ?>
+    <?php include ("../includes/softwareinclude/functions.php")?>
+    <?php include("../cpanel/includes/config.php"); ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/host-style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         .body {
             background-color: #F0F0;
@@ -76,10 +83,14 @@
 </head>
 
 <body>
+<?php include("../includes/header.php"); ?>
 
+<div class='layout'>
+        <?php include("sidebar.php"); ?>
+        <div class="content">
     <div class="d-flex">
         <h2 class="fs-4">Transactional History</h2>
-        <div class="d-flex ml-auto"><img src="assets/images/svg/account_circle.svg" class="account_circle" alt="">
+        <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
             <p class="mt-1 ms-2">Welcome,
                 <?php echo $_SESSION['sessionusername']; ?>
             </p>
@@ -92,7 +103,7 @@
         <button class="btn mx-1 active_but" onclick="makeActive(this)">Internal Transfers</button>
         <div class="custom-input p-1 ms-auto">
             <input type="text" placeholder="Search" />
-            <img src="assets/images/svg/Shape.svg" alt="404">
+            <img src="../assets/images/svg/Shape.svg" alt="404">
         </div>
     </div>
     <script>
@@ -146,6 +157,10 @@
             </tbody>
         </table>
     </div>
+            </div>
+</div>
+<?php include("../includes/footer.php"); ?>
+    <?php include("../includes/scripts.php"); ?>
 </body>
 </body>
 

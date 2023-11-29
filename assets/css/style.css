@@ -1,18 +1,22 @@
 /*Main Css */
 
+.body {
+  background-color: #F0F0F0;
+}
+
 .dashboard-subheader-bg {
-  height: 130px;
-  width: 100%;
-  background: url(../images/svg/Gradient.png);
-  background-size: 100% 100%;
-  overflow: hidden;
+height: 130px;
+width: 100%;
+background: url(../../assets/images/svg/Gradient.png);
+background-size: 100% 100%;
+overflow: hidden;
 }
 
 .dashboard-subheader-box {
-  height: 232px;
-  width: auto;
-  background: url(../images/svg/2.svg);
-  background-size: 100% 100%;
+height: 232px;
+width: auto;
+background: url(../../assets/images/svg/2.svg);
+background-size: 100% 100%;
 }
 .position {
   text-align: center;
@@ -167,13 +171,6 @@
      display: none !important;
   }
 }
- form .row {
-     border: 0px solid;
- }
- .custom-button{
-     background-color: #0342AB !important;
-     
- }
 ::-moz-selection {
   background: #87ceeb;
   color: #fff;
@@ -5397,3 +5394,4 @@ footer .copyright p span {
     padding-bottom: 25px;
   }
 }/*# sourceMappingURL=style.css.map */
+

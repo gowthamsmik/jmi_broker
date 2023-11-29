@@ -37,7 +37,7 @@
                   </div>
 
                   <div class="col-md-6">
-                     <div class="mainBanner-img">Banner Image
+                     <div class="mainBanner-img">Banner Image  
                         <img src="cms/<?php echo getPageMetaByIDKeyGroup(1,'Banner Image','Banner');?>" alt="">
                      </div>
                   </div>
