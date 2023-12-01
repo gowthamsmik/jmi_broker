@@ -1,14 +1,14 @@
 <?php
 include('config.php');
-error_reporting(0);
+error_reporting(3);
 session_start();
 
 $siteurl = 'http://localhost/jmi/cms/';
 $webeurl = 'http://localhost/jmi/';
 
-$session_user = $_SESSION['user'];
+$session_user = $_SESSION['sessionuser'];
 $input = $_REQUEST;
-
+global $conn;
 $transfer_to = $input['transfer_to'];
 
 if ($input['transfer_to'] == 'other') {
@@ -34,7 +34,7 @@ if (!preg_match('/^[0-9]*$/', $input['transfer_from']) || strlen($input['transfe
 if (!preg_match('/^[0-9]*$/', $input['currency']) || $input['currency'] < 1 || $input['currency'] > 1) {
     die("Currency validation failed.");
 }
-
+/*
 $query = "|MODE=7|LOGIN=" . $input['transfer_from'] . "|CPASS=" . $input['password'];
 
 $query1 = "|MODE=4|LOGIN=" . $input['transfer_from'] . "|CPASS=" . $input['password'] . "|TOACC=" . $transfer_to . "|AMOUNT=" . $_POST['amount'];
@@ -110,13 +110,29 @@ if (is_object($result) && isset($result->result) && $result->result == 0) {
 
     $ret1 = substr($ret1, 0, strlen($ret1) - 1);
     $result1 = json_decode($ret1);
-
-    if ($result1->result == 0) {
+    */
+    $result1 = 1;
+    if ($result1) {
+        try{
         // Assume you have a Transactions model and the corresponding database table
         // You should replace this with your actual model and database table name
         // Also, you need to include the necessary model file or set up autoloading
-        $transaction = new Transactions;
-        $transaction->website_accounts_id = $user->id;
+        $transquery = "insert into transactions (account,amount,currency,type,via,website_accounts_id,status) values (?,?,?,?,?,?,?)";
+        $trasactions = $conn->prepare($transquery);
+        $amount = (float)$input['amount'];
+        $currency = (int)$input['currency'];
+        $via = $input['transfer_from'];
+        $type = 2;
+        $status = 1;
+        $trasactions->bind_param("idsisii", $transfer_to,$amount,$currency,$type,$via,$session_user,$status);
+        $trasactions->execute();
+        header("Location:../internal-transfers.php?tab=1");
+        }
+        catch(Exception $e)
+        {
+            echo "error".$e->getMessage();
+        }
+       /*  $transaction->website_accounts_id = $user->id;,
         $transaction->account = $transfer_to;
         $transaction->amount = $input['amount'];
         $transaction->currency = $input['currency'];
@@ -124,10 +140,10 @@ if (is_object($result) && isset($result->result) && $result->result == 0) {
         $transaction->via = $input['transfer_from'];
         $transaction->status = 1; // Assuming 1 is the status for successful transactions
         $transaction->details_user = '';
-        $transaction->details_admin = '';
-        $transaction->save();
+        $transaction->details_admin = ''; */
+        //$transaction->save();
 
-        if (Request::segment(1) == 'ar') {
+       /*  if (Request::segment(1) == 'ar') {
             header("Location: ar/cpanel/transaction-history?status-success=تم التحويل بنجاح");
             exit();
         } elseif (Request::segment(1) == 'ru') {
@@ -136,11 +152,11 @@ if (is_object($result) && isset($result->result) && $result->result == 0) {
         } else {
             header("Location: en/cpanel/transaction-history?status-success=Successfully Transfered");
             exit();
-        }
+        } */
     }
-}
+//}
 
-if (Request::segment(1) == 'ar') {
+/* if (Request::segment(1) == 'ar') {
     header("Location: ar/cpanel/transaction-history?status-error=فشل التحويل");
     exit();
 } elseif (Request::segment(1) == 'ru') {
@@ -149,5 +165,5 @@ if (Request::segment(1) == 'ar') {
 } else {
     header("Location: en/cpanel/transaction-history?status-error=Failed");
     exit();
-}
+} */
 ?>

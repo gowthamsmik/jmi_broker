@@ -1,49 +1,56 @@
 <?php
 include("config.php");
-session_start();
-
-
+error_reporting(3);
             // Flash messages
             $_SESSION['pageType'] = 'menu';
             $_SESSION['currentPage'] = 'add-account';
-
+            global $conn;
             // Get session user
-            $sessionUser = isset($_SESSION['user']) ? $_SESSION['user'] : '';
 
+            $sessionUser = isset($_SESSION['sessionuser']) ? $_SESSION['sessionuser'] : '';
+         
             // Get user details
-            $stmtUser = $conn->prepare("SELECT * FROM website_accounts WHERE username = :user OR email = :user");
-            $stmtUser->bindParam(':user', $sessionUser);
+            $stmtUser = $conn->prepare("SELECT * FROM website_accounts WHERE username = ? OR email = ?");
+            $stmtUser->bind_param('ss', $sessionUser,$sessionUser);
             $stmtUser->execute();
-            $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
-
+            $resultUser = $stmtUser->get_result();
+            $user = $resultUser->fetch_assoc();
+            //var_dump($user);exit(0);
+            $userId = $user['id'];
+     
             // Get all notifications
-            $stmtNotificationsAll = $conn->prepare("SELECT * FROM notifications WHERE website_accounts_id = :userId ORDER BY id DESC LIMIT 8");
-            $stmtNotificationsAll->bindParam(':userId', $user['id']);
+            $stmtNotificationsAll = $conn->prepare("SELECT * FROM notifications WHERE website_accounts_id =  ? ORDER BY id DESC LIMIT 8");
+            $stmtNotificationsAll->bind_param('i', $userId);
             $stmtNotificationsAll->execute();
-            $notificationsAll = $stmtNotificationsAll->fetchAll(PDO::FETCH_ASSOC);
+            $resultNotificationsAll = $stmtNotificationsAll->get_result();
+            $notificationsAll = $resultNotificationsAll->fetch_all(MYSQLI_ASSOC);
 
             // Get unseen notifications
-            $stmtNotificationsUnseen = $conn->prepare("SELECT * FROM notifications WHERE website_accounts_id = :userId AND notification_status = 0");
-            $stmtNotificationsUnseen->bindParam(':userId', $user['id']);
+            $stmtNotificationsUnseen = $conn->prepare("SELECT * FROM notifications WHERE website_accounts_id = ? AND notification_status = 0");
+            $stmtNotificationsUnseen->bind_param('i', $userId);
             $stmtNotificationsUnseen->execute();
-            $notificationsUnseen = $stmtNotificationsUnseen->fetchAll(PDO::FETCH_ASSOC);
+            $resultNotificationsUnseen = $stmtNotificationsUnseen->get_result();
+            $notificationsUnseen = $resultNotificationsUnseen->fetch_all(MYSQLI_ASSOC);
 
             // Get live and demo accounts
-            $liveAccountsStmt = $conn->prepare("SELECT * FROM fx_accounts WHERE website_accounts_id = :userId AND account_type = 'live'");
-            $liveAccountsStmt->bindParam(':userId', $user['id']);
+            $liveAccountsStmt = $conn->prepare("SELECT * FROM fx_accounts WHERE website_accounts_id = ? AND account_radio_type = 1");
+            $liveAccountsStmt->bind_param('i', $userId);
             $liveAccountsStmt->execute();
-            $liveAccounts = $liveAccountsStmt->fetchAll(PDO::FETCH_ASSOC);
+            $liveaccount = $liveAccountsStmt->get_result();
+            $liveAccounts = $liveaccount->fetch_all(MYSQLI_ASSOC);
 
-            $demoAccountsStmt = $conn->prepare("SELECT * FROM fx_accounts WHERE website_accounts_id = :userId AND account_type = 'demo'");
-            $demoAccountsStmt->bindParam(':userId', $user['id']);
+            $demoAccountsStmt = $conn->prepare("SELECT * FROM fx_accounts WHERE website_accounts_id = ? AND account_type = 'demo'");
+            $demoAccountsStmt->bind_param('i', $userId);
             $demoAccountsStmt->execute();
-            $demoAccounts = $demoAccountsStmt->fetchAll(PDO::FETCH_ASSOC);
+            $demoaccount = $demoAccountsStmt->get_result();
+            $demoAccounts = $demoaccount->fetch_all(MYSQLI_ASSOC);
 
             // Get documents
-            $documentsStmt = $conn->prepare("SELECT * FROM documents WHERE website_accounts_id = :userId");
-            $documentsStmt->bindParam(':userId', $user['id']);
+            $documentsStmt = $conn->prepare("SELECT * FROM documents WHERE website_accounts_id = ? ");
+            $documentsStmt->bind_param('i', $userId);
             $documentsStmt->execute();
-            $documents = $documentsStmt->fetchAll(PDO::FETCH_ASSOC);
+            $document = $documentsStmt->get_result();
+            $documents = $document->fetch_all(MYSQLI_ASSOC)
 
             // Set title and view based on language
             // if( Request::segment(1) =='ar'){

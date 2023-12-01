@@ -1,4 +1,14 @@
-<?php if(!isset($_SESSION['sessionuser']))session_start(); ?>
+<?php if(!isset($_SESSION['sessionuser']))session_start();
+if(isset($_SESSION['msg']))
+{
+    $msg = $_SESSION['msg'];
+    unset($_SESSION['msg']);
+}
+else
+{
+    $msg = '';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +37,8 @@
 
 <body>
 <?php include("../includes/header.php"); ?>
+<?php include("includes/add_account.php"); ?>
+<div class="main-header" style="text-align:center"> <?php echo $msg; ?></div>
     <div class='layout'>
         <?php include("sidebar.php"); ?>
         <div class="content">
@@ -38,53 +50,63 @@
         </div>
     </div>
     <div class="bg-white mt-4 p-5 rounded-3">
-        <form>
+        <form method="post" action="includes/post_add_account.php">
             <div class="row border-0">
                 <div class="col border-0">
                     <label for="">Account Type:</label>
-                    <select class="form-select mt-2" id="sel1" name="sellist1">
-                        <option>-Select-</option>
-                        <option>Individual</option>
-                        <option>IB</option>
+                    <select class="form-select mt-2" id="sel1" name="account_type">
+                    <?php $acctname = "";
+                                                foreach($liveAccounts as $account) { 
+                                                    if($account['account_type'] == 1)
+                                                    {
+                                                        $acctname = "Individual Account";
+                                                    }
+                                                    else
+                                                    {
+                                                        $acctname = "IB Account";
+                                                    } ?>
+                                                <option value="<?php echo $account['account_id'] ?>" ><?php echo $acctname ?> </option>
+                                                <?php } ?>
                     </select>
                 </div>
                 <div class="col border-0">
                     <label for="">Account Group::</label>
-                    <select class="form-select mt-2" id="sel1" name="sellist1">
+                    <select class="form-select mt-2" id="sel1" name="account_group">
                         <option>-Select-</option>
-                        <option>Fixed Spread Account</option>
-                        <option>Scalping Account</option>
-                        <option>Variable Spread Account</option>
-                        <option>Bonus Account</option>
+                        <option value=1>Fixed Spread Account</option>
+                        <option value=2>Scalping Account</option>
+                        <option value=3>Variable Spread Account</option>
+                        <option value=4>Bonus Account</option>
                     </select>
                 </div>
                 <div class="col border-0">
                     <label for="">Currency base:</label>
-                    <select class="form-select mt-2" id="sel1" name="sellist1">
-                        <option>USD</option>
+                    <select class="form-select mt-2" id="sel1" name="currency">
+                        <option value=1>USD</option>
                     </select>
                 </div>
             </div>
             <div class="row border-0 mt-4">
                 <div class="col border-0">
                     <label for="">MT4 Login User:</label>
-                    <input type="number" class="form-control border rounded-3 mt-2" placeholder="0.00" name="">
+                    <input type="text" class="form-control border rounded-3 mt-2" placeholder="Login Name" name="account_id">
                 </div>
                 <div class="col border-0">
                     <label for="">MT4 Login Password:</label>
                     <input type="password" class="form-control border rounded-3 mt-2" placeholder="***********"
-                        name="pswd">
+                        name="password">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something"
-                        checked>
+                    <input type="number" class="form-check-input" id="check1" name="account_radio_type" value="1"
+                        style="display:none">
                     <label class="form-check-label mt-1" for="check1">I agree the terms and conditions</label>
                 </div>
             </div>
+            <input type="submit" class="btn btn_color w-25 mt-4 text-white" value ='Add Account' /> 
         </form>
-        <button type="button" class="btn btn_color w-25 mt-4 text-white">Add Account </button>
+        
     </div>
     </div>
     </div>

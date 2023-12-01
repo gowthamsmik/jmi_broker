@@ -4,16 +4,13 @@
 <head>
     <?php include("../includes/softwareinclude/config.php") ?>
     <?php include("../includes/compatibility.php"); ?>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/layout.css">
+     <link rel="stylesheet" href="../assets/css/layout.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/host-style.css">
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .body {
             background-color: #F0F0F0;
@@ -109,6 +106,7 @@
 </head>
 <body>
     <?php include("../includes/header.php"); ?>
+    <?php include('includes/live-accounts.php') ?>
     <div class='layout'>
         <?php include("sidebar.php"); ?>
         <div class="content">
@@ -127,9 +125,18 @@
                 <div class="row mt-3">
                     <div class="col-4">
                         <select class="form-select p-2" aria-label="Select account">
-                            <option selected>Select </option>
-                            <option value="1">Account 1</option>
-                            <option value="2">Account 2</option>
+                        <?php $acctname = "";
+                                                foreach($accounts as $account) { 
+                                                    if($account['account_type'] == 1)
+                                                    {
+                                                        $acctname = "Individual Account";
+                                                    }
+                                                    else
+                                                    {
+                                                        $acctname = "IB Account";
+                                                    } ?>
+                                                <option value="<?php echo $account['account_id'] ?>" ><?php echo $acctname ?> </option>
+                                                <?php } ?>
                             <!-- Add more options as needed -->
                         </select>
                     </div>
@@ -162,23 +169,19 @@
             </thead>
             <tbody>
             <?php
-                    $dummyData = array(
-                        array('001', 'Server 1', 'Demo', 'USD', 'Group A', 'xxxxx', 'Investor A', 'John Doe', '1:100', '$10,000', '$12,500', '<button>Action</button>'),
-                        array('002', 'Server 2', 'Live', 'USD', 'Group B', 'xxxxx', 'Investor B', 'Jane Doe', '1:200', '$5,000', '$7,500', '<button>Action</button>'),
-                        array('001', 'Server 1', 'Demo', 'USD', 'Group A', 'xxxxx', 'Investor A', 'John Doe', '1:100', '$10,000', '$12,500', '<button>Action</button>'),
-                        array('002', 'Server 2', 'Live', 'USD', 'Group B', 'xxxxx', 'Investor B', 'Jane Doe', '1:200', '$5,000', '$7,500', '<button>Action</button>'),array('001', 'Server 1', 'Demo', 'USD', 'Group A', 'xxxxx', 'Investor A', 'John Doe', '1:100', '$10,000', '$12,500', '<button>Action</button>'),
-                        array('002', 'Server 2', 'Live', 'USD', 'Group B', 'xxxxx', 'Investor B', 'Jane Doe', '1:200', '$5,000', '$7,500', '<button>Action</button>'),
-                    );
-
+                     
+                    $dummyData=$accounts;
                     foreach ($dummyData as $rowIndex => $row) {
                         echo '<tr class="my-auto">';
                         foreach ($row as $index => $cell) {
-                            if ($index === 0) {
+                           
+                           if ($index == 'account_id') {
                                 echo '<td class="bold-cell">' . $cell . '</td>';
-                            }  else if ($index === 2) {
+                            }  
+                            else if ($index == "account_type") {
                                 echo '<td class="text-success">' . $cell . '</td>';
                             }
-                            else if ($index === 3) {
+                            else if ($index == "currency") {
                                 echo '<td class="bold-cell">
                                         <div class="image-cell-container">
                                             <img src="../assets/images/image 2.png"  alt="404" class="align-middle">
@@ -186,49 +189,48 @@
                                         </div>
                                       </td>';
                             }
-
-
-                            else if ($index === 4) {
+                            else if ($index == 'group') {
                                 echo '<td class="text-primary">' . $cell . '</td>';
                             }
-                            else if ($index === 5) {
+                            else if ($index == 'password') {
                                 echo '<td><span class="bgs p-2 rounded"><i class="fa fa-eye" style="font-size:15px"></i>' . $cell . '</span></td>';
                             }
-                            else if ($index === 6) {
+                            else if ($index == 'investor_password') {
                                 echo '<td><span class="bgs p-2 rounded">' . $cell . '</span></td>';
                             }
-                            else if ($index === 7) {
+                            else if ($index == 'Name') {
                                 echo '<td class="bold-cell">' . $cell . '</td>';
                             }
-                            else if ($index === 8) {
+                            else if ($index === 'leverage') {
                                 echo '<td class="bold-cell">' . $cell . '</td>';
-                            }
-                            else if ($index === 9) {
+                            }   
+                           /*  else if ($index === 'balance') {
                                 $bgClass = ($rowIndex % 2 == 0) ? 'bgs' : 'bg-odd';
                                 echo '<td class="' . $bgClass . '">' . $cell . '</td>';
-                            } else if ($index === 10) {
+                            } else if ($index === 'equity') {
                                 $bgClass = ($rowIndex % 2 == 0) ? 'bgs' : 'bg-odd';
                                 echo '<td class="' . $bgClass . '">' . $cell . '</td>';
-                            }
-                            else if ($index === 11) {
-                                echo '<td>
-                                        <div class="action-buttons-container">
-                                            <div class="action-button w-100 py-1">
-                                                <button class="btn btn-warning btn-block">Delete Account</button>
-                                            </div>
-                                            <div class="action-button w-100 py-1">
-                                                <button class="btn btn-warning btn-block">Change Password</button>
-                                            </div>
-                                            <div class="action-button w-100 py-1">
-                                                <button class="btn btn-warning btn-block">Edit Account</button>
-                                            </div>
-                                        </div>
-                                    </td>';
-                            }
+                            } */
+                           
                             else{
-                                echo '<td >' . $cell . '</td>';
+                                echo  '<td  >' . $cell . '</td>';
                             }
                         }
+                            
+                            echo '<td></td><td></td><td>
+                                    <div class="action-buttons-container">
+                                        <div class="action-button w-100 py-1">
+                                            <button class="btn btn-warning btn-block">Delete Account</button>
+                                        </div>
+                                        <div class="action-button w-100 py-1">
+                                            <button class="btn btn-warning btn-block">Change Password</button>
+                                        </div>
+                                        <div class="action-button w-100 py-1">
+                                            <button class="btn btn-warning btn-block">Edit Account</button>
+                                        </div>
+                                    </div>
+                                </td>';
+                         
                         echo '</tr>';
                     }
                 ?>

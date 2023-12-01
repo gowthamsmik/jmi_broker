@@ -27,6 +27,4 @@ function getAlltransactions($type){
     }
     return $result;
 }
-
- 
 ?>

@@ -28,7 +28,9 @@
 </head>
 
 <body>
+
 <?php include("../includes/header.php"); ?>
+<?php include('includes/internal-transfer.php'); ?>
     <div class='layout'>
         <?php include("sidebar.php"); ?>
         <div class="content">
@@ -40,45 +42,59 @@
         </div>
     </div>
     <div class="bg-white mt-4 p-5 rounded-3">
-        <form>
+        <form method="post" action="includes/post-internal-transfer.php">
             <div class="row border-0">
                 <div class="col border-0">
                     <label for="">Transfer From:</label>
-                    <select class="form-select mt-2" id="sel1" name="sellist1">
-                        <option>Select</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                    <select class="form-select mt-2" id="sel1" name="transfer_from">
+                    <?php $acctname = "";
+                                                foreach($accounts as $account) { 
+                                                    if($account['account_type'] == 1)
+                                                    {
+                                                        $acctname = "Individual Account";
+                                                    }
+                                                    else
+                                                    {
+                                                        $acctname = "IB Account";
+                                                    } ?>
+                                                <option value="<?php echo $account['account_id'] ?>" ><?php echo $acctname ?> </option>
+                                                <option value="other">Other Account</option>
+                                                <?php } ?>
                     </select>
                 </div>
                 <div class="col border-0">
                     <label for="">Transfer To: </label>
-                    <select class="form-select mt-2" id="sel1" name="sellist1">
-                        <option>Select</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                    <select class="form-select mt-2" id="sel1" name="transfer_to">
+                    <?php $acctname = "";
+                                                foreach($accounts as $account) { 
+                                                    if($account['account_type'] == 1)
+                                                    {
+                                                        $acctname = "Individual Account";
+                                                    }
+                                                    else
+                                                    {
+                                                        $acctname = "IB Account";
+                                                    } ?>
+                                                <option value="<?php echo $account['account_id'] ?>" ><?php echo $acctname ?> </option>
+                                                <?php } ?>
                     </select>
                 </div>
                 <div class="col border-0">
                     <label for="">Currency base:</label>
-                    <select class="form-select mt-2" id="sel1" name="sellist1">
-                        <option>Select</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                    <select class="form-select mt-2" id="sel1" name="currency">
+                        <option value="1">USD</option>
                     </select>
                 </div>
             </div>
             <div class="row border-0 mt-4">
                 <div class="col border-0">
                     <label for="">Transfer Amount</label>
-                    <input type="number" class="form-control border rounded-3 mt-2" placeholder="0.00" name="">
+                    <input type="number" class="form-control border rounded-3 mt-2" placeholder="0.00" name="amount">
                 </div>
                 <div class="col border-0">
                     <label for="">Account Password:</label>
                     <input type="password" class="form-control border rounded-3 mt-2" placeholder="***********"
-                        name="pswd">
+                        name="password">
                 </div>
             </div>
             <div class="row mt-4">
@@ -92,8 +108,9 @@
                     <h6>Express Transfer (Instant Transfer)</h6>
                 </div>
             </div>
+       
+        <input type="submit" class="btn custom-button text-light w-25 mt-4" value="Transfer Now" />
         </form>
-        <button type="button" class="btn custom-button text-light w-25 mt-4">Transfer Now</button>
     </div>
     </div>
     </div>
