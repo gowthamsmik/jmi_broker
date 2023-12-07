@@ -1,100 +1,324 @@
- 
-    <style>
-        .tab-text {
-            color: #0342ab !important;
-            font-size: 12px !important;
-        }
+<style>
+    a, table,th,td {
+        font-family: Poppins;
+    }
+    th{
+        text-align: center;
+    }
+    a {
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+    }
 
-        .tab-text.active {
-            border-bottom: 2px solid #0342ab !important;
-            background: none !important;
-        }
+    a:hover {
 
-        .thead{
-            text-align: center;
-            font-weight: bold;
-        }
-    </style>
- 
-    <div class="bg-white py-3 my-3">
-        <ul class="nav nav-tabs d-flex w-100" id="myTabs">
-            <li class="nav-item">
-                <a class="nav-link active tab-text border-0 px-2" id="tab1-tab" data-toggle="tab" href="#tab11"
-                    style="width:100%;">Forex</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link tab-text border-0 px-2" id="tab2-tab" data-toggle="tab" href="#tab12"
-                    style="width:100%;">Stock</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link tab-text border-0 px-2" id="tab3-tab" data-toggle="tab" href="#tab13"
-                    style="width:100%;">Indices</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link tab-text border-0 px-2" id="tab3-tab" data-toggle="tab" href="#tab13"
-                    style="width:100%;">Commodities</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link tab-text border-0 px-2" id="tab3-tab" data-toggle="tab" href="#tab13"
-                    style="width:100%;">Cyptro</a>
-            </li>
-        </ul>
-
-        <div class="tab-content mt-2">
-            <div class="tab-pane fade show active" id="tab11">
-                <table class="table table-striped">
-                    <thead class="thead">
-                        <tr>
-                            <th>Live Press</th>
-                            <th>Bid</th>
-                            <th>Ask</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>EURUSD</td>
-                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018</td>
-                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018</td>
-                        </tr>
-                        <tr>
-                            <td>EURUSD</td>
-                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018</td>
-                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018</td>
-                        </tr>
-                        <tr>
-                            <td>EURUSD</td>
-                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018</td>
-                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018</td>
-                        </tr>
-                        <tr>
-                            <td>EURUSD</td>
-                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018</td>
-                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018</td>
-                        </tr>
-                        <tr>
-                            <td>EURUSD</td>
-                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018</td>
-                            <td><img src='<?php echo $siteurl."assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab-pane fade" id="tab12">
-                <h3>Content for Tab 2</h3>
-                <p>This is the content of Tab 2.</p>
-            </div>
-            <div class="tab-pane fade" id="tab13">
-                <h3>Content for Tab 3</h3>
-                <p>This is the content of Tab 3.</p>
-            </div>
-            <div class="tab-pane fade" id="tab14">
-                <h3>Content for Tab 3</h3>
-                <p>This is the content of Tab 3.</p>
-            </div>
-            <div class="tab-pane fade" id="tab15">
-                <h3>Content for Tab 3</h3>
-                <p>This is the content of Tab 3.</p>
-            </div>
-        </div>
+        border-bottom: 2px solid blue;
+        color: blue;
+    }
+</style>
+<div class="bg-white p-3">
+    <div class="d-flex gap-2 flex-wrap mb-3" id="categoryLinks ">
+        <a onclick="showTable('forex')" id="forex"><?php echo $lang['forex'] ?></a>
+        <a onclick="showTable('stock')" id="stock"><?php echo $lang['stock'] ?></a>
+        <a onclick="showTable('indices')" id="indices"><?php echo $lang['indices'] ?></a>
+        <a onclick="showTable('commodities')" id="commodities"><?php echo $lang['commodities2'] ?></a>
+        <a onclick="showTable('crypto')" id="crypto"><?php echo $lang['crypto'] ?></a>
     </div>
- 
+    <div id="forexTable" style="display: block;">
+        <table class="table table-striped">
+            <thead class="thead">
+                <tr>
+                            <th><?php echo $lang['livePress'] ?></th>
+                            <th><?php echo $lang['bid'] ?></th>
+                            <th><?php echo $lang['ask'] ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="stockTable" style="display: none;">
+        <table class="table table-striped">
+            <thead class="thead">
+                <tr>
+                    <th>Live Press</th>
+                    <th>Bid</th>
+                    <th>Ask</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>USD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>USD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>USD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>USD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>USD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="indicesTable" style="display: none;">
+        <table class="table table-striped">
+            <thead class="thead">
+                <tr>
+                    <th>Live Press</th>
+                    <th>Bid</th>
+                    <th>Ask</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="commoditiesTable" style="display: none;">
+        <table class="table table-striped">
+            <thead class="thead">
+                <tr>
+                    <th>Live Press</th>
+                    <th>Bid</th>
+                    <th>Ask</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>USD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>USD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>USD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>USD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>USD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="cryptoTable" style="display: none;">
+        <table class="table table-striped">
+            <thead class="thead">
+                <tr>
+                    <th>Live Press</th>
+                    <th>Bid</th>
+                    <th>Ask</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+                <tr>
+                    <td>EURUSD</td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_blue.svg" ?>' alt="404"> 1.1018
+                    </td>
+                    <td><img src='<?php echo $siteurl . "assets/images/svg/call_made_yellow.svg" ?>' alt="404"> 1.1018
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function showTable(category) {
+            // Hide all tables
+            document.getElementById('forexTable').style.display = 'none';
+            document.getElementById('stockTable').style.display = 'none';
+            document.getElementById('indicesTable').style.display = 'none';
+            document.getElementById('commoditiesTable').style.display = 'none';
+            document.getElementById('cryptoTable').style.display = 'none';
+            // Hide other category tables here
+
+            // Show the selected category table
+            document.getElementById(category + 'Table').style.display = 'block';
+        }
+
+
+        var previousClickedElementId = null;
+
+        function styleElement(elementId) {
+            if (previousClickedElementId !== null) {
+                var previousElement = document.getElementById(previousClickedElementId);
+                previousElement.style.color = '';  // Remove color style
+                previousElement.style.borderBottom = '';  // Remove border style
+            }
+
+            var currentElement = document.getElementById(elementId);
+            currentElement.style.color = 'blue';
+            currentElement.style.borderBottom = '2px solid blue';
+
+            // Update the previousClickedElementId to the current clicked element
+            previousClickedElementId = elementId;
+        }
+
+
+        document.getElementById('forex').addEventListener('click', function () {
+            styleElement('forex');
+        });
+
+        document.getElementById('stock').addEventListener('click', function () {
+            styleElement('stock');
+        });
+
+        document.getElementById('indices').addEventListener('click', function () {
+            styleElement('indices');
+        });
+
+        document.getElementById('commodities').addEventListener('click', function () {
+            styleElement('commodities');
+        });
+
+        document.getElementById('crypto').addEventListener('click', function () {
+            styleElement('crypto');
+        });
+
+
+    </script>
+</div>

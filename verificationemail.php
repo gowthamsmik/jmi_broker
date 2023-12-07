@@ -40,7 +40,7 @@ if ($checkInUserSql->num_rows <= 0) {
     if($UPDATERESULT===TRUE){
       echo "true";
     }else{
-      echo "false";
+      echo "updated faile -- false";
     }  
   }else{
     $INSERTDATA="INSERT INTO email_verification (email, token) VALUES ('$email', '$token')" ;
@@ -52,11 +52,11 @@ if ($checkInUserSql->num_rows <= 0) {
     }
   }
 }else{
-  echo "false";
+  echo "sending email failed ---false";
 }
 } else {echo "Available";}
 } catch (Exception $e) {
-  echo "false";
+  echo "false".$e->getMessage();
 }
 $conn->close();
 ?>

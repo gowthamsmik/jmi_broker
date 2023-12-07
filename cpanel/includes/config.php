@@ -4,8 +4,8 @@ session_start();
 
 global $siteurl;
 global $webeurl;
-$siteurl = 'http://localhost/jmi/';
-$webeurl = 'http://localhost/jmi/';
+$siteurl = 'https://jmibroker.net/';
+$webeurl = 'https://jmibroker.net/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';

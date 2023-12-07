@@ -13,20 +13,20 @@ if (isset($_SESSION['sessionuser'])) {
     $userStmt->bind_param("ss", $session_user, $session_user);
     $userStmt->execute();
     $userResult = $userStmt->get_result();
-     
+    
     if ($userResult && $userResult->num_rows > 0) {
         $user = $userResult->fetch_assoc();
- 
+        $userId = (int)$user['id'];
         // Get user notifications
         $notificationsQuery = "SELECT * FROM Notifications WHERE website_accounts_id = ? ORDER BY id DESC LIMIT 8";
         $notificationsStmt = $conn->prepare($notificationsQuery);
-        $notificationsStmt->bind_param("i", $user['id']);
+        $notificationsStmt->bind_param("i", $userId);
         $notificationsStmt->execute();
         $notificationsResult = $notificationsStmt->get_result();
         $notifications_all = $notificationsResult->fetch_all(MYSQLI_ASSOC);
 
         // Get unseen notifications
-        $userId = (int)$user['id'];
+      
         $notificationsUnseenQuery = "SELECT * FROM Notifications WHERE website_accounts_id = ? AND notification_status = 0";
         $notificationsUnseenStmt = $conn->prepare($notificationsUnseenQuery);
         $notificationsUnseenStmt->bind_param("i", $userId);

@@ -3,8 +3,8 @@ include('config.php');
 error_reporting(0);
 session_start();
 
-$siteurl = 'http://localhost/jmi/cms/';
-$webeurl = 'http://localhost/jmi/';
+$siteurl = 'http://localhost/cms/';
+$webeurl = 'http://localhost/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';

@@ -2,8 +2,8 @@
 error_reporting(0);
 session_start();
 
-$siteurl = 'http://localhost/jmi/cms/';
-$webeurl = 'http://localhost/jmi/';
+$siteurl = 'http://localhost/cms/';
+$webeurl = 'http://localhost/';
 
 $session_user = $_SESSION['user'];
 $input = $_REQUEST;

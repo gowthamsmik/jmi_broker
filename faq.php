@@ -1,6 +1,10 @@
+<?php if(!isset($_SESSION['sessionuser']))
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
+     <?php include("includes/softwareinclude/config.php"); ?>
       <?php include("includes/compatibility.php"); ?>
       <meta name="description" content="">
       <title>Title Here</title>

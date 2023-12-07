@@ -7,15 +7,13 @@ $type = isset($_GET['type'])?$_GET['type']:'all';
 <head>
     <?php include("../includes/softwareinclude/config.php") ?>
     <?php include("../includes/compatibility.php"); ?>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>JMI | Control Panel</title>
     <link rel="stylesheet" href="../assets/css/layout.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/host-style.css">
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
        <?php include ("../includes/softwareinclude/functions.php")?>
     <style>
         .body {
@@ -104,20 +102,20 @@ $type = isset($_GET['type'])?$_GET['type']:'all';
         <div class="content">
             <div class="route-content" id="link1">
     <div class="d-flex">
-        <h2 class="fs-4">Transactional History</h2>
-        <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
-            <p class="mt-1 ms-2">Welcome,
+        <h2 class="fs-4"><?php echo $lang['transactionalHistory'] ?></h2>
+        <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
+            <p class="mt-1 ms-2"><?php echo $lang['welcome1'] ?>,
                 <?php echo $_SESSION['sessionusername']; ?>
             </p>
         </div>
     </div>
     <div class=" d-flex my-2">
-        <button class="btn mx-1  px-3 active_but <?php echo $type=='all' ? 'active_button':'' ?>" onclick="makeActive(this,'all')">All</button>
-        <button class="btn mx-1 active_but <?php echo $type=='deposit' ? 'active_button':'' ?>" onclick="makeActive(this,'deposit')">Deposit</button>
-        <button class="btn mx-1 active_but <?php echo $type=='withdraw' ? 'active_button':'' ?>" onclick="makeActive(this,'withdraw')">Withdraw</button>
-        <button class="btn mx-1 active_but <?php echo $type=='internal' ? 'active_button':'' ?>" onclick="makeActive(this,'internal')">Internal Transfers</button>
+        <button class="btn mx-1  px-3 active_but <?php echo $type=='all' ? 'active_button':'' ?>" onclick="makeActive(this,'all')"><?php echo $lang['all']?></button>
+        <button class="btn mx-1 active_but <?php echo $type=='deposit' ? 'active_button':'' ?>" onclick="makeActive(this,'deposit')"><?php echo $lang['deposit1']?></button>
+        <button class="btn mx-1 active_but <?php echo $type=='withdraw' ? 'active_button':'' ?>" onclick="makeActive(this,'withdraw')"><?php echo $lang['withdraw1']?></button>
+        <button class="btn mx-1 active_but <?php echo $type=='internal' ? 'active_button':'' ?>" onclick="makeActive(this,'internal')"><?php echo $lang['internalTransfers']?></button>
         <div class="custom-input p-1 ms-auto">
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder=<?php echo $lang['search']?> />
             <img src="../assets/images/svg/Shape.svg" alt="404">
         </div>
     </div>
@@ -139,12 +137,12 @@ $type = isset($_GET['type'])?$_GET['type']:'all';
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Type</th>
-                    <th>Via </th>
-                    <th>Account</th>
-                    <th>Status </th>
-                    <th>Details </th>
-                    <th>Date</th>
+                    <th><?php echo $lang['type1']?></th>
+                    <th><?php echo $lang['via']?> </th>
+                    <th><?php echo $lang['account1']?></th>
+                    <th><?php echo $lang['status']?> </th>
+                    <th><?php echo $lang['details']?> </th>
+                    <th><?php echo $lang['date']?></th>
                 </tr>
             </thead>
             <tbody>

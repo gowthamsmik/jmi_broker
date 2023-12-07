@@ -1,54 +1,72 @@
 <?php
 
+
+
 include("config.php");
 session_start();
 
+try{
 // Flash messages
 $_SESSION['pageType'] = 'menu';
 $_SESSION['currentPage'] = 'documents';
 
-$sessionUser = isset($_SESSION['user']) ? $_SESSION['user'] : '';
-$location = GeoIP::getLocation();
+//$sessionUser = isset($_SESSION['sessionusername']) ? $_SESSION['usessionusername'] : '';
+$SessionUserId = $_SESSION['sessionuserid'];
+//$location = GeoIP::getLocation();
+
 
 // Fetch user details
-$stmtUser = $conn->prepare("SELECT * FROM website_accounts WHERE username = :user OR email = :user");
-$stmtUser->bindParam(':user', $sessionUser);
+
+$stmtUser = $conn->prepare("SELECT * FROM website_accounts WHERE id = ?");
+$stmtUser->bind_param("i", $SessionUserId);
 $stmtUser->execute();
-$user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+$user = $stmtUser->get_result();
+$user = $user->fetch_assoc();
+
 
 // Fetch notifications
-$stmtNotificationsAll = $conn->prepare("SELECT * FROM notifications WHERE website_accounts_id = :userId ORDER BY id DESC LIMIT 8");
-$stmtNotificationsAll->bindParam(':userId', $user['id']);
+$stmtNotificationsAll = $conn->prepare("SELECT * FROM notifications WHERE website_accounts_id = ? ORDER BY id DESC LIMIT 8");
+$stmtNotificationsAll->bind_param("i", $user['id']);
 $stmtNotificationsAll->execute();
-$notificationsAll = $stmtNotificationsAll->fetchAll(PDO::FETCH_ASSOC);
+$notificationsAll = $stmtNotificationsAll->get_result();
+$notificationsAll = $notificationsAll->fetch_assoc();
 
-$stmtNotificationsUnseen = $conn->prepare("SELECT * FROM notifications WHERE website_accounts_id = :userId AND notification_status = 0");
-$stmtNotificationsUnseen->bindParam(':userId', $user['id']);
+
+$stmtNotificationsUnseen = $conn->prepare("SELECT * FROM notifications WHERE website_accounts_id = ? AND notification_status = 0");
+$stmtNotificationsUnseen->bind_param("i", $user['id']);
 $stmtNotificationsUnseen->execute();
-$notificationsUnseen = $stmtNotificationsUnseen->fetchAll(PDO::FETCH_ASSOC);
+$notificationsUnseen = $stmtNotificationsUnseen->get_result();
+$notificationsUnseen = $notificationsUnseen->fetch_assoc();
+
 
 // Fetch document details
-$id = isset($_GET['id']) ? $_GET['id'] : null;
-$stmtDocument = $conn->prepare("SELECT * FROM documents WHERE id = :id AND website_accounts_id = :userId");
-$stmtDocument->bindParam(':id', $id);
-$stmtDocument->bindParam(':userId', $user['id']);
+//$data = json_decode(file_get_contents("php://input"), true);
+$id = $_POST['document_id'];
+
+$stmtDocument = $conn->prepare("SELECT * FROM documents WHERE id = ? AND website_accounts_id = ?");
+$stmtDocument->bind_param("ii", $id,$user['id']);
 $stmtDocument->execute();
-$document = $stmtDocument->fetch(PDO::FETCH_ASSOC);
+$document = $stmtDocument->get_result();
+$document = $document->fetch_assoc();
+
 
 if ($document && $document['type'] !== 8) {
     $lastDocument = $document['document'];
     $path = substr($lastDocument, strpos($lastDocument, "assets/user_documents"));
-
+    
+   
     // Delete the document
-    $stmtDeleteDocument = $conn->prepare("DELETE FROM documents WHERE id = :id AND website_accounts_id = :userId");
-    $stmtDeleteDocument->bindParam(':id', $id);
-    $stmtDeleteDocument->bindParam(':userId', $user['id']);
+    $stmtDeleteDocument = $conn->prepare("DELETE FROM documents WHERE id = ? AND website_accounts_id = ?");
+    $stmtDeleteDocument->bind_param("ii", $id,$user['id']);
     $stmtDeleteDocument->execute();
-
+   
     // Create notification
-    $stmtNotification = $conn->prepare("INSERT INTO notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link) VALUES (:userId, 0, 'Your document has been deleted successfully.', 'Your document has been deleted successfully.', 'تم حذف المستند الخاص بك بنجاح.', 'تم حذف المستند الخاص بك بنجاح.', 'Ваш документ был успешно удален.', 'Ваш документ был успешно удален.', '/cpanel/documents')");
-    $stmtNotification->bindParam(':userId', $user['id']);
+    $stmtNotification = $conn->prepare("INSERT INTO notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link, created_at) VALUES ( ?, 0, 'Your document has been deleted successfully.', 'Your document has been deleted successfully.', 'تم حذف المستند الخاص بك بنجاح.', 'تم حذف المستند الخاص بك بنجاح.', 'Ваш документ был успешно удален.', 'Ваш документ был успешно удален.', '/cpanel/documents', NOW())");
+    $stmtNotification->bind_param("i", $user['id']);
     $stmtNotification->execute();
+
+    echo "deleted";
+    exit();
 } else {
     if (!$document) {
         // Document not found
@@ -72,4 +90,8 @@ if ($document && $document['type'] !== 8) {
 //     header('Location: en/cpanel/documents');
 //     exit();
 // }
+}
+catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
 ?>

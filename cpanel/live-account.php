@@ -107,26 +107,27 @@
 <body>
     <?php include("../includes/header.php"); ?>
     <?php include('includes/live-accounts.php') ?>
+    <title>JMI | Control Panel</title>
     <div class='layout'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
     <div>
         <div class="d-flex">
-            <h2 class="fs-4">Forex Account</h2>
-            <div class="d-flex ml-auto"><img src='<?php echo $siteurl ."assets/images/svg/account_circle.svg" ?>' class="account_circle" alt="">
-                <p class="mt-1 ms-2">Welcome,  <?php echo $_SESSION['sessionusername']; ?></p>
+            <h2 class="fs-4"><?php echo $lang['forex_account'] ?></h2>
+            <div class="d-flex ms-auto"><img src='<?php echo $siteurl ."assets/images/svg/account_circle.svg" ?>' class="account_circle" alt="">
+                <p class="mt-1 ms-2"><?php echo $lang['welcome'] ?>,  <?php echo $_SESSION['sessionusername']; ?></p>
             </div>
         </div>
-        <h2 class="mt-5">Your account opening request is currently under review</h2>
+        <h2 class="mt-5"><?php echo $lang['account_review_message'] ?></h2>
         <div>
-            <h2 class="mt-3">Live Accounts</h2>
+            <h2 class="mt-3"><?php echo $lang['live_accounts1'] ?></h2>
             <form>
                 <div class="row mt-3">
                     <div class="col-4">
                         <select class="form-select p-2" aria-label="Select account">
                         <?php $acctname = "";
-                                                foreach($accounts as $account) { 
+                                                /*foreach($accounts as $account) { 
                                                     if($account['account_type'] == 1)
                                                     {
                                                         $acctname = "Individual Account";
@@ -136,12 +137,15 @@
                                                         $acctname = "IB Account";
                                                     } ?>
                                                 <option value="<?php echo $account['account_id'] ?>" ><?php echo $acctname ?> </option>
-                                                <?php } ?>
+                                                <?php }*/ ?>
+                                              <option value="">select</option>
+                            <option value="1" >Individual Account</option>
+                            <option value="2" >IB Account </option>  
                             <!-- Add more options as needed -->
                         </select>
                     </div>
                     <div class="input-group col bg">
-                        <input type="text" class="form-control " placeholder="Search" aria-label="Search" aria-describedby="search-icon">
+                        <input type="text" class="form-control " placeholder="<?php echo $lang['search1'] ?>" aria-label="Search" aria-describedby="search-icon">
                         <button class="btn " type="button" id="search-icon">
                         <i class="fa fa-search" style="font-size:24px"></i>
                         </button>
@@ -153,18 +157,18 @@
         <table class="responsive-table">
             <thead>
                 <tr>
-                    <th>Account</th>
-                    <th>Server</th>
-                    <th>Type</th>
-                    <th>Currency</th>
-                    <th>Group</th>
-                    <th>Passwords</th>
-                    <th>Investor</th>
-                    <th>Name</th>
-                    <th>Leverage</th>
-                    <th>Balance</th>
-                    <th>Equity</th>
-                    <th>Action</th>
+                    <th><?php echo $lang['account'] ?></th>
+                    <th><?php echo $lang['server'] ?></th>
+                    <th><?php echo $lang['type'] ?></th>
+                    <th><?php echo $lang['currency'] ?></th>
+                    <th><?php echo $lang['group'] ?></th>
+                    <th><?php echo $lang['passwords'] ?></th>
+                    <th><?php echo $lang['investor'] ?></th>
+                    <th><?php echo $lang['name'] ?></th>
+                    <th><?php echo $lang['leverage'] ?></th>
+                    <th><?php echo $lang['balance'] ?></th>
+                    <th><?php echo $lang['equity'] ?></th>
+                    <th><?php echo $lang['action'] ?></th>
                 </tr>
             </thead>
             <tbody>

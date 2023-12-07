@@ -1,7 +1,7 @@
 <?php 
 
 global $webeurl;
-$webeurl = 'http://localhost/jmi-cms/';
+$webeurl = 'https://jmibroker.net/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';

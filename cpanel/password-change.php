@@ -1,25 +1,26 @@
-<?php if(!isset($_SESSION['sessionuser']))session_start(); ?>
+<?php if (!isset($_SESSION['sessionuser']))
+    session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <?php include("../includes/softwareinclude/config.php") ?>
     <?php include("../includes/compatibility.php"); ?>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>JMI | Control Panel</title>
     <link rel="stylesheet" href="../assets/css/layout.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/host-style.css">
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <style>
         form .row {
             border: 0px solid;
         }
-        .custom-button{
+
+        .custom-button {
             background-color: #FFBF10 !important;
         }
 
@@ -35,43 +36,96 @@
 </head>
 
 <body>
-<?php include("../includes/header.php"); ?>
+    <?php include("../includes/header.php"); ?>
     <div class='layout'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
-    <div class="d-flex">
-        <h2 class="fs-4">Password Change</h2>
-        <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
-            <p class="mt-1 ms-2">Welcome, <?php echo $_SESSION['sessionusername']; ?></p>
-        </div>
-    </div>
-    <div class="bg-white mt-4 p-5 rounded-3">
-        <div class="row">
-            <div class="col">
-                <div class="row">
-                    <div class="row mt-3"><label for="" class="form-label">Current Password <img
-                                src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
-                    <div class="row my-4"><label for="" class="form-label">New Password <img
-                                src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
-                    <div class="row"><label for="" class="form-label">Confirm Password <img
-                                src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
+                <div class="d-flex">
+                    <h2 class="fs-4"><?php echo $lang["passwordChange"]?></h2>
+                    <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg"
+                            class="account_circle" alt="">
+                        <p class="mt-1 ms-2"><?php echo $lang['welcome1']?>,
+                            <?php echo $_SESSION['sessionusername']; ?>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-white mt-4 p-5 rounded-3">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <div class="row mt-3"><label for="" class="form-label"><?php echo $lang['currentPassword']?><img
+                                            src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
+                                <div class="row my-4"><label for="" class="form-label"><?php echo $lang['newPassword']?> <img
+                                            src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
+                                <div class="row"><label for="" class="form-label"><?php echo $lang['confirmPassword']?><img
+                                            src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <input type="password" name="" id="cpassword" class="form-control border w-100"
+                                placeholder="<?php echo $lang['currentPassword']?>">
+                            <input type="password" name="" id="npassword" class="form-control border my-3 w-100"
+                                placeholder="<?php echo $lang['newPassword']?>">
+                            <input type="password" name="" id="cnpassword" class="form-control border w-100"
+                                placeholder="<?php echo $lang['confirmNewPassword']?>">
+                            <button type="button" class="btn custom-button text-light w-auto mt-4"
+                                onclick="change_password()"><?php echo  $lang['updatePassword']?></button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class="col">
-                <input type="password" name="" id="" class="form-control border w-100" placeholder="Current Password">
-                <input type="password" name="" id="" class="form-control border my-3 w-100" placeholder="New Password">
-                <input type="password" name="" id="" class="form-control border w-100" placeholder="Confirm New Password">
-                <button type="button" class="btn custom-button text-light w-auto mt-4">Update password</button>
-            </div>
         </div>
-        
-    </div>
-    </div>
-    </div>
     </div>
     <?php include("../includes/footer.php"); ?>
     <?php include("../includes/scripts.php"); ?>
 </body>
+<script>
+    function change_password() {
+        var isValid = true;
+        var currentPassword = $('input[id=cpassword]').val();
+        var newPassword = $('input[id=npassword]').val();
+        var confirmNewPassword = $('input[id=cnpassword]').val();
+        
+      
+
+        if (!currentPassword || !newPassword || !confirmNewPassword) {
+            isValid = false;
+            alert("All fields are required for Epay deposit.");
+        } else if (newPassword.length < 8 || newPassword.length > 40) {
+            isValid = false;
+            alert("New Password must contains 8 to 40 characters");
+        } else if (confirmNewPassword.length < 8 || confirmNewPassword.length > 40) {
+            isValid = false;
+            alert("Confirm new password must contains 8 to 40 characters");
+        } else if (newPassword != confirmNewPassword) {
+            isValid = false;
+            alert("New Password and Confirm Password does not match");
+        }
+
+        if (isValid) {
+            $.ajax({
+            type: 'POST',
+            url: 'includes/changepassword.php',
+            data: {
+                currentPassword,
+                newPassword,
+                confirmNewPassword
+            },            
+            success: function (response) {
+                console.log(response);
+                alert("Passsword: " + response);
+                window.location.href = "personal-details.php";
+
+            },
+            error: function (error) {
+                console.error(error);
+                alert("Failed to Upload Document.");
+            }
+        });
+        }
+    }
+</script>
 
 </html>

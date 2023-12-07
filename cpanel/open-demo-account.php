@@ -1,10 +1,10 @@
 <?php if(!isset($_SESSION['sessionuser']))session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <?php include("../includes/softwareinclude/config.php") ?>
     <?php include("../includes/compatibility.php"); ?>
+    <title>JMI | Control Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/layout.css">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -12,173 +12,104 @@
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        .wel {
-            font-style: Poppins;
-            font-size: 20px;
-            font-weight: 400;
-            text-align: right;
+        .body {
+            background-color: #F0F0F0;
         }
-
-        .fsa {
-            border: 1px solid blue;
-
-            width: 23%;
-            background-color: #053B9E;
-            border-radius: 8px;
-            margin-top: 5%
+        .border-bottom-80 {
+            border-bottom: 1px solid #DEE2E6;
+            /* or your preferred border color */
+            height: 80%;
         }
-
-        .log {
-            padding-left: 5%;
-            padding-top: 5%;
+        .card {
+            border-radius: 10px;
         }
-
-        .pl {
-            padding-left: 5%;
+        .account_circle {
+            height: 30px;
+            width: 30px;
         }
-
-        .min {
-            color: #FFFFFF;
-            font-family: Inter;
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
         }
-
-        .usd {
-            font-size: 29px;
-            font-family: Inter;
-            margin-top: 2%;
-            margin-bottom: 2%;
-            color: #FFBF10;
+        .grid-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
         }
-
-        .fs {
-            font-size: 12px;
-            font-family: Inter;
-            margin-top: 2%;
-            margin-bottom: 2%;
-            color: #FFBF10;
-
+        .row-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-
-        .be {
-            color: #D2D2D2;
-            margin-top: 2%;
-            margin-bottom: 2%;
-            font-size: 8px;
+        .row-item {
+            margin: 10px;
         }
-
-        .li {
-            margin-top: 2%;
-            margin-bottom: 2%;
-            border: 1px solid #FFFFFF;
+        .button {
+            background-color: #007BFF !important;
+            /* Primary color */
+            color: #fff !important;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-
-        li {
-            margin-top: 2%;
-            margin-bottom: 2%;
-            color: #FFFFFF;
-            font-size: 12px;
-        }
-
-        ul {
-            padding-left: 5%;
-        }
-
-        .button1 {
-            padding: 7%;
-            border: 1px solid #FFBF10;
-            margin-top: 6%;
-            margin-bottom: 6%;
-            border-radius: 8px;
-            background-image: linear-gradient(to right, #FEDC18, #FFF7C5);
-        }
-
-        label {
-            color: #000000;
-            float: left;
-            margin-left: 80px;
-            margin-bottom: 40px;
-        }
-
-        .caa {
-            border: 1px solid #07348F;
-            background-color: #07348F;
-            border-radius: 8px;
-        }
-
-        .p11 {
-            font-family: Poppins;
-
-            font-weight: bold;
-            font-size: 24px;
-            color: #FFFFFF;
-            padding: 10px;
-        }
-
-        .foo {
-            width: 98%;
-            background-color: #FFFFFF;
-        }
-
-        .buttonprimary {
-            background-color: #07348F;
-            color: white;
-        }
-
-        .pl .usd {
-            background: linear-gradient(to right, #FEDC18,
-                    #FEDC18, #FFF7C5, #FFF7C5);
-            -webkit-text-fill-color: transparent;
-            -webkit-background-clip: text;
-            font-weight: bold;
-        }
-
-        .pl .fs {
-            color: #FEDC18;
-            font-weight: bold;
-            opacity: 70%;
-        }
-
-        .box_list {
-            list-style-type: disc;
-            font-size: 12px;
-            line-height: 18px;
+        .button:hover {
+            background-color: #FFC107 !important;
+            color: #000000 !important;
+            /* Yellow hover color */
         }
     </style>
 </head>
-
 <body>
-    <?php include("../includes/header.php"); ?>
+<?php include("../includes/header.php"); ?>
     <div class='layout'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
-     
-        <div class="d-flex mb-3">
-            <h2 class="fs-4">Open Demo Account</h2>
-            <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
-                <p class="mt-1 ms-2">Welcome,
-                    <?php echo $_SESSION['sessionusername']; ?>
-                </p>
+        <div class="d-flex justify-between">
+            <h2 class="fs-4"><?php echo $lang['open_demo_account1']?></h2>
+            <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
+                <p class="mt-1 ms-2 "><?php echo $lang['welcome1'] ?>, <?php echo $_SESSION['sessionusername']; ?></p>
             </div>
         </div>
-         
-
-         
-
-        
-
-
-
-          
-     
-    </div>
+        <div class="grid-container mt-5">
+            <!-- Dynamically generate grid items here -->
+            <?php
+            // Sample data (replace this with data fetched from your source)
+            $data = [
+                ['image' => '../assets/images/mt4-windows.jpg', 'texthed' => 'MT4 for Windows', 'textpara' => 'Supported OS: Windows 98, 98SE, 2000, XP, Windows Vista, Windows 7', 'button_text' => 'Download Now','link'=>"https://download.mql5.com/cdn/web/jmi.brokers.ltd/mt4/jmibrokers4setup.exe"],
+                ['image' => '../assets/images/mt4-iphone.png', 'texthed' => 'MT4 for IPhone', 'textpara' => 'Supported OS: iPhone 3GS, 4, 4S, iOS 4.0 and later', 'button_text' => 'Download Now','link'=>"https://download.mql5.com/cdn/mobile/mt4/ios?server=JMIBrokers-Demo,JMIBrokers-JMI"],
+                ['image' => '../assets/images/mt4-ipad.png', 'texthed' => 'MT4 for IPad', 'textpara' => 'Supported OS: iPod touch, iPad1, iOS 4.0 and later','button_text' => 'Download Now','link'=>"https://download.mql5.com/cdn/web/jmi.brokers.ltd/mt4/jmibrokers4setup.exe"],
+                ['image' => '../assets/images/mt4-android.png', 'texthed' => 'MT4 for Android', 'textpara' => 'Supported OS: Touchscreen smartphone or tablet, Android 2.1 and', 'button_text' => 'Download Now','link'=> "https://download.mql5.com/cdn/mobile/mt4/android?server=JMIBrokers-Demo,JMIBrokers-JMI"],
+                // Add more data as needed
+            ];
+            foreach ($data as $item) {
+                ?>
+                <div class="grid-item card bg-white  rounded box mx-auto">
+                    <div class="w-100 h-100 px-5 py-4">
+                        <img src="<?php echo $item['image']; ?>" class="mx-auto" alt="Image">
+                    </div>
+                    <p class="text-center fs-3 mt-2">
+                        <?php echo $item['texthed']; ?>
+                    </p>
+                    <p class="text-center mt-2">
+                        <?php echo $item['textpara']; ?>
+                    </p>
+                    <a class='btn button mt-3 ' href='<?php echo $item['link']?>'>
+                        <?php echo $item['button_text']; ?>
+            </a>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+        </div>
     </div>
     </div>
     <?php include("../includes/footer.php"); ?>
     <?php include("../includes/scripts.php"); ?>
 </body>
-
 </html>

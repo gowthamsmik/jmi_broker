@@ -465,10 +465,10 @@
             // Get the screen width using JavaScript
             var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
             // Update styles based on screen width
-            console.log("lopsid",screenWidth);
+          
             var sidebarregular = document.getElementById('display_sidetable1');
             var sidebarmini = document.getElementById('display_sidetable2');
-            console.log("lopsid",sidebarregular,sidebarmini);
+         
             if (screenWidth >= 300 && screenWidth <=880) {
                sidebarregular.style.display = 'none';
                sidebarmini.style.display = 'block';
@@ -477,7 +477,7 @@
                sidebarregular.style.display = 'block';
             }
 
-            //console.log("lopsid",sidebarmini);
+            
         }
 
         window.onload = getScreenSize,showRoute('link1');

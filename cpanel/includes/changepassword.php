@@ -1,11 +1,42 @@
 <?php
- 
-         include("config.php");
-         session_start();
-        $session_user= $_SESSION['username'];   
-        $accountsqry = "select * from website_accounts where id = $userId and account_radio_type=1";
-        //$notifications_all=Notifications::where('website_accounts_id',$user->id)->orderBy('id','desc')->take(8)->get()->all();
-        //$notifications_unseen=Notifications::where('website_accounts_id',$user->id)->where('notification_status',0)->get()->all();
+error_reporting(3);
+include("config.php");
+$sessionId = $_SESSION['sessionuserid'];
 
-             
+try {
+    $currentPassword = $_POST['currentPassword'];
+    $newPassword = $_POST['newPassword'];
+    $confirmNewPassword = $_POST['confirmNewPassword'];
+
+    // Fetch user data from the database
+    $checkExistingQuery = "SELECT * FROM website_accounts WHERE id = ?";
+    $stmt = $conn->prepare($checkExistingQuery);
+    $stmt->bind_param('s', $sessionId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    if (!$user) {
+        echo "User not found";
+        exit();
+    }
+    
+    // Check if the current password is correct
+    if (md5($currentPassword) == $user['password']) {
+        // Hash the new password (use appropriate hashing algorithm, e.g., password_hash)
+        $hashedNewPassword = md5($newPassword);
+        // Update the user's password
+        $updatePasswordQuery = "UPDATE website_accounts SET password = ? WHERE id = ?";
+        $stmt = $conn->prepare($updatePasswordQuery);
+        $stmt->bind_param('ss', $hashedNewPassword, $sessionId);
+        $stmt->execute();
+
+        echo "Password updated!";
+    } else {
+        echo "Current Password is incorrect";
+    }
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+}
 ?>
+

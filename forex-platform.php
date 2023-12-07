@@ -1,6 +1,10 @@
+<?php if(!isset($_SESSION['sessionuser']))
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
+      <?php include('includes/softwareinclude/config.php') ?>
       <?php include("includes/compatibility.php"); ?>
       <meta name="description" content="">
       <title>Title Here</title>
@@ -32,7 +36,7 @@
 
                   <div class="col-md-6">
                      <div class="banner-img fs-0">
-                        <img src="assets/images/banner/forex-platform-img.png" alt="">
+                        <img src=<?php echo $siteurl."assets/images/banner/forex-platform-img.png" ?> alt="">
                      </div>
                   </div>
                </div>

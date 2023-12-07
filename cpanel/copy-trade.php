@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <title>JMI | Control Panel</title>
 </head>
 
 <body>
@@ -22,16 +23,16 @@
         <div class="content">
             <div class="route-content" id="link1">
                 <div class="d-flex">
-                    <h2 class="fs-4">Copy Trade</h2>
-                    <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
-                        <p class="mt-1 ms-2">Welcome, <?php echo isset($_SESSION['sessionusername']) ? $_SESSION['sessionusername'] :"" ?></p>
+                    <h2 class="fs-4"><?php echo $lang['copy_trade']?></h2>
+                    <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
+                        <p class="mt-1 ms-2"><?php echo $lang['welcome1'] ?>, <?php echo isset($_SESSION['sessionusername']) ? $_SESSION['sessionusername'] :"" ?></p>
                     </div>
                 </div>
                 <div class="bg-white mt-4 p-5 rounded-3">
                 <form method="post" action='<?php echo $siteurl."cpanel/includes/post-copy-trade.php" ?>'>
                     <div class="row border-0">
                         <div class="col border-0">
-                            <label for="">Copy From:</label>
+                            <label for=""><?php echo $lang['copyFrom']?></label>
                             <select class="form-select mt-2" id="sel1" name="copy_from">
                             <option value="" disabled selected >- Select -</option>
                                                 <?php 
@@ -53,7 +54,7 @@
                             <input type="number" class="form-control hidden" name="other_account" id="other_account" placeholder="Account Number" style="display:none" />
                         </div>
                         <div class="col border-0">
-                            <label for="">Copy To:</label>
+                            <label for=""><?php echo $lang['copyTo']?></label>
                             <select class="form-select mt-2" id="sel1" name="copy_to">
                             <?php 
                                                 $acctname = "";
@@ -73,11 +74,11 @@
                     </div>
                     <div class="row border-0 mt-4">
                         <div class="col border-0">
-                            <label for="">Copy Percentage:</label>
+                            <label for=""><?php echo $lang['copyPercentage']?>:</label>
                             <input type="number" class="form-control border rounded-3 mt-2" placeholder="0.00" name="percentage">
                         </div>
                         <div class="col border-0">
-                            <label for="">Account Password:</label>
+                            <label for=""><?php echo $lang['accountPassword1']?>:</label>
                             <input type="password" class="form-control border rounded-3 mt-2" placeholder="***********"
                                 name="password">
                         </div>
@@ -86,7 +87,7 @@
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something"
                                 checked>
-                            <label class="form-check-label mt-1" for="check1">I agree the terms and conditions</label>
+                            <label class="form-check-label mt-1" for="check1"><?php echo $lang['iAgreeTerms1']?></label>
                         </div>
                     </div>
                 
@@ -94,16 +95,16 @@
                 </form>
                 </div>
                 <div >
-                    <h4 class="fs-4"> Linked copy Trade </h4>
+                    <h4 class="fs-4 mt-3"> <?php echo $lang['linked_copy_trade']?></h4>
                     <table class="class='gap-3 bg-white table mt-3'">
                     <thead>
                         <tr>
                                 <td>#</td>
-                                <td>Copy From</td>
-                                <td>Copy To</td>
-                                <td>Copy Percentage</td>
-                                <td>Status</td>
-                                <td>Action</td>
+                                <td><?php echo $lang['copy_from']?></td>
+                                <td><?php echo $lang['copy_to']?></td>
+                                <td><?php echo $lang['copy_percentage']?></td>
+                                <td><?php echo $lang['status']?></td>
+                                <td><?php echo $lang['action']?></td>
                             </tr>
                         </thead>
                         <tbody><?PHP $i=1;  ?>

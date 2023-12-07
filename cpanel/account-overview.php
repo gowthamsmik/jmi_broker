@@ -1,6 +1,6 @@
 <?php if(!isset($_SESSION['sessionuser']))session_start() ?>
 <!DOCTYPE html>
-<html lang="en">
+<html >
 
 <head>
 <?php include("../includes/softwareinclude/config.php") ?>
@@ -12,10 +12,10 @@
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <title>JMI | Control Panel</title>
 </head>
 
 <body>
-   
     <?php include("../includes/header.php"); ?>
     <?php include("includes/accountOverview.php"); ?>
     <div class='layout'>
@@ -23,20 +23,20 @@
         <div class="content">
             <div class="route-content" id="link1">
         <div class="d-flex">
-            <h2 class="fs-4">Control Panel|Account OverView</h2>
-            <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
-                <p class="mt-1 ms-2">Welcome,
+            <h2 class="fs-4"><?php echo $lang['control_panel_account_overview']?></h2>
+            <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
+                <p class="mt-1 ms-2"><?php echo $lang['welcome1'] ?>,
                     <?php echo $_SESSION['sessionusername']; ?>
                 </p>
             </div>
         </div>
         <div class="card round p-3 bg-white my-3 py-5">
             <div class="border-bottom-80 p-1 d-flex justify-content-between">
-                <h3>FOREX ACCOUNTS</h3>
+                <h3><?php echo $lang['forex_accounts'] ?></h3>
                 <h3 class="ml-auto"> <?PHP echo array_sum($equities) ?>   USD</h3>
             </div>
             <div class="mt-3 p-1 d-flex justify-content-between">
-                <h3>TOTAL VALUE</h3>
+                <h3><?php echo $lang['total_value'] ?></h3>
                 <h3 class="ml-auto font-weight-bold fs-1 text-color"><span class="forex-font">
                 
                 <?PHP echo array_sum($equities) ?>   
@@ -46,16 +46,16 @@
         <?php if(count($accounts)<=0) { ?>
             <div class="row forexaccount">
                                             <div class="col-sm-12">
-                                              <h5 style=" color: #0059b2; ">FOREX ACCOUNT</h5>
-                                              <h5> Your account opening request is currently under review</h5>
+                                              <h5 style=" color: #0059b2; "><?php echo $lang['forex_accounts']?></h5>
+                                              <h5><?php echo  $lang['review_message'] ?></h5>
                                             </div>
                                       </div>
                                       <?PHP }else{ ?>
 
                                         <div class="row forexaccount">
                                               <div class="col-sm-12">
-                                                <h5 style=" color: #0059b2; ">FOREX ACCOUNT</h5>
-                                                <h5>       You have no live accounts</h5>
+                                                <h5 style=" color: #0059b2; "><?php echo $lang['forex_accounts']?></h5>
+                                                <h5>  <?php echo $lang['no_live_accounts']?></h5>
                                               </div>
                                         </div>
 

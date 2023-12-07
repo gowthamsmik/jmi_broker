@@ -1,7 +1,7 @@
 <?php
 
-$siteurl = 'http://localhost/jmi/cms/';
-$webeurl = 'http://localhost/jmi/';
+$siteurl = 'http://localhost/cms/';
+$webeurl = 'http://localhost/';
 include('includes/functions.php');
 
 $session_user = $_SESSION['sessionuser'];

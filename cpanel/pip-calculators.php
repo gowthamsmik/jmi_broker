@@ -1,19 +1,22 @@
-<?php if(!isset($_SESSION['sessionuser']))session_start(); ?>
+<?php if(!isset($_SESSION['sessionuser']))session_start(); 
+include("includes/functions.php");
+$pipData=pipCalculator();
+$pipDataCount=count($pipData);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <?php include("../includes/softwareinclude/config.php") ?>
     <?php include("../includes/compatibility.php"); ?>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>JMI | Control Panel</title>
     <link rel="stylesheet" href="../assets/css/layout.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/host-style.css">
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <?php include("includes/style.php"); ?>
 
     <style>
@@ -36,14 +39,14 @@
         <div class="content">
             <div class="route-content" id="link1">
     <div class="d-flex">
-        <h2 class="fs-4">JMI Brokers | Pip Calculator</h2>
-        <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
+        <h2 class="fs-4">JMI Brokers | Pip Calculator </h2>
+        <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
             <p class="mt-1 ms-2">Welcome,
                 <?php echo $_SESSION['sessionusername']; ?>
             </p>
         </div>
     </div>
-
+    
     <table class="table mt-3">
         <thead>
             <tr>
@@ -61,7 +64,7 @@
                 array('AUD/CHF', '0.5801', '11.31', '1.13', '0.11'),
                 array('AUD/CHF', '0.5801', '11.31', '1.13', '0.11'),
             );
-            foreach ($dummyData as $rowIndex => $row) {
+            foreach ($pipData as $rowIndex => $row) {
                 echo '<tr class="my-auto">';
                 foreach ($row as $index => $cell) {
                     if ($index === 0) {
@@ -83,9 +86,11 @@
     </table>
     </div>
     </div>
+      
     </div>
     <?php include("../includes/footer.php"); ?>
     <?php include("../includes/scripts.php"); ?>
 </body>
+
 
 </html>

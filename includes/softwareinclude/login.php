@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $status = $user['account_status'];
             $userName = $user['username'];
             $name=$user['fullname'];
+            $id= $user['id'];
             //$userRole=$user['user_role'];
             $userPhone=$user['mobile'];
 
@@ -38,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['sessionkey'] = $key;
             $_SESSION['sessionuser'] = $userName;
             $_SESSION['sessionusername'] = $name;
+            $_SESSION['sessionuserid'] = $userId;
 
             $usertype =$userRole;
            

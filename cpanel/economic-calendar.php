@@ -5,6 +5,7 @@
 <head>
     <?php include("../includes/softwareinclude/config.php") ?>
     <?php include("../includes/compatibility.php"); ?>
+    <title>JMI | Control Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/layout.css">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -37,9 +38,9 @@
         <div class="content">
             <div class="route-content" id="link1">
     <div class="d-flex">
-        <h2 class="fs-4">JMI brokers | Forex Calendar</h2>
-        <div class="d-flex ml-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
-            <p class="mt-1 ms-2">Welcome,
+        <h2 class="fs-4">JMI brokers | <?php echo $lang['jmiBrokersForexCalendar'] ?></h2>
+        <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
+            <p class="mt-1 ms-2"><?php echo $lang['welcome'] ?>,
                 <?php echo $_SESSION['sessionusername']; ?>
             </p>
         </div>
@@ -57,46 +58,23 @@
             </select>
         </div>
     </div> -->
-    <table class="table mt-3">
+    <!-- <table class="table mt-3">
         <thead>
             <tr>
-                <th>Time </th>
-                <th>Currency</th>
-                <th>Event</th>
-                <th>Actual</th>
-                <th>Forecast</th>
-                <th>Previous</th>
+                <th><?php echo $lang['time'] ?> </th>
+                <th><?php echo $lang['currency1'] ?></th>
+                <th><?php echo $lang['event'] ?></th>
+                <th><?php echo $lang['actual'] ?></th>
+                <th><?php echo $lang['forecast'] ?></th>
+                <th><?php echo $lang['previous'] ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php
-            $dummyData = array(
-                array('10:30', 'EUR', 'PPI m/m', '-0.1%', '-0.5%','-0.2%'),
-                array('10:30', 'EUR', 'PPI m/m', '-0.1%', '-0.5%','-0.2%'),
-                array('10:30', 'EUR', 'PPI m/m', '-0.1%', '-0.5%','-0.2%'),
-            );
-            foreach ($dummyData as $rowIndex => $row) {
-                echo '<tr class="my-auto">';
-                foreach ($row as $index => $cell) {
-                    if ($index === 0) {
-                        echo '<td>' . $cell . '</td>';
-                    } else if ($index === 1) {
-                        echo '<td>' . $cell . '</td>';
-                    } else if ($index === 2) {
-                        echo '<td>' . $cell . '</td>';
-                    } else if ($index === 3) {
-                        echo '<td>' . $cell . '</td>';
-                    } else if ($index === 4) {
-                        echo '<td>' . $cell . '</td>';
-                    } else if ($index === 5) {
-                        echo '<td>' . $cell . '</td>';
-                    }
-                }
-                echo '</tr>';
-            }
-            ?>
+           
         </tbody>
-    </table>
+    </table> -->
+    <iframe scrolling="no" allowtransparency="true" frameborder="0" width="100%" height="500px" src="https://www.tradays.com/en/economic-calendar/widget?mode=2&amp;utm_source=www.jmibrokers.com"></iframe>
+
     </div>
     </div>
     </div>

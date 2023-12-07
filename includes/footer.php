@@ -7,6 +7,19 @@
 		.phonecheckbtn {
 			width: "10px";
 		}
+		.meg_box {
+			background-color: #0342ab;
+		}
+		.hand_box {
+			background-color: #DFDFDF;
+			margin-right: 5%;
+		}
+		.msghand_box {
+			background-color: #F0F0F0;
+		}
+		.hand_box p , .meg_box p {
+			font-size: 20px !important;
+		}
 	</style>
 	<script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
 
@@ -71,7 +84,7 @@
 			);
 			$.ajax({
 				type: "get",
-				url: "https://173.212.204.10/jmi-cms/checkmobileexist.php?phone=" + phone,
+				url: "https://jmibroker.net/checkmobileexist.php?phone=" + phone,
 
 				success: function (result) {
 					console.log("return result",result)
@@ -153,7 +166,7 @@
 			}
 			$.ajax({
 				type: "get",
-				url: "https://173.212.204.10/jmi-cms/verificationemail.php?email=" + email,
+				url: "https://jmibroker.net/verificationemail.php?email=" + email,
 
 				success: function (result) {
 					console.log("result email", result)
@@ -255,8 +268,16 @@
 		});
 	</script>
 
-	<!-- {!! NoCaptcha::renderJs() !!} -->
- 
+	<div class="d-flex gap-5 msghand_box justify-content-end">
+		<div class="meg_box p-3 rounded-top-4 text-center">
+			<img src="../assets/images/svg/msg.svg" alt="404">
+			<p class="text-white">Live Chat</p>
+		</div>
+		<a href="contact-us.php"><div class="hand_box p-3 rounded-top-4 text-center text-dark">
+			<img src="../assets/images/svg/hand.svg" alt="404">
+			<p>Contact Us</p>
+		</div></a>
+	</div>
 	<footer>
 		<div class="container">
 			<?php if (!$isUserWebsitePage): ?>
@@ -265,13 +286,13 @@
 						<div class="col">
 							<div class="footerT-cont">
 								<ul>
-									<li class="tx-gd">Tools</li>
-									<li><a href="mt4-platform-overview.php">MT4</a></li>
-									<li><a href="calendar.php">Economic Calendar</a></li>
-									<li><a href="pip-calculator.php">Pip Calculator</a></li>
-									<li><a href="#">Heatmap</a></li>
-									<li><a href="#">Technical Analysis</a></li>
-									<li><a href="#">Fundamental Analysis</a></li>
+									<li class="tx-gd"><?php echo $lang['tools2'] ?></li>
+									<li><a href="mt4-platform-overview.php"><?php echo $lang['mt4'] ?></a></li>
+									<li><a href="calendar.php"><?php echo $lang['economicCalendar'] ?></a></li>
+									<li><a href="pip-calculator.php"><?php echo $lang['pipCalculator'] ?></a></li>
+									<li><a href="#"><?php echo $lang['heatmap'] ?></a></li>
+									<li><a href="#"><?php echo $lang['technicalAnalysis'] ?></a></li>
+									<li><a href="#"><?php echo $lang['fundamentalAnalysis'] ?></a></li>
 								</ul>
 							</div>
 						</div>
@@ -279,12 +300,12 @@
 						<div class="col">
 							<div class="footerT-cont">
 								<ul>
-									<li class="tx-gd">Investment Choices</li>
-									<li><a href="forex-trading.php">Forex Trading</a></li>
-									<li><a href="precious-metal.php">Precious Metals Trading</a></li>
-									<li><a href="future.php">Future Energies Trading</a></li>
-									<li><a href="stock-cfds.php">Stocks CFDs</a></li>
-									<li><a href="commodities.php">Commodities</a></li>
+									<li class="tx-gd"><?php echo $lang['investmentChoices'] ?></li>
+									<li><a href="forex-trading.php"><?php echo $lang['forexTrading'] ?></a></li>
+									<li><a href="precious-metal.php"><?php echo $lang['preciousMetalsTrading'] ?></a></li>
+									<li><a href="future.php"><?php echo $lang['futureEnergiesTrading'] ?></a></li>
+									<li><a href="stock-cfds.php"><?php echo $lang['stocksCfds'] ?></a></li>
+									<li><a href="commodities.php"><?php echo $lang['commodities1'] ?></a></li>
 								</ul>
 							</div>
 						</div>
@@ -292,13 +313,13 @@
 						<div class="col">
 							<div class="footerT-cont">
 								<ul>
-									<li class="tx-gd">Partnership</li>
-									<li><a href="how-to-become.php">Become Our Partner</a></li>
+									<li class="tx-gd"><?php echo $lang['partnership'] ?></li>
+									<li><a href="how-to-become.php"><?php echo $lang['becomeOurPartner'] ?></a></li>
 									<li><a href="business.php">Why to Make Business with JMI</a></li>
-									<li><a href="brokers.php">Introducing Brokers</a></li>
-									<li><a href="money-manager.php">Money Manager Program</a></li>
-									<li><a href="how-to-become-money-managers.php">How To Become a Money Mangers</a></li>
-									<li><a href="white-label.php">White Labels</a></li>
+									<li><a href="brokers.php"><?php echo $lang['introducingBrokers'] ?></a></li>
+									<li><a href="money-manager.php"><?php echo $lang['moneyManagerProgram'] ?></a></li>
+									<li><a href="how-to-become-money-managers.php"><?php echo $lang['howToBecomeAMoneyManager'] ?></a></li>
+									<li><a href="white-label.php"><?php echo $lang['whiteLabels'] ?></a></li>
 								</ul>
 							</div>
 						</div>
@@ -306,12 +327,12 @@
 						<div class="col">
 							<div class="footerT-cont">
 								<ul>
-									<li class="tx-gd">About</li>
-									<li><a href="about-us.php">About JMI</a></li>
-									<li><a href="licenses.php">Licenses and Regulations</a></li>
-									<li><a href="brokers.php">Advantages of JMI Brokers Platform</a></li>
-									<li><a href="contact-us.php">Contact us</a></li>
-									<li><a href="career.php">Careers</a></li>
+									<li class="tx-gd"><?php echo $lang['about'] ?></li>
+									<li><a href="about-us.php"><?php echo $lang['aboutJMI'] ?></a></li>
+									<li><a href="licenses.php"><?php echo $lang['licensesAndRegulations'] ?></a></li>
+									<li><a href="brokers.php"><?php echo $lang['advantagesOfJMIBrokersPlatform'] ?></a></li>
+									<li><a href="contact-us.php"><?php echo $lang['contactUs'] ?></a></li>
+									<li><a href="career.php"><?php echo $lang['careers1'] ?></a></li>
 								</ul>
 							</div>
 						</div>
@@ -319,10 +340,10 @@
 						<div class="col">
 							<div class="footerT-cont">
 								<ul>
-									<li class="tx-gd">JMI Brokers</li>
-									<li><a href="#">Who We Are</a></li>
-									<li><a href="policy.php">Our Policy</a></li>
-									<li><a href="contact-us.php">Contact Us</a></li>
+									<li class="tx-gd"><?php echo $lang['jmiBrokers'] ?></li>
+								<li><a href="#"><?php echo $lang['whoWeAre'] ?></a></li>
+								<li><a href="policy.php"><?php echo $lang['ourPolicy'] ?></a></li>
+								<li><a href="contact-us.php"><?php echo $lang['contactUs1'] ?></a></li>
 								</ul>
 							</div>
 						</div>
@@ -330,9 +351,9 @@
 						<div class="col">
 							<div class="footerT-cont">
 								<ul>
-									<li class="tx-gd">Supports Center</li>
-									<li><a href="faq.php">FAQ;s</a></li>
-									<li><a href="#">Our Blogs</a></li>
+									<li class="tx-gd"><?php echo $lang['supportsCenter'] ?></li>
+								<li><a href="faq.php"><?php echo $lang['faqs1'] ?></a></li>
+								<li><a href="#"><?php echo $lang['ourBlogs'] ?></a></li>
 								</ul>
 							</div>
 						</div>
@@ -340,8 +361,8 @@
 						<div class="col">
 							<div class="footerT-cont">
 								<ul>
-									<li class="tx-gd">Trading Accounts</li>
-									<li><a href="forex-trading.php">Every Trader</a></li>
+									<li class="tx-gd"><?php echo $lang['tradingAccounts'] ?></li>
+								<li><a href="forex-trading.php"><?php echo $lang['everyTrader'] ?></a></li>
 								</ul>
 							</div>
 						</div>
@@ -434,34 +455,34 @@
 			<div class="myPopup">
 				<div class="closePop">X</div>
 				<div class="popupcont">
-					<h6>Login</h6>
+					<h6><?php echo $lang['login'] ?></h6>
 
 					<form action="#">
 						<div class="popupfeild">
-							<label for="">User Name / Phone Number</label>
-							<input type="text" name='loginUserorPhone' placeholder="Type User Name or Phone">
+							<label for=""><?php echo $lang['user_name_placeholder'] ?></label>
+							<input type="text" name='loginUserorPhone' placeholder="<?php echo $lang['user_name_placeholder'] ?>">
 						</div>
 
 						<div class="popupfeild">
-							<label for="">Password</label>
+							<label for=""><?php echo $lang['password_placeholder'] ?></label>
 							<input name='loginPassword' type="password" placeholder="********">
 						</div>
 
 						<div class="loginforgot">
 							<label for="remenber">
 								<input type="checkbox" id="remenber">
-								Remember me
+								<?php echo $lang['remember_me'] ?>
 							</label>
 
-							<a href="#">Forgot your Password?</a>
+							<a href="#"><?php echo $lang['forgot_password'] ?></a>
 						</div>
 
 						<div class="popupbutton" id='loginButton'>
-							<button>Login Now</button>
+							<button><?php echo $lang['login_now'] ?></button>
 						</div>
 
 						<div class="popupsingUp">
-							<span>Don't have an account?</span> <a href="#">Sign Up</a>
+							<span><?php echo $lang['no_account'] ?></span> <a href="#"><?php echo $lang['sign_up'] ?></a>
 						</div>
 					</form>
 				</div>
@@ -475,64 +496,64 @@
 			<div class="myPopup">
 				<div class="closePop" id='registerClose'>X</div>
 				<div class="popupcont">
-					<h6>Registration</h6>
-					<p>Fill up the form and tour team will get back to you within 24 hours</p>
+					<h6><?php echo $lang['registration'] ?></h6>
+					<p><?php echo $lang['fill_form'] ?></p>
 
 					<form action="#" method="post" onsubmit="return validate()" id="registerform">
 						<div id="recaptcha-container"></div>
 						<div class="row justify-content-center">
 							<div class="col-md-4">
 								<div class="popupfeild">
-									<label for="">Full Name</label>
+									<label for=""><?php echo $lang['full_name'] ?></label>
 									<input name='fullName' type="text" placeholder="Input your first name in here">
 								</div>
 							</div>
 
 							<div class="col-md-4">
 								<div class="popupfeild">
-									<label for="">Gender</label>
+									<label for=""><?php echo $lang['gender'] ?></label>
 									<select name="gender" id="">
-										<option value="0" selected disabled>Select</option>
-										<option value="1">Male</option>
-										<option value="1">Female</option>
-										<option value="1">Other</option>
+										<option value="0" selected disabled><?php echo $lang['select'] ?></option>
+										<option value="1"><?php echo $lang['male'] ?></option>
+										<option value="1"><?php echo $lang['female'] ?></option>
+										<option value="1"><?php echo $lang['other'] ?></option>
 									</select>
 								</div>
 							</div>
 
 							<div class="col-md-4">
 								<div class="popupfeild">
-									<label for="">Email Address</label>
-									<input name='email' type="email" placeholder="Type Email" class="pdmoreinput"
+									<label for=""><?php echo $lang['email_address'] ?></label>
+									<input name='email' type="email" placeholder="<?php echo $lang['type_email'] ?>" class="pdmoreinput"
 										id="email" oninput="changeStyle('email')">
-									<a href="#" onclick="emailSendAuth();" id="SencodeEmail">Send Code</a>
+									<a href="#" onclick="emailSendAuth();" id="SencodeEmail"><?php echo $lang['send_now'] ?></a>
 									<a href="#" id="emailverifiedLink"
-										style="background-color:green;color:white;display:none">Verified</a>
+										style="background-color:green;color:white;display:none"><?php echo $lang['verified1'] ?></a>
 
 								</div>
 								<div class="popupfeild" id="emailVerification" style="display:none">
 									<input name='emailVerification' type="text"
-										placeholder="Enter Email Verification Code" class="pdmoreinput" id="emailcode">
-									<a href="#" onclick="emailcodeverify();">Verify</a>
+										placeholder="<?php echo $lang['enter_email_verification_code'] ?>" class="pdmoreinput" id="emailcode">
+									<a href="#" onclick="emailcodeverify();"><?php echo $lang['verify'] ?></a>
 								</div>
 							</div>
 
 							<div class="col-md-4">
 								<div class="popupfeild">
-									<label for="">User Name</label>
-									<input name='userName' type="text" placeholder="Type User Name">
+									<label for=""><?php echo $lang['user_name1'] ?></label>
+									<input name='userName' type="text" placeholder="<?php echo $lang['type_user_name'] ?>">
 								</div>
 							</div>
 
 
 							<div class="col-md-8">
 								<div class="popupfeild">
-									<label for="phone">Phone Number</label>
+									<label for="phone"><?php echo $lang['phone_number1'] ?></label>
 									<div class="row">
 										<div class="col-sm-6">
 											<select class="form-select" style="width: 100%;" name="country"
 												id='dialcode'>
-												<option value="0" selected disabled>Select Dial Code</option>
+												<option value="0" selected disabled><?php echo $lang['select_dial_code1'] ?></option>
 												<?php
 
 												$countriesJson = file_get_contents('assets/json/countries.json');
@@ -554,16 +575,16 @@
 										<div class="col-sm-6">
 											<div class="popupfeild">
 												<input type="tel" id="phone" name="phone" class="pdmoreinput"
-													placeholder="Type Phone Number" oninput="changeStyle(' phone')">
-												<a href="#" onclick="phoneSendAuth();" id="SendphoneCode">Send Code</a>
+													placeholder="<?php echo $lang['type_phone_number'] ?>" oninput="changeStyle(' phone')">
+												<!-- <a href="#" onclick="phoneSendAuth();" id="SendphoneCode"><?php/* echo $lang['send_now1'] */?></a>
 												<a href="#" id="phoneverifiedLink"
-													style="background-color:green;color:white;display:none">Verified</a>
+													style="background-color:green;color:white;display:none"><?php /* echo $lang['verified1'] */ ?></a> -->
 
 											</div>
 											<div class="popupfeild" style="display:none" id="phoneVerification">
 												<input type="tel" name="phone" class="pdmoreinput" id="phoneCode"
-													placeholder="Enter OTP">
-												<a href="#" onclick="codeverify();">Verify OTP</a>
+													placeholder="<?php echo $lang['enter_otp'] ?>">
+												<a href="#" onclick="codeverify();"><?php echo $lang['verify_otp1'] ?></a>
 											</div>
 
 											<!-- <div id="phone-dropdown-container"></div> -->
@@ -602,7 +623,7 @@
 													</defs>
 												</svg>
 											</div>
-											<span>Mini 8 characters</span>
+											<span><?php echo $lang['mini_8_characters'] ?></span>
 										</li>
 
 										<li>
@@ -617,7 +638,7 @@
 														stroke-linecap="round" stroke-linejoin="round" />
 												</svg>
 											</div>
-											<span>1 number</span>
+											<span><?php echo $lang['1_number'] ?></span>
 										</li>
 
 										<li>
@@ -632,7 +653,7 @@
 														stroke-linecap="round" stroke-linejoin="round" />
 												</svg>
 											</div>
-											<span>1 special character</span>
+											<span><?php echo $lang['special_character1'] ?></span>
 										</li>
 
 										<li>
@@ -647,7 +668,7 @@
 														stroke-linecap="round" stroke-linejoin="round" />
 												</svg>
 											</div>
-											<span>Uppercase letter</span>
+											<span>	<?php echo $lang['uppercase_letter1'] ?></span>
 										</li>
 									</ul>
 								</div>
@@ -655,8 +676,8 @@
 
 							<div class="col-md-4">
 								<div class="popupfeild">
-									<label for="">Password</label>
-									<input name='password' type="password" placeholder="Type User Name or Phone">
+									<label for=""><?php echo $lang['password'] ?></label>
+									<input name='password' type="password" placeholder="<?php echo $lang['password1'] ?>">
 								</div>
 							</div>
 
@@ -664,13 +685,13 @@
 								<div class="popupfeild">
 									<label for=""></label>
 									<input class="mt-4" type="password" name="confirmpassword"
-										placeholder="Retype Password">
+										placeholder="<?php echo $lang['confirm_password2'] ?>">
 								</div>
 							</div>
 
 							<div class="col-md-4">
 								<div class="popupbutton d-flex align-items-end h-100">
-									<button id='registerButton'>Register Now </button>
+									<button id='registerButton'><?php echo $lang['register_now1'] ?> </button>
 								</div>
 							</div>
 
@@ -680,7 +701,7 @@
 										<div class="icon">
 											<img src=<?php echo $siteurl."assets/images/google-icon.png" ?> alt="">
 										</div>
-										Sign in with Google
+										<?php echo $lang['sign_in_with_google1'] ?>
 									</button>
 								</div>
 							</div>
@@ -690,7 +711,7 @@
 										<div class="icon">
 											<img src=<?php echo $siteurl."assets/images/facebook-icon.png" ?> alt="">
 										</div>
-										Sign in with Facebook
+										<?php echo $lang['sign_in_with_facebook1'] ?>
 									</button>
 								</div>
 							</div>
@@ -716,10 +737,9 @@
 
 		// });
 
-
-
 		function validate() {
-			if (emailverified && smsverified) {
+			//if (emailverified && smsverified)
+			if (emailverified) {
 				return true;
 			}
 			return false;
@@ -746,7 +766,8 @@
 
 			$('#registerButton ').on('click', function (e) {
 				console.log("juileb")
-				if (emailverified && smsverified) {
+				//if (emailverified && smsverified)
+				if (emailverified) {
 					e.preventDefault(); // Prevent the default form submission
 					// window.location.href = "home.php";
 					// Perform your validation here
@@ -828,7 +849,7 @@
 					});
 				}
 				else {
-					alert("email and sms are not verified");
+					alert("email or sms are not verified");
 				}
 			});
 			//Login Ajax
