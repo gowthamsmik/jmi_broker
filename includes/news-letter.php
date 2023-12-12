@@ -12,7 +12,7 @@
                 if($getAllNewsFront->num_rows > 0){
                     foreach($getAllNewsFront as $thisFrontNews){ ?>
                         <div class="col-md-4">
-                            <div class="about-card3">
+                            <div class="about-card3 mb-3">
                                 <div class="abtCard-head">
                                     <img src="cms/<?php echo $thisFrontNews['image'];?>" alt="">
                                 </div>
@@ -21,7 +21,7 @@
                                         <h6 class="tx-blue">
                                             <?php echo $thisFrontNews['heading']; ?>
                                         </h6>
-                                        <p class="tx-grey300 p-fs5">
+                                        <p class="tx-grey300 p-fs5" style="text-align:justify;">
                                             <?php echo $thisFrontNews['description']; ?>
                                         </p>
                                     </div>
@@ -30,7 +30,7 @@
                                             <span class="tx-grey-new"><?php echo date('d-m-Y',$thisFrontNews['posted_on']); ?></span>
                                         </p>
         
-                                        <a href="#">
+                                        <a href="forex-trading.php">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="58" height="59" viewBox="0 0 58 59"
                                                 fill="none">
                                                 <path d="M16.918 41.151L41.0846 16.9844" stroke="#0343AE" stroke-width="4"

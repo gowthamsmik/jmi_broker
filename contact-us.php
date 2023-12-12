@@ -4,12 +4,13 @@
       <?php include("includes/compatibility.php"); ?>
       <meta name="description" content="">
       <title>Title Here</title>
+      <?php include("includes/softwareinclude/config.php"); ?>
       <?php include("includes/style.php"); ?>
    </head>
    <body>
       <?php include("includes/header.php"); ?>
 
-      <section class="contact-banner">
+      <section class="contact-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(22, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd mn-btn">
                 <h2><?php echo getPageMetaByIDKeyGroup(22,'Banner Heading 1','Banner');?></h2>
@@ -53,7 +54,7 @@
                               </div>
 
                               <div class="col-md-12">
-                                 <label for="msg">Email Address</label>
+                                 <label for="msg">Messages</label>
                                  <br>
                                  <textarea name="message" id="msg" placeholder="Write your messages in here" required></textarea>
                               </div>

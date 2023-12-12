@@ -3,18 +3,24 @@
 <head>
     <?php include('includes/compatibility.php'); ?>
     <meta name='description' content=''>
-    <title>Title Here</title>
+    <title>Future </title>
+    <?php include("includes/softwareinclude/config.php"); ?>
     <?php include('includes/style.php'); ?>
+    <style>
+        p{
+            text-align:justify;
+        }
+    </style>
 </head>
 <body>
     <?php include('includes/header.php'); ?>
 
-    <section class='future-banner'>
+    <section class='future-banner' style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(33, 'Banner Background', 'Banner'); ?>');">
         <div class='container'>
             <div class='banner-cont text-center mn-hd mn-btn'>
                 <h2 class='pdB1'><?php echo getPageMetaByIDKeyGroup(33,'Banner Heading 1','Banner');?></h2>
-                <p class='p-fs4 tx-white pdB1'><?php echo getPageMetaByIDKeyGroup(33,'Banner Description','Banner');?></p>
-                <a class='gd-btn marR1 signUp' href='<?php echo getPageMetaByIDKeyGroup(33,'Banner Button URL','Banner');?>'><?php echo getPageMetaByIDKeyGroup(33,'Banner Button Text','Banner');?>
+                <p class='p-fs4 tx-white pdB1 text-center'><?php echo getPageMetaByIDKeyGroup(33,'Banner Description','Banner');?></p>
+                <a class='gd-btn marR1 signUp' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(33, 'Banner Button URL', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(33,'Banner Button Text','Banner');?>
                     <span>
                         <svg width='21' height='16' viewBox='0 0 21 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
                             <path d='M2 9L19 9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
@@ -22,7 +28,7 @@
                         </svg>
                     </span>
                 </a>
-                <a class='ol-btn loginUp' href='#'>Open Live Account</a>
+                <a class='ol-btn loginUp' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>">Open Live Account</a>
             </div>
         </div>
     </section>
@@ -279,7 +285,7 @@
                     </li>
                 </ul>
                 <div class='mn-btn'>
-                    <a class='gd-btn marR1 signUp' href='<?php echo getPageMetaByIDKeyGroup(33,'Button URL 1','Bottom Buttons');?>'><?php echo getPageMetaByIDKeyGroup(33,'Button Text 1','Bottom Buttons');?>
+                    <a class='gd-btn marR1 signUp' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(33,'Button URL 1','Bottom Buttons'); ?>"><?php echo getPageMetaByIDKeyGroup(33,'Button Text 1','Bottom Buttons');?>
                     <span>
                         <svg xmlns='http://www.w3.org/2000/svg' width='21' height='16' viewBox='0 0 21 16' fill='none'>
                             <path d='M2 9L19 9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
@@ -287,7 +293,7 @@
                         </svg>
                     </span>
                     </a>
-                    <a class='ol-btn loginUp' href='<?php echo getPageMetaByIDKeyGroup(33,'Button URL 2','Bottom Buttons');?>'><?php echo getPageMetaByIDKeyGroup(33,'Button Text 2','Bottom Buttons');?></a>
+                    <a class='ol-btn loginUp' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(33,'Button URL 2','Bottom Buttons'); ?>"><?php echo getPageMetaByIDKeyGroup(33,'Button Text 2','Bottom Buttons');?></a>
                 </div>
             </div>
         </div>

@@ -22,6 +22,7 @@ $(document).ready(function() {
      $('.closePop, .overlay').click(function(){
         $('.loginpopup-waper').fadeOut();
         $('.signUppopup-waper').fadeOut();
+        $('.forgetpasswordpopup-waper').fadeOut();
         $('.overlay').fadeOut();
     });
 

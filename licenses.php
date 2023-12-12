@@ -3,13 +3,19 @@
    <head>
       <?php include("includes/compatibility.php"); ?>
       <meta name="description" content="">
-      <title>Title Here</title>
+      <title>License</title>
+      <?php include("includes/softwareinclude/config.php"); ?>
       <?php include("includes/style.php"); ?>
+      <style>
+         p{
+            text-align:justify !important;
+         }
+      </style>
    </head>
    <body>
       <?php include("includes/header.php"); ?>
 
-      <section class="licenses-banner">
+      <section class="licenses-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(3, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd">
                 <h2><?php echo getPageMetaByIDKeyGroup(3,'Banner Heading','Banner');?></h2>
@@ -58,7 +64,7 @@
 
                         <div class="bottom-cont2">
                            <div class="licenses-btn mn-btn text-center">
-                              <button type="submit" class="theam-btn">
+                              <button type="submit" class="theam-btn signUp">
                                  <?php echo getPageMetaByIDKeyGroup(3,'Button text','Licenses and Regulations Left Box');?>
                               </button>
                            </div>

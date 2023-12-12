@@ -3,8 +3,14 @@
    <head>
       <?php include("includes/compatibility.php"); ?>
       <meta name="description" content="">
-      <title>Title Here</title>
+      <title>Mt4 Platform</title>
+      <?php include("includes/softwareinclude/config.php"); ?>
       <?php include("includes/style.php"); ?>
+      <style>
+        p{
+            text-align:justify;
+        }
+    </style>
    </head>
    <body>
       <?php include("includes/header.php"); ?>
@@ -15,7 +21,7 @@
                <div class="banner-cont mn-hd mn-btn">
                   <h2 class="tx-white"><?php echo getPageMetaByIDKeyGroup(7,'Banner Heading 1','Banner');?></h2>
                   <div class="banner-btn">
-                     <a class="gd-btn signUp" href="#"><?php echo getPageMetaByIDKeyGroup(7,'Banner Button Text','Banner');?> 
+                     <a class="gd-btn signUp" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : '#'; ?>"><?php echo getPageMetaByIDKeyGroup(7,'Banner Button Text','Banner');?> 
                         <span>
                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="16" viewBox="0 0 21 16" fill="none">
                               <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -23,12 +29,13 @@
                            </svg>
                         </span>
                      </a>
-                     <a class="ol-btn loginUp" href="#">Open Live Account</a>
+                     <a class="ol-btn loginUp" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>">Open Live Account</a>
                   </div>
                </div>
 
                <div class="banner-img fs-0">
-                  <img src="assets/images/banner/mt4-img.png" alt="">
+                  <!-- <img src="assets/images/banner/mt4-img.png" alt=""> -->
+                  <img src="cms/<?php echo getPageMetaByIDKeyGroup(7, 'Banner Background', 'Banner'); ?>" alt="" >
                </div>
             </div>
         </div>
@@ -50,7 +57,8 @@
 
                   <div class="col-md-6 text-center">
                      <div class="moneySec1-img">
-                        <img src="assets/images/mt4/mt4_mobile_trading.png" alt="">
+                        <!-- <img src="assets/images/mt4/mt4_mobile_trading.png" alt=""> -->
+                        <img src="cms/<?php echo getPageMetaByIDKeyGroup(7, 'Image', 'JMI Trading'); ?>" alt="" >
                      </div>
                   </div>
                </div>
@@ -81,7 +89,8 @@
                   <div class="row align-items-center">
                      <div class="col-md-6 text-center">
                         <div class="img-wapper">
-                           <img src="assets/images/mt4/mockup-mt4-page.png" alt="">
+                           <!-- <img src="assets/images/mt4/mockup-mt4-page.png" alt=""> -->
+                           <img src="cms/<?php echo getPageMetaByIDKeyGroup(7, 'Image', 'Overview'); ?>" alt="" >
                         </div>
                      </div>
 
@@ -95,10 +104,10 @@
 
                            <ul class="applist">
                               <li>
-                                 <a href="#"><img src="assets/images/google-play.png" alt=""></a>
+                                 <a href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4&hl=en&refer[…]292009626949028%26server%3dJMIBrokers-Demo%252cJMIBrokers-JMI"><img src="assets/images/google-play.png" alt=""></a>
                               </li>
                               <li>
-                                 <a href="#"><img src="assets/images/apple-store.png" alt=""></a>
+                                 <a href="https://apps.apple.com/us/app/metatrader-4/id496212596"><img src="assets/images/apple-store.png" alt=""></a>
                               </li>
                               <li>
                                  <a href="#"><img src="assets/images/app-galler.png" alt=""></a>
@@ -124,7 +133,8 @@
 
                      <div class="col-md-6 text-center">
                         <div class="tourSec-img">
-                           <img src="assets/images/mt4/marker-watch.png" alt="">
+                           <!-- <img src="assets/images/mt4/marker-watch.png" alt=""> -->
+                           <img src="cms/<?php echo getPageMetaByIDKeyGroup(7, 'Image', 'Market Watch'); ?>" alt="" >
                         </div>
                      </div>
                   </div>
@@ -134,7 +144,8 @@
                   <div class="row align-items-center">
                      <div class="col-md-6 text-center">
                         <div class="tourSec-img">
-                           <img src="assets/images/mt4/charts.png" alt="">
+                           <!-- <img src="assets/images/mt4/charts.png" alt=""> -->
+                           <img src="cms/<?php echo getPageMetaByIDKeyGroup(7, 'Image', 'Charts'); ?>" alt="" >
                         </div>
                      </div>
 
@@ -162,7 +173,8 @@
 
                      <div class="col-md-6 text-center">
                         <div class="tourSec-img">
-                           <img src="assets/images/mt4/navigator.png" alt="">
+                           <!-- <img src="assets/images/mt4/navigator.png" alt=""> -->
+                           <img src="cms/<?php echo getPageMetaByIDKeyGroup(7, 'Image', 'Navigator'); ?>" alt="" >
                         </div>
                      </div>
                   </div>
@@ -172,7 +184,8 @@
                   <div class="row align-items-center">
                      <div class="col-md-6 text-center">
                         <div class="tourSec-img">
-                           <img src="assets/images/mt4/trade-terminal.png" alt="">
+                           <!-- <img src="assets/images/mt4/trade-terminal.png" alt=""> -->
+                           <img src="cms/<?php echo getPageMetaByIDKeyGroup(7, 'Image', 'Trade Terminal'); ?>" alt="" >
                         </div>
                      </div>
 
@@ -230,6 +243,7 @@
 
                            <ul class="pb-5">
                               <li><span>-</span> From the menu options Tools > New Order</li>
+                              <li><span>-</span> From the menu options Tools > New Order</li>
                               <li><span>-</span> By pressing the F9 key on your keyboard</li>
                               <li><span>-</span> By double-clicking a currency pair in your Market Watch window.</li>
                               <li><span>-</span> By right-clicking the Trade Terminal window and choosing New Order</li>
@@ -241,7 +255,8 @@
 
                      <div class="col-md-6 text-center">
                         <div class="tourSec-img">
-                           <img src="assets/images/mt4/navigator.png" alt="">
+                           <!-- <img src="assets/images/mt4/navigator.png" alt=""> -->
+                           <img src="cms/<?php echo getPageMetaByIDKeyGroup(7, 'Image', 'Order Form'); ?>" alt="" >
                         </div>
                      </div>
                   </div>

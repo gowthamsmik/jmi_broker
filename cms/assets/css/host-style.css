@@ -1,0 +1,98 @@
+.loginpopup, .signUppopup, .overlay, .menu-Bar{
+    z-index: 5;
+}
+
+
+.pakageCard{
+    transition: all 0.4s ease-in-out;
+}
+.pakageCard:hover {
+    background-color: #333;
+}
+
+.hSec1-cardCont.mn-hd a {
+    font-size: 22px;
+    margin-top: 20px;
+}
+.contact-section2 .sec2-cont p span.subHd {
+    display: block;
+    font-size: 15px;
+    color: #0343ae;
+}
+
+.career-section2 .careerSec-cont .career-card a {
+    display: none !important;
+}
+.paymethod-slider {
+    padding-bottom: 60px;
+}
+section.paymentMethodsSection {
+    padding: 40px 0;
+}
+.slick-dots li button:before{
+    display: none;
+}
+.slick-dots li button{
+    width: 11px;
+        background: #646464;
+    height: 11px;
+}
+
+.slick-dots li.slick-active button {
+    background: #0343ae;
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 1280px){
+    .menu {
+        height: calc(100vh - 180px);
+        overflow: auto;
+        flex-shrink: 0;
+        justify-content: flex-start;
+        padding-right: 15px;
+    }
+
+    header .main-header ul.menu > li {
+        display: block;
+        padding: 0px 0px 20px 0px;
+        width: 100%;
+        flex-shrink: 0;
+    }
+    
+    .menuWrap{
+        padding-right: 0;
+    }
+    
+    
+    
+    
+    
+    
+}
+
+
+@media (max-width: 767px){
+    .about-section6 .row .col-md-3 {
+    flex: 0 0 50%;
+}
+    .about-section6 .sec6-cont .main-image svg {
+        width: 25px;
+    }
+    section.about-section7 {
+        text-align: center;
+    }
+section.about-section7 .cont3 a:nth-child(1) {
+    text-align: right;
+}
+section.about-section7 .cont3 a:nth-child(2) {
+    text-align: left;
+}
+    
+}

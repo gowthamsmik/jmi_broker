@@ -3,13 +3,14 @@
 <head>
     <?php include("includes/compatibility.php"); ?>
     <meta name="description" content="">
-    <title>Title Here</title>
+    <title>Forex</title>
+    <?php include("includes/softwareinclude/config.php"); ?>
     <?php include("includes/style.php"); ?>
 </head>
 <body>
     <?php include("includes/header.php"); ?>
 
-    <section class="forex-banner">
+    <section class="forex-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(31, 'Banner Background', 'Banner'); ?>');">
         <div class='container'>
             <div class='banner-cont text-center mn-hd mn-btn'>
                 <h2 class='pdB1'><?php echo getPageMetaByIDKeyGroup(31,'Banner Heading 1','Banner');?></h2>
@@ -67,7 +68,7 @@
             <div class="aboutSec2-main">
                 <div class="row">
                     <div class="col-md-6">
-                        <img class="main-image" src="assets/images/forex/1.jpg" alt="">
+                        <img class="main-image" src="cms/<?php echo getPageMetaByIDKeyGroup(31, 'image', 'How It Works'); ?>" alt="">
                     </div>
 
                     <div class="col-md-6">

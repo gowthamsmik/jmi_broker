@@ -1,11 +1,13 @@
-<?php 
+<?php
 error_reporting(0);
 session_start();
 
 global $siteurl;
 global $webeurl;
-$siteurl = 'http://localhost/jmi-cms/cms/';
-$webeurl = 'http://localhost/jmi-cms/';
+global $hostname;
+$hostname = 'jmibroker.net';
+$siteurl = 'https://jmibroker.net/cms/';
+$webeurl = 'https://jmibroker.net/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';

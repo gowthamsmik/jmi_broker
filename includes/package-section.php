@@ -12,7 +12,7 @@
                      if($get_packages -> num_rows > 0){
                         foreach($get_packages as $thisPackage){ ?>
                         <div class="col">
-                           <div class="pakageCard">
+                           <div class="pakageCard h-100">
                               <div class="pakageCard-icon">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="35" viewBox="0 0 43 35" fill="none">
                                     <path d="M17.431 29.0003C17.2416 28.6703 17.0616 28.3403 16.9004 28.001C16.9004 28.001 2.40116 28.001 2.33012 28.0104C1.31949 28.1266 0.554525 28.9816 0.550781 29.9997V32.9997C0.554531 34.1022 1.44703 34.9965 2.5514 35.0003H23.5512C23.7499 35.0003 23.9506 34.9703 24.14 34.9103C23.5193 34.6515 22.9175 34.3459 22.34 33.9991C20.3094 32.7728 18.62 31.0534 17.431 29.0003Z" fill="url(#paint0_linear_623_67364)"/>
@@ -66,7 +66,7 @@
                                  <p>
                                     <?php echo $thisPackage['description'];?>
                                  </p>
-                                 <a href="#" class="gd-btn">BuyPackage</a>
+                                 <a href="<?php echo getPageMetaByIDKeyGroup(21,'Banner Button URL','Package');?>" class="gd-btn">Buy Package</a>
                               </div>
                            </div>
                         </div>

@@ -1,16 +1,16 @@
 
 <section class="paymentMethodsSection">
     <div class="container">
-        <div class="row paymethod-slider">
-            <div class="col-md-2"><img src="assets/images/pay-methods/7.png"/></div>
-            <div class="col-md-2"><img src="assets/images/pay-methods/1.png"/></div>
-            <div class="col-md-2"><img src="assets/images/pay-methods/9.png"/></div>
-            <div class="col-md-2"><img src="assets/images/pay-methods/5.png"/></div>
-            <div class="col-md-2"><img src="assets/images/pay-methods/6.png"/></div>
-            <div class="col-md-2"><img src="assets/images/pay-methods/2.png"/></div>
-            <div class="col-md-2"><img src="assets/images/pay-methods/8.png"/></div>
-            <div class="col-md-2"><img src="assets/images/pay-methods/3.png"/></div>
-            <div class="col-md-2"><img src="assets/images/pay-methods/4.png"/></div
+        <div class="row paymethod-slider gap-2">
+            <div class="col"><img src="assets/images/pay-methods/7.png"/></div>
+            <div class="col"><img src="assets/images/pay-methods/1.png"/></div>
+            <div class="col"><img src="assets/images/pay-methods/9.png"/></div>
+            <div class="col"><img src="assets/images/pay-methods/5.png"/></div>
+            <div class="col"><img src="assets/images/pay-methods/6.png"/></div>
+            <div class="col"><img src="assets/images/pay-methods/2.png"/></div>
+            <div class="col"><img src="assets/images/pay-methods/8.png"/></div>
+            <div class="col"><img src="assets/images/pay-methods/3.png"/></div>
+            <div class="col"><img src="assets/images/pay-methods/4.png"/></div
         </div>
     </div>
 </section>

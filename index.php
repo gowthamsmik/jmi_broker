@@ -3,16 +3,19 @@
    <head>
       <?php include("includes/compatibility.php"); ?>
       <meta name="description" content="">
-      <title>Title Here</title>
-      
-      <?php include("includes/style.php"); ?>
-      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+      <title>JMI Brokers | Online Forex Trading</title>
+      <?php include("includes/softwareinclude/config.php"); ?>
+      <?php include("includes/style.php");
+   $demoAccountURL = $siteurl . "cpanel/open-demo-account.php?tab=1";
+   $liveAccountURL = $siteurl . "cpanel/open-demo-account.php?tab=1";
+   ?>
+      <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
    </head>
    <body>
       
       <?php include("includes/header.php"); ?>
 
-      <section class="mainBanner" style="background-image: url('<?php echo getPageMetaByIDKeyGroup(1,'Banner Background','Banner');?>');">
+      <section class="mainBanner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(1,'Banner Background','Banner');?>');">
          <div class="container">
             <div class="pdX8">
                <div class="row align-items-center">
@@ -24,7 +27,7 @@
                         <?php echo getPageMetaByIDKeyGroup(1,'Banner Description','Banner');?>
                         </p>
 
-                        <a href="<?php echo getPageMetaByIDKeyGroup(1,'Banner Button URL','Banner');?>" class="text-uppercase gd-btn signUp">
+                        <a href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(1, 'Banner Button URL', 'Banner'); ?>" class="text-uppercase gd-btn signUp">
                            <?php echo getPageMetaByIDKeyGroup(1,'Banner Button Text','Banner');?>
                            <span>
                               <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +113,7 @@
                   <div class="col-md-6">
                      <div class="hSec1-hd mn-hd mb-5">
                         <h3 class="tx-blue pb-2"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Investment Choices');?></h3>
-                        <p class="p-fs3"><?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices');?></p>
+                        <p class="p-fs3" style="text-align:justify;"><?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices');?></p>
                      </div>
 
                      <div class="hSec1-card">
@@ -124,7 +127,7 @@
                               <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 1');?> </h3>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 1');?></span>
                            </div>
-                           <p class="p-fs2 tx-white">
+                           <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 1');?>
                            </p>
                            <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 1');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
@@ -142,7 +145,7 @@
                               <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 2');?> </h3>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 2');?></span>
                            </div>
-                           <p class="p-fs2 tx-white">
+                           <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 2');?>
                            </p>
                            <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 2');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
@@ -161,7 +164,7 @@
                               <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 3');?> </h3>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 3');?></span>
                            </div>
-                           <p class="p-fs2 tx-white">
+                           <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 3');?>
                            </p>
                            <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 3');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
@@ -184,7 +187,7 @@
                               <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 4');?> </h3>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 4');?></span>
                            </div>
-                           <p class="p-fs2 tx-white">
+                           <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 4');?>
                            </p>
                            <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 4');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
@@ -203,7 +206,7 @@
                               <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 5');?> </h3>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 5');?></span>
                            </div>
-                           <p class="p-fs2 tx-white">
+                           <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 5');?>
                            </p>
                            <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 5');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
@@ -222,7 +225,7 @@
                               <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 6');?> </h3>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 6');?></span>
                            </div>
-                           <p class="p-fs2 tx-white">
+                           <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 6');?>
                            </p>
                            <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 6');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
@@ -289,7 +292,7 @@
          <div class="container pdX8">
             <div class="hSec2-hd mn-hd hd-pad text-center pdX8">
                <h3 class="tx-blue pb-2"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Alternative Investments');?></h3>
-               <p class="tx-grey300 p-fs3"><?php echo getPageMetaByIDKeyGroup(1,'Description','Alternative Investments');?></p>
+               <p class="tx-grey300 p-fs3" style="text-align:center;"><?php echo getPageMetaByIDKeyGroup(1,'Description','Alternative Investments');?></p>
             </div>
 
             <div class="row align-items-center pb-5">
@@ -300,8 +303,8 @@
                </div>
                <div class="col-md-6">
                   <div class="hSec2-cont mn-hd">
-                     <h3 class="tx-blue pb-2"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Fundamental Analysis');?>"</h3>
-                     <p class="tx-grey300 p-fs3"><?php echo getPageMetaByIDKeyGroup(1,'Description','Fundamental Analysis');?></p>
+                     <h3 class="tx-blue pb-2"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Fundamental Analysis');?></h3>
+                     <p class="tx-grey300 p-fs3" style="text-align:justify;"><?php echo getPageMetaByIDKeyGroup(1,'Description','Fundamental Analysis');?></p>
    
                      <ul>
                         <li>
@@ -312,7 +315,7 @@
                            <div class="cont mn-hd">
                               <p class="p-fs4 tx-blue pb-2 fw-semibold"><?php echo getPageMetaByIDKeyGroup(1,'Gold prices Heading','Fundamental Analysis');?></p>
    
-                              <p>
+                              <p style="text-align:justify;">
                                  <?php echo getPageMetaByIDKeyGroup(1,'Gold prices Description','Fundamental Analysis');?>
                               </p>
                            </div>
@@ -326,7 +329,7 @@
                            <div class="cont mn-hd">
                               <p class="p-fs4 tx-blue pb-2 fw-semibold"><?php echo getPageMetaByIDKeyGroup(1,'US dollar Heading','Fundamental Analysis');?></p>
    
-                              <p>
+                              <p style="text-align:justify;">
                               <?php echo getPageMetaByIDKeyGroup(1,'US dollar Description','Fundamental Analysis');?>
                               </p>
                            </div>
@@ -340,9 +343,9 @@
                <div class="col-md-6">
                   <div class="hSec2-cont mn-hd">
                      <h3 class="tx-blue pb-2"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Social Trading');?></h3>
-                     <p class="tx-grey300 p-fs3"><?php echo getPageMetaByIDKeyGroup(1,'Description','Social Trading');?></p>
+                     <p class="tx-grey300 p-fs3" style="text-align:justify;"><?php echo getPageMetaByIDKeyGroup(1,'Description','Social Trading');?></p>
 
-                     <ul>
+                     <ul class="ps-0">
                         <li>
                            <div class="img">
                               <img src="cms/<?php echo getPageMetaByIDKeyGroup(1,'Free Copy Account Image','Social Trading');?>" alt="">
@@ -351,7 +354,7 @@
                            <div class="cont mn-hd">
                               <p class="p-fs4 tx-blue pb-2 fw-semibold"><?php echo getPageMetaByIDKeyGroup(1,'Free Copy Account Heading','Social Trading');?></p>
 
-                              <p>
+                              <p style="text-align:justify;">
                               <?php echo getPageMetaByIDKeyGroup(1,'Free Copy Account Description','Social Trading');?>
                               </p>
                            </div>
@@ -365,7 +368,7 @@
                            <div class="cont mn-hd">
                               <p class="p-fs4 tx-blue pb-2 fw-semibold"><?php echo getPageMetaByIDKeyGroup(1,'Instant intertransfer Heading','Social Trading');?></p>
 
-                              <p>
+                              <p style="text-align:justify;">
                               <?php echo getPageMetaByIDKeyGroup(1,'Instant intertransfer Description','Social Trading');?>
                               </p>
                            </div>
@@ -387,79 +390,119 @@
 
       <section class="faqSection">
          <div class="container-fluid p-0">
-            <div class="row align-items-center">
+            <div class="row align-items-center container mx-auto">
                <div class="col-md-6">
                   <div class="faqSec-img">
                      <img src="assets/images/faqsec/1.jpg" alt="">
                   </div>
                </div>
 
-               <div class="col-md-6">
-                  <div class="faqSec-cont mn-hd">
+               <div class="col-md-6 ">
+                  <div class="faqSec-cont mn-hd pe-0">
                      <h3 class="tx-blue">Got Questions? <br> We Have Answers!</h3>
                      <p class="tx-grey300 p-fs3">Frequently Asked Questions List</p>
                      <div class="innerFAQSec-accordion">
-                        <ul class="accordion">
-                           <li>
-                              <div class="acc_title">
-                              What is the procedure for opening an account with JMI?
-                                 <i class="far fa-plus"></i>
-                              </div>
-                              <div class="acc_desc" style="display: none;">
-                                 <p>JMI Brokers can only accept funds that have been wired from an account that carries the name of the client. In conformity with Anti-Money laundering laws</p>
-                              </div>
-                           </li>
+                     <ul class="accordion">
+                                <li>
+                                    <div class="acc_title" data-bs-toggle="collapse" href="#collapseOne">
+                                        What is the procedure for opening an account with JMI?
+                                        <i class="far fa-plus"></i>
+                                    </div>
+                                    <div class="acc_desc collapse" id="collapseOne" data-bs-parent=".accordion">
+                                        <p style="text-align:justify;">Two Ways to Open Your JMI Brokers trading Account <br> <br>
+                                            The fastest and easiest account opening method available. Complete your
+                                            application online. (Recommended)
+                                            <br><br>
+                                            Open your Real Account (Documents Required) : <br>
+                                            1. Download the Customer Account Agreement. <br>
+                                            2. Read complete and sign the Agreement, ensuring you have fully understood
+                                            all terms and conditions. <br>
+                                            3. Please send the following pages either by fax +971 26594 258 Or scan the
+                                            documents and email them to support@jmibroker.net Pages 3, 4,5, 6,7,10, 19
+                                            and 24 from the customer account agreement For Individual accounts you need
+                                            to enclose a clear copy of your valid passport and a utility bill (ex.
+                                            telephone or electricity) as proof of residence. <br>
+                                            4, When we receive the requested documents we will check your applications,
+                                            once accepted our staff will set up an account for you and they will send
+                                            you a confirmation letter containing your username and your password , you
+                                            must sign it and send it either by fax +971 26594 258 or scan it and email
+                                            to support@jmibroker.net <br>
+                                            5. Once we receive the signed confirmation letter your account will be ready
+                                            and you can wire the Funds to our Bank Account.
+                                        </p>
+                                    </div>
+                                </li>
 
-                           <li>
-                              <div class="acc_title">
-                              When Can I Start Trading?
-                                 <i class="far fa-plus"></i>
-                              </div>
-                              <div class="acc_desc" style="display: none;">
-                                 <p>JMI Brokers can only accept funds that have been wired from an account that carries the name of the client. In conformity with Anti-Money laundering laws</p>
-                              </div>
-                           </li>
+                                <li>
+                                    <div class="acc_title" data-bs-toggle="collapse" href="#collapseTwo">
+                                        When Can I Start Trading?
+                                        <i class="far fa-plus"></i>
+                                    </div>
+                                    <div class="acc_desc collapse" id="collapseTwo" data-bs-parent=".accordion">
+                                        <p style="text-align:justify;">1. Upon receiving your application, our compliance department checks and
+                                            validates it for approval. The approval and set up process required approx.
+                                            2 business days for Individual Accounts and approx. 3 days for Corporate
+                                            Accounts to be completed. <br>
+                                            2. Once approved, our Back Office will then set up your account and contact
+                                            you with your Account Number (login and password) and wiring instructions to
+                                            fund your account. <br>
+                                            3. Before you can begin trading, you will need to fund your Trading Account
+                                            by wiring payment to our bank with the requisite funds. Third party
+                                            transfers are not acceptable. Learn how to fund your account. <br>
+                                            4. Once we have received your wire transfer, we will immediately credit your
+                                            Trading Account. This process may take up to 2-3 days depending on how long
+                                            the wire transfer takes. <br>
+                                            5. You can start trading as soon as your Trading Account has been credited.
+                                        </p>
+                                    </div>
+                                </li>
 
-                           <li>
-                              <div class="acc_title">
-                              How do I transfer my funds?
-                                 <i class="far fa-plus"></i>
-                              </div>
-                              <div class="acc_desc" style="display: none;">
-                                 <p>JMI Brokers can only accept funds that have been wired from an account that carries the name of the client. In conformity with Anti-Money laundering laws</p>
-                              </div>
-                           </li>
+                                <li>
+                                    <div class="acc_title" data-bs-toggle="collapse" href="#collapseThree">
+                                        How do I transfer my funds?
+                                        <i class="far fa-plus"></i>
+                                    </div>
+                                    <div class="acc_desc collapse" id="collapseThree" data-bs-parent=".accordion">
+                                        <p style="text-align:justify;">JMI Brokers can only accept funds that have been wired from an account that
+                                            carries the name of the client. In conformity with Anti-Money laundering
+                                            laws</p>
+                                    </div>
+                                </li>
 
-                           <li>
-                              <div class="acc_title">
-                              Can I transfer funds from my trading account to another client trading account?
-                                 <i class="far fa-plus"></i>
-                              </div>
-                              <div class="acc_desc" style="display: none;">
-                                 <p>JMI Brokers can only accept funds that have been wired from an account that carries the name of the client. In conformity with Anti-Money laundering laws</p>
-                              </div>
-                           </li>
+                                <li>
+                                    <div class="acc_title" data-bs-toggle="collapse" href="#collapseFour">
+                                        Can I transfer funds from my trading account to another client trading account?
+                                        <i class="far fa-plus"></i>
+                                    </div>
+                                    <div class="acc_desc collapse" id="collapseFour" data-bs-parent=".accordion">
+                                        <p style="text-align:justify;">No, it prevents the transfer of funds between different clients accounts , it
+                                            also prevents the conversion of any third party .</p>
+                                    </div>
+                                </li>
 
-                           <li>
-                              <div class="acc_title">
-                              Is it possible to open more than one account with the JMI?
-                                 <i class="far fa-plus"></i>
-                              </div>
-                              <div class="acc_desc" style="display: none;">
-                                 <p>JMI Brokers can only accept funds that have been wired from an account that carries the name of the client. In conformity with Anti-Money laundering laws</p>
-                              </div>
-                           </li>
+                                <li>
+                                    <div class="acc_title" data-bs-toggle="collapse" href="#collapseFive">
+                                        Is it possible to open more than one account with the JMI?
+                                        <i class="far fa-plus"></i>
+                                    </div>
+                                    <div class="acc_desc collapse" id="collapseFive" data-bs-parent=".accordion">
+                                        <p style="text-align:justify;">Yes , in fact you can open several sub-accounts belonging to the main your
+                                            account , and open a sub account , simply print and fill the sub-account
+                                            application form and send it to us via fax or e-mail .</p>
+                                    </div>
+                                </li>
 
-                           <li>
-                              <div class="acc_title">
-                              Are you managing money ?
-                                 <i class="far fa-plus"></i>
-                              </div>
-                              <div class="acc_desc" style="display: none;">
-                                 <p>JMI Brokers can only accept funds that have been wired from an account that carries the name of the client. In conformity with Anti-Money laundering laws</p>
-                              </div>
-                           </li>
-                        </ul>
+                                <li>
+                                    <div class="acc_title" data-bs-toggle="collapse" href="#collapseSix">
+                                        Are you managing money ?
+                                        <i class="far fa-plus"></i>
+                                    </div>
+                                    <div class="acc_desc collapse" id="collapseSix" data-bs-parent=".accordion">
+                                        <p style="text-align:justify;">JMI Brokers only excutes online service , we do not provide account
+                                            management service .</p>
+                                    </div>
+                                </li>
+                            </ul>
                      </div>
                   </div>
 
@@ -475,15 +518,21 @@
                   <div class="col-md-3">
                      <div class="mobileAppSec-cont mn-hd">
                         <h3 class="tx-blue pb-2"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Mobile App Support');?></h3>
-                        <p class="tx-grey300 p-fs3 pb-3"><?php echo getPageMetaByIDKeyGroup(1,'Description','Mobile App Support');?></p>
+                        <p class="tx-grey300 p-fs3 pb-3" style="text-align:justify;"><?php echo getPageMetaByIDKeyGroup(1,'Description','Mobile App Support');?></p>
    
                         <span class="tx-grey300 p-fs2 fw-bold pb-2">Download App</span>
    
-                        <ul class="d-flex g-2">
-                           <li><a href="#"><img src="assets/images/mobile-app/google.png" alt=""></a></li>
-                           <li><a href="#"><img src="assets/images/mobile-app/apple.png" alt=""></a></li>
-                           <li><a href="#"><img src="assets/images/mobile-app/app.png" alt=""></a></li>
-                        </ul>
+                        <ul class="applist">
+                              <li>
+                                 <a href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4&hl=en&refer[…]292009626949028%26server%3dJMIBrokers-Demo%252cJMIBrokers-JMI"><img src="assets/images/google-play.png" alt=""></a>
+                              </li>
+                              <li>
+                                 <a href="https://apps.apple.com/us/app/metatrader-4/id496212596"><img src="assets/images/apple-store.png" alt=""></a>
+                              </li>
+                              <li>
+                                 <a href="#"><img src="assets/images/app-galler.png" alt=""></a>
+                              </li>
+                           </ul>
                      </div>
                   </div>
                   <div class="col-md-6 text-center">
@@ -571,8 +620,8 @@
 
                <div class="hCta-form mn-btn pdX8">
                   <form>
-                     <input type="text" placeholder="Enter Your Website">
-                     <button class="gd-btn">
+                     <input class="rounded" type="text" placeholder="Enter Your Website">
+                     <button class="gd-btn rounded-end">
                         Lets Get Started
                         <span>
                            <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">

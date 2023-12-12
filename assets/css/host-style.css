@@ -1,4 +1,4 @@
-.loginpopup, .signUppopup, .overlay, .menu-Bar{
+.loginpopup, .signUppopup,.forgotpasswordpopup,.overlay, .menu-Bar{
     z-index: 5;
 }
 

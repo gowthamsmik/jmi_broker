@@ -1,0 +1,19 @@
+.admin-logo img{
+    margin: 20px auto;
+    display: flex;
+    width: 130px;
+    width: 100%; max-width: 130px;
+}
+
+.cursor-pointer{cursor: pointer;}
+
+.max-width-100{max-width:100%;}
+
+#notification-center{width:250px;border: 2px solid #eee;padding: 0px;}
+#notification-center li{padding: 5px 10px 5px;border-bottom:1px solid #333;cursor: pointer;}
+#notification-center li.unseen{background:#eee;}
+#notification-center li:hover{background:#eee;}
+#notification-center li:first-child{padding-top: 0px;}
+#notification-center li:last-child{border-bottom: 0px;}
+#notification-center li p{margin-bottom: 0px;}
+#notification-center li p.float-right{text-align:right;}
