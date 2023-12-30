@@ -99,8 +99,8 @@ if (isset($_SESSION['mailmsg'])) {
         }
     </style>
     <title>Your Form</title>
-    <script src="https://jmibroker.net/cms/assets/js/tinymce/tinymce.min.js"></script>
-    <script src="https://jmibroker.net/cms/assets/js/tinymce/themes/modern/theme.min.js"></script>
+    <script src="https://jmibrokers.com/cms/assets/js/tinymce/tinymce.min.js"></script>
+    <script src="https://jmibrokers.com/cms/assets/js/tinymce/themes/modern/theme.min.js"></script>
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
@@ -198,14 +198,13 @@ if (isset($_SESSION['mailmsg'])) {
 
                                                 <th class="cell">#</th>
                                                 <th class="cell">Mail</th>
-                                                <th class="cell">Title</th>
                                                 <th class="cell">Name</th>
                                                 <th class="cell">Manage</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $perPage = 5;
+                                            $perPage = 10;
                                             $index = 0;
                                             $page = isset($_GET['page']) ? $_GET['page'] : 1;
                                             $getAllMailListAccount = getAllMailListAccounts($page, $perPage);
@@ -216,16 +215,13 @@ if (isset($_SESSION['mailmsg'])) {
                                                     <tr class="text-center">
                                                         <td class="cell">
                                                             <input type="checkbox" name="selectedRows[]"
-                                                                value="<?php echo $mailListAccount['mail']; ?>" />
+                                                                value='<?php echo json_encode($mailListAccount); ?>' />
                                                         </td>
                                                         <td class="cell">
-                                                            <?php echo $index; ?>
+                                                            <?php echo $mailListAccount['id']; ?>
                                                         </td>
                                                         <td class="cell"><span class="truncate">
                                                                 <?php echo $mailListAccount['mail']; ?>
-                                                            </span></td>
-                                                        <td class="cell"><span class="truncate">
-                                                                <?php echo $mailListAccount['title']; ?>
                                                             </span></td>
                                                         <td class="cell"><span class="truncate">
                                                                 <?php echo $mailListAccount['name']; ?>
@@ -246,11 +242,39 @@ if (isset($_SESSION['mailmsg'])) {
                             <ul class="pagination justify-content-end">
                                 <?php
                                 $totalRecords = getTotalMailListAccounts();
-                                $totalPages = ceil($totalRecords / $perPage);
+                                $limit = 10; // Set the number of records to display per page
+                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-                                for ($i = 1; $i <= $totalPages; $i++) {
-                                    echo '<li class="page-item ' . ($page == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                // Calculate the total number of pages
+                                $totalPages = ceil($totalRecords / $limit);
+
+                                // Determine the starting and ending page numbers to display
+                                $startPage = max($currentPage - 3, 1);
+                                $endPage = min($startPage + 5, $totalPages);
+
+                                // Display pagination links
+                                echo '<ul class="pagination justify-content-end">';
+
+                                // First button
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
+
+                                // Previous button
+                                $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+
+                                // Page numbers
+                                for ($i = $startPage; $i <= $endPage; $i++) {
+                                    echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
                                 }
+
+                                // Next button
+                                $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+
+                                // Last button
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
+
+                                echo '</ul>';
                                 ?>
                             </ul>
                         </nav>
@@ -302,14 +326,19 @@ if (isset($_SESSION['mailmsg'])) {
         function sendSelectedMails() {
             var checkboxes = document.querySelectorAll('input[name="selectedRows[]"]:checked');
             var selectedMails = [];
-
             checkboxes.forEach(function (checkbox) {
-                selectedMails.push(checkbox.value);
+                console.log("Checkbox value:", checkbox.value);
+                var mailListAccount = JSON.parse(checkbox.value);
+                console.log("Parsed Mail List Account:", mailListAccount);
+                selectedMails.push(mailListAccount);
             });
-
-            // Add the selectedMails array to a hidden input field before submitting the form
+            console.log("Selected Mails:", selectedMails);
             document.getElementById('selectedMailsInput').value = JSON.stringify(selectedMails);
         }
+
+
+
+
     </script>
 </body>
 

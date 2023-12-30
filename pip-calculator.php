@@ -3,8 +3,13 @@
 <head>
     <?php include("includes/compatibility.php"); ?>
     <meta name="description" content="">
-    <title>Title Here</title>
-    <?php include("includes/softwareinclude/config.php"); ?>
+    <title>Pip Calculator</title>
+    <?php include("includes/softwareinclude/config.php");
+    include("cpanel/includes/functions.php");
+    $pipData=pipCalculator();
+    $pipDataCount=count($pipData);
+    ?>
+    
     <?php include("includes/style.php"); ?>
 </head>
 <body>
@@ -15,7 +20,7 @@
             <div class="banner-cont text-center mn-hd mn-btn">
                 <h2 class="pdB1"><?php echo getPageMetaByIDKeyGroup(18,'Banner Heading 1','Banner');?></h2>
                 <p class="p-fs4 tx-white pdB1"><?php echo getPageMetaByIDKeyGroup(18,'Description','Banner');?></p>
-                <a class="gd-btn marR1 signUp" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(18,'Banner Button URL','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(18,'Banner Button Text','Banner');?>
+                <a class="gd-btn marR1 <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(18,'Banner Button URL','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(18,'Banner Button Text','Banner');?>
                     <span>
                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -23,7 +28,7 @@
                         </svg>
                     </span>
                 </a>
-                <a class="ol-btn loginUp" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>" >Open Live Account</a>
+                <a class="ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>" >Open Live Account</a>
             </div>
         </div>
     </section>
@@ -55,7 +60,7 @@
                 </div>
             </div>
             <div class="table100 piptable">
-                <iframe src="https://www.jmibrokers.com/en/pip-calculator2/" scrolling="no" style="width: 100%; height: 100%; min-height: 1200px;"></iframe>
+                <!-- <iframe src="https://www.jmibrokers.com/en/pip-calculator2/" scrolling="no" style="width: 100%; height: 100%; min-height: 1200px;"></iframe> -->
                 <!--<table>-->
                 <!--    <thead>-->
                 <!--        <tr>-->
@@ -148,6 +153,43 @@
                 <!--        </tr>-->
                 <!--    </tbody>-->
                 <!--</table>-->
+                <table class="table mt-3">
+        <thead>
+            <tr>
+                <th><?php echo $lang['th_Currency']; ?></th>
+                <th><?php echo $lang['th_Price']; ?></th>
+                <th><?php echo $lang['th_Standard_Lot']; ?></th>
+                <th><?php echo $lang['th_Mini_Lot']; ?></th>
+                <th><?php echo $lang['th_Micro_Lot']; ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $dummyData = array(
+                array('AUD/CHF', '0.5801', '11.31', '1.13', '0.11'),
+                array('AUD/CHF', '0.5801', '11.31', '1.13', '0.11'),
+                array('AUD/CHF', '0.5801', '11.31', '1.13', '0.11'),
+            );
+            foreach ($pipData as $rowIndex => $row) {
+                echo '<tr class="my-auto">';
+                foreach ($row as $index => $cell) {
+                    if ($index === 0) {
+                        echo '<td><a href="#">' . $cell . '</a></td>';
+                    } else if ($index === 1) {
+                        echo '<td>' . $cell . '</td>';
+                    } else if ($index === 2) {
+                        echo '<td>' . $cell . '</td>';
+                    } else if ($index === 3) {
+                        echo '<td>' . $cell . '</td>';
+                    } else if ($index === 4) {
+                        echo '<td>' . $cell . '</td>';
+                    }   
+                }
+                echo '</tr>';
+            }
+            ?>
+        </tbody>
+    </table>
             </div>
         </div>
     </section>

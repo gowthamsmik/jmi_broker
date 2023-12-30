@@ -159,10 +159,10 @@
 
                 <div class="forex-table-main">
                     <div class="box-table1 showfirst">
-                        <iframe src="https://www.jmibrokers.com/en/FX4Dmajor1" style="width: 100%; height: 500px;"></iframe>
+                        <iframe src="https://www.jmibrokers.com/FX4Dmajor1.php" style="width: 100%; height: 500px;"></iframe>
                     </div>
                     <div class="box-table2">
-                        <iframe src="https://www.jmibrokers.com/en/FX4Dmajor2" style="width: 100%; height: 500px;"></iframe>
+                        <iframe src="https://www.jmibrokers.com/FX4Dmajor2.php" style="width: 100%; height: 500px;"></iframe>
                     </div>
                     <!--<table>-->
                     <!--    <thead>-->
@@ -346,10 +346,10 @@
 
                 <div class="forex-table-main">
                     <div class="box-table3 showfirst">
-                        <iframe src="https://www.jmibrokers.com/en/FX4DmajorCross" style="width: 100%; height: 500px;"></iframe>
+                        <iframe src="https://www.jmibrokers.com/FX4DmajorCross.php" style="width: 100%; height: 500px;"></iframe>
                     </div>
                     <div class="box-table4">
-                        <iframe src="https://www.jmibrokers.com/en/FX5DmajorCross" style="width: 100%; height: 500px;"></iframe>
+                        <iframe src="https://www.jmibrokers.com/FX5DmajorCross.php" style="width: 100%; height: 500px;"></iframe>
                     </div>
                     <!--<table>-->
                     <!--    <thead>-->
@@ -527,7 +527,7 @@
                 </div>
 
                 <div class="forex-table-main">
-                    <iframe src="https://www.jmibrokers.com/en/FXCrossRates" style="width: 100%; height: 500px;"></iframe>
+                    <iframe src="https://www.jmibrokers.com/FXCrossRates.php" style="width: 100%; height: 500px;"></iframe>
                     <!--<table>-->
                     <!--    <thead>-->
                     <!--        <tr>-->

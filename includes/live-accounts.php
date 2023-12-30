@@ -53,7 +53,7 @@ if ($user) {
     foreach ($accounts as $account) {
         // Fetch user information
         $ret = '';
-        $ptr = @fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
+        $ptr = fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
 
         if ($ptr) {
             if (fputs($ptr, "WUSERINFO-login=$account['account_id']|password=$account['password']\nQUIT\n")) {
@@ -67,7 +67,7 @@ if ($user) {
         }
 
         if ($ret == Null or $ret == 'error') {
-            $ptr = @fsockopen('92.204.139.189', '443', $errno, $errstr, 5);
+            $ptr = fsockopen('92.204.139.189', '443', $errno, $errstr, 5);
 
             if ($ptr) {
                 if (fputs($ptr, "WUSERINFO-login=$account['account_id']|password=$account['password']\nQUIT\n")) {
@@ -86,7 +86,7 @@ if ($user) {
         $endTime = time();
         $ret3 = '';
 
-        $ptr2 = @fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
+        $ptr2 = fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
 
         if ($ptr2) {
             if (fputs($ptr2, "WUSERHISTORY-login=$account['account_id']|password=$account['password']|from=$startTime|to=$endTime\nQUIT\n")) {
@@ -100,7 +100,7 @@ if ($user) {
         }
 
         if ($ret3 == Null or $ret3 == 'error') {
-            $ptr2 = @fsockopen('92.204.139.189', '443', $errno, $errstr, 5);
+            $ptr2 = fsockopen('92.204.139.189', '443', $errno, $errstr, 5);
 
             if ($ptr2) {
                 if (fputs($ptr2, "WUSERHISTORY-login=$account['account_id']|password=$account['password']|from=$startTime|to=$endTime\nQUIT\n")) {

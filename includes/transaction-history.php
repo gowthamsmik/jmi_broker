@@ -36,7 +36,7 @@ if (isset($_GET['neteller--']) && $_GET['neteller--'] == 'success' && $_SESSION[
 
     $stmtNotification = $conn->prepare("INSERT INTO Notifications (website_accounts_id, notification_status, notification, notification_link) VALUES (?, ?, ?, ?)");
     $notificationAmount = $_SESSION['amount'] / 100;
-    $stmtNotification->bind_param("iiss", $id = 999999999, $status = 0, $notificationAmount . 'USD New Neteller Deposited', $link = '/spanel/deposit-fund-requests?&bymail=' . $user['email']);
+    $stmtNotification->bind_param("iiss", $id = 999999999, $status = 0, $notificationAmount . 'USD New Neteller Deposited', $link = '/cms/deposite-f-requests?&bymail=' . $user['email']);
     $stmtNotification->execute();
 
     // Additional email sending logic here...
@@ -76,7 +76,7 @@ if (isset($_GET['neteller--']) && $_GET['neteller--'] == 'success' && $_SESSION[
 
     $stmtNotification = $conn->prepare("INSERT INTO Notifications (website_accounts_id, notification_status, notification, notification_link) VALUES (?, ?, ?, ?)");
     $notificationAmount = $_SESSION['PAYMENT_AMOUNT'];
-    $stmtNotification->bind_param("iiss", $id = 999999999, $status = 0, $notificationAmount . 'USD New AdvCash Deposited', $link = '/spanel/deposit-fund-requests?&bymail=' . $user['email']);
+    $stmtNotification->bind_param("iiss", $id = 999999999, $status = 0, $notificationAmount . 'USD New AdvCash Deposited', $link = '/cms/deposite-f-requests?&bymail=' . $user['email']);
     $stmtNotification->execute();
 
     // Additional email sending logic here...

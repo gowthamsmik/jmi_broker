@@ -451,11 +451,15 @@ ul.dropdown li a:hover{color:#0244B0!important;}
 	padding: 85px 0 120px;
 }
 
+
+
 .pakageCard{
 	border-radius: 8.59px;
 	border: 1.074px solid #424242;
 	background: #053B9E;
 	padding: 30px 20px 40px;
+	font-size: 14px;
+  	min-width:220px !important;
 
 	.pakageCard-icon{
 		padding-bottom: 20px;
@@ -526,6 +530,7 @@ ul.dropdown li a:hover{color:#0244B0!important;}
 			}
 		}
 	}
+	
 }
 
 // FAQ
@@ -1101,7 +1106,7 @@ footer{
 							color: #fff;
 
 							&:hover{
-								color: #B3CCF5;
+								color: #FEDC18 !important;
 							}
 						}
 
@@ -2107,7 +2112,7 @@ footer{
 	}
 }
 .forex-section4{
-	padding-bottom: 50px;
+	padding-bottom: 50px !important;
 
 	.mn-btn{
 		 padding-top: 60px;
@@ -3726,7 +3731,6 @@ footer{
 		position: absolute;
 		right: 0;
 		top: -7px;
-		opacity: 0;
 	}
 	.pdX8, .pdX5 {
 		padding-right: 0%;

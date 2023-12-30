@@ -1,4 +1,4 @@
-const sitUrl="https://jmibroker.net/"
+const sitUrl="https://jmibrokers.com/"
 const allLinks = [
     [ `${sitUrl}about-us.php`, 'About JMI', 'عن JMI', 'О JMI'],
     [`${sitUrl}licenses.php`, 'Licenses and Regulations', 'التراخيص واللوائح', 'Лицензии и регулирование'],

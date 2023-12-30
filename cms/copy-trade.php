@@ -136,12 +136,13 @@
                                                     <th class="cell">Copy To</th>
                                                     <th class="cell">Percentage</th>
                                                     <th class="cell">Status</th>
+                                                    <th class="cell">Date</th>
                                                     <th class="cell">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $perPage = 5;
+                                                $perPage = 10;
                                                 $index = 0;
                                                 $page = isset($_GET['page']) ? $_GET['page'] : 1;
                                                 $getAllCopyTradeListAccount = getAllcopytrade($page, $perPage);
@@ -181,6 +182,7 @@
                                                             <!-- <td class="cell"><span class="truncate">
                                                                     ?php echo $mailListAccount['status']; ?>
                                                                 </span></td> -->
+                                                                
                                                             <td class="cell">
                                                                 <?php
                                                                 $statusValue = $copytradeListAccount['status'];
@@ -204,15 +206,21 @@
                                                                 echo $statusLabel;
                                                                 ?>
                                                             </td>
+                                                            <td class="cell"><span class="truncate">
+                                                            <?php echo $copytradeListAccount['created_at']; ?>
+                                                                </span></td>
                                                             <td class="cell">
                                                                 <?php if ($copytradeListAccount['status'] == '0') { ?>
                                                                     <button type="button" class="btn action cpyaction"
                                                                         style="background-color: green !important; color: white;"
                                                                         data-id="<?php echo $copytradeListAccount['id']; ?>">Approved</button>
-                                                                <?php } ?>
+                                                                <?php }  if($copytradeListAccount['status'] != '9'){
+
+                                                                ?>
                                                                 <button type="button" class="btn deletesinglecopytrade"
                                                                     style="background-color:red"
                                                                     data-id="<?php echo $copytradeListAccount['id']; ?>">Delete</button>
+                                                                    <?php }?>
                                                             </td>
 
                                                         </tr>
@@ -270,17 +278,45 @@
                             </div>
 
                             <nav class="app-pagination">
-                                <ul class="pagination justify-content-end">
-                                    <?php
-                                    $totalRecords = getTotaladmins();
-                                    $totalPages = ceil($totalRecords / $perPage);
+                            <ul class="pagination justify-content-end">
+                                <?php
+                                $totalRecords = getTotalcopytrade();
+                                $limit = 10; // Set the number of records to display per page
+                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-                                    for ($i = 1; $i <= $totalPages; $i++) {
-                                        echo '<li class="page-item ' . ($page == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-                                    }
-                                    ?>
-                                </ul>
-                            </nav>
+                                // Calculate the total number of pages
+                                $totalPages = ceil($totalRecords / $limit);
+
+                                // Determine the starting and ending page numbers to display
+                                $startPage = max($currentPage - 3, 1);
+                                $endPage = min($startPage + 5, $totalPages);
+
+                                // Display pagination links
+                                echo '<ul class="pagination justify-content-end">';
+
+                                // First button
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
+
+                                // Previous button
+                                $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+
+                                // Page numbers
+                                for ($i = $startPage; $i <= $endPage; $i++) {
+                                    echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                }
+
+                                // Next button
+                                $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+
+                                // Last button
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
+
+                                echo '</ul>';
+                                ?>
+                            </ul>
+                        </nav>
 
                         </div><!--//tab-pane-->
 
@@ -333,19 +369,7 @@
                         data: { type: 'delete-admin', ids: ids, page: currentPage },
                         success: function (res) {
                             console.log("cddsdddddddddddddddddddd", res);
-                            var successMessageDiv = document.getElementById('success-message');
-                            successMessageDiv.innerHTML = 'Selected admin Has Been Deleted';
-                            successMessageDiv.style.display = 'block';
-                            $('html, body').animate({ scrollTop: 0 }, 'fast');
-                            setTimeout(function () {
-                                window.location.reload();
-                            }, 3000);
-
-                            //alert('Selected Records Deleted');
-                            //window.location.href = "technical-analysis.php";
-                            var deleteAllButton = document.getElementById('deleteAllButton');
-                            deleteAllButton.disabled = true;
-                            deleteAllButton.style.display = 'none';  // Hide the button after deletion
+                            
                         },
                         error: function (err) {
                             console.error(err);
@@ -420,11 +444,13 @@
                     success: function (res) {
                         console.log("approvetrade", res);
                         if (res.error) {
+                            alert("Failed to approve copy-trade:",res.error)
                             console.error('Error from server:', res.error);
+                            window.location.href="copy-trade.php";
                         } else if (res.success) {
+                            alert("Approved Copy Trade Successfully.")
                             console.log('Update successful');
-
-                            window.location.reload();
+                            window.location.href="copy-trade.php";
                         }
                     }
 
@@ -432,7 +458,7 @@
                 });
             });
         </script>
-        <script>
+       <script>
             $(document).on('click', '.deletesinglecopytrade', function () {
 
                 var deletecpytradeId = $(this).data('id');
@@ -450,7 +476,7 @@
                         } else if (res.success) {
                             console.log('Update successful');
 
-                            window.location.reload();
+                            location.reload();
                         }
                     }
 

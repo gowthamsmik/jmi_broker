@@ -99,7 +99,7 @@ if ($_SESSION['user']) {
 
             // Insert admin notification
             $adminNotificationQuery = "INSERT INTO Notifications (website_accounts_id, notification_status, notification, notification_link)
-                                       VALUES (999999999, 0, ?, '/spanel/copy-trade?&bymail=' . ? . '&')";
+                                       VALUES (999999999, 0, ?, '/cms/copy-trade?&bymail=' . ? . '&')";
             $adminNotificationStmt = $conn->prepare($adminNotificationQuery);
             $adminNotificationStmt->bind_param("ss", $user['email'], $user['email']);
             $adminNotificationStmt->execute();
@@ -130,7 +130,7 @@ function executeSocketRequest($ip, $query)
 
     // Open socket
     $q = "WMQWEBAPI MASTER=jmi2020" . $query . "\nQUIT\n";
-    $ptr = @fsockopen($ip, '443', $errno, $errstr, 5);
+    $ptr = fsockopen($ip, '443', $errno, $errstr, 5);
 
     // Check connection
     if ($ptr) {

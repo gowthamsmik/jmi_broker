@@ -41,9 +41,24 @@
     padding-bottom: 10px !important;
 }
 
-.popupfeild input,
-select {
+.popupfeild input, select {
     height: 65px !important;
+    padding: 20px 20px !important;
+}
+
+.controls .form-control {
+    height: 50px !important;
+    padding: 10px 15px !important;
+}
+
+.form-control {
+    height: 50px !important;
+    padding: 10px 15px !important;
+}
+
+.form-select{
+    height: 50px !important;
+    padding: 10px 15px !important;
 }
 
 .popupfeild label {
@@ -86,11 +101,6 @@ select {
 
 .popupfeild .pdmoreinput {
     padding-right: 0px !important;
-}
-
-.popupfeild input,
-select {
-    padding: 20px 20px !important;
 }
 
 .popupfeild ul li {
@@ -185,15 +195,18 @@ select {
     opacity: 0.7;
 }
 
+a{
+    text-decoration: none;
+}
 </style>
 <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
 
 <script>
 var firebaseConfig = {
     apiKey: "AIzaSyCFVvsn6dt0WsVQljltQiW-ed-NOLRN9J8",
-    authDomain: "jmibroker.net",
+    authDomain: "en.jmibrokers.com",
     projectId: "jmi-brokers",
-    storageBucket: "jmibroker.net",
+    storageBucket: "en.jmibrokers.com",
     messagingSenderId: "698047998267",
     appId: "1:698047998267:web:3f68d50ce3c78ef29e2f1e",
     measurementId: "G-FTZC0TXY4K"
@@ -245,7 +258,7 @@ function phoneSendAuth() {
     });
     $.ajax({
         type: "get",
-        url: "https://jmibroker.net/checkmobileexist.php?phone=" + phone,
+        url: "https://en.jmibrokers.com/checkmobileexist.php?phone=" + phone,
 
         success: function(result) {
             console.log("return result", result)
@@ -326,12 +339,14 @@ function emailSendAuth() {
         alert('Please enter a valid email address.');
         return;
     }
+   
     $.ajax({
         type: "get",
-        url: "https://jmibroker.net/verificationemail.php?email=" + email,
+        url: "<?php echo $siteurl;?>verificationemail.php?email=" + email,
 
         success: function(result) {
-            console.log("result email", result)
+            console.log("result email", result);
+          
             if (result == "true") {
                 console.log("result1 email", result)
                 $element = document.getElementById("emailVerification");
@@ -353,6 +368,8 @@ function emailSendAuth() {
 
         },
         error: function(result) {
+         
+            console.log('email error ',result)
             $("#emailerror").text('An error has occured');
             $("#emailerror").show();
         }
@@ -378,6 +395,8 @@ function emailcodeverify() {
                 $sendEmail = document.getElementById("SencodeEmail");
                 $sendEmail.style.display = "none";
                 emailverified = true;
+                $emailInput = document.getElementById("email");
+                $emailInput.disabled = true;
 
                 $("#emailsuccessRegsiter").text("Code Verified, you can resume now.");
                 $("#emailsuccessRegsiter").show();
@@ -449,15 +468,15 @@ $(function() {
     <!-- END ProvideSupport.com Text Chat Link Code -->
 </div>
 
-<div class="d-flex gap-5 msghand_box justify-content-end">
+<div class="d-flex gap-5 msghand_box justify-content-end mt-3">
     <div class="meg_box p-3 rounded-top-4 text-center" onclick="toggleLiveChat()">
         <img src="../assets/images/svg/msg.svg" alt="404">
-        <p class="text-white">Live Chat</p>
+        <p class="text-white"><?php echo $lang['live_chat'] ?></p>
     </div>
-    <a href="contact-us.php">
+    <a href=<?php echo $siteurl."contact-us.php" ?>>
         <div class="hand_box p-3 rounded-top-4 text-center text-dark">
             <img src="../assets/images/svg/hand.svg" alt="404">
-            <p class="text-center">Contact Us</p>
+            <p class="text-center"><?php echo $lang['contact_us'] ?></p>
         </div>
     </a>
 </div>
@@ -469,8 +488,8 @@ function toggleLiveChat() {
         'block' : 'none';
 }
 </script>
-<footer>
-    <div class="container">
+<footer class="mt-0">
+    <div class="container ">
         <?php if (!$isUserWebsitePage): ?>
         <div class="footer-top">
             <div class="row">
@@ -478,12 +497,12 @@ function toggleLiveChat() {
                     <div class="footerT-cont">
                         <ul>
                             <li class="tx-gd"><?php echo $lang['tools2'] ?></li>
-                            <li><a href="mt4-platform-overview.php"><?php echo $lang['mt4'] ?></a></li>
-                            <li><a href="calendar.php"><?php echo $lang['economicCalendar'] ?></a></li>
-                            <li><a href="pip-calculator.php"><?php echo $lang['pipCalculator'] ?></a></li>
-                            <li><a href="heatmap.php"><?php echo $lang['heatmap'] ?></a></li>
-                            <li><a href="daily_technical_analysis.php"><?php echo $lang['technicalAnalysis'] ?></a></li>
-                            <li><a href="dailyfundamental.php"><?php echo $lang['fundamentalAnalysis'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."mt4-platform-overview.php" ?>><?php echo $lang['mt4'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."calendar.php"?>><?php echo $lang['economicCalendar'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."pip-calculator.php"?>><?php echo $lang['pipCalculator'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."fx_heatmap.php"?>><?php echo $lang['heatmap'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."daily_technical_analysis.php"?>><?php echo $lang['technicalAnalysis'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."dailyfundamental.php"?>><?php echo $lang['fundamentalAnalysis'] ?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -492,11 +511,13 @@ function toggleLiveChat() {
                     <div class="footerT-cont">
                         <ul>
                             <li class="tx-gd"><?php echo $lang['investmentChoices'] ?></li>
-                            <li><a href="forex-trading.php"><?php echo $lang['forexTrading'] ?></a></li>
-                            <li><a href="precious-metal.php"><?php echo $lang['preciousMetalsTrading'] ?></a></li>
-                            <li><a href="future.php"><?php echo $lang['futureEnergiesTrading'] ?></a></li>
-                            <li><a href="stock-cfds.php"><?php echo $lang['stocksCfds'] ?></a></li>
-                            <li><a href="commodities.php"><?php echo $lang['commodities1'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."forex-trading.php"?>><?php echo $lang['forexTrading'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."stock-cfds.php"?>><?php echo $lang['stocksCfds'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."commodities.php"?>><?php echo $lang['commodities1'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."precious-metal.php"?>><?php echo $lang['preciousMetalsTrading'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."future.php"?>><?php echo $lang['futureEnergiesTrading'] ?></a></li>
+                            <!-- <li><a href=<?php echo $siteurl."future-trading.php"?>><?php echo $lang['futureTrading'] ?></a></li> -->
+                           
                         </ul>
                     </div>
                 </div>
@@ -505,14 +526,15 @@ function toggleLiveChat() {
                     <div class="footerT-cont">
                         <ul>
                             <li class="tx-gd"><?php echo $lang['partnership'] ?></li>
-                            <li><a href="how-to-become.php"><?php echo $lang['becomeOurPartner'] ?></a></li>
-                            <li><a href="business.php">Why to Make Business with JMI</a></li>
-                            <li><a href="brokers.php"><?php echo $lang['introducingBrokers'] ?></a></li>
-                            <li><a href="money-manager.php"><?php echo $lang['moneyManagerProgram'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."how-to-become.php" ?>><?php echo $lang['becomeOurPartner'] ?></a></li>
+                            <!-- <li><a href=<?php echo $siteurl."business.php" ?>>Why to Make Business with JMI</a></li> -->
                             <li><a
-                                    href="how-to-become-money-managers.php"><?php echo $lang['howToBecomeAMoneyManager'] ?></a>
+                                    href=<?php echo $siteurl."how-to-become-money-managers.php" ?>><?php echo $lang['howToBecomeAMoneyManager'] ?></a>
                             </li>
-                            <li><a href="white-label.php"><?php echo $lang['whiteLabels'] ?></a></li>
+                           
+                            <li><a href=<?php echo $siteurl."money-manager.php" ?>><?php echo $lang['moneyManagerProgram'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."brokers.php" ?>><?php echo $lang['introducingBrokers'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."white-label.php"?>><?php echo $lang['whiteLabels'] ?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -521,11 +543,11 @@ function toggleLiveChat() {
                     <div class="footerT-cont">
                         <ul>
                             <li class="tx-gd"><?php echo $lang['about'] ?></li>
-                            <li><a href="about-us.php"><?php echo $lang['aboutJMI'] ?></a></li>
-                            <li><a href="licenses.php"><?php echo $lang['licensesAndRegulations'] ?></a></li>
-                            <li><a href="brokers.php"><?php echo $lang['advantagesOfJMIBrokersPlatform'] ?></a></li>
-                            <li><a href="contact-us.php"><?php echo $lang['contactUs'] ?></a></li>
-                            <li><a href="career.php"><?php echo $lang['careers1'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."about-us.php" ?>><?php echo $lang['aboutJMI'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."licenses.php" ?>><?php echo $lang['licensesAndRegulations'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."brokers.php" ?>><?php echo $lang['advantagesOfJMIBrokersPlatform'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."contact-us.php" ?>><?php echo $lang['contactUs'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."career.php" ?>><?php echo $lang['careers1'] ?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -534,9 +556,9 @@ function toggleLiveChat() {
                     <div class="footerT-cont">
                         <ul>
                             <li class="tx-gd"><?php echo $lang['jmiBrokers'] ?></li>
-                            <li><a href="brokers.php"><?php echo $lang['whoWeAre'] ?></a></li>
-                            <li><a href="policy.php"><?php echo $lang['ourPolicy'] ?></a></li>
-                            <li><a href="contact-us.php"><?php echo $lang['contactUs1'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."brokers.php" ?>><?php echo $lang['whoWeAre'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."policy.php"?>><?php echo $lang['ourPolicy'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."term.php"?>><?php echo $lang['termandconditions'] ?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -545,8 +567,8 @@ function toggleLiveChat() {
                     <div class="footerT-cont">
                         <ul>
                             <li class="tx-gd"><?php echo $lang['supportsCenter'] ?></li>
-                            <li><a href="faq.php"><?php echo $lang['faqs1'] ?></a></li>
-                            <li><a href="brokers.php"><?php echo $lang['ourBlogs'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."faq.php" ?>><?php echo $lang['faqs1'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."brokers.php" ?>><?php echo $lang['ourBlogs'] ?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -555,7 +577,7 @@ function toggleLiveChat() {
                     <div class="footerT-cont">
                         <ul>
                             <li class="tx-gd"><?php echo $lang['tradingAccounts'] ?></li>
-                            <li><a href="forex-trading.php"><?php echo $lang['everyTrader'] ?></a></li>
+                            <li><a href=<?php echo $siteurl."forex-trading.php"?>><?php echo $lang['everyTrader'] ?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -629,7 +651,7 @@ function toggleLiveChat() {
                         </p>
                     </div>
                     <p class="tx-blue-new p-fs6 line-h" style="text-align:justify;">
-                        <?php echo getSectionMetaByIDKeyGroup('1', 'Description 1', 'Bottom'); ?>
+                        <?php echo getSectionMetaByIDKeyGroup('1', 'Description 2', 'Bottom'); ?>
                     </p>
                 </div>
             </div>
@@ -638,7 +660,7 @@ function toggleLiveChat() {
     </div>
     <div class="copyright text-center">
         <div class="container">
-            <p class="tx-white p-fs5">
+            <p class="tx-white p-fs5 text-center">
                 <?php echo getSectionMetaByIDKeyGroup('1', 'Copyright', 'Bottom'); ?>
             </p>
         </div>
@@ -717,8 +739,8 @@ function toggleLiveChat() {
                                 <select name="gender" id="">
                                     <option value="0" selected disabled><?php echo $lang['select'] ?></option>
                                     <option value="1"><?php echo $lang['male'] ?></option>
-                                    <option value="1"><?php echo $lang['female'] ?></option>
-                                    <option value="1"><?php echo $lang['other'] ?></option>
+                                    <option value="2"><?php echo $lang['female'] ?></option>
+                                    <option value="3"><?php echo $lang['other'] ?></option>
                                 </select>
                             </div>
                         </div>
@@ -797,6 +819,31 @@ function toggleLiveChat() {
                                 </div>
                             </div>
                         </div>
+
+
+                        
+
+                        <div class="col-md-4">
+                            <div class="popupfeild">
+                                <label for=""><?php echo $lang['password'] ?></label>
+                                <input name='password' type="password" placeholder="<?php echo $lang['password1'] ?>">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 ">
+                            <div class="popupfeild">
+                                <label for=""><?php echo $lang['retype_password'] ?></label>
+                                <input class="mt-0" type="password" name="confirmpassword"
+                                    placeholder="<?php echo $lang['confirm_password2'] ?>">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="popupbutton d-flex align-items-end h-auto">
+                                <button class="py-4" id='registerButton'><?php echo $lang['register_now1'] ?> </button>
+                            </div>
+                        </div>
+
 
 
                         <div class="col-md-12">
@@ -879,29 +926,8 @@ function toggleLiveChat() {
                         </div>
 
                         <div class="col-md-4">
-                            <div class="popupfeild">
-                                <label for=""><?php echo $lang['password'] ?></label>
-                                <input name='password' type="password" placeholder="<?php echo $lang['password1'] ?>">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 ">
-                            <div class="popupfeild">
-                                <label for=""><?php echo $lang['retype_password'] ?></label>
-                                <input class="mt-0" type="password" name="confirmpassword"
-                                    placeholder="<?php echo $lang['confirm_password2'] ?>">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="popupbutton d-flex align-items-end h-auto">
-                                <button class="py-4" id='registerButton'><?php echo $lang['register_now1'] ?> </button>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
                             <div class="googlebtn otherbtn">
-                                <button>
+                                <button disabled style="cursor: not-allowed;">
                                     <div class="icon">
                                         <img src=<?php echo $siteurl."assets/images/google-icon.png" ?> alt="">
                                     </div>
@@ -911,7 +937,7 @@ function toggleLiveChat() {
                         </div>
                         <div class="col-md-4">
                             <div class="facebookbtn otherbtn">
-                                <button>
+                                <button disabled style="cursor: not-allowed;">
                                     <div class="icon">
                                         <img src=<?php echo $siteurl."assets/images/facebook-icon.png" ?> alt="">
                                     </div>
@@ -961,6 +987,16 @@ function toggleLiveChat() {
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!-- Add this script after including jQuery -->
+
+<?php
+if(isset($_GET['myref'])) {
+    echo '<script>
+       
+        $(".loginpopup-waper").fadeOut();
+        $(".signUppopup-waper").fadeIn();
+    </script>';
+}
+?>
 <script>
 // var input = document.querySelector("#phone");
 // intlTelInput(input, {
@@ -1142,9 +1178,10 @@ function changeStyle(type) {
         $('#phoneverifiedLink').css("display", 'none');
         smsverified = false;
     } else {
-        $("#SencodeEmail").css("display", 'flex');
-        $('#emailverifiedLink').css("display", 'none');
-        emailverified = false;
+        // $("#SencodeEmail").css("display", 'flex');
+        // $('#emailverifiedLink').css("display", 'none');
+        // emailverified = false;
+        console.log(" changed");
     }
 }
 </script>
@@ -1201,7 +1238,7 @@ function passwordSendAuth(e) {
     }
     $.ajax({
         type: "POST",
-        url: "https://jmibroker.net/passwordreset.php",
+        url: "https://jmibrokers.com/passwordreset.php",
         data: {
             email: email
         },

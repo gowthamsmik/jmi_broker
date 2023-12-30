@@ -660,7 +660,7 @@ header {
   padding-left: 30px;
 }
 .topHeader-btn .tpBtn-language {
-  padding-right: 20px;
+  padding-right: 10px !important;
   margin-top: 4px;
 }
 .topHeader-btn .tpBtn-language a {
@@ -1048,12 +1048,16 @@ ul.dropdown li a:hover {
   padding: 85px 0 120px;
 }
 
+
 .pakageCard {
   border-radius: 8.59px;
   border: 1.074px solid #424242;
   background: #053B9E;
   padding: 30px 20px 40px;
+  font-size: 14px;
+  min-width:220px !important;
 }
+
 .pakageCard .pakageCard-icon {
   padding-bottom: 20px;
 }
@@ -1546,7 +1550,7 @@ footer .footer-top .footerT-cont ul li a {
   color: #fff;
 }
 footer .footer-top .footerT-cont ul li a:hover {
-  color: #B3CCF5;
+  color: #FEDC18  !important;
 }
 footer .footer-top .footerT-cont ul li.first {
   font-size: 18px;

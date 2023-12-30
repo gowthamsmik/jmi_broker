@@ -39,7 +39,7 @@ session_start();
             $ret='error';
             $ret2='error';
             //---- open socket
-            $ptr=@fsockopen('85.234.143.239','443',$errno,$errstr,5);
+            $ptr=fsockopen('85.234.143.239','443',$errno,$errstr,5);
             //---- check connection
             if($ptr)
             {
@@ -65,7 +65,7 @@ session_start();
             $startTime = mktime(0, 0, 0, 1, 1, date('Y')-4);    //last 3 years
             $endTime = time();  // current time
 
-            $ptr2=@fsockopen('85.234.143.239','443',$errno,$errstr,5);
+            $ptr2=fsockopen('85.234.143.239','443',$errno,$errstr,5);
             //---- check connection
             if($ptr2)
             {

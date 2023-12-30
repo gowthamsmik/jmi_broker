@@ -85,7 +85,11 @@ include('includes/header.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $getAllfaqs = getAlldocuments();
+                                        <?php
+                                        $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                                        $limit = 10; // Set the number of records to display per page
+                                        
+                                        $getAllfaqs = getAlldocuments($currentPage, $limit);
                                         if ($getAllfaqs->num_rows > 0) {
                                             foreach ($getAllfaqs as $thisFaq) { ?>
                                                 <tr class="text-center">
@@ -169,10 +173,10 @@ include('includes/header.php');
                                                             <button type="button" class="btn action docaction"
                                                                 style="background-color: green !important; color: white;"
                                                                 data-id="<?php echo $thisFaq['id']; ?>"
-                                                                >Approved</button>
+                                                                data-webid="<?php echo $thisFaq['website_accounts_id'] ?>">Approved</button>
                                                             <button type="button" class="btn  delete-single"
-                                                                style="background-color:red"
-                                                                data-id="<?php echo $thisFaq['id']; ?>">Delete</button>
+                                                                style="background-color:red" data-id="<?php echo $thisFaq['id']; ?>"
+                                                                data-webid="<?php echo $thisFaq['website_accounts_id'] ?>">Delete</button>
                                                         <?php } ?>
 
                                                     </td>
@@ -189,18 +193,46 @@ include('includes/header.php');
                         </div><!--//app-card-body-->
                     </div><!--//app-card-->
                     <nav class="app-pagination">
-                        <!-- <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul> -->
-                    </nav><!--//app-pagination-->
+                        <ul class="pagination justify-content-end">
+                            <?php
+                            $totalRecords = getTotalDocumentCount();
+                            $limit = 10; // Set the number of records to display per page
+                            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                            // Calculate the total number of pages
+                            $totalPages = ceil($totalRecords / $limit);
+
+                            // Determine the starting and ending page numbers to display
+                            $startPage = max($currentPage - 3, 1);
+                            $endPage = min($startPage + 5, $totalPages);
+
+                            // Display pagination links
+                            echo '<ul class="pagination justify-content-end">';
+
+                            // First button
+                            echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
+
+                            // Previous button
+                            $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+                            echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+
+                            // Page numbers
+                            for ($i = $startPage; $i <= $endPage; $i++) {
+                                echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                            }
+
+                            // Next button
+                            $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+                            echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+
+                            // Last button
+                            echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
+
+                            echo '</ul>';
+                            ?>
+                        </ul>
+                    </nav>
+
 
                 </div><!--//tab-pane-->
 
@@ -220,15 +252,16 @@ include('includes/header.php');
     </footer>
 
     <script>
-          $(document).on('click', '.docaction', function () {
-       
+        $(document).on('click', '.docaction', function () {
+
             var documentId = $(this).data('id');
+            var webid=$(this).data('webid');
             console.log("documentId===========", documentId);
             alert("Are you sure to Approved this document");
             $.ajax({
                 url: 'includes/softwareinclude/ajax.php',
                 type: 'post',
-                data: { type: 'updatedocument', id: documentId },
+                data: { type: 'updatedocument', id: documentId,webid: webid },
                 dataType: 'json',
                 success: function (res) {
                     console.log("updatedocument", res);
@@ -245,22 +278,22 @@ include('includes/header.php');
             });
         });
 
-        
+
     </script>
 
     <script>
         $(document).ready(function () {
-        //     // When any checkbox is clicked
-        //     $('.checkbox').on('change', function () {
-        //         updateDeleteAllButton();
-        //     });
+            //     // When any checkbox is clicked
+            //     $('.checkbox').on('change', function () {
+            //         updateDeleteAllButton();
+            //     });
 
-        //     // When the header checkbox is clicked
-        //     $('#select-all-checkbox').on('change', function () {
-        //         var isChecked = $(this).prop('checked');
-        //         $('.checkbox').prop('checked', isChecked);
-        //         updateDeleteAllButton();
-        //     });
+            //     // When the header checkbox is clicked
+            //     $('#select-all-checkbox').on('change', function () {
+            //         var isChecked = $(this).prop('checked');
+            //         $('.checkbox').prop('checked', isChecked);
+            //         updateDeleteAllButton();
+            //     });
 
             // When the "Delete All" button is clicked
             // $('.delete-all').on('click', function () {
@@ -285,24 +318,28 @@ include('includes/header.php');
             // When a single delete button is clicked
             $('.delete-single').on('click', function () {
                 var recordId = $(this).data('id');
-                // Show confirmation alert
+                var webid = $(this).data('webid');
+                console.log("Record ID:", recordId);
+                console.log("Web ID:", webid);
+
                 if (confirm('Are you sure you want to delete this record?')) {
                     // Proceed with AJAX call to delete the single record
-                    deleteRecords(recordId);
+                    deleteRecords(recordId,webid);
                 }
             });
+
 
             // function updateDeleteAllButton() {
             //     var anyCheckboxChecked = $('.checkbox:checked').length > 0;
             //     $('.delete-all').toggle(anyCheckboxChecked);
             // }
 
-            function deleteRecords(ids) {
+            function deleteRecords(ids,webid) {
                 // Implement the logic to delete records with the specified IDs using AJAX
                 $.ajax({
                     url: 'includes/softwareinclude/ajax.php',
                     type: 'post',
-                    data: { type: 'deleteupdateRecords', ids: ids },
+                    data: { type: 'deleteupdateRecords', ids: ids, webid: webid },
                     dataType: 'json',
                     success: function (res) {
                         console.log("deleteRecords", res);
@@ -314,7 +351,7 @@ include('includes/header.php');
 
                             alert('Records deleted successfully.');
 
-                            window.location.href="documents.php";
+                            window.location.href = "documents.php";
                         }
                     }
                 });

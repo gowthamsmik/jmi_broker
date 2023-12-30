@@ -6,7 +6,7 @@ $getNews = getFAnalysisById($id);
 	    
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">			    
-			    <h1 class="app-page-title">Edit FAQ</h1>
+			    <h1 class="app-page-title">Edit FUNDAMENTAL ANALYSIS</h1>
 			    <hr class="mb-4">
 				<form class="update-fanalysis">
 				    

@@ -8,7 +8,7 @@ $webeurl = 'http://localhost/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'jmi';
+$dbname = 'jmibroker';
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
@@ -132,7 +132,7 @@ if (count($unionpayCards) > 0) {
 
 // Notify admin
 $adminNotificationQuery = "INSERT INTO Notifications (website_accounts_id, notification_status, notification, notification_link) 
-VALUES (999999999, 0, '{$user['email']} is requesting a unionpay card', '/spanel/unionpay-cards-request?&bymail={$user['email']}&')";
+VALUES (999999999, 0, '{$user['email']} is requesting a unionpay card', '/cms/union-pay-card?&bymail={$user['email']}&')";
 $conn->query($adminNotificationQuery);
 
 echo "true";

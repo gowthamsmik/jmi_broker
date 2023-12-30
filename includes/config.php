@@ -1,11 +1,11 @@
 <?php 
 
 global $webeurl;
-$webeurl = 'https://jmibroker.net/';
+$webeurl = 'https://jmibrokers.com/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'jmi';
+$dbname = 'jmibroker';
 global $conn;
 $conn = new mysqli( $servername, $username, $password, $dbname );
 // Check connection
@@ -74,7 +74,8 @@ function getAllNewsFront(){
 
 function getAllFundamentalAnalysisFront(){
     global $conn;
-    $sql = "SELECT * FROM fundamental_analysis";
+    //$sql = "SELECT * FROM fundamental_analysis";
+    $sql= "SELECT * FROM fundamental_analysis ORDER BY created_at DESC LIMIT 5";
     $res = $conn->query($sql);
     return $res;
 }

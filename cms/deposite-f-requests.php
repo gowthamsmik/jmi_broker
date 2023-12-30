@@ -47,6 +47,10 @@
 			background-color: green !important;
 			color: white;
 		}
+		.danger{
+			background-color: red !important;
+			color: white;
+		}
 	</style>
 
 </head>
@@ -177,15 +181,15 @@
 															switch ($statusValue) {
 																case '1':
 																	$statusLabel = 'Done';
-																	echo 'background-color: #28a745;'; // Green color for 'Done'
+																	echo 'color: #28a745;'; // Green color for 'Done'
 																	break;
 																case '0':
 																	$statusLabel = 'Pending';
-																	echo 'background-color: #ffc107;'; // Yellow color for 'Pending'
+																	echo 'color: #ffc107;'; // Yellow color for 'Pending'
 																	break;
 																case '9':
 																	$statusLabel = 'Rejected';
-																	echo 'background-color: #dc3545;'; // Red color for 'Rejected'
+																	echo 'color: #dc3545;'; // Red color for 'Rejected'
 																	break;
 																default:
 																	$statusLabel = 'Unknown';
@@ -196,9 +200,16 @@
 															<?php echo $statusLabel; ?>
 														</td>
 
-
 														<td class="cell"><span class="truncate">
-																<?php echo $getAllfundrequests['details_user']; ?>
+																<?php if( $getAllfundrequests['via']=='Bank Wire')
+																{?>
+																	<a class="btn btn-primary" href="<?php echo $getAllfundrequests['details_admin'] ?>" target="__blank">Show TT Copy</a>
+																<?php }
+																else{
+																	echo $getAllfundrequests['details_admin'];
+																}
+																 ?>
+																
 															</span></td>
 														<td class="cell"><span class="truncate">
 																<?php echo $getAllfundrequests['created_at']; ?>
@@ -212,9 +223,9 @@
 																	data-id="<?php echo $getAllfundrequests['id']; ?>"
 																	onclick="openModal(<?php echo $getAllfundrequests['id']; ?>,1)">Done</button>
 
-																<button type="button" class="btn action" data-toggle="modal"
+																<button type="button" class="btn danger" data-toggle="modal"
 																	data-target="#rejectstatus"
-																	onclick="openrejectModal(<?php echo $getAllfundrequests['id']; ?>,9)">Rejected</button>
+																	onclick="openrejectModal(<?php echo $getAllfundrequests['id']; ?>,9)">Reject</button>
 
 															<?php } ?>
 															<!-- <a class="btn-sm app-btn-secondary mx-1"
@@ -322,16 +333,45 @@
 						</div>
 						<nav class="app-pagination">
 							<ul class="pagination justify-content-end">
-								<?php
-								$totalRecords = getTotalpagedepositerequest();
-								$totalPages = ceil($totalRecords / $perPage);
+					<?php
+                    $totalRecords = getTotalpagedepositerequest();
+                    $limit = 10; // Set the number of records to display per page
+                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-								for ($i = 1; $i <= $totalPages; $i++) {
-									echo '<li class="page-item ' . ($page == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-								}
-								?>
-							</ul>
-						</nav>
+                    // Calculate the total number of pages
+                    $totalPages = ceil($totalRecords / $limit);
+
+                    // Determine the starting and ending page numbers to display
+                    $startPage = max($currentPage - 3, 1);
+                    $endPage = min($startPage + 5, $totalPages);
+
+                    // Display pagination links
+                    echo '<ul class="pagination justify-content-end">';
+
+                    // First button
+                    echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
+
+                    // Previous button
+                    $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+                    echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+
+                    // Page numbers
+                    for ($i = $startPage; $i <= $endPage; $i++) {
+                        echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                    }
+
+                    // Next button
+                    $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+                    echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+
+                    // Last button
+                    echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
+
+                    echo '</ul>';
+                    ?>
+					</ul>
+				</nav>
+						
 
 					</div><!--//tab-pane-->
 

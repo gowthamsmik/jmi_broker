@@ -406,11 +406,11 @@ $lang = array(
     'stocksCfds' => 'Stocks CFDs',
     'commodities1' => 'Commodities',
     'partnership' => 'Partnership',
-    'becomeOurPartner' => 'Become Our Partner',
+    'becomeOurPartner' => 'Our Partner',
     'whyMakeBusinessWithJMI' => 'Why to Make Business with JMI',
     'introducingBrokers' => 'Introducing Brokers',
     'moneyManagerProgram' => 'Money Manager Program',
-    'howToBecomeAMoneyManager' => 'How To Become a Money Manager',
+    'howToBecomeAMoneyManager' => 'Money Manager',
     'whiteLabels' => 'White Labels',
     'about' => 'About',
     'aboutJMI' => 'About JMI',
@@ -420,8 +420,8 @@ $lang = array(
     'careers1' => 'Careers',
     'jmiBrokers' => 'JMI Brokers',
     'whoWeAre' => 'Who We Are',
-    'ourPolicy' => 'Our Policy',
-    'contactUs1' => 'Contact Us',
+    'ourPolicy' => 'Privacy policy',
+    'termandconditions' => 'Term & Conditions',
     'supportsCenter' => 'Supports Center',
     'faqs1' => 'FAQs',
     'ourBlogs' => 'Our Blogs',
@@ -484,6 +484,23 @@ $lang = array(
     'controlPanel'=> 'Control Panel',
     'home'=>'Home',
     'dashboard'=>'Dashboard',
+    "S.No"=>" S.No",
+    'live_chat' => 'Live Chat',
+    'MT4 Password'=>'MT4 Password','كلمة مرور MT4',
+
+    // html
+    'live_account_null' => 'You Have no live account, You can add your account from  <a class="fs-4 text-primary" href="add-existing-account.php">Here</a>  or open a new account from  <a class="fs-4 text-primary" href="open-live-account.php">Here</a>',
+    'th_Currency' => 'Currency',
+    'th_Price' => 'Price',
+    'th_Standard_Lot' => 'Standard Lot<br>(Units 100,000)',
+    'th_Mini_Lot' => 'Mini Lot<br>(Units 10,000)',
+    'th_Micro_Lot' => 'Micro Lot<br>(Units 1,000)',    
+    'currencies_heat_map_description' => '<p>The Currencies Heat Map is a set of tables which display the relative strengths of major currency pairs in comparison with each other, designed to give an overview of the forex market across various time frames. Whether you\'re a scalper, day, swing, or position trader, it is a powerful tool if you\'re looking for new and innovative trading strategies to add to your repertoire. Scroll down to the bottom of this forex heat map to view the key containing explanations for the color codes.</p>',
     
+  
+
+
+
+
 
 ); ?>

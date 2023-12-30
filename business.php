@@ -21,7 +21,7 @@
                <div class='banner-cont mn-hd mn-btn'>
                   <h2 class='tx-white'><?php echo getPageMetaByIDKeyGroup(12,'Banner Heading 1','Banner');?></h2>
                   <div class='banner-btn'>
-                     <a class='gd-btn signUp' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(12,'Banner Button URL','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(12,'Banner Button Text','Banner');?>
+                     <a class='gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(12,'Banner Button URL','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(12,'Banner Button Text','Banner');?>
                         <span>
                            <svg xmlns='http://www.w3.org/2000/svg' width='21' height='16' viewBox='0 0 21 16' fill='none'>
                               <path d='M2 9L19 9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
@@ -29,7 +29,7 @@
                            </svg>
                         </span>
                      </a>
-                     <a class='ol-btn loginUp' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(12,'Banner Button URL 2','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(12,'Banner Button Text 2','Banner');?></a>
+                     <a class='ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(12,'Banner Button URL 2','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(12,'Banner Button Text 2','Banner');?></a>
                   </div>
                </div>
 
@@ -100,9 +100,7 @@
                   </div>
                </div>
 
-               <div class='mn-btn partnerSec1-cont pdT1 text-center'>
-                  <a class='gd-btn' href='<?php echo getPageMetaByIDKeyGroup(12,'Banner Button URL','Global Partnerships');?>'><?php echo getPageMetaByIDKeyGroup(12,'Banner Button Text','Global Partnerships');?></a>
-               </div>
+              
             </div>
          </div>
       </section>

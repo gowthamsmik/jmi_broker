@@ -484,9 +484,23 @@ $lang = array(
     'controlPanel'=> 'لوحة التحكم',
     'home'=>'Домой',
     'dashboard'=>'لوحة القيادة',
+    'live_chat' => 'الدردشة الحية',    
+    "S.No"=>"ر.ت",
+    'MT4 Password'=>'كلمة مرور MT4',
     
     'controlPanelAccountOverview1' => 'لوحة التحكم | نظرة عامة على الحساب',
     'homeDashboard2' => 'الصفحة الرئيسية > لوحة التحكم',
+
+       // html
+       'live_account_null' => 'ليس لديك حساب نشط. يمكنك <a class="fs-4 text-primary" href="add-existing-account.php">إضافة حسابك من هنا</a> أو فتح حساب جديد من <a class="fs-4 text-primary" href="open-live-account.php">هنا</a>',
+       'th_Currency' => 'العملة',
+       'th_Price' => 'السعر',
+       'th_Standard_Lot' => 'الوحدة القياسية<br>(وحدات 100,000)',
+       'th_Mini_Lot' => 'الوحدة المصغرة<br>(وحدات 10,000)',
+       'th_Micro_Lot' => 'الوحدة الصغيرة<br>(وحدات 1,000)',
+       'currencies_heat_map_description' => '<p>خريطة حرارة العملات هي مجموعة من الجداول التي تعرض القوة النسبية لأزواج العملات الرئيسية بالمقارنة مع بعضها البعض، مصممة لتعطي لمحة عن سوق الفوركس عبر إطارات زمنية مختلفة. سواء كنت Scalper أو Day Trader أو Swing Trader أو Position Trader، إنها أداة قوية إذا كنت تبحث عن استراتيجيات تداول جديدة ومبتكرة لإضافتها إلى مجموعتك. انتقل إلى أسفل هذه الخريطة الحرارية للفوركس لعرض المفتاح الذي يحتوي على شروحات لرموز الألوان.</p>',
+
+
 
 );
 ?>

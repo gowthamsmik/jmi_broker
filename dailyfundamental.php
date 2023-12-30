@@ -72,7 +72,7 @@
                   <?php echo getPageMetaByIDKeyGroup(19, 'Description', 'Banner'); ?>
                </p>
                <div class="banner-btn">
-                  <a class="gd-btn signUp" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(19, 'Banner Button URL', 'Banner'); ?>"
+                  <a class="gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(19, 'Banner Button URL', 'Banner'); ?>"
                      >
                      <?php echo getPageMetaByIDKeyGroup(19, 'Banner Button Text', 'Banner'); ?>
                      <span>
@@ -84,7 +84,7 @@
                         </svg>
                      </span>
                   </a>
-                  <a class="ol-btn loginUp" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>" >Open Live Account</a>
+                  <a class="ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>" >Open Live Account</a>
                </div>
             </div>
          </div>
@@ -120,7 +120,7 @@
                                  </span>
                               </h4>
 
-                              <a href="#">
+                              <a href="<?php echo ($thisData['id'] <= 2 ? 'commodities.php' : 'forex-trading.php') ?>">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58"
                                     fill="none">
                                     <path d="M16.918 41.0846L41.0846 16.918" stroke="url(#paint0_linear_455_36892)"

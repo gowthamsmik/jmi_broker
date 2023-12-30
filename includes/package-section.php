@@ -1,5 +1,5 @@
 <section class="packageSection">
-         <div class="container">
+         <div class="container-fluid ">
             <div class="pdX8">
                <div class="packageSec-hd mn-hd hd-pad text-center pdX5">
                   <h3 class="tx-blue pb-2"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Package');?></h3>
@@ -11,7 +11,7 @@
                      <?php $get_packages =get_packages();
                      if($get_packages -> num_rows > 0){
                         foreach($get_packages as $thisPackage){ ?>
-                        <div class="col">
+                        <div class="col-lg-3 col-md-6 mb-4 pakageCard_outer">
                            <div class="pakageCard h-100">
                               <div class="pakageCard-icon">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="35" viewBox="0 0 43 35" fill="none">
@@ -46,27 +46,15 @@
                               <div class="pakageCard-title">
                                  <h6><?php echo $thisPackage['name'];?></h6>
                                  <h5><?php echo $thisPackage['price'];?> USD</h5>
-                                 <h4><?php echo $thisPackage['discount_line'];?></h4>
-                                 <span><?php echo $thisPackage['tag_line'];?></span>
+                                 <h4 ><?php echo $thisPackage['discount_line'];?></h4>
+                                 <span ><?php echo $thisPackage['tag_line'];?></span>
                               </div>
       
-                              <div class="pakageCard-detail mn-btn">
-                                 <!-- <ul>
-                                    <li>1 PIP fixed spread</li>
-                                    <li>Up To 1:500 Leverage</li>
-                                    <li>100$ Minimum funding</li>
-                                    <li>USD is the main currency</li>
-                                    <li>Islamic account - No Swap</li>
-                                    <li>Minimum lot 0.01</li>
-                                    <li>Expert advisor</li>
-                                    <li>Heading is available</li>
-                                    <li>4 Digits</li>
-                                    <li>Scalping is not available</li>
-                                 </ul> -->
-                                 <p>
-                                    <?php echo $thisPackage['description'];?>
-                                 </p>
-                                 <a href="<?php echo getPageMetaByIDKeyGroup(21,'Banner Button URL','Package');?>" class="gd-btn">Buy Package</a>
+                              <div class="pakageCard-detail mn-btn text-white line-height-3">
+                                 
+                                 <?php echo $thisPackage['description'];?>
+                                 
+                                 <a href="<?php echo getPageMetaByIDKeyGroup(21,'Banner Button URL','Package');?>" class="gd-btn mt-4">Buy Package</a>
                               </div>
                            </div>
                         </div>

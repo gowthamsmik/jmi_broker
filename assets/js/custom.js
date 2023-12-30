@@ -290,3 +290,133 @@ if ($(window).width() < 1200) {
   });
 }
 
+function showLoader() {
+  document.getElementById('loader').style.display = 'block';
+}
+
+function hideLoader() {
+  document.getElementById('loader').style.display = 'none';
+}
+
+
+// function updatePagination(totalPages, currentPage, type) {
+//   $('#pagination-container').empty();
+
+//   if (currentPage > 1) {
+//       $('#pagination-container').append('<button class="opt-num-btn" onclick="loadTransactions(' + (1) + ', \'' + type + '\')">&laquo;&laquo;</button>');
+//   } else {
+//       $('#pagination-container').append('<button class="opt-num-btn" disabled>&laquo;&laquo;</button>');
+//   }
+
+//   if (currentPage > 1) {
+//       $('#pagination-container').append('<button class="opt-num-btn" onclick="loadTransactions(' + (currentPage - 1) + ', \'' + type + '\')">&laquo;</button>');
+//   } else {
+//       $('#pagination-container').append('<button class="opt-num-btn" disabled>&laquo;</button>');
+//   }
+
+//   $('#pagination-container').append('<button class="current-num-btn" disabled>' + currentPage + '</button>');
+
+//   for (var i = currentPage + 1; i <= Math.min(currentPage + 2, totalPages - 1); i++) {
+//       $('#pagination-container').append('<button class="opt-num-btn" onclick="loadTransactions(' + i + ', \'' + type + '\')">' + i + '</button>');
+//   }
+
+//   if (currentPage + 2 < totalPages - 1) {
+//       // Display ellipsis or any other indicator for more pages
+//       $('#pagination-container').append('<button class="opt-num-btn" disabled>&hellip;</button>');
+//   }
+
+//   if (totalPages > currentPage) {
+//       $('#pagination-container').append('<button class="opt-num-btn" onclick="loadTransactions(' + (currentPage + 1) + ', \'' + type + '\')">&raquo;</button>');
+//   } else {
+//       $('#pagination-container').append('<button class="opt-num-btn" disabled>&raquo;</button>');
+//   }
+
+//   if (totalPages > currentPage + 1) {
+//       $('#pagination-container').append('<button class="opt-num-btn" onclick="loadTransactions(' + totalPages + ', \'' + type + '\')">&raquo;&raquo;</button>');
+//   } else {
+//       $('#pagination-container').append('<button class="opt-num-btn" disabled>&raquo;&raquo;</button>');
+//   }
+// }
+
+
+function updatePagination(totalPages, currentPage, type, updateFunction) {
+  
+  $('#pagination-container').empty();
+  if(updateFunction=='loadTransactions'){
+  if (currentPage > 1) {
+    $('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(1, \'' + type + '\')">&laquo;&laquo;</button>');
+  } else {
+    $('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&laquo;&laquo;</button>');
+  }
+
+  if (currentPage > 1) {
+    $('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + (currentPage - 1) + ', \'' + type + '\')">&laquo;</button>');
+  } else {
+    $('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&laquo;</button>');
+  }
+
+  $('#pagination-container').append('<button class="current-num-btn" disabled>' + currentPage + '</button>');
+
+  for (var i = currentPage + 1; i <= Math.min(currentPage + 2, totalPages - 1); i++) {
+    $('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + i + ', \'' + type + '\')">' + i + '</button>');
+  }
+
+  if (currentPage + 2 < totalPages - 1) {
+    // Display ellipsis or any other indicator for more pages
+    $('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&hellip;</button>');
+  }
+
+  if (totalPages > currentPage) {
+    $('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + (currentPage + 1) + ', \'' + type + '\')">&raquo;</button>');
+  } else {
+    $('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&raquo;</button>');
+  }
+  
+  if (totalPages > currentPage ) {
+    $('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + totalPages + ', \'' + type + '\')">&raquo;&raquo;</button>');
+  } else {
+    $('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&raquo;&raquo;</button>');
+  }
+}
+else{
+
+  
+  if (currentPage > 1) {
+    $('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(1)">&laquo;&laquo;</button>');
+  } else {
+    $('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&laquo;&laquo;</button>');
+  }
+
+  if (currentPage > 1) {
+    $('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + (currentPage - 1) + ')">&laquo;</button>');
+  } else {
+    $('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&laquo;</button>');
+  }
+
+  $('#pagination-container').append('<button class="current-num-btn" disabled>' + currentPage + '</button>');
+
+  for (var i = currentPage + 1; i <= Math.min(currentPage + 2, totalPages - 1); i++) {
+    $('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + i + ')">' + i + '</button>');
+  }
+
+  if (currentPage + 2 < totalPages - 1) {
+    // Display ellipsis or any other indicator for more pages
+    $('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&hellip;</button>');
+  }
+
+  if (totalPages > currentPage) {
+    $('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + (currentPage + 1) + ')">&raquo;</button>');
+  } else {
+    $('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&raquo;</button>');
+  }
+  
+  if (totalPages > currentPage) {
+    $('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + totalPages + ')">&raquo;&raquo;</button>');
+  } else {
+    $('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&raquo;&raquo;</button>');
+  }
+
+
+
+}
+}

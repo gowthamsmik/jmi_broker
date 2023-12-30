@@ -23,7 +23,7 @@
                      <div class="banner-cont mn-hd mn-btn">
                         <h2 class="tx-white"><?php echo getPageMetaByIDKeyGroup(6,'Banner Heading 1','Banner');?></h2>
                         <div class="banner-btn">
-                           <a class="gd-btn signUp" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : '#'; ?>">DEMO ACCOUNT 
+                           <a class="gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : '#'; ?>">DEMO ACCOUNT 
                               <span>
                                  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="16" viewBox="0 0 21 16" fill="none">
                                     <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -31,14 +31,14 @@
                                  </svg>
                               </span>
                            </a>
-                           <a class="ol-btn loginUp" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>"><?php echo getPageMetaByIDKeyGroup(6,'Banner Button Text','Banner');?></a>
+                           <a class="ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>"><?php echo getPageMetaByIDKeyGroup(6,'Banner Button Text','Banner');?></a>
                         </div>
                      </div>
                   </div>
 
                   <div class="col-md-6">
                      <div class="banner-img fs-0">
-                        <img src="assets/images/banner/metatrader.png" alt="">
+                        <img src="cms/<?php echo getPageMetaByIDKeyGroup(6,'Banner Image','Banner');?>" alt="">
                      </div>
                   </div>
                </div>
@@ -60,7 +60,7 @@
 
                      <div class="col-md-6 text-center">
                         <div class="img-wapper">
-                           <img class="mix-mode-multiply" src="assets/images/iphone.png" alt="">
+                           <img class="mix-mode-multiply" src="cms/<?php echo getPageMetaByIDKeyGroup(6,'Image','Trading with Meta Trader');?>" alt="">
                         </div>
                      </div>
 
@@ -68,7 +68,7 @@
                         <div class="overviewSecMain-cont mn-btn text-center pdT1 mn-hd">
                            <h6 class="tx-blue fw-bold"><?php echo getPageMetaByIDKeyGroup(6,'Heading 2','Trading with Meta Trader');?></h6>
                            <p class="tx-grey300 p-fs5 px-3"><?php echo getPageMetaByIDKeyGroup(6,'Description 2','Trading with Meta Trader');?></p>
-                           <a class="gd-btn signUp" href="download-file.php"><?php echo getPageMetaByIDKeyGroup(6,'Buton text','Trading with Meta Trader');?></a>
+                           <a class="gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="download-file.php"><?php echo getPageMetaByIDKeyGroup(6,'Buton text','Trading with Meta Trader');?></a>
                         </div>
                      </div>
                   </div>

@@ -70,7 +70,7 @@ function createNotification($conn, $accountId, $notification, $accountTypeText, 
     $notificationObj->website_accounts_id = $accountId;
     $notificationObj->notification_status = 0;
     $notificationObj->notification = getNotificationText($notification, $accountTypeText, $input, $isArabic);
-    $notificationObj->notification_link = '/cpanel/live-accounts';
+    $notificationObj->notification_link = '/cpanel/live-account';
     $notificationObj->save();
 
     return $notificationObj;

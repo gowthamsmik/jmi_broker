@@ -456,6 +456,8 @@ ul.dropdown li a:hover{color:#0244B0!important;}
 	border: 1.074px solid #424242;
 	background: #053B9E;
 	padding: 30px 20px 40px;
+	font-size: 14px;
+  	min-width:220px !important;
 
 	.pakageCard-icon{
 		padding-bottom: 20px;
@@ -498,6 +500,7 @@ ul.dropdown li a:hover{color:#0244B0!important;}
 			line-height: 1.2;
 		}
 	}
+	
 
 	.pakageCard-detail{
 		ul{
@@ -1101,7 +1104,7 @@ footer{
 							color: #fff;
 
 							&:hover{
-								color: #B3CCF5;
+								color: #FEDC18 !important;
 							}
 						}
 

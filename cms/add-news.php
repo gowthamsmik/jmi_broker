@@ -20,6 +20,22 @@
 						<label for="setting-input-1" class="form-label">Description</label>
 						<textarea name="description" class="form-control"></textarea>
 				    </div>
+					<div class="mb-3">
+						<label for="setting-input-1" class="form-label">Arabic Title</label>
+				        <input name="ar_title" type="text" class="form-control" value="" >
+				    </div>
+				    <div class="mb-3">
+						<label for="setting-input-1" class="form-label">Arabic Details</label>
+						<textarea name="ar_details" class="form-control"></textarea>
+				    </div>
+					<div class="mb-3">
+						<label for="setting-input-1" class="form-label">Russian Title</label>
+				        <input name="ru_title" type="text" class="form-control" value="" >
+				    </div>
+				    <div class="mb-3">
+						<label for="setting-input-1" class="form-label">Russian Details</label>
+						<textarea name="ru_details" class="form-control"></textarea>
+				    </div>
 				    <div class="mb-3">
 						<label for="setting-input-1" class="form-label">Posted By</label>
 						<input name="posted_by" type="text" class="form-control" value="" >

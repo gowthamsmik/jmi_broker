@@ -1,4 +1,4 @@
-<?php include('includes/header.php'); 
+<?php include('includes/header.php');
 global $hostname; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,23 +83,24 @@ global $hostname; ?>
             color: white;
             /* Set text color for the "Clear" button */
         }
-        .bgcolor{
-            background-color:#00A65A;
-            color:white;
+
+        .bgcolor {
+            background-color: #00A65A;
+            color: white;
         }
     </style>
     <title>Your Form</title>
     <script src="https://<?php echo $hostname; ?>/cms/assets/js/tinymce/tinymce.min.js"></script>
     <script src="https://<?php echo $hostname; ?>/cms/assets/js/tinymce/themes/modern/theme.min.js"></script>
 
-<script>
-  tinymce.init({
-    selector: 'textarea',
-    plugins: 'preview textcolor image link media code wordcount emoticons', // Add any additional plugins you need
-    toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code',
-    menubar: 'file edit view insert format tools table help',
-  });
-</script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'preview textcolor image link media code wordcount emoticons', // Add any additional plugins you need
+            toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code',
+            menubar: 'file edit view insert format tools table help',
+        });
+    </script>
 
 </head>
 
@@ -109,24 +110,25 @@ global $hostname; ?>
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
 
-            <div class="row g-3 mb-4 align-items-center justify-content-between card">
+                <div class="row g-3 mb-4 align-items-center justify-content-between card">
                     <div class="col-auto">
                         <h1 class="app-page-title mb-0">Fundamental Analysis</h1>
                     </div>
                     <h6>All Fundamental</h6>
-                    <div id="success-message" class="border p-3 rounded" style="display: none;background-color:#00A65A;color:white">
+                    <div id="success-message" class="border p-3 rounded"
+                        style="display: none;background-color:#00A65A;color:white">
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:#0ffcf8">
                     <p> New Fundamental</p>
-                    <form class="add-fundamental-analysis"  enctype="multipart/form-data">
+                    <form class="add-fundamental-analysis" enctype="multipart/form-data">
                         <label for="type">Heading</label>
                         <input type="text" id="heading" name="heading" placeholder="Enter Heading">
 
                         <label for="type">Description</label>
                         <input type="text" id="description" name="description" placeholder="Enter Description">
                         <div class="my-3">
-                            <lable for="fileToUpload" >Choose File:</lable>
-                            <input type="file" name="fileToUpload" id="fileToUpload" >
+                            <lable for="fileToUpload">Choose File:</lable>
+                            <input type="file" name="fileToUpload" id="fileToUpload">
                         </div>
                         <br>
                         <button type="submit" value="Add" class="btn bgcolor my-2">Add</button>
@@ -147,7 +149,8 @@ global $hostname; ?>
                         </div>
                     </div>
                 </form> -->
-                <button type="button" class="btn btn-success my-3" id="deleteAllButton" onclick="deletefundamentalanalysis()" style="display: none;">Delete All</button>
+                <button type="button" class="btn btn-success my-3" id="deleteAllButton"
+                    onclick="deletefundamentalanalysis()" style="display: none;">Delete All</button>
                 <div class="tab-content" id="orders-table-tab-content">
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel"
                         aria-labelledby="orders-all-tab">
@@ -171,7 +174,7 @@ global $hostname; ?>
                                         </thead>
                                         <tbody>
                                             <?php
-                                             $perPage = isset($_GET['technicalperpage']) ? $_GET['technicalperpage'] : 3;
+                                            $perPage = isset($_GET['technicalperpage']) ? $_GET['technicalperpage'] : 10;
                                             $index = 0;
                                             $page = isset($_GET['page']) ? $_GET['page'] : 1;
                                             // echo "perpage".$perPage,"<br>";
@@ -194,24 +197,28 @@ global $hostname; ?>
                                                             </span></td>
                                                         <td class="cell"><span class="truncate">
                                                                 <?php echo $mailListAccount['description']; ?>
-                                                        </span></td>
+                                                            </span></td>
                                                         <td class="cell"><span class="truncate">
-                                                                <?php echo $mailListAccount['posted_on']; ?>
+                                                                <?php echo $mailListAccount['created_at']; ?>
                                                             </span></td>
                                                         <td class="cell">
-                                                        <button type="button" class="btn bgcolor" onclick="viewFundamentalAnalysis(<?php echo $mailListAccount['id']; ?>,'1')">View</button>
+                                                            <button type="button" class="btn btn-sm bgcolor"
+                                                                onclick="viewFundamentalAnalysis(<?php echo $mailListAccount['id']; ?>,'1')">View</button>
                                                             <!-- <button type="button" class="btn btn-success technicalStatus" data-technicalstatus="<?php echo $mailListAccount['technicalstatus']; ?>" data-id="<?php echo $mailListAccount['id']; ?>">
                                                                 <?php $buttonname = ($mailListAccount['technicalstatus'] == '0' ? 'published' : 'Unpublished'); ?>
                                                                 <?php echo $buttonname; ?>
                                                             </button> -->
 
 
-                                                            <button type="button" class="btn bgcolor editfundamentalButton" data-toggle="modal" data-target="#editfundamentalModal" data-id="<?php echo $mailListAccount['id']; ?>">
+                                                            <button type="button"
+                                                                class="btn btn-sm bgcolor editfundamentalButton"
+                                                                data-toggle="modal" data-target="#editfundamentalModal"
+                                                                data-id="<?php echo $mailListAccount['id']; ?>">
                                                                 Edit
                                                             </button>
 
-                                                            <button type="button" class="btn bgcolor"
-                                                            onclick="deletefundamentalanalysis(this);">Delete</button>
+                                                            <button type="button" class="btn btn-sm bgcolor"
+                                                                onclick="deletefundamentalanalysis(this);">Delete</button>
                                                     </tr>
                                                 <?php }
                                             } ?>
@@ -224,58 +231,94 @@ global $hostname; ?>
 
                             </div><!--//app-card-body-->
                         </div>
-                            <div class="modal fade " id="editfundamentalModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="editModalLabel">Edit Fundamental Analysis</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                        <div class="modal fade " id="editfundamentalModal" tabindex="-1" role="dialog"
+                            aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel">Edit Fundamental Analysis</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
 
-                                        <div class="modal-body">
-                                        <form class="update-fundamental-analysis"  enctype="multipart/form-data">
-                                        <div class="w-full ">
-                                            <label for="type">ID</label>
-                                            <input type="id" id="editFundamentalId" name="id" class="w-100" readonly>
-                                        </div>
+                                    <div class="modal-body">
+                                        <form class="update-fundamental-analysis" enctype="multipart/form-data">
+                                            <div class="w-full ">
+                                                <label for="type">ID</label>
+                                                <input type="id" id="editFundamentalId" name="id" class="w-100"
+                                                    readonly>
+                                            </div>
 
                                             <label for="type">Heading</label>
-                                            <input type="text" id="editheading" name="heading" >
+                                            <input type="text" id="editheading" name="heading">
 
                                             <label for="type">Description</label>
-                                            <input type="text" id="editdescription" name="description" >
+                                            <input type="text" id="editdescription" name="description">
 
-                                            <!-- <lable for="fileToUpload" >Choose File:</lable>
-                                            <input type="file" name="fileToUpload" id="editfileToUpload" > -->
+                                            <!-- <label for="type">Image</label>
+                                            <img src="" alt="404">
+                                            <input type="file" id="image" name="image"> -->
+
+                                            <lable for="updatefundamental">Choose File:</lable>
+                                            <img id="editfileToUpload" alt="404" class="w-75 h-75">
+                                            <input type="file" name="updatefundamental" id="updatefundamental">
                                             <div class="my-2">
                                                 <button type="submit" value="Add" class="btn bgcolor">Add</button>
-                                                <button type="reset" value="Clear" class="btn btn-secondary">Clear</button>
-                                        </div>
+                                                <button type="reset" value="Clear"
+                                                    class="btn btn-secondary">Clear</button>
+                                            </div>
                                         </form>
 
-                                        </div>
-                                        <!-- <div class="modal-footer">
+                                    </div>
+                                    <!-- <div class="modal-footer">
                                             <button type="reset" class="btn btn-secondary" >Close</button>
                                             <button type="submit" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
                                         </div> -->
-                                    </div>
                                 </div>
                             </div>
-
+                        </div>
                         <nav class="app-pagination">
                             <ul class="pagination justify-content-end">
                                 <?php
                                 $totalRecords = getTotalfundamentalAnalysis();
-                                $totalPages = ceil($totalRecords / $perPage);
+                                $limit = 10; // Set the number of records to display per page
+                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-                                for ($i = 1; $i <= $totalPages; $i++) {
-                                    echo '<li class="page-item ' . ($page == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                // Calculate the total number of pages
+                                $totalPages = ceil($totalRecords / $limit);
+
+                                // Determine the starting and ending page numbers to display
+                                $startPage = max($currentPage - 3, 1);
+                                $endPage = min($startPage + 5, $totalPages);
+
+                                // Display pagination links
+                                echo '<ul class="pagination justify-content-end">';
+
+                                // First button
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
+
+                                // Previous button
+                                $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+
+                                // Page numbers
+                                for ($i = $startPage; $i <= $endPage; $i++) {
+                                    echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
                                 }
+
+                                // Next button
+                                $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+
+                                // Last button
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
+
+                                echo '</ul>';
                                 ?>
                             </ul>
                         </nav>
+
 
                     </div><!--//tab-pane-->
 
@@ -291,93 +334,93 @@ global $hostname; ?>
         </footer>
 
         <script>
-   function deletefundamentalanalysis() {
-            var selectedRows = document.querySelectorAll('input[name="selectedRows[]"]:checked');
-            var currentPage = <?php echo $page; ?>;
-            var perPage = <?php echo $perPage; ?>;
+            function deletefundamentalanalysis() {
+                var selectedRows = document.querySelectorAll('input[name="selectedRows[]"]:checked');
+                var currentPage = <?php echo $page; ?>;
+                var perPage = <?php echo $perPage; ?>;
 
-            if (selectedRows.length === 0) {
-                alert('Please select at least one row to delete.');
-                return;
-            }
-
-            if (confirm('Are you sure you want to delete the selected records?')) {
-                var ids = Array.from(selectedRows).map(function (row) {
-                    return row.value;
-                });
-
-                // Send an AJAX request to delete the selected records on the current page
-                $.ajax({
-                    url: 'includes/softwareinclude/ajax.php',
-                    type: 'post',
-                    data: { type: 'delete-fundamental-analysis', ids: ids, page: currentPage },
-                    success: function (res) {
-                        console.log(res);
-                        var successMessageDiv = document.getElementById('success-message');
-                        successMessageDiv.innerHTML = 'Selected Record Has Been Deleted';
-                        successMessageDiv.style.display = 'block';
-                        $('html, body').animate({ scrollTop: 0 }, 'fast');
-                        setTimeout(function () {
-                            window.location.reload();
-                        }, 2000);
-                    },
-                    error: function (err) {
-                        console.error(err);
-                        alert('Error deleting Accounts');
-                    }
-                });
-            }
-        }
-
-                function toggleSelectAll() {
-                    var checkboxes = document.querySelectorAll('input[name="selectedRows[]"]');
-                    var selectAllCheckbox = document.getElementById('selectAllCheckbox');
-                    var deleteAllButton = document.getElementById('deleteAllButton');
-
-                    checkboxes.forEach(function (checkbox) {
-                        checkbox.checked = selectAllCheckbox.checked;
-                    });
-
-                    // Enable or disable the "Delete All" button based on the number of selected checkboxes
-                    deleteAllButton.disabled = !checkboxesChecked();
-                 deleteAllButton.style = checkboxesChecked() ? 'active' : 'disabled';
+                if (selectedRows.length === 0) {
+                    alert('Please select at least one row to delete.');
+                    return;
                 }
 
-                function checkboxesChecked() {
-                    var checkboxes = document.querySelectorAll('input[name="selectedRows[]"]');
-                    var checkedCount = 0;
+                if (confirm('Are you sure you want to delete the selected records?')) {
+                    var ids = Array.from(selectedRows).map(function (row) {
+                        return row.value;
+                    });
 
-                    checkboxes.forEach(function (checkbox) {
-                        if (checkbox.checked  ) {
-                            checkedCount++;
+                    // Send an AJAX request to delete the selected records on the current page
+                    $.ajax({
+                        url: 'includes/softwareinclude/ajax.php',
+                        type: 'post',
+                        data: { type: 'delete-fundamental-analysis', ids: ids, page: currentPage },
+                        success: function (res) {
+                            console.log(res);
+                            var successMessageDiv = document.getElementById('success-message');
+                            successMessageDiv.innerHTML = 'Selected Record Has Been Deleted';
+                            successMessageDiv.style.display = 'block';
+                            $('html, body').animate({ scrollTop: 0 }, 'fast');
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 2000);
+                        },
+                        error: function (err) {
+                            console.error(err);
+                            alert('Error deleting Accounts');
                         }
                     });
-
-                    return checkedCount > 1;
                 }
+            }
 
-                // Call toggleSelectAll on page load to set the initial state of the button
-                window.onload = function () {
-                    toggleSelectAll();
-                };
-                function submitForm() {
-                    var form = document.getElementById('fundamentalForm');
-                    form.submit();
-                }
-                function viewFundamentalAnalysis(id, view) {
+            function toggleSelectAll() {
+                var checkboxes = document.querySelectorAll('input[name="selectedRows[]"]');
+                var selectAllCheckbox = document.getElementById('selectAllCheckbox');
+                var deleteAllButton = document.getElementById('deleteAllButton');
+
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+
+                // Enable or disable the "Delete All" button based on the number of selected checkboxes
+                deleteAllButton.disabled = !checkboxesChecked();
+                deleteAllButton.style = checkboxesChecked() ? 'active' : 'disabled';
+            }
+
+            function checkboxesChecked() {
+                var checkboxes = document.querySelectorAll('input[name="selectedRows[]"]');
+                var checkedCount = 0;
+
+                checkboxes.forEach(function (checkbox) {
+                    if (checkbox.checked) {
+                        checkedCount++;
+                    }
+                });
+
+                return checkedCount > 1;
+            }
+
+            // Call toggleSelectAll on page load to set the initial state of the button
+            window.onload = function () {
+                toggleSelectAll();
+            };
+            function submitForm() {
+                var form = document.getElementById('fundamentalForm');
+                form.submit();
+            }
+            function viewFundamentalAnalysis(id, view) {
                 $.ajax({
                     type: 'POST',
                     url: 'includes/softwareinclude/ajax.php',
-                    data: { fundamentalType: view,type: 'session-store-fundamental' },
-                    success: function(response) {
+                    data: { fundamentalType: view, type: 'session-store-fundamental' },
+                    success: function (response) {
                         window.location.href = 'view-fundamental-analysis.php?id=' + id;
                     },
-                    error: function(error) {
+                    error: function (error) {
                         console.error('Error setting session variable:', error);
                     }
                 });
             }
-</script>
+        </script>
 
     </div>
 </body>

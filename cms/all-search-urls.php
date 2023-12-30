@@ -161,7 +161,7 @@
                                                                 value="<?php echo $allsearchurls['id']; ?>" />
                                                         </td>
                                                         <td class="cell">
-                                                            <?php echo $index; ?>
+                                                            <?php echo $allsearchurls['id']; ?>
                                                         </td>
                                                         <td class="cell"><span class="truncate">
                                                                 <?php echo $allsearchurls['url']; ?>
@@ -192,11 +192,39 @@
                             <ul class="pagination justify-content-end">
                                 <?php
                                 $totalRecords = getTotalAllSearchUrls();
-                                $totalPages = ceil($totalRecords / $perPage);
+                                $limit = 10; // Set the number of records to display per page
+                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-                                for ($i = 1; $i <= $totalPages; $i++) {
-                                    echo '<li class="page-item ' . ($page == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                // Calculate the total number of pages
+                                $totalPages = ceil($totalRecords / $limit);
+
+                                // Determine the starting and ending page numbers to display
+                                $startPage = max($currentPage - 3, 1);
+                                $endPage = min($startPage + 5, $totalPages);
+
+                                // Display pagination links
+                                echo '<ul class="pagination justify-content-end">';
+
+                                // First button
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
+
+                                // Previous button
+                                $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+
+                                // Page numbers
+                                for ($i = $startPage; $i <= $endPage; $i++) {
+                                    echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
                                 }
+
+                                // Next button
+                                $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+
+                                // Last button
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
+
+                                echo '</ul>';
                                 ?>
                             </ul>
                         </nav>
@@ -291,4 +319,4 @@
 
 
 </html>
-<?php include('includes/footer.php'); ?>
+<?php include('includes/footer.php'); ?>    

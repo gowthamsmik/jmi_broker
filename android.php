@@ -23,7 +23,7 @@
                      <div class="banner-cont mn-hd mn-btn">
                         <h2 class="tx-white"><?php echo getPageMetaByIDKeyGroup(10,'Banner Heading 1','Banner');?></h2>
                         <div class="banner-btn">
-                           <a class="gd-btn signUp" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : '#'; ?>"><?php echo getPageMetaByIDKeyGroup(10,'Banner Button Text','Banner');?> 
+                           <a class="gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : '#'; ?>"><?php echo getPageMetaByIDKeyGroup(10,'Banner Button Text','Banner');?> 
                               <span>
                                  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="16" viewBox="0 0 21 16" fill="none">
                                     <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -31,14 +31,14 @@
                                  </svg>
                               </span>
                            </a>
-                           <a class="ol-btn loginUp" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>">Open Live Account</a>
+                           <a class="ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>">Open Live Account</a>
                         </div>
                      </div>
                   </div>
 
                   <div class="col-md-6">
                      <div class="banner-img text-center">
-                        <img src="assets/images/banner/android.png" alt="">
+                        <img src="cms/<?php echo getPageMetaByIDKeyGroup(10,'Banner Image','Banner');?>" alt="">
                      </div>
                   </div>
                </div>
@@ -53,7 +53,7 @@
                   <div class="row align-items-center">
                      <div class="col-md-6 text-center">
                         <div class="img-wapper">
-                           <img class="mix-mode-multiply" src="assets/images/android.png" alt="">
+                           <img class="mix-mode-multiply" src="cms/<?php echo getPageMetaByIDKeyGroup(10,'Image','Overview');?>" alt="">
                         </div>
                      </div>
 
