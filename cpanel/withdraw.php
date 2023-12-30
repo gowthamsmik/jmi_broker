@@ -121,7 +121,7 @@ $liveAccountsCount = count($liveaccounts);
                 </div>
                 <div class="bg-white p-3">
                     <div class="text-primary fs-6 my-2"> Control Panel |
-                        <?php echo ($paytype == "") ? 'Withdraw' : (($paytype == "Epay") ? 'Epay' : 'Coin Base'); ?>
+                        <?php echo ($paytype == "") ? 'Withdraw' : (($paytype == "Epay") ? 'Epay' : (($paytype == "Bank Wire") ? 'Bank Wire' : 'Coin Base')); ?>
                     </div>
                     <div class="my-3 fs-4"
                         style="display:<?php echo ($paytype == '' && $liveAccountsCount < 1) ? '' : 'none' ?>">You Have
@@ -166,16 +166,16 @@ $liveAccountsCount = count($liveaccounts);
 
                     <div class="row bg-white mt-4 p-5 rounded-3 part2" id="bank_wire"
                         style="display:<?php echo $paytype == 'Bank Wire' ? 'flex' : 'none' ?>">
-                        <div class="col-sm-6">
+                        <div class="col-lg-6 col-md-10 col-sm-12">
                         <form method="post" action="includes/add_transactions.php?paymentType=bank_wire">
                             
 
 
                                 <br />
-                                <div class="row">
+                                <div class="row mb-2">
 
 
-                                    <label class="col-sm-4">Account Number:</label>
+                                    <label class="col-sm-4 mt-3">Account Number:</label>
                                     <div class="col-sm-8">
                                         <div class="controls">
                                             <select class="form-control" name="account_number" id="account_number"
@@ -196,8 +196,8 @@ $liveAccountsCount = count($liveaccounts);
                                 </div>
 
                                 <br />
-                                <div class="row">
-                                    <label class="col-sm-4">Currency base:</label>
+                                <div class="row mb-2">
+                                    <label class="col-sm-4 mt-3">Currency base:</label>
                                     <div class="col-sm-8">
                                         <div class="controls">
                                             <select class="form-control" name="currency" id="currency" required>
@@ -209,8 +209,8 @@ $liveAccountsCount = count($liveaccounts);
 
 
                                 <br />
-                                <div class="row" id="amount">
-                                    <label class="col-sm-4">Withdraw Amount:</label>
+                                <div class="row mb-2" id="amount">
+                                    <label class="col-sm-4 mt-3">Withdraw Amount:</label>
                                     <div class="col-sm-8">
                                         <div class="controls">
                                             <input type="number" class="form-control border" name="amount" id="amount"
@@ -221,8 +221,8 @@ $liveAccountsCount = count($liveaccounts);
                                 </div>
 
                                 <br />
-                                <div class="row" id="amount">
-                                    <label class="col-sm-4">Bank Name:</label>
+                                <div class="row mb-2" id="amount">
+                                    <label class="col-sm-4 mt-3">Bank Name:</label>
                                     <div class="col-sm-8">
                                         <div class="controls">
                                             <input type="text" class="form-control border" name="bank_name" id="bank_name"
@@ -233,8 +233,8 @@ $liveAccountsCount = count($liveaccounts);
                                 </div>
 
                                 <br />
-                                <div class="row" id="amount">
-                                    <label class="col-sm-4">Bank Swift:</label>
+                                <div class="row mb-2" id="amount">
+                                    <label class="col-sm-4 mt-3">Bank Swift:</label>
                                     <div class="col-sm-8">
                                         <div class="controls">
                                             <input type="text" class="form-control border" name="bank_swift" id="bank_swift"
@@ -245,8 +245,8 @@ $liveAccountsCount = count($liveaccounts);
                                 </div>
 
                                 <br />
-                                <div class="row" id="amount">
-                                    <label class="col-sm-4">Bank Account or IBan:</label>
+                                <div class="row mb-2" id="amount">
+                                    <label class="col-sm-4 mt-3">Bank Account or IBan:</label>
                                     <div class="col-sm-8">
                                         <div class="controls">
                                             <input type="text" class="form-control border" name="bank_iban" id="bank_iban"
@@ -259,7 +259,7 @@ $liveAccountsCount = count($liveaccounts);
 
 
                                 <br />
-                                <div class="row">
+                                <div class="row mb-2">
                                     <label class="col-sm-4"></label>
                                     <div class="col-sm-8 " >
                                         <div class="controls">
@@ -275,23 +275,19 @@ $liveAccountsCount = count($liveaccounts);
                         </div>
                         <div class="col-sm-5 col-sm-push-1" >
 
-<div id="demoaccount">
-<img loading="lazy" src="/assets/cpanel/img/bankwire.png" alt="Bank Wire"  class="max-width-100 d-flex" />
+<div id="demoaccount" class="">
+<img loading="lazy" src="/assets/cpanel/img/bankwire.png" alt="Bank Wire"  class="max-width-100 d-flex mx-auto" />
     <h3>Bank Wire Withdrawing Details</h3>
-
     <p>Important Terms and Conditions <br /> Kindly note that by funding your account and/or by submitting a withdrawal request you agree on all the terms and conditions including those in relation to deposits and withdrawals. <br /> The following are an integral part of the terms and conditions: <br /> The Client agrees that the Company may charge the Client transfer fees and/or any other charges in any case where a withdrawal request is made by the Client without any trading activity taking place between that withdrawal request and the last deposit of the Client. <br /> The Client agrees that the Company may, at its own discretion and at any time and/or when in its sole opinion an abuse of the 0.00% transfer fees benefit has occurred, request and/or deduct any and/or all the transfer fee amounts from the client’ s account(s) and/or close the client’s account(s) and/or take any other action may consider necessary, as a compensation for the said abuse. <br />The Client acknowledges and confirms that the Company may, at its own discretion and at any time and/or for whatsoever reason and/or without any prior notification to the client and/or without the prior consent of the client, to increase the amount of 0.00% transfer fees which is demonstrated at the Company’s Website-Trading Accounts-Account Funding page to any other amount the Company believes necessary.</p>
 </div>
 
-
-
 </div>
-
                     </div>
                     <!-- end bank wire -->
 
                     <div class="row bg-white mt-4 p-5 rounded-3 part2" id="epayform"
                         style="display:<?php echo $paytype == 'Epay' ? 'flex' : 'none' ?>">
-                        <div class="col">
+                        <div class="col-lg-6 col-md-10 col-sm-12">
                             <form method="post" action="includes/add_transactions.php?paymentType=epay">
                                 <div class=" border-0">
                                     <div class=" border-0 mb-1">
@@ -347,7 +343,7 @@ $liveAccountsCount = count($liveaccounts);
 
                     <div class="row bg-white mt-4 p-5 rounded-3 part3" id="coinbaseform"
                         style="display:<?php echo $paytype == 'Coin Base' ? 'flex' : 'none' ?>">
-                        <div class="col">
+                        <div class="col-lg-6 col-md-10 col-sm-12">
                             <form method="post" action="includes/add_transactions.php?paymentType=coinbase">
                                 <div class=" border-0">
                                     <div class=" border-0">

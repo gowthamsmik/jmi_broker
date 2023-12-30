@@ -147,7 +147,7 @@ if ($input['account_radio_type'] == 0) {
         $stmtAdminNotification->bindValue(':adminId', 999999999);
         $stmtAdminNotification->bindValue(':notificationStatus', 0);
         $stmtAdminNotification->bindValue(':notification', "{$user['email']} has created a new demo account");
-        $stmtAdminNotification->bindValue(':notificationLink', "/spanel/website-accounts?&bymail={$user['email']}&");
+        $stmtAdminNotification->bindValue(':notificationLink', "/cms/website-account?&bymail={$user['email']}&");
         $stmtAdminNotification->execute();
 
         $successMessage = '';
@@ -268,7 +268,7 @@ if ($input['account_radio_type'] == 0) {
             $ret = 'error';
 
             // Open socket
-            $ptr = @fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
+            $ptr = fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
             
             // Check connection
             if ($ptr) {
@@ -287,7 +287,7 @@ if ($input['account_radio_type'] == 0) {
             }
             if($ret == Null or $ret == 'error')
             {
-                $ptr=@fsockopen('92.204.139.189','443',$errno,$errstr,5);
+                $ptr=fsockopen('92.204.139.189','443',$errno,$errstr,5);
 //---- check connection
                 if($ptr)
                 {
@@ -352,7 +352,7 @@ if ($input['account_radio_type'] == 0) {
                     'website_accounts_id' => 999999999,
                     'notification_status' => 0,
                     'notification' => $user->email . 'Has Created A New Live Account',
-                    'notification_link' => '/spanel/website-accounts?&bymail=' . $user->email . '&',
+                    'notification_link' => '/cms/website-account?&bymail=' . $user->email . '&',
                 ];
                 // Create a new Notifications object or use stdClass if you don't have a class
                 $notification = new stdClass();
@@ -361,7 +361,7 @@ if ($input['account_radio_type'] == 0) {
                 $notification->website_accounts_id = 999999999;
                 $notification->notification_status = 0;
                 $notification->notification = $user->email . ' Has Created A New Live Account';
-                $notification->notification_link = '/spanel/website-accounts?&bymail=' . $user->email;
+                $notification->notification_link = '/cms/website-account?&bymail=' . $user->email;
 
                 // Prepare the SQL statement for notifications
                 $sqlNotification = "INSERT INTO notifications (website_accounts_id, notification_status, notification, notification_link) VALUES (?, ?, ?, ?)";

@@ -67,7 +67,7 @@ $stmt->execute();
 // // Insert notification into database
 if($currency==1){$currencyy='USD';};
 $notification=$amount.' '.$currencyy.' New Bank Wire Deposited ';
-$notification_link='/spanel/deposit-fund-requests?&bymail='.$user['email'].'&';
+$notification_link='/cms/deposite-f-requests?&bymail='.$user['email'].'&';
 $stmtNotification = $conn->prepare("INSERT INTO notifications (website_accounts_id, notification_status, notification, notification_link) VALUES ('999999999', '0', ?, ?)");
 
 $stmtNotification->bind_param('ss',$notification, $notification_link);
@@ -91,7 +91,7 @@ sendMailsToAdmin($data['details'] ,$subject);
 $stmtNotification1 = $conn->prepare("INSERT INTO notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link) VALUES (?, '0', 'Your deposit has been delivered successfully, our backoffice department will handle it soon.',
  'Your deposit has been delivered successfully, our backoffice department will handle it soon.', 'تم استلام الايداع بنجاح وستتم معالجتة قريبا من جهة الشركة', 
  'تم استلام الايداع بنجاح وستتم معالجتة قريبا من جهة الشركة', 'Ваш депозит был успешно доставлен, наш бэк-офис скоро его обработает.', 
- 'Ваш депозит был успешно доставлен, наш бэк-офис скоро его обработает.', '/cpanel/transaction-history')");
+ 'Ваш депозит был успешно доставлен, наш бэк-офис скоро его обработает.', '/cpanel/transactional-history')");
 $stmtNotification1->bind_param('i', $userId);
 $stmtNotification1->execute();
 

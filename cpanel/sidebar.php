@@ -36,6 +36,9 @@
          margin-left: 5px;
          margin-top: 5px;
       }
+      .slidebar_table {
+        background: #ffbf10 !important;
+      }
    </style>
    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -207,8 +210,8 @@
       </div>
 
 
-      <button class="slidebar_table" id="display_sidetable2" onclick="toggleTable()">
-         <p>Table</p>
+      <button class="slidebar_table text-center w-75 me-3 pt-3" id="display_sidetable2" onclick="toggleTable()">
+         <p class="text-white">Table</p>
       </button>
 
       <div class="modal" id="small_slider_modal">

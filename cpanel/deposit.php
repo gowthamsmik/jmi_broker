@@ -21,6 +21,7 @@ $invoices = getAllInvoices();
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src= <?php echo $siteurl."assets/js/slick.min.js" ?>> </script>
     <?php include("includes/style.php"); ?>
     <style>
         .body {
@@ -72,6 +73,7 @@ $invoices = getAllInvoices();
         }
         .btn_color{
             background-color: #FFC926 !important;
+            height: auto;
         }
         .btn_color:hover{
             background-color: #0342ab !important;
@@ -167,8 +169,10 @@ div.form-control
             </div>
         </div>
         <div class="bg-white p-3">
-        <div class="text-primary fs-6 my-2"> Control Panel | <?php echo ($paytype == "") ? $lang['deposit'] : (($paytype == "Epay") ? 'Epay' : 'Coin Base'); ?> </div>
-        <div class="my-3 fs-4" style="display:<?php echo ($paytype == '' && $liveAccountsCount < 1) ? '' : 'none' ?>">You Have no live account, You can add your account from  <a class="fs-4 text-primary" href="add-existing-account.php">Here</a>  or open a new account from  <a class="fs-4 text-primary" href="open-live-account.php">Here</a> </div>
+        <div class="text-primary fs-6 my-2"> Control Panel | <?php echo ($paytype == "") ? $lang['deposit'] : (($paytype == "Epay") ? 'Epay' : (($paytype == "Coin Base") ? 'Coin Base' :'Bank Wire')); ?> </div>
+        <div class="my-3 fs-4" style="display:<?php echo ($paytype == '' && $liveAccountsCount < 1) ? '' : 'none' ?>">
+        <?php echo $lang['live_account_null'] ?>
+    </div>
         <div class="grid-container mt-5 bg-white" id="list" style="display:<?php echo ($paytype == '' && $liveAccountsCount > 0) ? '' : 'none' ?>">
       
                     <?php
@@ -205,21 +209,21 @@ div.form-control
     <!-- start bank wire -->
                 <div class="row bg-white mt-4 p-5 rounded-3 part2" id="epayform" style="display:<?php echo $paytype == 'Bank Wire' ? 'flex' : 'none' ?>">
 
-                <?php if ($liveAccountsCount <= 0) { ?>
+                <?php if ($liveAccountsCount  <= 0) { ?>
                     <div>
-                        <h2>You Have no live account, You can add your account from <a href="/en/cpanel/add-account">Here</a> or open a new account from <a href="/en/cpanel/open-account">Here</a></h2> @endif
-                    </div> <?php } else {
+<?php echo $lang['live_account_null'] ?>
+</div> <?php } else {
                     ?>
 
                     <div>
                         <div class="col mb-3" id="invbut">
-                            <a class="btn bankwirebut active" id="request_invoice_button" onclick="show_invoice_form('request_invoice')" >Request new invoice</a>
+                            <a class="btn bankwirebut active mt-3" id="request_invoice_button" onclick="show_invoice_form('request_invoice')" >Request new invoice</a>
 
                             
-                            <a class="btn bankwirebut" id="recent_invoice_button" onclick="show_invoice_form('recent_invoice')">View recent invoices</a>
+                            <a class="btn bankwirebut mt-3" id="recent_invoice_button" onclick="show_invoice_form('recent_invoice')">View recent invoices</a>
 
                            
-                            <a class="btn bankwirebut" id="swift_tt_copy_button" onclick="show_invoice_form('swift_tt_copy')">Submit SWIFT / TT Copy</a>
+                            <a class="btn bankwirebut mt-3" id="swift_tt_copy_button" onclick="show_invoice_form('swift_tt_copy')">Submit SWIFT / TT Copy</a>
                         </div>
 
                         <script>
@@ -243,10 +247,10 @@ div.form-control
                                 <h5 class="">Bank Wire Funding Details</h5>
                                 <br>
                         <div class="row" >
-                      <label class="col-sm-3">Full Name:</label>
-                      <div class="col-sm-4">
+                      <label class="col-sm-3 mt-3">Full Name:</label>
+                      <div class="col-lg-6 col-md-6 col-sm-8">
                           <div class="controls form-control" id="contentfullname">
-                              <input onkeyup="validFullName()" type="text"  name="fullname" id="fullname"   />
+                              <input onkeyup="validFullName()" type="text"  name="fullname" id="fullname" class="mt-2"   />
                               <i class="fa fa-check-circle" aria-hidden="true"></i>
                               <i class="fa fa-times-circle" aria-hidden="true"></i>
                               <p style="color:red;" id="validFullName" ></p>
@@ -269,8 +273,8 @@ div.form-control
                       <br />
                       <div class="row">
 
-                          <label class="col-sm-3">Account Number:</label>
-                          <div class="col-sm-4">
+                          <label class="col-sm-3 mt-3">Account Number:</label>
+                          <div class="col-lg-6 col-md-6 col-sm-8">
                               <div class="controls">
                                   <select class="form-control" name="account_number" id="account_number"  required >
                                   <option value="" selected disabled>-Select-</option>
@@ -292,11 +296,11 @@ div.form-control
 
                   <br />
                   <div class="row">
-                      <label class="col-sm-3">Deposit Amount:</label>
-                      <div class="col-sm-4">
+                      <label class="col-sm-3 mt-3">Deposit Amount:</label>
+                      <div class="col-lg-6 col-md-6 col-sm-8">
                           <div class="controls form-control" id="contentamount">
-                            <input  onkeyup="validAmount()" type="number" name="amount" id="amount"   />
-                            <input type="number" class="form-control" value="1" name="type" id="type"   style="display:none;" />
+                            <input  onkeyup="validAmount()" type="number" name="amount" id="amount" class="mt-2"  />
+                            <input type="number" class="form-control" value="1" name="type" id="type" style="display:none;" />
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                             <i class="fa fa-times-circle" aria-hidden="true"></i>
                             <p style="color:red;" id="validAmount" ></p>
@@ -307,8 +311,8 @@ div.form-control
 
                       <br />
                       <div class="row">
-                          <label class="col-sm-3">Currency base:</label>
-                          <div class="col-sm-4">
+                          <label class="col-sm-3 mt-3">Currency base:</label>
+                          <div class="col-lg-6 col-md-6 col-sm-8">
                               <div class="controls">
                                   <select class="form-control" name="currency" id="currency"   >
                                       <option value="1" selected>USD</option>
@@ -320,10 +324,10 @@ div.form-control
 
                       <br />
                       <div class="row" >
-                          <label class="col-sm-3">Address:</label>
-                          <div class="col-sm-4">
+                          <label class="col-sm-3 mt-3">Address:</label>
+                          <div class="col-lg-6 col-md-6 col-sm-8">
                               <div class="controls form-control" id="contentaddress" >
-                                  <input onkeyup="validAddress()" id="address" type="text"  name="address"     />
+                                  <input onkeyup="validAddress()" id="address" type="text" name="address" class="mt-2"/>
                                   <i class="fa fa-check-circle" aria-hidden="true"></i>
                                   <i class="fa fa-times-circle" aria-hidden="true"></i>
                                   <p style="color:red;" id="validAddress" ></p>
@@ -334,8 +338,8 @@ div.form-control
 
                         <br />
                         <div class="row" >
-                            <label class="col-sm-3">Country:</label>
-                            <div class="col-sm-4">
+                            <label class="col-sm-3 mt-3">Country:</label>
+                            <div class="col-lg-6 col-md-6 col-sm-8">
                                 <!-- <div class="controls form-control" id="contentcountry"> -->
                                     <!-- <input onkeyup="validCountry()" type="text" name="country" id="country"   /> -->
                                     <!-- <i class="fa fa-check-circle" aria-hidden="true"></i>
@@ -377,10 +381,10 @@ div.form-control
                           <br>
                      
                           <div class="row" >
-                              <label class="col-sm-3">City:</label>
-                              <div class="col-sm-4">
+                              <label class="col-sm-3 mt-3">City:</label>
+                              <div class="col-lg-6 col-md-6 col-sm-8">
                                   <div class="controls form-control" id="contentcity">
-                                      <input onkeyup="validCity()" type="text" name="city" id="city"    />
+                                      <input onkeyup="validCity()" type="text" name="city" id="city" class="mt-2" />
                                       <i class="fa fa-check-circle" aria-hidden="true"></i>
                                       <i class="fa fa-times-circle" aria-hidden="true"></i>
                                       <p style="color:red;" id="validCity" ></p>
@@ -395,7 +399,7 @@ div.form-control
                   <br />
                 <div class="row">
                       <label class="col-sm-2"></label>
-                      <div class="col-sm-4 ">
+                      <div class="col-lg-6 col-md-6 col-sm-8 mt-4 ">
                           <div class="controls">
                                <input disabled class="btn form-control h-auto text-white rounded" type="submit" 
                                id="submit-bank-print" value="Print your invoice" />
@@ -549,7 +553,7 @@ div.form-control
 
 
                 <div class="row bg-white mt-4 p-5 rounded-3 part2" id="epayform" style="display:<?php echo $paytype == 'Epay' ? 'flex' : 'none' ?>">
-                    <div class="col">
+                    <div class="col-sm-8">
                         <form method="post"  action="includes/deposit_transactions.php?paymentType=epay">
                             <div class=" border-0">
                                 <div class=" border-0 mb-1">
@@ -569,7 +573,7 @@ div.form-control
                                 </div>
 
                                 <div class=" border-0 my-2">
-                                    <label for=""><?php $lang['currency_base'] ?>:</label>
+                                    <label for=""><?php $lang['currency_base'] ?>Currency base:</label>
                                     <select class="form-select mt-2" id="sel1" name="epayCurrency" required>
                                         <option>USD</option>
                                     </select>
@@ -582,11 +586,11 @@ div.form-control
                                         name="epayAmount" required>
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn_color w-50 mt-4 text-white"  value="Deposit Now"> 
+                            <input type="submit" class="btn btn_color w-50 mt-4 text-white rounded"  value="Deposit Now"> 
                         </form>
                     </div>
-                    <div class="col mx-2 mt-5 r text-center align-items-center justify-content-center">
-                        <img src="../assets/images/pay-methods/2.png" alt="img" class="w-50" />
+                    <div class="col-sm-3 mx-2 mt-5 r text-center align-items-center justify-content-center">
+                        <img src="../assets/images/pay-methods/2.png" alt="img" class="w-100" />
                         <div class="mt-5">
                             <p class="fs-3 my-2">Epay Deposit Details</h2>
                             <p class="fs-6">Express Deposit (12 hours)</p>
@@ -594,7 +598,7 @@ div.form-control
                     </div>
                 </div>
                 <div class="row bg-white mt-4 p-5 rounded-3 part3" id="coinbaseform" style="display:<?php echo $paytype == 'Coin Base' ? 'flex' : 'none' ?>">
-                    <div class="col">
+                    <div class="col-sm-8">
                         <form method="post"  action="includes/deposit_transactions.php?paymentType=coinbase">
                             <div class=" border-0">
                                 <div class=" border-0 mb-1">
@@ -627,12 +631,12 @@ div.form-control
                                         name="cbAmount" required>
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn_color w-50 mt-4 text-white"  value="Deposit Now"> 
+                            <input type="submit" class="btn btn_color w-50 mt-4 text-white rounded"  value="Deposit Now"> 
                
                         </form>
                     </div>
-                    <div class="col mx-2 mt-5 r text-center align-items-center justify-content-center">
-                        <img src="../assets/images/pay-methods/1.png" alt="img" class="w-50" />
+                    <div class="col-sm-3 mx-2 mt-5 r text-center align-items-center justify-content-center">
+                        <img src="../assets/images/pay-methods/1.png" alt="img" class="w-100" />
                         <div class="mt-5">
                             <p class="fs-3 my-2">CoinBase Deposit Details</h2>
                             <p class="fs-6">Express Deposit (12 hours)</p>

@@ -52,9 +52,9 @@ else
     <div class="bg-white mt-4 p-5 rounded-3">
         <form method="post" action="includes/post_add_account.php">
             <div class="row border-0">
-                <div class="col border-0">
+                <div class="col-lg-4 col-md-6 col-sm-12 border-0 mt-4">
                     <label for=""><?php echo $lang['account_type'] ?>:</label>
-                    <select class="form-select mt-2" id="sel1" name="account_type">
+                    <select class="form-select mt-2" id="sel1" name="account_type" required>
                     <?php $acctname = "";
                                                /* foreach($liveAccounts as $account) { 
                                                     if($account['account_type'] == 1)
@@ -68,37 +68,38 @@ else
                                                 <option value="<?php echo $account['account_id'] ?>" ><?php echo $acctname ?> </option>
                                                 <?php }*/
                                                  ?>
-                                                    <option value="">select</option>
+                                                   
+                                                    <option value="" disabled selected > -<?php echo $lang['select'] ?>-</option>
                             <option value="1" >Individual Account</option>
                             <option value="2" >IB Account </option>
                     </select>
                 </div>
-                <div class="col border-0">
+                <div class="col-lg-4 col-md-6 col-sm-12 border-0 mt-4">
                     <label for=""><?php echo $lang['account_group'] ?>:</label>
-                    <select class="form-select mt-2" id="sel1" name="account_group">
-                        <option>-<?php echo $lang['select'] ?>-</option>
+                    <select class="form-select mt-2" id="sel1" name="account_group" required>
+                        <option value="" disabled selected>-<?php echo $lang['select'] ?>-</option>
                         <option value=1><?php echo $lang['fixed_spread_account1'] ?></option>
                         <option value=2><?php echo $lang['scalping_account1'] ?></option>
                         <option value=3><?php echo $lang['variable_spread_account1'] ?></option>
                         <option value=4><?php echo $lang['bonus_account'] ?></option>
                     </select>
                 </div>
-                <div class="col border-0">
+                <div class="col-lg-4 col-md-6 col-sm-12 border-0 mt-4">
                     <label for=""><?php echo $lang['currency_base'] ?>:</label>
-                    <select class="form-select mt-2" id="sel1" name="currency">
+                    <select class="form-select mt-2" id="sel1" name="currency" required>
                         <option value=1>USD</option>
                     </select>
                 </div>
-            </div>
-            <div class="row border-0 mt-4">
-                <div class="col border-0">
+            <!-- </div>
+            <div class="row border-0 mt-4"> -->
+                <div class="col-lg-6 col-md-6 col-sm-12 border-0 mt-4">
                     <label for=""><?php echo $lang['mt4_login_user'] ?>:</label>
-                    <input type="text" class="form-control border rounded-3 mt-2" placeholder="Login Name" name="account_id">
+                    <input type="number" class="form-control border rounded-3 mt-2" placeholder="" name="account_id" required>
                 </div>
-                <div class="col border-0">
+                <div class="col-lg-6 col-md-6 col-sm-12 border-0 mt-4">
                     <label for=""><?php echo $lang['mt4_login_password'] ?>:</label>
                     <input type="password" class="form-control border rounded-3 mt-2" placeholder="***********"
-                        name="password">
+                        name="password" required>
                 </div>
             </div>
             <div class="row mt-4">
@@ -108,7 +109,7 @@ else
                     <!-- <label class="form-check-label mt-1" for="check1"><?php echo $lang['agree_terms_conditions_existing_account'] ?></label> -->
                 </div>
             </div>
-            <input type="submit" class="btn btn_color w-25 mt-4 text-white rounded" value ='<?php echo $lang['add_account'] ?>' /> 
+            <input type="submit" class="btn btn_color w-50 mt-4 text-white rounded" value ='<?php echo $lang['add_account'] ?>' /> 
         </form>
         
     </div>
@@ -116,7 +117,14 @@ else
     </div>
     </div>
     <?php include("../includes/footer.php"); ?>
-    <?php include("../includes/scripts.php"); ?>
+    <?php include("../includes/scripts.php"); 
+         if (isset($_SESSION['add-existing-account-message'])) {
+            echo '<script>alert("' . $_SESSION['add-existing-account-message'] . '");</script>';
+            unset($_SESSION['add-existing-account-message']);
+    
+        }?>
+    
+    ?>
 </body>
 
 </html>

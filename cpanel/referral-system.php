@@ -119,8 +119,8 @@
             </p>
 
             <div class="input-group mb-3 mt-4">
-                <input type="text" class="form-control border" placeholder="https://www.jmibroker.net/en?myref=10441">
-                <button class="btn btn-success custom-button" type="submit">Copy Link</button>
+                <input type="text" class="form-control border" id="MyRef" readonly placeholder="<?php echo $siteurl;?>index.php?myref=<?php echo $_SESSION['sessionuserid']+10000;?>">
+                <button class="btn btn-success custom-button"  onclick="CopyText()" type="submit">Copy Link</button>
             </div>
 
         </div>
@@ -131,5 +131,18 @@
     <?php include("../includes/scripts.php"); ?>
  
 </body>
+
+<script>
+
+function CopyText()
+	{
+	$('input#MyRef').val('<?php echo $siteurl;?>index.php?myref=<?php echo $_SESSION['sessionuserid']+10000;?>');
+	var copyText = document.getElementById("MyRef");
+  	copyText.select();
+  	document.execCommand("Copy");
+	}
+
+
+</script>
 
 </html>

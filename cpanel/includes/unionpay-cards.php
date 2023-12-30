@@ -8,7 +8,7 @@ $webeurl = 'http://localhost/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'jmi';
+$dbname = 'jmibroker';
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection

@@ -38,7 +38,7 @@
         <div class="content">
             <div class="route-content" id="link1">
     <div class="d-flex">
-        <h2 class="fs-4">JMI brokers | <?php echo $lang['jmiBrokersForexCalendar'] ?></h2>
+        <h2 class="fs-4"><?php echo $lang['economic_calendar'] ?></h2>
         <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
             <p class="mt-1 ms-2"><?php echo $lang['welcome'] ?>,
                 <?php echo $_SESSION['sessionusername']; ?>
@@ -73,7 +73,7 @@
            
         </tbody>
     </table> -->
-    <iframe scrolling="no" allowtransparency="true" frameborder="0" width="100%" height="500px" src="https://www.tradays.com/en/economic-calendar/widget?mode=2&amp;utm_source=www.jmibroker.net"></iframe>
+    <iframe scrolling="no" allowtransparency="true" frameborder="0" width="100%" height="500px" src="https://www.tradays.com/en/economic-calendar/widget?mode=2&amp;utm_source=www.jmibrokers.com"></iframe>
 
     </div>
     </div>

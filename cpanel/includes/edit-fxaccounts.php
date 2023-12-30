@@ -54,7 +54,7 @@ if ($SessionUserId) {
     $notificationDetailsRu = 'Запрос на редактирование учетной записи успешно обработан, вы получите уведомление, когда оно будет выполнено.';
 
 
-    $stmtUserNotification = $conn->prepare("INSERT INTO Notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link) VALUES (?, 0, ?, ?, ?, ?, ?, ?, '/cpanel/live-accounts')");
+    $stmtUserNotification = $conn->prepare("INSERT INTO Notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link) VALUES (?, 0, ?, ?, ?, ?, ?, ?, '/cpanel/live-account')");
     $stmtUserNotification->bind_param("issssss", $SessionUserId, $notification,$details,$notificationTextAr,$notificationDetailsAr, $notificationTextRu, $notificationDetailsRu);
    
     $stmtUserNotification->execute();

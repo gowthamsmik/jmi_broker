@@ -54,26 +54,32 @@
                     <div class="row">
                         <div class="col">
                             <div class="row">
-                                <div class="row mt-3"><label for="" class="form-label"><?php echo $lang['currentPassword']?><img
+                                <div class="col-lg-5 col-md-6 col-sm-8"><div class="row mt-3"><label for="" class="form-label mt-2"><?php echo $lang['currentPassword']?><img
                                             src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
-                                <div class="row my-4"><label for="" class="form-label"><?php echo $lang['newPassword']?> <img
+                                </div>
+                                <div class="col-lg-5 col-md-6 col-sm-8 mb-3"><input type="password" name="" id="cpassword" class="form-control border w-100"
+                                placeholder="<?php echo $lang['currentPassword']?>"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5 col-md-6 col-sm-8"><div class="row"><label for="" class="form-label mt-3"><?php echo $lang['newPassword']?> <img
                                             src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
-                                <div class="row"><label for="" class="form-label"><?php echo $lang['confirmPassword']?><img
+                                </div>
+                                <div class="col-lg-5 col-md-6 col-sm-8 mb-3"><input type="password" name="" id="npassword" class="form-control border w-100"
+                                placeholder="<?php echo $lang['newPassword']?>"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5 col-md-6 col-sm-8"><div class="row"><label for="" class="form-label mt-3"><?php echo $lang['confirmPassword']?><img
                                             src="../assets/images/asterisk.png" alt="" class="asterisk"></label></div>
+                                </div>
+                                <div class="col-lg-5 col-md-6 col-sm-8 mb-3"><input type="password" name="" id="cnpassword" class="form-control border w-100"
+                                placeholder="<?php echo $lang['confirmNewPassword']?>"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col"><button type="button" class="btn custom-button text-light w-auto mt-4"
+                                onclick="change_password()"><?php echo  $lang['updatePassword']?></button></div>
                             </div>
                         </div>
-                        <div class="col">
-                            <input type="password" name="" id="cpassword" class="form-control border w-100"
-                                placeholder="<?php echo $lang['currentPassword']?>">
-                            <input type="password" name="" id="npassword" class="form-control border my-3 w-100"
-                                placeholder="<?php echo $lang['newPassword']?>">
-                            <input type="password" name="" id="cnpassword" class="form-control border w-100"
-                                placeholder="<?php echo $lang['confirmNewPassword']?>">
-                            <button type="button" class="btn custom-button text-light w-auto mt-4"
-                                onclick="change_password()"><?php echo  $lang['updatePassword']?></button>
-                        </div>
                     </div>
-
                 </div>
             </div>
         </div>

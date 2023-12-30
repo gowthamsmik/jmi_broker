@@ -168,7 +168,7 @@
 
 <body>
     <?php include("../includes/header.php"); ?>
-    <?php include('includes/live-accounts.php') ?>
+    <!-- <?php //include('includes/live-accounts.php') ?> -->
     <title>JMI | Control Panel</title>
     <div class='layout'>
         <?php include("sidebar.php"); ?>

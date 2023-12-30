@@ -61,7 +61,7 @@ if ($document && $document['type'] !== 8) {
     $stmtDeleteDocument->execute();
    
     // Create notification
-    $stmtNotification = $conn->prepare("INSERT INTO notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link, created_at) VALUES ( ?, 0, 'Your document has been deleted successfully.', 'Your document has been deleted successfully.', 'تم حذف المستند الخاص بك بنجاح.', 'تم حذف المستند الخاص بك بنجاح.', 'Ваш документ был успешно удален.', 'Ваш документ был успешно удален.', '/cpanel/documents', NOW())");
+    $stmtNotification = $conn->prepare("INSERT INTO notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link, created_at) VALUES ( ?, 0, 'Your document has been deleted successfully.', 'Your document has been deleted successfully.', 'تم حذف المستند الخاص بك بنجاح.', 'تم حذف المستند الخاص بك بنجاح.', 'Ваш документ был успешно удален.', 'Ваш документ был успешно удален.', '/cpanel/upload-documents', NOW())");
     $stmtNotification->bind_param("i", $user['id']);
     $stmtNotification->execute();
 

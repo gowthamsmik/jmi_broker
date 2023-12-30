@@ -93,7 +93,7 @@ include("includes/functions.php");
         <div class="content">
 
 <div class="d-flex">
-        <h2 class="fs-4">JMI Brokers | <?php echo $lang['jmiBrokersFxHeatMap'] ?></h2>
+        <h2 class="fs-4"><?php echo $lang['fx_heatmap'] ?></h2>
     <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle"
             alt="">
             <p class="mt-1 ms-2"><?php echo $lang['welcome'] ?>,
@@ -114,12 +114,7 @@ include("includes/functions.php");
     </div>
 </div>
 <div class="row">
-    <p>The Currencies Heat Map is a set of tables which display the relative
-        strengths of major currency pairs in comparison with each other, designed to give an overview of the
-        forex market across various time frames. Whether you're a scalper, day, swing, or position trader,
-        it is a powerful tool if you're looking for new and innovative trading strategies to add to your
-        repertoire. Scroll down to the bottom of this forex heat map to view the key containing explanations
-        for the color codes.</p>
+   <?php echo $lang['currencies_heat_map_description'] ?>
 </div>
 
 

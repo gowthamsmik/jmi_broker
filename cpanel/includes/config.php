@@ -1,15 +1,15 @@
 <?php 
-error_reporting(0);
+error_reporting(3);
 session_start();
 
 global $siteurl;
 global $webeurl;
-$siteurl = 'https://jmibroker.net/';
-$webeurl = 'https://jmibroker.net/';
+$siteurl = 'https://jmibrokers.com/';
+$webeurl = 'https://jmibrokers.com/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'jmi';
+$dbname = 'jmibroker';
 global $conn;
 $conn = new mysqli( $servername, $username, $password, $dbname );
 // Check connection

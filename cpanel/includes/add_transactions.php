@@ -43,7 +43,7 @@ $websiteAccountId = $_SESSION["sessionuserid"];
         $notfications = $conn->prepare($notifyquery);
         $website_accounts_id = 999999999;
         $notification =$notify;
-        $notification_link = $notify;
+        $notification_link = "/cms/withdraw-f-requests";
         $notification_status = 0;
         $created_at=date('Y-m-d H:i:s');
         $notfications->bind_param("issis",$website_accounts_id,$notification,$notification_link,$notification_status,$created_at);
@@ -60,7 +60,7 @@ $websiteAccountId = $_SESSION["sessionuserid"];
         $details_ar='تم استلام طلب السحب بنجاح وستتم معالجتة قريبا من جهة الشركة';
         $notification_ru='Ваша заявка на снятие была доставлена, наш бэк-офис скоро обработает ее.';
         $details_ru='Ваша заявка на снятие была доставлена, наш бэк-офис скоро обработает ее.';
-        $notification_link = '/cpanel/transaction-history';
+        $notification_link = '/cpanel/transactional-history';
         $created_at=date('Y-m-d H:i:s');
         $notsfications->bind_param("iissssssss",$website_accounts_id,$notification_status,$notification,$details,$notification_ar,$details_ar,$notification_ru,$details_ru,$notification_link,$created_at);
         $notsfications->execute();
@@ -79,7 +79,7 @@ $websiteAccountId = $_SESSION["sessionuserid"];
         // $notification1->notification_ru='Ваша заявка на снятие была доставлена, наш бэк-офис скоро обработает ее.';
         // $notification1->details_ru='Ваша заявка на снятие была доставлена, наш бэк-офис скоро обработает ее.';
 
-        // $notification1->notification_link='/cpanel/transaction-history';
+        // $notification1->notification_link='/cpanel/transactional-history';
         // $notification1->save();
     //  $stmt = $conn->prepare("INSERT INTO transactions (website_accounts_id, account, amount, currency, type, via, status, details_user, details_admin) VALUES ($website_accounts_id, $accountNumber, :amount, :currency, :type, :via, :status, :detailsUser, :detailsAdmin)");
 
@@ -136,7 +136,7 @@ $websiteAccountId = $_SESSION["sessionuserid"];
     
     // // Insert into Notifications table
     $notification = $_POST['amount'] . ' ' . $currencyy . ' New Bank Wire Withdraw ';
-    $notificationLink = '/spanel/withdraw-fund-requests?&bymail=' . $user['email'] . '&';
+    $notificationLink = '/cms/withdraw-f-requests?&bymail=' . $user['email'] . '&';
     $sqlNotification = "INSERT INTO notifications (website_accounts_id, notification_status, notification, notification_link) VALUES (999999999, 0, ?, ?)";
     $stmtNotification = $conn->prepare($sqlNotification);
     $stmtNotification->bind_param('ss', $notification, $notificationLink);
@@ -155,7 +155,7 @@ $websiteAccountId = $_SESSION["sessionuserid"];
 
     
     // // Insert into Notifications table (for user)
-    $sqlNotificationUser = "INSERT INTO notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link) VALUES (?, 0, 'Your withdrawal request has been delivered, our backoffice department will handle it soon.', 'Your withdrawal request has been delivered, our backoffice department will handle it soon.', 'تم استلام طلب السحب بنجاح وستتم معالجته قريبًا من جهة الشركة', 'تم استلام طلب السحب بنجاح وستتم معالجته قريبًا من جهة الشركة', 'Ваш запрос на снятие был доставлен, наш бэк-офис скоро обработает его.', 'Ваш запрос на снятие был доставлен, наш бэк-офис скоро обработает его.', '/cpanel/transaction-history')";
+    $sqlNotificationUser = "INSERT INTO notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link) VALUES (?, 0, 'Your withdrawal request has been delivered, our backoffice department will handle it soon.', 'Your withdrawal request has been delivered, our backoffice department will handle it soon.', 'تم استلام طلب السحب بنجاح وستتم معالجته قريبًا من جهة الشركة', 'تم استلام طلب السحب بنجاح وستتم معالجته قريبًا من جهة الشركة', 'Ваш запрос на снятие был доставлен, наш бэк-офис скоро обработает его.', 'Ваш запрос на снятие был доставлен, наш бэк-офис скоро обработает его.', '/cpanel/transactional-history')";
     $stmtNotificationUser = $conn->prepare($sqlNotificationUser);
     $stmtNotificationUser->bind_param('i', $user['id']);
     $stmtNotificationUser->execute();
@@ -200,7 +200,7 @@ $websiteAccountId = $_SESSION["sessionuserid"];
         $notfications = $conn->prepare($notifyquery);
         $website_accounts_id = 999999999;
         $notification =$notify;
-        $notification_link = $notify;
+        $notification_link = "/cms/withdraw-f-requests";
         $notification_status = 0;
         $created_at=date('Y-m-d H:i:s');
         $notfications->bind_param("issis",$website_accounts_id,$notification,$notification_link,$notification_status,$created_at);
@@ -216,7 +216,7 @@ $websiteAccountId = $_SESSION["sessionuserid"];
         $details_ar='تم استلام طلب السحب بنجاح وستتم معالجتة قريبا من جهة الشركة';
         $notification_ru='Ваша заявка на снятие была доставлена, наш бэк-офис скоро обработает ее.';
         $details_ru='Ваша заявка на снятие была доставлена, наш бэк-офис скоро обработает ее.';
-        $notification_link = '/cpanel/transaction-history';
+        $notification_link = '/cpanel/transactional-history';
         $created_at=date('Y-m-d H:i:s');
         $notsfications->bind_param("iissssssss",$website_accounts_id,$notification_status,$notification,$details,$notification_ar,$details_ar,$notification_ru,$details_ru,$notification_link,$created_at);
         $notsfications->execute();

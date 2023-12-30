@@ -1,13 +1,82 @@
 <?php
+include('config.php');
 error_reporting(0);
 session_start();
 
-$sessionUser = $_SESSION['user'];
+$sessionUser = $_SESSION['sessionuser'];
 $stmtUser = $conn->prepare("SELECT * FROM website_accounts WHERE username = ? OR email = ?");
 $stmtUser->bind_param("ss", $sessionUser, $sessionUser);
 $stmtUser->execute();
 $resultUser = $stmtUser->get_result();
 $user = $resultUser->fetch_assoc();
+
+
+$SessionUserId = $_SESSION['sessionuserid'];
+
+$recordsPerPage = 10;
+$page = isset($_GET['page']) ? intval($_GET['page']) : 0;
+$offset = ($page - 1) * $recordsPerPage;
+
+
+if($page!=0){
+
+
+$search=getSearchContent($_GET['search']);
+if($search!="transaction"){
+$statusArray=[$search,-1,-1];
+$search="%transaction%";
+}
+else{
+$statusArray=[0,1,9];
+$search="%".$_GET['search']."%";
+}
+
+    $newtype ='';
+   
+    switch($_GET['type'])
+    {
+        case 'all': $newtype='';break;
+        case 'deposit': $newtype=0;break;
+        case 'withdraw': $newtype=1;break;
+        case 'internal': $newtype=2;break;
+    }
+    
+    if($_GET['type']!='all')
+        $sql = "SELECT * FROM transactions where type= ? and website_accounts_id= ? and CONCAT(status,'',details_user,'transaction',details_admin,'',account, '', amount, '', type,'',via,'',created_at,'',id) LIKE ? AND status in (?, ?, ?) order by id desc limit ?, ?";
+    else
+        $sql = "SELECT * FROM transactions where website_accounts_id= ? and CONCAT(status,'',details_user,'transaction',details_admin,'',account, '', amount, '', type,'',via,'',created_at,'',id) LIKE ? AND status in (?, ?, ?) order by id desc limit ?, ?";
+    $transactionStmt = $conn->prepare($sql);
+    if($_GET['type']!='all')
+        $transactionStmt->bind_param("iisiiiii",$newtype, $user['id'],$search,$statusArray[0],$statusArray[1],$statusArray[2],$offset,$recordsPerPage);
+    else
+        $transactionStmt->bind_param("isiiiii", $user['id'],$search,$statusArray[0],$statusArray[1],$statusArray[2],$offset,$recordsPerPage);
+
+    $transactionStmt->execute();
+    $transactionStmtResult = $transactionStmt->get_result();
+    $transactions= $transactionStmtResult->fetch_all(MYSQLI_ASSOC);
+
+      // Count total records for pagination
+      if($_GET['type']!='all'){
+      $stmtTotalRecords = $conn->prepare("SELECT COUNT(*) as total FROM transactions WHERE website_accounts_id = ? and type= ? and CONCAT(status,'',details_user,'transaction',details_admin,'',account, '', amount, '', type,'',via,'',created_at,'',id) LIKE ? AND status in (?, ?, ?)");
+      $stmtTotalRecords->bind_param("iisiii", $user['id'],$newtype,$search,$statusArray[0],$statusArray[1],$statusArray[2]);
+      }
+      else
+      {
+        $stmtTotalRecords = $conn->prepare("SELECT COUNT(*) as total FROM transactions WHERE website_accounts_id = ? and CONCAT(status,'',details_user,'transaction',details_admin,'',account, '', amount, '', type,'',via,'',created_at,'',id) LIKE ? AND status in (?, ?, ?)");
+      $stmtTotalRecords->bind_param("isiii", $user['id'],$search,$statusArray[0],$statusArray[1],$statusArray[2]);
+      }
+      $stmtTotalRecords->execute();
+      $resultTotalRecords = $stmtTotalRecords->get_result();
+      $totalRecords = $resultTotalRecords->fetch_assoc()['total'];
+      
+      echo json_encode(['transactions' => $transactions, 'totalPages' => ceil($totalRecords / $recordsPerPage)]);
+      exit();
+}
+
+
+
+
+
 
 $stmtNotificationsAll = $conn->prepare("SELECT * FROM Notifications WHERE website_accounts_id = ? ORDER BY id DESC LIMIT 8");
 $stmtNotificationsAll->bind_param("i", $user['id']);
@@ -39,7 +108,7 @@ if (isset($_GET['neteller--']) && $_GET['neteller--'] == 'success' && $_SESSION[
 
     $stmtNotification = $conn->prepare("INSERT INTO Notifications (website_accounts_id, notification_status, notification, notification_link) VALUES (?, ?, ?, ?)");
     $notificationAmount = $_SESSION['amount'] / 100;
-    $stmtNotification->bind_param("iiss", $id = 999999999, $status = 0, $notificationAmount . 'USD New Neteller Deposited', $link = '/spanel/deposit-fund-requests?&bymail=' . $user['email']);
+    $stmtNotification->bind_param("iiss", $id = 999999999, $status = 0, $notificationAmount . 'USD New Neteller Deposited', $link = '/cms/deposite-f-requests?&bymail=' . $user['email']);
     $stmtNotification->execute();
 
     // Additional email sending logic here...
@@ -79,7 +148,7 @@ if (isset($_GET['neteller--']) && $_GET['neteller--'] == 'success' && $_SESSION[
 
     $stmtNotification = $conn->prepare("INSERT INTO Notifications (website_accounts_id, notification_status, notification, notification_link) VALUES (?, ?, ?, ?)");
     $notificationAmount = $_SESSION['PAYMENT_AMOUNT'];
-    $stmtNotification->bind_param("iiss", $id = 999999999, $status = 0, $notificationAmount . 'USD New AdvCash Deposited', $link = '/spanel/deposit-fund-requests?&bymail=' . $user['email']);
+    $stmtNotification->bind_param("iiss", $id = 999999999, $status = 0, $notificationAmount . 'USD New AdvCash Deposited', $link = '/cms/deposite-f-requests?&bymail=' . $user['email']);
     $stmtNotification->execute();
 
     // Additional email sending logic here...
@@ -122,5 +191,29 @@ if (isset($_GET['neteller--']) && $_GET['neteller--'] == 'success' && $_SESSION[
     }
 }
 
+function getSearchContent($text){
+   
+   
+    
+    if(strpos("success", strtolower($text)) !== false)
+    {
+        $content=1;
+    }
+    else if(strpos("rejected", strtolower($text)) !== false)
+    {
+        $content=9;
+    }
+    else if(strpos("pending", strtolower($text)) !== false)
+    {
+        $content=0;
+    }
+    
+    else{
+        $content="transaction";
+    }
+  
+  return $content;
+    
+}
 $conn->close();
 ?>

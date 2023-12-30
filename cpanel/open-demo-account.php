@@ -82,7 +82,7 @@
             $data = [
                 ['image' => '../assets/images/mt4-windows.jpg', 'texthed' => 'MT4 for Windows', 'textpara' => 'Supported OS: Windows 98, 98SE, 2000, XP, Windows Vista, Windows 7', 'button_text' => 'Download Now','link'=>"https://download.mql5.com/cdn/web/jmi.brokers.ltd/mt4/jmibrokers4setup.exe"],
                 ['image' => '../assets/images/mt4-iphone.png', 'texthed' => 'MT4 for IPhone', 'textpara' => 'Supported OS: iPhone 3GS, 4, 4S, iOS 4.0 and later', 'button_text' => 'Download Now','link'=>"https://download.mql5.com/cdn/mobile/mt4/ios?server=JMIBrokers-Demo,JMIBrokers-JMI"],
-                ['image' => '../assets/images/mt4-ipad.png', 'texthed' => 'MT4 for IPad', 'textpara' => 'Supported OS: iPod touch, iPad1, iOS 4.0 and later','button_text' => 'Download Now','link'=>"https://download.mql5.com/cdn/web/jmi.brokers.ltd/mt4/jmibrokers4setup.exe"],
+                ['image' => '../assets/images/mt4-ipad.png', 'texthed' => 'MT4 for IPad', 'textpara' => 'Supported OS: iPod touch, iPad1, iOS 4.0 and later','button_text' => 'Download Now','link'=>"https://download.mql5.com/cdn/mobile/mt4/ios?server=JMIBrokers-Demo,JMIBrokers-JMI"],
                 ['image' => '../assets/images/mt4-android.png', 'texthed' => 'MT4 for Android', 'textpara' => 'Supported OS: Touchscreen smartphone or tablet, Android 2.1 and', 'button_text' => 'Download Now','link'=> "https://download.mql5.com/cdn/mobile/mt4/android?server=JMIBrokers-Demo,JMIBrokers-JMI"],
                 // Add more data as needed
             ];

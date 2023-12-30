@@ -98,11 +98,11 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                                 Username</button> -->
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
+                    <!-- <div class="d-flex align-items-center gap-5 row mt-4">
                         <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["password"] ?></label></div>
                         <div class="col-7"><button onclick="showRoute('link15')"
                                 class="btn button_color"><?php echo $lang["change_password"] ?></button></div>
-                    </div>
+                    </div> -->
                     <div class="d-flex align-items-center gap-5 row mt-4">
                         <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["gender"] ?></label></div>
                         <div class="col-7">
@@ -376,8 +376,13 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
         </div>
     </div>
     <?php include("../includes/footer.php"); ?>
-    <?php include("../includes/scripts.php"); ?>
+    <?php include("../includes/scripts.php"); 
 
+    if (isset($_SESSION['profile_meesage'])) {
+        echo '<script>alert("' . $_SESSION['profile_meesage'] . '");</script>';
+        unset($_SESSION['profile_meesage']);
+
+    }?>
     <!-- script -->
 
 
