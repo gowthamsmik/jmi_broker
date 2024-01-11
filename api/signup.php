@@ -7,8 +7,8 @@ include('../includes/softwareinclude/config.php');
 include('../cpanel/includes/functions.php');
 
 function sendMailsToAdmin1($mailBody,$mailSubject){
-    //require_once '../../vendor/autoload.php';
-    include('../vendor/autoload.php');
+    require_once '../vendor/autoload.php';
+    //include('../vendor/autoload.php');
     $transport = new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls');
     $transport->setUsername('gopi.smiksystems@gmail.com');
     //$transport->setPassword('JMI159BROKERS');
