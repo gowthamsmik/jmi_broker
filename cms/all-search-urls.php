@@ -119,7 +119,7 @@
                         </div>
                     </form>
                     <div class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-success m-3">Export All</button>
+                        <button type="button" class="btn btn-success m-3" id="extractAllsearchurl">Export All</button>
                         <button type="button" class="btn btn-success m-3" onclick="deleteallsearchurls()">Delete
                             Selected</button>
                     </div>
@@ -313,6 +313,30 @@
             window.onload = function () {
                 toggleSelectAll();
             };
+            $(document).on('click', '#extractAllsearchurl', function () {
+				// Make an AJAX request to a PHP script that extracts and downloads the CSV
+				$.ajax({
+					url: 'includes/softwareinclude/ajax.php',
+					type: 'post',
+					data: { type: 'extract-all-search-search-url' },
+					success: function (res) {
+						alert('CSV extraction successful. Download will begin shortly.');
+						var csvData = res;
+						console.log(csvData)
+						var blob = new Blob([csvData], { type: 'text/csv' });
+						var link = document.createElement('a');
+						link.href = window.URL.createObjectURL(blob);
+						link.download = 'all_search_url_data.csv';
+						document.body.appendChild(link);
+						link.click();
+						document.body.removeChild(link);
+					},
+					error: function (err) {
+						console.error(err);
+						alert('Error extracting data.');
+					}
+				});
+			});
         </script>
     </div>
 </body>

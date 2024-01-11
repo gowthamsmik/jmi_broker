@@ -121,8 +121,8 @@ if (!$userdetails[0]['country'] or !$userdetails[0]['mobile']) {
         label {
             color: #000000;
             float: left;
-            margin-left: 80px;
-            margin-bottom: 40px;
+            /* margin-left: 80px; */
+            margin-bottom: 10px;
         }
 
         .caa {
@@ -244,15 +244,15 @@ if (!$userdetails[0]['country'] or !$userdetails[0]['mobile']) {
 
 <body>
     <?php include("../includes/header.php"); ?>
-    <div class='layout'>
+    <div class='layout cpanal_banar'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
                 <div>
                     <div class="d-flex mb-3">
-                        <h2 class="fs-4"><?php echo $lang['open_live_account1'] ?>  </h2>
-                        <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg"
-                                class="account_circle" alt="">
+                        <h2 class="fs-4"><?php echo $lang['open_live_account1'] ?> </h2>
+                        <div class="d-flex <?php echo ($userPreferredLanguage === 'ar') ? 'me-auto' : 'ms-auto'; ?>">
+                            <img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
                             <p class="mt-1 ms-2"><?php echo $lang['welcome1'] ?>,
                                 <?php echo $_SESSION['sessionusername']; ?>
                             </p>
@@ -421,19 +421,21 @@ if (!$userdetails[0]['country'] or !$userdetails[0]['mobile']) {
 
                         </div> -->
                     </div>
-                    <div style="float:left;margin-top:8%;margin-bottom:5%">
+                    <div style="<?php echo ($userPreferredLanguage === 'ar') ? 'float:right;margin:4% 5% 5% 5%;' : 'float:left;margin:8% 0 5% 5%;'; ?>">
                         <form action="">
                             <div class="row border-0">
-                                <div class="col border-0">
-                                    <label for=""><?php echo $lang['account_type'] ?></label>
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-3 border-0">
+                                    <label for=""
+                                        class="<?php echo ($userPreferredLanguage === 'ar') ? 'w-100' : ''; ?>"><?php echo $lang['account_type'] ?></label>
                                     <select class="form-select mt-2" id="account_type" name="sellist1">
                                         <option disabled ><?php echo $lang['select'] ?></option>
                                         <option value="1"><?php echo $lang['individual'] ?></option>
                                         <option value="2"><?php echo $lang['ib'] ?></option>
                                     </select>
                                 </div>
-                                <div class="col border-0">
-                                    <label for=""><?php echo $lang['account_group'] ?></label>
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-3 border-0">
+                                    <label for=""
+                                        class="<?php echo ($userPreferredLanguage === 'ar') ? 'w-100' : ''; ?>"><?php echo $lang['account_group'] ?></label>
                                     <select class="form-select mt-2" id="account_group" name="sellist1">
                                         <option disabled><?php echo $lang['select'] ?></option>
                                         <option value="1"><?php echo $lang['fixed_spread_account'] ?></option>
@@ -442,19 +444,21 @@ if (!$userdetails[0]['country'] or !$userdetails[0]['mobile']) {
                                         <option value="4"><?php echo $lang['bonus_account'] ?></option>
                                     </select>
                                 </div>
-                                <div class="col border-0">
-                                    <label for=""><?php echo $lang['currency'] ?></label>
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-3 border-0">
+                                    <label for=""
+                                        class="<?php echo ($userPreferredLanguage === 'ar') ? 'w-100' : ''; ?>"><?php echo $lang['currency'] ?></label>
                                     <select class="form-select mt-2" id="currency" name="sellist1">
                                         <option>USD</option>
                                     </select>
                                 </div>
                             </div>
+                            <button class="caa my-3" style="<?php echo ($userPreferredLanguage === 'ar') ? '' : ''; ?>">
+                                <p class="p11"><?php echo $lang['customer_account_agreement'] ?></p>
+                            </button>
                         </form>
                     </div>
 
-                    <button class="caa my-3">
-                        <p class="p11"><?php echo $lang['customer_account_agreement'] ?></p>
-                    </button>
+
                     <!-- <div class="foo rounded">
                         <div class="p-4">
                             <p class="fw-bold mb-2">JMI Brokers LTD is licensed broker from Vanuatu Financial Services
@@ -905,7 +909,7 @@ if (!$userdetails[0]['country'] or !$userdetails[0]['mobile']) {
                                     <label class="form-check-label mt-1 ms-0" for="check1"><?php echo $lang['agree_terms_conditions'] ?></label>
                                 </div>
                             </div>
-                            <button type="button" class="buttonprimary rounded py-2 w-25 mb-3 ms-4" id="openAccountBtn" disabled onclick="openAccount()"><?php echo $lang['open_account'] ?></button>
+                            <button type="button" class="buttonprimary rounded py-2 w-25 mb-3 mx-4" id="openAccountBtn" disabled onclick="openAccount()"><?php echo $lang['open_account'] ?></button>
                         </div> 
                     </div>
                 </div>

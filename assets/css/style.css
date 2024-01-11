@@ -32,7 +32,14 @@
 
 .position {
   text-align: center;
-  padding-top: 10% !important;
+  padding-top: 4% !important;
+}
+
+@media screen and (min-width:350px) and (max-width:550px) {
+  .position {
+    text-align: center;
+    padding-top: 10% !important;
+  }
 }
 
 .font-size {
@@ -95,6 +102,10 @@
   padding: 1%;
   margin: 1%;
   width: 60%;
+  /* overflow-x: auto; */
+}
+
+.table_scroll {
   overflow-x: auto;
 }
 
@@ -114,6 +125,7 @@
   color: white;
   border-color: #0342ab;
   border-radius: 0px;
+  height:100% !important;
 }
 
 #myTabs {
@@ -190,6 +202,7 @@ form .row {
 
 .custom-button {
   background-color: #0342AB !important;
+  z-index: 1 !important;
 
 }
 
@@ -551,7 +564,7 @@ button {
 }
 
 .mn-hd h1 {
-  font-size: 150px;
+  font-size: 100px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1.346px;
@@ -894,7 +907,7 @@ header {
 .topHeader-btn {
   display: flex;
   align-items: center;
-  border-left: 1px solid #ECECEC;
+  /* border-left: 1px solid #ECECEC; */
   margin-left: 40px;
   padding-left: 30px;
 }
@@ -1075,7 +1088,7 @@ header {
 ul.dropdown {
   position: absolute;
   width: 280px;
-  left: 0px;
+  /* left: 0px; */
   margin: auto;
   background: #fff;
   padding: 15px;
@@ -1182,9 +1195,11 @@ ul.dropdown li a:hover {
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
-  position: relative;
+  margin-top: 170px;
+  /* position: relative; */
   /* background-color: #0343AE; */
 }
+
 
 .mainBanner::after {
   content: "";
@@ -1335,7 +1350,7 @@ ul.dropdown li a:hover {
   border-radius: 8.59px;
   border: 1.074px solid #424242;
   background: #053B9E;
-  padding: 30px 20px 40px;
+  padding: 80px 20px 80px !important;
   font-size: 14px;
   min-width:220px !important;
 }
@@ -1548,7 +1563,7 @@ ul.dropdown li a:hover {
 
 .homeCta {
   background: linear-gradient(0deg, rgba(3, 67, 174, 0.5) 0%, rgba(3, 67, 174, 0.5) 100%), url(../images/cta-bg.jpg), lightgray 0px -460.167px/100% 326.599% no-repeat;
-  padding: 70px 0 90px;
+  padding: 50px 0 50px;
   text-align: center;
 }
 
@@ -1637,7 +1652,7 @@ ul.dropdown li a:hover {
 }
 
 .about-section2 {
-  padding: 160px 0;
+  padding: 60px 0 !important;
 }
 
 .about-section2 .aboutSec2-top {
@@ -1714,19 +1729,22 @@ ul.dropdown li a:hover {
   border-radius: 22.278px;
   background: #00163F;
   position: relative;
-  height: 177px;
+  height: 100%;
+  width:100%
 }
+
 
 .about-section4 .about-card2 p {
   font-weight: 700;
-  padding-left: 35px;
-  width: 240px;
+  padding-left: 25px;
+  width: 210px;
 }
 
 .about-section4 .about-card2 img {
   position: absolute;
-  right: 0;
+  /* right: 0; */
   bottom: 0;
+  width: 40%;
 }
 
 .about-section5 {
@@ -1877,8 +1895,10 @@ footer .footer-top {
 
 footer .footer-top .footer-sponser {
   position: absolute;
-  bottom: 30px;
-  right: 50px;
+  bottom: 10px;
+  /* right: 50px; */
+  max-width:500px;
+  min-width: 300px;
 }
 
 footer .footer-top .footer-sponser .sponser1 {
@@ -1949,8 +1969,8 @@ footer .footer-middle .middle-cont .line-h {
 
 footer .footer-middle .middle-cont .cont-title {
   display: flex;
-  align-items: center;
-  padding-bottom: 30px;
+  /*align-items: center;
+  padding-bottom: 30px;*/
 }
 
 footer .footer-middle .middle-cont .cont-title span {
@@ -3712,7 +3732,7 @@ footer .copyright p span {
   }
 
   .mn-hd h1 {
-    font-size: 115px;
+    font-size: 100px;
   }
 
   .mn-hd h3 {
@@ -3798,7 +3818,7 @@ footer .copyright p span {
   footer .footer-top .footer-sponser .sponser1 {
     width: 300px;
     margin: auto;
-    margin-right: 0;
+    /* margin-right: 0; */
   }
 
   footer .footer-top .footer-sponser .sponser1 .spon1-cont2 {
@@ -3822,8 +3842,9 @@ footer .copyright p span {
   .about-section4 .about-card2 {
     align-items: normal;
     position: relative;
-    height: 170px;
-    padding: 30px 0 22px;
+    height: 100%;
+    width:100%;
+    padding: 25px 10px;
   }
 
   .about-section4 .about-card2 p {
@@ -3835,7 +3856,7 @@ footer .copyright p span {
   }
 
   .about-section4 .about-card2 img {
-    width: 45%;
+    width: 40%;
   }
 
   .careerSection1 .greySec-cont1 p {
@@ -4060,8 +4081,10 @@ footer .copyright p span {
 
   .about-section4 .about-card2 {
     align-items: normal;
-    padding: 25px;
+    padding: 25px 10px;
     overflow: hidden;
+    height: 100%;
+    width:100%;
   }
 
   .about-section4 .about-card2 p {
@@ -4074,7 +4097,7 @@ footer .copyright p span {
   }
 
   .about-section4 .about-card2 img {
-    width: 45%;
+    width: 40%;
   }
 
   .about-section5 .sec5-main .about-card3 .mn-hd {
@@ -4308,10 +4331,10 @@ footer .copyright p span {
     line-height: 1;
   }
 }
-header .main-header ul.menu>li a:hover {
-  background: rgb(32, 53, 105, 0.8392156863);
+.bg:hover {
+  background: rgb(32, 53, 105, 0.8392156863) !important;
   color:#FED801 !important;
-  padding: 10px;
+  padding: 10px !important;
 }
 
 @media (max-width: 1280px) {
@@ -4445,7 +4468,8 @@ header .main-header ul.menu>li a:hover {
   }
 
   .about-section4 .about-card2 {
-    height: 150px;
+    height: 100%;
+    width:100%;
   }
 
   .about-section4 {
@@ -5168,7 +5192,8 @@ header .main-header ul.menu>li a:hover {
   }
 
   .about-section4 .about-card2 {
-    height: 120px;
+    height: 100%;
+    width:100%;
   }
 
   section.about-section7 .cont2 {
@@ -5190,7 +5215,7 @@ header .main-header ul.menu>li a:hover {
   footer .footer-top .footer-sponser {
     position: absolute;
     bottom: 10px;
-    right: 0px;
+    /* right: 0px; */
   }
 
   footer .footer-middle .middle-cont .cont-title p br {
@@ -5443,6 +5468,11 @@ header .main-header ul.menu>li a:hover {
     padding-bottom: 6px;
   }
 
+  .topHeader-btn {
+    border: 0px solid white !important;
+
+  }
+
   .logo img {
     width: 200px;
   }
@@ -5644,7 +5674,8 @@ header .main-header ul.menu>li a:hover {
   }
 
   .about-section4 .about-card2 {
-    height: 120px;
+    height: 100%;
+    width:100%;
     margin-bottom: 10px;
   }
 
@@ -6594,4 +6625,52 @@ header .main-header ul.menu>li a:hover {
 
 .pagination-disabled-button{
   background-color: #ddd !important;
+}
+
+.banner{
+  margin-top: 170px;
+}
+
+.cpanal_banar{
+  margin-top: 67px;
+}
+
+@media screen and (min-width:767px) and (max-width:1280px) {
+  .banner{
+    margin-top: 150px !important;
+  }
+  .mainBanner {
+    margin-top: 150px !important;
+  }
+  .cpanal_banar{
+    margin-top: 20px !important;
+  }
+}
+
+@media screen and (min-width:350px) and (max-width:766px) {
+	.banner{
+	  margin-top: 198px !important;
+	}
+	.mainBanner {
+	  margin-top: 198px !important;
+	}
+  }
+
+.fma_img {
+  height: 40px !important;
+  width: 40px !important;
+}
+
+@media screen and (min-width:768px) and (max-width:1200px) {
+  .fma_img {
+    height: 35px !important;
+    width: 40px !important;
+  }
+}
+
+@media screen and (min-width:300px) and (max-width:767px) {
+  .fma_img {
+    height: 35px !important;
+    width: 40px !important;
+  }
 }

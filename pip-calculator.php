@@ -15,7 +15,7 @@
 <body>
     <?php include("includes/header.php"); ?>
 
-    <section class="pip-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(18, 'Banner Background', 'Banner'); ?>');">
+    <section class="pip-banner banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(18, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd mn-btn">
                 <h2 class="pdB1"><?php echo getPageMetaByIDKeyGroup(18,'Banner Heading 1','Banner');?></h2>

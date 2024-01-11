@@ -69,31 +69,37 @@ if (file_exists($langFilePath)) {
         font-size: 16px;
     }
 
-    /* .topHeader-btn {
+    .topHeader-btn {
 			margin-left: 20px !important;
 			padding-left: 20px !important;
 		}
 
-		.topHeader-search {
-			width: auto !important;
-		}
-
+		
+        
 		#badgeBox {
 			max-height: 200px;
 			width: 420px;
-			background: #0059b2;
-			overflow-y: auto;
+			overflow-y: auto !important;
+            background: #0059b2;
+            position: relative;
+            overflow: hidden;
 		}
 
-		hr {
-			color: white;
-			border: 2px solid #fff;
-		}
+        #badgeBox .dropdown-item:hover{
+            background: #0342ab;
+            width:100%;
+            overflow-x: auto;
+            color: #0059b2 !important;
+        }
 
-		.dropdown-menu .dropdown-item:hover {
-			background-color: transparent;
-			color: inherit;
-		} */
+        #badgeBox .dropdown-value{
+            color:yellow !important;
+            
+        }
+
+        #badgeBox .date-time {
+            color:white !important;
+        }
 
 
     /*for search */
@@ -139,10 +145,15 @@ if (file_exists($langFilePath)) {
     .position{
         padding-top:5% !important;
     }
+    .header_main{
+        position: fixed;
+        Z-index:2;
+        width:100%;
+    }
     </style>
 </head>
-<header>
-    <div class="top-header">
+<header class="header_main">
+    <div class="top-header" >
         <div class="row container-fluid d-flex align-items-center justify-content-between">
             <div class="col topHeader-cont">
                 <p>
@@ -160,7 +171,8 @@ if (file_exists($langFilePath)) {
                 </div>
             </div>
 
-            <div class="col topHeader-btn">
+            <div class="col topHeader-btn"
+                style="<?php echo ($userPreferredLanguage === 'ar') ? 'border-right: 1px solid #ECECEC;' : 'border-left: 1px solid #ECECEC;'; ?>">
                 <div class="tpBtn-language pe-2">
 
                     <select id="languageDropdown" onchange="changeLanguage(this.value)">
@@ -181,7 +193,7 @@ if (file_exists($langFilePath)) {
                 <div class="tpBtn-login">
                     <a href="#" class="loginUp"><?php echo $lang['login']; ?></a>
                 </div>
-                <div class="tpBtn-register">
+                <div class="tpBtn-register mx-3">
                     <a href="#" class="signUp"><?php echo $lang['register']; ?></a>
                 </div>
                 <?php } else { ?>
@@ -212,7 +224,7 @@ if (file_exists($langFilePath)) {
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a href="#" class="dropdown-item text-secondary fs-5" id="logout"><i
-                                        class="fa fa-sign-out"></i>&nbsp&nbspLogout</a></li>
+                                        class="fa fa-sign-out"></i>&nbsp&nbsp<?php echo $lang['Logout'] ?></a></li>
                         </ul>
 
                     </div>
@@ -229,14 +241,14 @@ if (file_exists($langFilePath)) {
                                 
                                 <?php $notifications = getuserNotifications(); ?>
                                 <script>console.log("kop",<?php echo count($notifications) ?>)</script>
-                                <a href="#" class="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                                <a href="#" class="d-flex" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-bell" style="color: white;"></i>
                                     <span class="badge text-white bg-danger" style="background: #0059b2;">
                                         <?php echo count($notifications) ?>
                                     </span>
                                 </a>
-
+                                
                                 <ul class="dropdown-menu" id="badgeBox" aria-labelledby="dropdownMenuLink" style="color:black;">
                                 </ul>
                             </div>
@@ -250,18 +262,19 @@ if (file_exists($langFilePath)) {
                                         var formattedDate = "<?php echo date('Y-m-d', strtotime($notification['created_at'])); ?>";
                                         var formattedTime = "<?php echo date('H:i:s', strtotime($notification['created_at'])); ?>";
 
-                                        // Create an anchor tag with the message and link
-                                        var listItem = $("<li class='dropdown-item text-white notify'  data-link='<?php echo $notification['notification_link']; ?>' data-notification='<?php echo $notification['id']; ?>'></li>");
-                                        var messageLink = $("<a href='#' ></a>");
-                                        messageLink.append("<span class='text-black'><?php echo $notification['notification']; ?></span>");
-                                        listItem.append(messageLink);
-                                        listItem.append("<br><span class='date-time float-end text-black'>" + formattedDate + " " + formattedTime + "</span>");
-                                        listItem.append("<hr class='mt-4'>");
-                                        dropdownMenu.append(listItem);
-                                    <?php endforeach; ?>
-                                    <?php else: ?>
-                                        dropdownMenu.append("<li class='dropdown-item text-black'>No Live Notifications</li>");
-                                    <?php endif; ?>
+                                         // Create an anchor tag with the message and link
+                                         var listItem = $("<li class='dropdown-item text-white notify'  data-link='<?php echo $notification['notification_link']; ?>' data-notification='<?php echo $notification['id']; ?>'></li>");
+                                       
+                                       var messageLink = $("<a href='#' ></a>");
+                                       messageLink.append("<span class='dropdown-value'><?php echo $notification['notification']; ?></span>");
+                                       listItem.append(messageLink);
+                                       listItem.append("<br><span class='date-time mt-2'>" + formattedDate + " " + formattedTime + "</span>");
+                                       listItem.append("<hr class='mt-2'>");
+                                       dropdownMenu.append(listItem);
+                                   <?php endforeach; ?>
+                                   <?php else: ?>
+                                       dropdownMenu.append("<li class='dropdown-item text-white'>No Live Notifications</li>");
+                                   <?php endif; ?>
                                 }
 
                                 generateDropdownItems();
@@ -270,6 +283,9 @@ if (file_exists($langFilePath)) {
                                  
                                     var notificationId = $(this).data('notification');
                                     var notificationLink = $(this).data('link');
+                                    var urlParts = notificationLink.split('?');
+                                    var cleanUrl = urlParts[0];
+
                                     console.log("notify", notificationLink, notificationId, "<?php echo $siteurl . 'includes/compatibility.php'; ?>");
                                     // Use AJAX to send data to a PHP script
                                     $.ajax({
@@ -281,8 +297,8 @@ if (file_exists($langFilePath)) {
                                         },
                                         success: function (response) {
                                             console.log("PHP script executed successfully:", response);
-                                            // window.location.href="php echo $siteurl ?>"+notificationLink+".php"; 
-                                            window.location.reload();
+                                            window.location.href="https://jmibrokers.com"+cleanUrl+".php"; 
+                                            // window.location.reload();
                                         },
                                         error: function (error) {
                                             console.error("Error in AJAX request:", error);
@@ -298,7 +314,7 @@ if (file_exists($langFilePath)) {
         </div>
     </div>
     </div>
-    <div class="main-header largemenu">
+    <div class="main-header largemenu gd-btn">
         <div class="container-fluid">
             <div class="menu-Bar">
                 <span></span>
@@ -311,7 +327,7 @@ if (file_exists($langFilePath)) {
                         <li class="dropdown-nav mt-2">
                             <a href="#"><?php echo $lang['about_us']; ?></a> <i class="fas fa-caret-down"></i>
 
-                            <ul class="dropdown">
+                            <ul class="dropdown" style="<?php echo ($userPreferredLanguage === 'ar') ? '' : 'left:0'; ?>">
                                 <li><a
                                         href=<?php echo $siteurl . "about-us.php" ?>><?php echo $lang['about_jmi']; ?></a>
                                 </li>
@@ -344,23 +360,23 @@ if (file_exists($langFilePath)) {
                         <li class="dropdown-nav m-0 mt-2">
                             <a href="#"><?php echo $lang['investment_choices']; ?></a> <i class="fas fa-caret-down"></i>
 
-                            <ul class="dropdown">
-                                <li><a href="forex-trading.php">
+                            <ul class="dropdown" style="<?php echo ($userPreferredLanguage === 'ar') ? '' : 'left:0'; ?>">
+                                <li><a href=<?php echo $siteurl ."forex-trading.php"?>>
                                         <?php echo $lang['forex_trading']; ?>
                                     </a></li>
-                                <li><a href="precious-metal.php">
+                                <li><a href=<?php echo $siteurl ."precious-metal.php"?>>
                                         <?php echo $lang['precious_metals_trading']; ?>
                                     </a></li>
-                                <li><a href="future.php">
+                                <li><a href=<?php echo $siteurl ."future.php"?>>
                                         <?php echo $lang['future_energies_trading']; ?>
                                     </a></li>
-                                <li><a href="forex-trading.php">
+                                <li><a href=<?php echo $siteurl ."forex-trading.php"?>>
                                         <?php echo $lang['indices_trading']; ?>
                                     </a></li>
-                                <li><a href="stock-cfds.php">
+                                <li><a href=<?php echo $siteurl ."stock-cfds.php"?>>
                                         <?php echo $lang['stocks_cfds']; ?>
                                     </a></li>
-                                <li><a href="commodities.php">
+                                <li><a href=<?php echo $siteurl ."commodities.php"?>>
                                         <?php echo $lang['commodities']; ?>
                                     </a></li>
                             </ul>
@@ -368,53 +384,54 @@ if (file_exists($langFilePath)) {
                         <li class="dropdown-nav m-0 mt-2">
                             <a href="#"><?php echo $lang['platforms']; ?></a> <i class="fas fa-caret-down"></i>
 
-                            <ul class="dropdown">
-                                <li><a href="forex-platform.php">
+                            <ul class="dropdown" style="<?php echo ($userPreferredLanguage === 'ar') ? '' : 'left:0'; ?>">
+                                <li><a href=<?php echo $siteurl ."forex-platform.php"?>>
                                         <?php echo $lang['forex_platform']; ?>
                                     </a></li>
-                                <li><a href="metatrader.php">
+                                <li><a href=<?php echo $siteurl ."metatrader.php"?>>
                                         <?php echo $lang['metatrader_4']; ?>
                                     </a></li>
-                                <li><a href="mt4-platform-overview.php">
+                                <li><a href=<?php echo $siteurl ."mt4-platform-overview.php"?>>
                                         <?php echo $lang['mt4_platform_overview']; ?>
                                     </a></li>
-                                <li><a href="iphone-ipad.php">
+                                <li><a href=<?php echo $siteurl ."iphone-ipad.php"?>>
                                         <?php echo $lang['iphone_and_ipad']; ?>
                                     </a></li>
-                                <li><a href="android.php">
+                                <li><a href=<?php echo $siteurl ."android.php"?>>
                                         <?php echo $lang['android']; ?>
                                     </a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-4 text-center">
-                    <a href="./" class="logo">
-                        <img src=<?php echo $siteurl."assets/images/logo.png"; ?> alt="">
+                <div class="text-center <?php echo ($userPreferredLanguage === 'ru') ? 'col-md-3' : 'col-md-4'; ?>">
+                    <a href=<?php echo $siteurl ."index.php" ?>
+                        class="logo d-flex justify-content-center align-items-center">
+                        <img src=<?php echo $siteurl."assets/images/logo.png"; ?> alt="" class="">
                     </a>
                 </div>
-                <div class="col-md-4 text-end">
+                <div class="text-end <?php echo ($userPreferredLanguage === 'ru') ? 'col-md-5' : 'col-md-4'; ?>">
                     <ul class="menu m-0">
                         <li class="dropdown-nav m-0">
                             <a href="#"><?php echo $lang['partnerships']; ?></a> <i class="fas fa-caret-down"></i>
 
-                            <ul class="dropdown">
-                                <li><a href="how-to-become.php">
+                            <ul class="dropdown" style="<?php echo ($userPreferredLanguage === 'ar') ? '' : 'left:0'; ?>">
+                                <li><a href=<?php echo $siteurl ."how-to-become.php"?>>
                                         <?php echo $lang['become_our_partner']; ?>
                                     </a></li>
-                                <li><a href="business.php">
+                                <li><a href=<?php echo $siteurl ."business.php"?>>
                                         <?php echo $lang['why_make_business']; ?>
                                     </a></li>
-                                <li><a href="brokers.php">
+                                <li><a href=<?php echo $siteurl ."brokers.php"?>>
                                         <?php echo $lang['introducing_brokers']; ?>
                                     </a></li>
-                                <li><a href="money-manager.php">
+                                <li><a href=<?php echo $siteurl ."money-manager.php"?>>
                                         <?php echo $lang['money_manager_program']; ?>
                                     </a></li>
-                                <li><a href="how-to-become-money-managers.php">
+                                <li><a href=<?php echo $siteurl ."how-to-become-money-managers.php"?>>
                                         <?php echo $lang['how_to_become_money_managers']; ?>
                                     </a></li>
-                                <li><a href="white-label.php">
+                                <li><a href=<?php echo $siteurl ."white-label.php"?>>
                                         <?php echo $lang['white_labels']; ?>
                                     </a></li>
                             </ul>
@@ -422,30 +439,30 @@ if (file_exists($langFilePath)) {
                         <li class="dropdown-nav m-0">
                             <a href="#"><?php echo $lang['tools']; ?></a> <i class="fas fa-caret-down"></i>
 
-                            <ul class="dropdown">
-                                <li><a href="calendar.php">
+                            <ul class="dropdown" style="<?php echo ($userPreferredLanguage === 'ar') ? '' : 'left:0'; ?>">
+                                <li><a href=<?php echo $siteurl ."calendar.php"?>>
                                         <?php echo $lang['economic_calendar']; ?>
                                     </a></li>
-                                <li><a href="dailyfundamental.php">
+                                <li><a href=<?php echo $siteurl ."dailyfundamental.php"?>>
                                         <?php echo $lang['fundamental_analysis']; ?>
                                     </a></li>
-                                <li><a href="pip-calculator.php">
+                                <li><a href=<?php echo $siteurl ."pip-calculator.php"?>>
                                         <?php echo $lang['pip_calculator']; ?>
                                     </a></li>
-                                <li><a href="daily_technical_analysis.php">
+                                <li><a href=<?php echo $siteurl ."daily_technical_analysis.php"?>>
                                         <?php echo $lang['daily_technical_analysis']; ?>
                                     </a></li>
-                                <li><a href="fx_heatmap.php">
+                                <li><a href=<?php echo $siteurl ."fx_heatmap.php"?>>
                                         <?php echo $lang['fx_heatmap']; ?>
                                     </a></li>
-                                <li><a href="download-file.php">
+                                <li><a href=<?php echo $siteurl ."download-file.php"?>>
                                         <?php echo $lang['download_files']; ?>
                                     </a></li>
 
                             </ul>
                         </li>
 
-                        <li class="nav-btn text-white m-0"><a href="contact-us.php"><?php echo $lang['contact_us']?></a>
+                        <li class="nav-btn text-white m-0"><a href=<?php echo $siteurl ."contact-us.php"?>><?php echo $lang['contact_us']?></a>
                         </li>
                     </ul>
                 </div>
@@ -462,7 +479,7 @@ if (file_exists($langFilePath)) {
             </div>
             <div class="row align-items-center">
                 <div class="col-md-12 text-center">
-                    <a href="./" class="logo">
+                    <a href=<?php echo $siteurl ."index.php" ?> class="logo d-flex justify-content-center align-items-center">
                         <img src=<?php echo $siteurl . "assets/images/logo.png" ?> alt="">
                     </a>
                 </div>
@@ -470,148 +487,148 @@ if (file_exists($langFilePath)) {
                     <div class="menuWrap">
                         <ul class="menu">
                             <li class="dropdown-nav">
-                                <a data-bs-toggle="dropdown" href="#"><?php echo $lang['about_us']; ?></a> <i
+                                <a data-bs-toggle="dropdown" class="bg" href="#"><?php echo $lang['about_us']; ?></a> <i
                                     class="fas fa-caret-down"></i>
 
                                 <ul class="dropdown-menu">
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "about-us.php" ?>><?php echo $lang['about_jmi']; ?></a>
                                     </li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "licenses.php" ?>>
                                             <?php echo $lang['licenses_and_regulations']; ?></a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "risk-management.php" ?>><?php echo $lang['risk_management']; ?></a>
                                     </li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "our-culture.php" ?>><?php echo $lang['our_culture']; ?></a>
                                     </li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "ourphilosophy.php" ?>><?php echo $lang['our_philosophy']; ?></a>
                                     </li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "brokers.php" ?>>
                                             <?php echo $lang['advantages_of_jmi_brokers_platform']; ?></a>
                                     </li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "contact-us.php" ?>>
                                             <?php echo $lang['contact_us']; ?></a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "policy.php" ?>>
                                             <?php echo $lang['conflict_of_interest_policy']; ?></a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "faq.php" ?>><?php echo $lang['faqs']; ?></a>
                                     </li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "career.php" ?>><?php echo $lang['careers']; ?></a>
                                     </li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
                                             href=<?php echo $siteurl . "partnership-programs.php" ?>><?php echo $lang['partnership_programs']; ?></a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="dropdown-nav">
-                                <a data-bs-toggle="dropdown" href="#"><?php echo $lang['investment_choices']; ?></a> <i
+                                <a data-bs-toggle="dropdown" class="bg" href="#"><?php echo $lang['investment_choices']; ?></a> <i
                                     class="fas fa-caret-down"></i>
 
                                 <ul class="dropdown-menu">
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black" href="forex-trading.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."forex-trading.php"?>>
                                             <?php echo $lang['forex_trading']; ?>
                                         </a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black" href="precious-metal.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."precious-metal.php"?>>
                                             <?php echo $lang['precious_metals_trading']; ?>
                                         </a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black" href="future.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."future.php"?>>
                                             <?php echo $lang['future_energies_trading']; ?>
                                         </a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black" href="forex-trading.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."future.php"?>>
                                             <?php echo $lang['indices_trading']; ?>
                                         </a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black" href="stock-cfds.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."stock-cfds.php"?>>
                                             <?php echo $lang['stocks_cfds']; ?>
                                         </a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black" href="commodities.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."commodities.php"?>>
                                             <?php echo $lang['commodities']; ?>
                                         </a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-nav">
-                                <a data-bs-toggle="dropdown" href="#"><?php echo $lang['platforms']; ?></a> <i
+                                <a data-bs-toggle="dropdown" class="bg" href="#"><?php echo $lang['platforms']; ?></a> <i
                                     class="fas fa-caret-down"></i>
 
                                 <ul class="dropdown-menu">
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black" href="forex-platform.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."forex-platform.php"?>>
                                             <?php echo $lang['forex_platform']; ?>
                                         </a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black" href="metatrader.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."metatrader.php"?>>
                                             <?php echo $lang['metatrader_4']; ?>
                                         </a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black"
-                                            href="mt4-platform-overview.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg"
+                                            href=<?php echo $siteurl ."mt4-platform-overview.php"?>>
                                             <?php echo $lang['mt4_platform_overview']; ?>
                                         </a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black" href="iphone-ipad.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."iphone-ipad.php"?>>
                                             <?php echo $lang['iphone_and_ipad']; ?>
                                         </a></li>
-                                    <li class="p-0 px-3"><a class="dropdown-item text-black" href="android.php">
+                                    <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."android.php"?>>
                                             <?php echo $lang['android']; ?>
                                         </a></li>
                                 </ul>
                             </li>
                             <li class="dropdown-nav">
-                                <a data-bs-toggle="dropdown" href="#"><?php echo $lang['partnerships']; ?></a> <i
+                                <a data-bs-toggle="dropdown" class="bg" href="#"><?php echo $lang['partnerships']; ?></a> <i
                                     class="fas fa-caret-down"></i>
 
                                 <ul class="dropdown-menu">
-								<li class=" p-0 px-3"><a class="dropdown-item text-black" href="how-to-become.php">
+								<li class=" p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."how-to-become.php"?>>
                                         <?php echo $lang['become_our_partner']; ?>
                                     </a>
                             </li>
-                            <li class="p-0 px-3"><a class="dropdown-item text-black" href="business.php">
+                            <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."business.php"?>>
                                     <?php echo $lang['why_make_business']; ?>
                                 </a></li>
-                            <li class="p-0 px-3"><a class="dropdown-item text-black" href="brokers.php">
+                            <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."brokers.php"?>>
                                     <?php echo $lang['introducing_brokers']; ?>
                                 </a></li>
-                            <li class="p-0 px-3"><a class="dropdown-item text-black" href="money-manager.php">
+                            <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."money-manager.php"?>>
                                     <?php echo $lang['money_manager_program']; ?>
                                 </a></li>
-                            <li class="p-0 px-3"><a class="dropdown-item text-black"
-                                    href="how-to-become-money-managers.php">
+                            <li class="p-0 px-3"><a class="dropdown-item text-black bg"
+                                    href=<?php echo $siteurl ."how-to-become-money-managers.php"?>>
                                     <?php echo $lang['how_to_become_money_managers']; ?>
                                 </a></li>
-                            <li class="p-0 px-3"><a class="dropdown-item text-black" href="white-label.php">
+                            <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."white-label.php"?>>
                                     <?php echo $lang['white_labels']; ?>
                                 </a></li>
                         </ul>
                         </li>
                         <li class="dropdown-nav">
-                            <a data-bs-toggle="dropdown" href="#"><?php echo $lang['tools']; ?></a> <i
+                            <a data-bs-toggle="dropdown" class="bg" href="#"><?php echo $lang['tools']; ?></a> <i
                                 class="fas fa-caret-down"></i>
 
                             <ul class="dropdown-menu">
-                                <li class="p-0 px-3"><a class="dropdown-item text-black" href="calendar.php">
+                                <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."calendar.php"?>>
                                         <?php echo $lang['economic_calendar']; ?>
                                     </a></li>
-                                <li class="p-0 px-3"><a class="dropdown-item text-black" href="dailyfundamental.php">
+                                <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."dailyfundamental.php"?>>
                                         <?php echo $lang['fundamental_analysis']; ?>
                                     </a></li>
-                                <li class="p-0 px-3"><a class="dropdown-item text-black" href="pip-calculator.php">
+                                <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."pip-calculator.php"?>>
                                         <?php echo $lang['pip_calculator']; ?>
                                     </a></li>
-                                <li class="p-0 px-3"><a class="dropdown-item text-black"
-                                        href="daily_technical_analysis.php"><?php echo $lang['daily_technical_analysis']; ?></a>
+                                <li class="p-0 px-3"><a class="dropdown-item text-black bg"
+                                        href=<?php echo $siteurl ."daily_technical_analysis.php"?>><?php echo $lang['daily_technical_analysis']; ?></a>
                                 </li>
 
-                                <li class="p-0 px-3"><a class="dropdown-item text-black"
-                                        href="fx_heatmap.php"><?php echo $lang['heatmap']; ?></a></li>
+                                <li class="p-0 px-3"><a class="dropdown-item text-black bg"
+                                        href=<?php echo $siteurl ."fx_heatmap.php"?>><?php echo $lang['heatmap']; ?></a></li>
 
-                                <li class="p-0 px-3"><a class="dropdown-item text-black" href="download-file.php">
+                                <li class="p-0 px-3"><a class="dropdown-item text-black bg" href=<?php echo $siteurl ."download-file.php"?>>
                                         <?php echo $lang['download_files']; ?>
                                     </a></li>
                             </ul>
                         </li>
-                        <li class="nav-btn"><a href="contact-us.php"><?php echo $lang['contact_us']?></a></li>
+                        <li class="nav-btn"><a href=<?php echo $siteurl ."contact-us.php"?>><?php echo $lang['contact_us']?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -732,5 +749,10 @@ function showMatches(query) {
     });
 
     suggestionsContainer.style.display = matches.length > 0 ? 'block' : 'none';
+}
+
+var userPreferredLanguage = "<?php echo $userPreferredLanguage; ?>";
+if (userPreferredLanguage === 'ar') {
+    document.body.style.direction = 'rtl';
 }
 </script>

@@ -6,7 +6,7 @@ $getNews = getNewsById($id);
 	    
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">			    
-			    <h1 class="app-page-title">Edit FAQ</h1>
+			    <h1 class="app-page-title">Edit News</h1>
 			    <hr class="mb-4">
 				<form class="update-news">
 				    
@@ -25,6 +25,22 @@ $getNews = getNewsById($id);
 				    <div class="mb-3">
 						<label for="setting-input-1" class="form-label">Description</label>
 						<textarea name="description" class="form-control" value="<?php echo $getNews['description'];?>"><?php echo $getNews['description'];?></textarea>
+				    </div>
+					<div class="mb-3">
+						<label for="setting-input-1" class="form-label">arabic title</label>
+				        <input name="ar_title" type="text" class="form-control" value="<?php echo $getNews['ar_heading'];?>" >
+				    </div>
+				    <div class="mb-3">
+						<label for="setting-input-1" class="form-label">Description</label>
+						<textarea name="ar_details" class="form-control" value="<?php echo $getNews['ar_description'];?>"><?php echo $getNews['description'];?></textarea>
+				    </div>
+					<div class="mb-3">
+						<label for="setting-input-1" class="form-label">russian title</label>
+				        <input name="ru_heading" type="text" class="form-control" value="<?php echo $getNews['ru_heading'];?>" >
+				    </div>
+				    <div class="mb-3">
+						<label for="setting-input-1" class="form-label">Description</label>
+						<textarea name="ru_description" class="form-control" value="<?php echo $getNews['ru_description'];?>"><?php echo $getNews['description'];?></textarea>
 				    </div>
 				    <div class="mb-3">
 						<label for="setting-input-1" class="form-label">Posted By</label>

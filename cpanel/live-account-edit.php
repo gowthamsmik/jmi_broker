@@ -179,7 +179,7 @@
                         <h2 class="fs-4">
                             <?php echo $lang['forex_account'] ?>
                         </h2>
-                        <div class="d-flex ms-auto"><img
+                        <div class="d-flex <?php echo ($userPreferredLanguage === 'ar') ? 'me-auto' : 'ms-auto'; ?>"><img
                                 src='<?php echo $siteurl . "assets/images/svg/account_circle.svg" ?>'
                                 class="account_circle" alt="">
                             <p class="mt-1 ms-2">

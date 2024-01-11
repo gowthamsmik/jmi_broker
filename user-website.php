@@ -26,7 +26,7 @@
       }
       .position {
          text-align: center;
-         padding-top: 4%;
+         padding-top: 4% !important;
       }
 
       .font-size {
@@ -103,12 +103,12 @@
          border-radius: 0px;
       }
 
-      .nav-tabs .nav-item .nav-link.active {
+      /* .nav-tabs .nav-item .nav-link.active {
          background-color: #0342ab;
          color: white;
          border-color: #0342ab;
          border-radius: 0px;
-      }
+      } */
 
       #myTabs {
          margin-bottom: -7px;

@@ -13,11 +13,11 @@ $getFAQ = getArFaqById($faqid);
 				    <div class="mb-3">
 						<label for="setting-input-1" class="form-label">السؤال</label>
 						<input name="id" type="hidden" class="form-control" value="<?php echo $getFAQ['id'];?>" >
-				        <input name="question" type="text" class="form-control" value="<?php echo $getFAQ['question'];?>" >
+				        <input name="question" type="text" class="form-control" value="<?php echo $getFAQ['ar_question'];?>" >
 				    </div>
 				    <div class="mb-3">
 						<label for="setting-input-1" class="form-label">الجواب</label>
-						<textarea name="answer" class="form-control" value="<?php echo $getFAQ['answer'];?>"><?php echo $getFAQ['answer'];?></textarea>
+						<textarea name="answer" class="form-control" value="<?php echo $getFAQ['ar_answer'];?>"><?php echo $getFAQ['ar_answer'];?></textarea>
 				    </div>
 				    <div class="mb-3">
 						<label for="setting-input-1" class="form-label">النوع</label>

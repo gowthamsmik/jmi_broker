@@ -52,7 +52,7 @@ $totalRecords = $resultTotalRecords->fetch_assoc()['total'];
         if($ret == Null or $ret =='error')
         {
        
-        $ptr=@fsockopen('92.204.139.189','443',$errno,$errstr,5);
+        $ptr=fsockopen('92.204.139.189','443',$errno,$errstr,5);
        
         if($ptr)
         {

@@ -39,13 +39,13 @@ else
 <?php include("../includes/header.php"); ?>
 <?php include("includes/add_account.php"); ?>
 <div class="main-header" style="text-align:center"> <?php echo $msg; ?></div>
-    <div class='layout'>
+    <div class='layout cpanal_banar'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
     <div class="d-flex">
         <h2 class="fs-4"><?php echo $lang['add_account']?></h2>
-        <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
+        <div class="d-flex <?php echo ($userPreferredLanguage === 'ar') ? 'me-auto' : 'ms-auto'; ?>"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
             <p class="mt-1 ms-2"><?php echo $lang['welcome_existing_account'] ?>,  <?php echo $_SESSION['sessionusername']; ?></p>
         </div>
     </div>

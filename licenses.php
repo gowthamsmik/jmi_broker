@@ -15,7 +15,7 @@
    <body>
       <?php include("includes/header.php"); ?>
 
-      <section class="licenses-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(3, 'Banner Background', 'Banner'); ?>');">
+      <section class="licenses-banner banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(3, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd">
                 <h2><?php echo getPageMetaByIDKeyGroup(3,'Banner Heading','Banner');?></h2>
@@ -64,7 +64,7 @@
 
                         <div class="bottom-cont2">
                            <div class="licenses-btn mn-btn text-center">
-                              <button type="submit" class="theam-btn signUp">
+                              <button type="submit" class="theam-btn gd-btn signUp">
                                  <?php echo getPageMetaByIDKeyGroup(3,'Button text','Licenses and Regulations Left Box');?>
                               </button>
                            </div>

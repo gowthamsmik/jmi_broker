@@ -7,7 +7,7 @@
       <?php include("includes/softwareinclude/config.php"); ?>
       <?php include("includes/style.php"); ?>
       <style>
-        p{
+        p, .tourSec-cont ul{
             text-align:justify;
         }
     </style>
@@ -15,7 +15,7 @@
    <body>
       <?php include("includes/header.php"); ?>
 
-      <section class="partner-banner money-banner ">
+      <section class="partner-banner banner money-banner ">
         <div class="container banner-pt1 banner-pb1 pdX5">
             <div class="partnerBannner-cont">
                <div class="banner-cont mn-hd mn-btn">
@@ -51,7 +51,7 @@
                         <p class="p-fs3"><?php echo getPageMetaByIDKeyGroup(7,'Description','JMI Trading');?></p>
                      </div>
                      <div class="mn-btn partnerSec1-cont pdT1">
-                        <a class="gd-btn" href="download-file.php"><?php echo getPageMetaByIDKeyGroup(7,'Buton text','JMI Trading');?></a>
+                        <a class="gd-btn" href="https://download.mql5.com/cdn/web/metaquotes.software.corp/mt4/mt4setup.exe"><?php echo getPageMetaByIDKeyGroup(7,'Buton text','JMI Trading');?></a>
                      </div>
                   </div>
 
@@ -98,7 +98,7 @@
                         <div class="overviewSecMain-cont mn-hd mn-btn">
                            <h3 class="tx-blue fw-bold"><?php echo getPageMetaByIDKeyGroup(7,'Heading','Overview');?></h3>
                            <p class="tx-grey300 p-fs5"><?php echo getPageMetaByIDKeyGroup(7,'Description','Overview');?></p>
-                           <a class="gd-btn" href="download-file.php">Download Meta Trader 4 FX Demo</a>
+                           <a class="gd-btn" href="https://download.mql5.com/cdn/web/metaquotes.software.corp/mt4/mt4setup.exe">Download Meta Trader 4 FX Demo</a>
 
                            <span class="p-fs2 bld d-block">Download App</span>
 

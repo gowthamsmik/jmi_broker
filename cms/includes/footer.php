@@ -387,6 +387,39 @@
             return;
         }
         e.preventDefault();
+        var heading = $("input[name='heading']").val();
+        var description = $("textarea[name='description']").val();
+        var arTitle = $("input[name='ar_title']").val();
+        var arDetails = $("textarea[name='ar_details']").val();
+        var ruTitle = $("input[name='ru_title']").val();
+        var ruDetails = $("textarea[name='ru_details']").val();
+        var postedBy = $("input[name='posted_by']").val();
+
+        if (heading.trim() === '') {
+            alert('Please enter a heading/title.');
+            return;
+        }
+
+        if (description.trim() === '') {
+            alert('Please enter a description.');
+            return;
+        }
+        if (arTitle.trim() === '') {
+            alert('Please enter a arabic title');
+            return;
+        }
+        if (arDetails.trim() === '') {
+            alert('Please enter a arabic details');
+            return;
+        }
+        if (ruTitle.trim() === '') {
+            alert('Please enter a russian title');
+            return;
+        }
+        if (ruDetails.trim() === '') {
+            alert('Please enter a russian details');
+            return;
+        }
         var forms = $(this).serialize();
         $.ajax({
             url: 'includes/softwareinclude/ajax.php',
@@ -395,7 +428,7 @@
             success: function (res) {
                 console.log(res);
                 alert('News Added');
-                //window.location.href = "all-news.php"
+                window.location.href = "all-news.php"
             }
         })
         addnewses = true;
@@ -406,6 +439,38 @@
             return;
         }
         e.preventDefault();
+        var heading = $("input[name='heading']").val();
+        var description = $("textarea[name='description']").val();
+        var arTitle = $("input[name='ar_title']").val();
+        var arDetails = $("textarea[name='ar_details']").val();
+        var ruHeading = $("input[name='ru_heading']").val();
+        var ruDescription = $("textarea[name='ru_description']").val();
+        var postedBy = $("input[name='posted_by']").val();
+
+        if (heading.trim() === '') {
+            alert('Please enter a heading/title.');
+            return;
+        }
+        if (description.trim() === '') {
+            alert('Please enter a description');
+            return;
+        }
+        if (arTitle.trim() === '') {
+            alert('Please enter a arabic title');
+            return;
+        }
+        if (arDetails.trim() === '') {
+            alert('Please enter a arabic details');
+            return;
+        }
+        if (ruHeading.trim() === '') {
+            alert('Please enter a russian title');
+            return;
+        }
+        if (ruDescription.trim() === '') {
+            alert('Please enter a russian details');
+            return;
+        }
         var forms = $(this).serialize();
         $.ajax({
             url: 'includes/softwareinclude/ajax.php',
@@ -418,6 +483,25 @@
             }
         })
         upnew = true;
+    })
+    var addfundanal = false;
+    $(document).on('submit', '.add-fanalysis', function (e) {
+        if (addfundanal) {
+            return;
+        }
+        e.preventDefault();
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=add-fanalysis',
+            success: function (res) {
+                console.log(res);
+                alert('News Added');
+                window.location.reload();
+            }
+        })
+        addfundanal = true;
     })
     var addfundanal = false;
     $(document).on('submit', '.add-fanalysis', function (e) {

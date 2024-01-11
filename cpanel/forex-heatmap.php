@@ -88,13 +88,13 @@ include("includes/functions.php");
 
 <body>
     <?php include("../includes/header.php"); ?>
-    <div class='layout'>
+    <div class='layout cpanal_banar'>
         <?php include("sidebar.php"); ?>
         <div class="content">
 
 <div class="d-flex">
         <h2 class="fs-4"><?php echo $lang['fx_heatmap'] ?></h2>
-    <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle"
+    <div class="d-flex <?php echo ($userPreferredLanguage === 'ar') ? 'me-auto' : 'ms-auto'; ?>"><img src="../assets/images/svg/account_circle.svg" class="account_circle"
             alt="">
             <p class="mt-1 ms-2"><?php echo $lang['welcome'] ?>,
             <?php echo $_SESSION['sessionusername']; ?>

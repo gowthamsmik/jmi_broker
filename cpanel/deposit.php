@@ -158,18 +158,18 @@ div.form-control
 </head>
 <body>
 <?php include("../includes/header.php"); ?>
-    <div class='layout'>
+    <div class='layout cpanal_banar'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
          <div class="d-flex">
             <h2 class="fs-4">Control Panel | <?php echo $lang['deposit'] ?> </h2>
-            <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
+            <div class="d-flex <?php echo ($userPreferredLanguage === 'ar') ? 'me-auto' : 'ms-auto'; ?>"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
                 <p class="mt-1 ms-2"><?php echo $lang['welcome1'] ?>,  <?php echo $_SESSION['sessionusername']; ?></p>
             </div>
         </div>
         <div class="bg-white p-3">
-        <div class="text-primary fs-6 my-2"> Control Panel | <?php echo ($paytype == "") ? $lang['deposit'] : (($paytype == "Epay") ? 'Epay' : (($paytype == "Coin Base") ? 'Coin Base' :'Bank Wire')); ?> </div>
+        <div class="text-primary fs-6 my-2"><?php echo $lang['controlPanel']?> | <?php echo ($paytype == "") ? $lang['deposit'] : (($paytype == "epay") ?   $lang['epay'] : (($paytype == "coin_base") ? $lang['coin_base']: $lang['bank_wire'])); ?> </div>
         <div class="my-3 fs-4" style="display:<?php echo ($paytype == '' && $liveAccountsCount < 1) ? '' : 'none' ?>">
         <?php echo $lang['live_account_null'] ?>
     </div>
@@ -178,11 +178,11 @@ div.form-control
                     <?php
                     // Sample data (replace this with data fetched from your source)
                     $data = [
-                        ['image' => '../assets/images/pay-methods/8.png', 'text' => 'Bank Wire', 'button_text' => 'deposit'],
-                        ['image' => '../assets/images/pay-methods/2.png', 'text' => 'Epay', 'button_text' => 'deposit'],
+                        ['image' => '../assets/images/pay-methods/8.png', 'text' => 'bank_wire', 'button_text' => 'deposit'],
+                        ['image' => '../assets/images/pay-methods/2.png', 'text' => 'epay', 'button_text' => 'deposit'],
                         //['image' => '../assets/images/pay-methods/3.png', 'text' => 'Advcash', 'button_text' => 'deposit'],
                         //['image' => '../assets/images/pay-methods/5.png', 'text' => 'Perfect Money', 'button_text' => 'deposit'],
-                        ['image' => '../assets/images/pay-methods/1.png', 'text' => 'Coin Base', 'button_text' => 'deposit'],
+                        ['image' => '../assets/images/pay-methods/1.png', 'text' => 'coin_base', 'button_text' => 'deposit'],
                         //['image' => '../assets/images/pay-methods/7.png', 'text' => 'Western Union', 'button_text' => 'deposit'],
                         //['image' => '../assets/images/pay-methods/6.png', 'text' => 'Money Gram', 'button_text' => 'deposit'],
                         // Add more data as needed
@@ -194,7 +194,7 @@ div.form-control
                                     <img src="<?php echo $item['image']; ?>" class="mx-auto" alt="Image">
                                 </div>
                                 <p class="font-weight-bold  text-center mt-3">
-                                    <?php echo $item['text']; ?>
+                                    <?php echo $lang[$item['text']]; ?>
                                 </p>
                                 <button class='btn button mt-3 '  onclick="handleMethod('<?php echo $item['text']; ?>')">
                                     <?php echo $lang[$item['button_text']]; ?>
@@ -207,7 +207,7 @@ div.form-control
 
 
     <!-- start bank wire -->
-                <div class="row bg-white mt-4 p-5 rounded-3 part2" id="epayform" style="display:<?php echo $paytype == 'Bank Wire' ? 'flex' : 'none' ?>">
+                <div class="row bg-white mt-4 p-5 rounded-3 part2" id="epayform" style="display:<?php echo $paytype == 'bank_wire' ? 'flex' : 'none' ?>">
 
                 <?php if ($liveAccountsCount  <= 0) { ?>
                     <div>
@@ -217,13 +217,13 @@ div.form-control
 
                     <div>
                         <div class="col mb-3" id="invbut">
-                            <a class="btn bankwirebut active mt-3" id="request_invoice_button" onclick="show_invoice_form('request_invoice')" >Request new invoice</a>
+                            <a class="btn bankwirebut active mt-3" id="request_invoice_button" onclick="show_invoice_form('request_invoice')" ><?php echo $lang['request_new_invoice']?></a>
 
                             
-                            <a class="btn bankwirebut mt-3" id="recent_invoice_button" onclick="show_invoice_form('recent_invoice')">View recent invoices</a>
+                            <a class="btn bankwirebut mt-3" id="recent_invoice_button" onclick="show_invoice_form('recent_invoice')"><?php echo $lang['view_recent_invoices']?></a>
 
                            
-                            <a class="btn bankwirebut mt-3" id="swift_tt_copy_button" onclick="show_invoice_form('swift_tt_copy')">Submit SWIFT / TT Copy</a>
+                            <a class="btn bankwirebut mt-3" id="swift_tt_copy_button" onclick="show_invoice_form('swift_tt_copy')"><?php echo $lang['submit_swift']?></a>
                         </div>
 
                         <script>
@@ -244,10 +244,10 @@ div.form-control
                             <div  class="request-invoice" id="request-invoice-form" style="display:block">
 
                                 <form method="post"  action="includes/bank_wire_request_invoice.php">
-                                <h5 class="">Bank Wire Funding Details</h5>
+                                <h5 class=""><?php echo $lang['bank_wire_funding_details']?></h5>
                                 <br>
                         <div class="row" >
-                      <label class="col-sm-3 mt-3">Full Name:</label>
+                      <label class="col-sm-3 mt-3"><?php echo $lang['full_name'] ?></label>
                       <div class="col-lg-6 col-md-6 col-sm-8">
                           <div class="controls form-control" id="contentfullname">
                               <input onkeyup="validFullName()" type="text"  name="fullname" id="fullname" class="mt-2"   />
@@ -273,11 +273,11 @@ div.form-control
                       <br />
                       <div class="row">
 
-                          <label class="col-sm-3 mt-3">Account Number:</label>
+                          <label class="col-sm-3 mt-3"><?php echo $lang['account_number']?>:</label>
                           <div class="col-lg-6 col-md-6 col-sm-8">
                               <div class="controls">
                                   <select class="form-control" name="account_number" id="account_number"  required >
-                                  <option value="" selected disabled>-Select-</option>
+                                  <option value="" selected disabled>-<?php echo $lang['select']?>-</option>
                                             < <?php
                                             if ($liveAccountsCount > 0) {
                                                 foreach ($liveaccounts as $account) {
@@ -296,7 +296,7 @@ div.form-control
 
                   <br />
                   <div class="row">
-                      <label class="col-sm-3 mt-3">Deposit Amount:</label>
+                      <label class="col-sm-3 mt-3"><?php echo $lang['deposit_now'] ?>:</label>
                       <div class="col-lg-6 col-md-6 col-sm-8">
                           <div class="controls form-control" id="contentamount">
                             <input  onkeyup="validAmount()" type="number" name="amount" id="amount" class="mt-2"  />
@@ -311,7 +311,7 @@ div.form-control
 
                       <br />
                       <div class="row">
-                          <label class="col-sm-3 mt-3">Currency base:</label>
+                          <label class="col-sm-3 mt-3"><?php echo $lang['currency_base'] ?>:</label>
                           <div class="col-lg-6 col-md-6 col-sm-8">
                               <div class="controls">
                                   <select class="form-control" name="currency" id="currency"   >
@@ -324,7 +324,7 @@ div.form-control
 
                       <br />
                       <div class="row" >
-                          <label class="col-sm-3 mt-3">Address:</label>
+                          <label class="col-sm-3 mt-3"><?php echo $lang['address'] ?>:</label>
                           <div class="col-lg-6 col-md-6 col-sm-8">
                               <div class="controls form-control" id="contentaddress" >
                                   <input onkeyup="validAddress()" id="address" type="text" name="address" class="mt-2"/>
@@ -338,7 +338,7 @@ div.form-control
 
                         <br />
                         <div class="row" >
-                            <label class="col-sm-3 mt-3">Country:</label>
+                            <label class="col-sm-3 mt-3"><?php echo $lang['country']?>:</label>
                             <div class="col-lg-6 col-md-6 col-sm-8">
                                 <!-- <div class="controls form-control" id="contentcountry"> -->
                                     <!-- <input onkeyup="validCountry()" type="text" name="country" id="country"   /> -->
@@ -347,7 +347,7 @@ div.form-control
                                 <p style="color:red;" id="validCountry" ></p> -->
 
                                     <select class="form-control rounded-3 box-shadow py-2 px-3" id="country" name="country" required>
-                                    <option value="" selected disabled>-Select-</option>
+                                    <option value="" selected disabled>-<?php echo $lang['select']?>-</option>
                                     <?php
 
                                     $countriesJson = file_get_contents('../assets/json/countries.json');
@@ -381,7 +381,7 @@ div.form-control
                           <br>
                      
                           <div class="row" >
-                              <label class="col-sm-3 mt-3">City:</label>
+                              <label class="col-sm-3 mt-3"><?php echo $lang['city']?>:</label>
                               <div class="col-lg-6 col-md-6 col-sm-8">
                                   <div class="controls form-control" id="contentcity">
                                       <input onkeyup="validCity()" type="text" name="city" id="city" class="mt-2" />
@@ -393,7 +393,7 @@ div.form-control
                           </div>
 
                           <br />
-                          <p>Please print your invoice to access both SEPA and SWIFT<br> Bank details to proceed with your payment.</p>
+                          <p><?php echo $lang['print_invoice_message'] ?></p>
 
 
                   <br />
@@ -417,15 +417,15 @@ div.form-control
                <div id="view-recent-invoices" style="display:none">
           
              
-               <h4 class="modal-title">Recent Invoices</h4>
+               <h4 class="modal-title"><?php echo $lang['recent_invoices'] ?></h4>
                 <br>
                   <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th>Account</th>
-                          <th>Amount</th>
-                          <th>Date</th>
-                          <th>Invoice</th>
+                          <th><?php echo $lang['account']?></th>
+                          <th><?php echo $lang['Amount']?></th>
+                          <th><?php echo $lang['date']?></th>
+                          <th><?php echo $lang['invoice']?></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -456,18 +456,19 @@ div.form-control
             <div class="row">
 
 
-        <label class="col-sm-5">Account Number:</label>
+        <label class="col-sm-5"><?php echo $lang['account_number']?>:</label>
         <div class="col-sm-6">
             <div class="controls">
                 <select class="form-control" name="tt_account_number" id="tt_account_number" required >
-                <option value="" selected disabled>-Select-</option>
+                <option value="" selected disabled>-<?php echo $lang['select'] ?>-</option>
                                             < <?php
                                             if ($liveAccountsCount > 0) {
                                                 foreach ($liveaccounts as $account) {
                                                     echo '<option value="' . $account['account_id'] . '">' . $account['account_id'] . '</option>';
                                                 }
                                             } else {
-                                                echo '<option value="" disabled>No live accounts available</option>';
+                                                echo '<option value="" disabled>' . $lang['no_live_accounts_available'] . '</option>';
+
                                             }
                                             ?>
                 </select>
@@ -477,7 +478,7 @@ div.form-control
 
     <br />
     <div class="row">
-        <label class="col-sm-5">Currency base:</label>
+        <label class="col-sm-5"><?php echo $lang['currency_base'] ?>:</label>
         <div class="col-sm-6">
             <div class="controls">
                 <select class="form-control" name="tt_currency" id="tt_currency" required >
@@ -490,7 +491,7 @@ div.form-control
 
     <br />
     <div class="row" id="amount">
-        <label class="col-sm-5">Deposit Amount:</label>
+        <label class="col-sm-5"><?php echo $lang['deposit_amount'] ?>:</label>
         <div class="col-sm-6">
             <div class="controls">
                 <input type="number" class="form-control border" name="tt_amount" id="tt_amount" required />
@@ -501,7 +502,7 @@ div.form-control
 
     <br />
     <div class="row" id="amount">
-        <label class="col-sm-5">Upload a TT Copy File:</label>
+        <label class="col-sm-5"><?php echo $lang['upload_tt_copy_file'] ?>:</label>
         <div class="col-sm-6">
             <div class="controls">
                 <!-- <input type="file" class="form-control" name="ttcopy" id="ttcopy" required /> -->
@@ -514,7 +515,7 @@ div.form-control
 
     <br />
     <div class="row" id="amount">
-        <label class="col-sm-5">Upload Invoice:</label>
+        <label class="col-sm-5"><?php echo $lang['upload_invoice'] ?>:</label>
         <div class="col-sm-6">
             <div class="controls">
                 <!-- <input type="file" class="form-control" name="invoice" id="invoice" required /> -->
@@ -528,7 +529,7 @@ div.form-control
     <br />
                         </br>
     <div class="row text-danger">
-        <p>In case your bank account currency is different than the deposit currency assigned, the conversion will be performed by your bank / Card Issuer</p>
+        <p><?php echo $lang['bank_account_currency_note'] ?></p>
     </div>
 
     <br />
@@ -536,7 +537,7 @@ div.form-control
         <label class="col-sm-4"></label>
         <div class="col-sm-8 w-auto">
             <div class="controls rounded" id="tt-copy">
-                 <input class="btn form-control h-auto text-white p-0 w-auto" onclick="uploadDocument()" value="Deposit Now" />
+                 <input class="btn form-control h-auto text-white p-0 w-auto" onclick="uploadDocument()" value="<?php echo $lang['deposit_now'] ?>"/>
 
             </div>
         </div>
@@ -552,15 +553,15 @@ div.form-control
 <!-- end bank wire -->
 
 
-                <div class="row bg-white mt-4 p-5 rounded-3 part2" id="epayform" style="display:<?php echo $paytype == 'Epay' ? 'flex' : 'none' ?>">
+                <div class="row bg-white mt-4 p-5 rounded-3 part2" id="epayform" style="display:<?php echo $paytype == 'epay' ? 'flex' : 'none' ?>">
                     <div class="col-sm-8">
                         <form method="post"  action="includes/deposit_transactions.php?paymentType=epay">
                             <div class=" border-0">
                                 <div class=" border-0 mb-1">
-                                    <label for="">Account Number:</label>
+                                    <label for=""><?php echo $lang['account_number']?>:</label>
                                     <select class="form-select mt-2" id="sel1" name="epayAccountId" required>
-                                        <option value="" selected disabled>-Select-</option>
-                                        < <?php
+                                        <option value="" selected disabled>-<?php echo $lang['select']?>-</option>
+                                         <?php
                                         if ($liveAccountsCount > 0) {
                                             foreach ($liveaccounts as $account) {
                                                 echo '<option value="' . $account['account_id'] . '">' . $account['account_id'] . '</option>';
@@ -573,7 +574,7 @@ div.form-control
                                 </div>
 
                                 <div class=" border-0 my-2">
-                                    <label for=""><?php $lang['currency_base'] ?>Currency base:</label>
+                                    <label for=""><?php echo $lang['currency_base'] ?></label>
                                     <select class="form-select mt-2" id="sel1" name="epayCurrency" required>
                                         <option>USD</option>
                                     </select>
@@ -581,30 +582,30 @@ div.form-control
                             </div>
                             <div class="row border-0 mt-4">
                                 <div class="col border-0">
-                                    <label for="">Deposit Amount </label>
+                                    <label for=""><?php echo $lang['deposit_amount'] ?> </label>
                                     <input type="number" class="form-control border rounded-3 mt-2" placeholder="0"
                                         name="epayAmount" required>
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn_color w-50 mt-4 text-white rounded"  value="Deposit Now"> 
+                            <input type="submit" class="btn btn_color w-50 mt-4 text-white rounded"  value="<?php echo $lang["deposit_now"] ?>"> 
                         </form>
                     </div>
                     <div class="col-sm-3 mx-2 mt-5 r text-center align-items-center justify-content-center">
                         <img src="../assets/images/pay-methods/2.png" alt="img" class="w-100" />
                         <div class="mt-5">
-                            <p class="fs-3 my-2">Epay Deposit Details</h2>
-                            <p class="fs-6">Express Deposit (12 hours)</p>
+                            <p class="fs-3 my-2"><?php echo $lang['epay_deposit_details']?></h2>
+                            <p class="fs-6"><?php echo $lang['express_deposit_12_hours'] ?></p>
                         </div>
                     </div>
                 </div>
-                <div class="row bg-white mt-4 p-5 rounded-3 part3" id="coinbaseform" style="display:<?php echo $paytype == 'Coin Base' ? 'flex' : 'none' ?>">
+                <div class="row bg-white mt-4 p-5 rounded-3 part3" id="coinbaseform" style="display:<?php echo $paytype == 'coin_base' ? 'flex' : 'none' ?>">
                     <div class="col-sm-8">
                         <form method="post"  action="includes/deposit_transactions.php?paymentType=coinbase">
                             <div class=" border-0">
                                 <div class=" border-0 mb-1">
-                                    <label for="">Account No:</label>
+                                    <label for=""><?php echo $lang['account_number']?> :</label>
                                     <select class="form-select mt-2" id="sel1" name="cbAccountId" required>
-                                        <option value="" selected disabled>-Select-</option>
+                                        <option value="" selected disabled>-<?php echo $lang['select']?>-</option>
                                         < <?php
                                         if ($liveAccountsCount > 0) {
                                             foreach ($liveaccounts as $account) {
@@ -618,7 +619,7 @@ div.form-control
                                 </div>
 
                                 <div class=" border-0 my-2">
-                                    <label for="">Currency base:</label>
+                                    <label for=""><?php echo $lang['currency_base']?>:</label>
                                     <select class="form-select mt-2" id="sel1" name="cbCurrency" required>
                                         <option>USD</option>
                                     </select>
@@ -626,20 +627,20 @@ div.form-control
                             </div>
                             <div class="row border-0 mt-4">
                                 <div class="col border-0">
-                                    <label for="">Amount To Deposit</label>
+                                    <label for=""><?php echo $lang['amount_to_deposit'] ?></label>
                                     <input type="number" class="form-control border rounded-3 mt-2" placeholder="0"
                                         name="cbAmount" required>
                                 </div>
                             </div>
-                            <input type="submit" class="btn btn_color w-50 mt-4 text-white rounded"  value="Deposit Now"> 
+                            <input type="submit" class="btn btn_color w-50 mt-4 text-white rounded"  value="<?php echo $lang['deposit_now'] ?>"> 
                
                         </form>
                     </div>
                     <div class="col-sm-3 mx-2 mt-5 r text-center align-items-center justify-content-center">
                         <img src="../assets/images/pay-methods/1.png" alt="img" class="w-100" />
                         <div class="mt-5">
-                            <p class="fs-3 my-2">CoinBase Deposit Details</h2>
-                            <p class="fs-6">Express Deposit (12 hours)</p>
+                            <p class="fs-3 my-2"><?php echo $lang['coinbase_deposit_details'] ?></h2>
+                            <p class="fs-6"><?php echo $lang['express_deposit_12_hours'] ?></p>
                         </div>
                     </div>
                 </div>

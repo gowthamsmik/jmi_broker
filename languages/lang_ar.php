@@ -273,9 +273,56 @@ $lang = array(
 
     //deposit function
     'deposit_account' => 'حساب الإيداع',
+    'epay' => 'إي-باي',
+    'coin_base' => "كوينبيس",
+    'bank_wire' => "تحويل بنكي",
+    'request_new_invoice'=>'طلب فاتورة جديدة',
+    'view_recent_invoices' => 'عرض الفواتير الحديثة',
+    'submit_swift' => 'تقديم نسخة SWIFT',
+    'bank_wire_funding_details' => 'تفاصيل تمويل التحويل البنكي',
+    'full_name' => 'الاسم الكامل:',
+    'account_number' => 'رقم الحساب',
+      "deposit_amount"=> "مبلغ الإيداع",
+  "deposit_now"=> "إيداع الآن",
+  "epay_deposit_details"=> "تفاصيل إيداع Epay",
+  "express_deposit_12_hours"=> "إيداع سريع (12 ساعة)",
+  "amount_to_deposit"=> "المبلغ المراد إيداعه",
+  "coinbase_deposit_details"=> "تفاصيل إيداع CoinBase",
+  "bank_account_currency_note"=> "في حال كانت عملة حسابك البنكي مختلفة عن العملة المخصصة للإيداع، سيتم إجراء التحويل من قبل بنكك / جهة إصدار البطاقة",
+  "upload_invoice"=> "تحميل الفاتورة",
+  "upload_tt_copy_file"=> "تحميل ملف نسخة TT",
+  "recent_invoices"=> "الفواتير الأخيرة",
+  "invoice"=> "فاتورة",
+    
+   
 
-    //withdraw  account
-    'withdraw_account' => 'سحب الحساب',
+
+ 
+
+
+   
+        //withdraw  account
+        'Withdraw' => 'ينسحب',
+        'withdraw_account' => 'سحب الحساب',
+        'deposit_amount' => 'مبلغ السحب',
+        'bank_name' => 'اسم البنك',
+        'bank_swift' => 'التحويل السريع للبنك',
+        'bank_iban' => 'حساب البنك أو رقم الIBAN',
+        'withdraw_now' => 'سحب الآن',
+    
+        'bank_wire_withdrawing_details' => 'تفاصيل سحب التحويل البنكي',
+    
+        'important_terms_and_conditions' => 'شروط وأحكام هامة <br /> يرجى ملاحظة أنه من خلال تمويل حسابك و/أو تقديم طلب سحب، فإنك توافق على جميع الشروط والأحكام بما في ذلك تلك المتعلقة بالإيداعات والسحوبات. <br /> يعتبر ما يلي جزءًا لا يتجزأ من الشروط والأحكام: <br /> يوافق العميل على أن الشركة قد تفرض على العميل رسوم نقل و/أو أي رسوم أخرى في أي حالة يتم فيها تقديم طلب سحب من قبل العميل دون حدوث أي نشاط تداول بين ذلك الطلب وآخر إيداع للعميل. <br /> يوافق العميل على أن الشركة قد تقوم، بتقديرها الخاص وفي أي وقت و/أو عندما ترى أن هناك سوء استخدام لفائدة رسوم التحويل 0.00٪ قد حدث، بطلب و/أو خصم أي و/أو جميع مبالغ رسوم التحويل من حساب العميل (أو حسابات العميل) و/أو إغلاق حسابات العميل و/أو اتخاذ أي إجراء آخر قد تراه الشركة ضروريًا، كتعويض عن هذا السوء الاستخدام. <br /> يقر العميل ويؤكد أن الشركة قد تقوم، بتقديرها الخاص وفي أي وقت و/أو لأي سبب من الأسباب و/أو دون أي إشعار مسبق للعميل و/أو دون موافقة مسبقة من العميل، بزيادة مبلغ رسوم التحويل 0.00٪ الذي يظهر على صفحة تمويل الحساب في موقع الشركة تظهر إلى أي مبلغ آخر يعتبره الشركة ضروريًا.',
+        'epay_account' => 'حساب Epay',
+        'amount_to_withdraw' => 'المبلغ المراد سحبه',
+        'epay_withdraw_details' => 'تفاصيل سحب Epay',
+    
+        'express_withdrawal_12_hours' => 'سحب سريع (12 ساعة)',
+    
+        'coinbase_withdraw_details' => 'تفاصيل سحب CoinBase',
+        'coinbase_account' => 'حساب CoinBase',
+        'withdraw_amount' => 'مبلغ السحب',
+    
 
     // internal transefer
     'internalTransfer' => 'التحويل الداخلي',
@@ -330,6 +377,7 @@ $lang = array(
 
 
     // Refferal Systems
+    'copyLink' => 'نسخ الوصلة',
     'controlPanelReferralSystemOverview' => 'لوحة التحكم | نظام الإحالة (IB) نظرة عامة',
     'myReferralLinkExplanation' => 'رابط الإحالة الخاص بي هو رابط فريد يتم إنشاؤه بواسطة نظامنا يحدد من أنت. بهذه الطريقة، يمكننا منحك الائتمان عندما يصبح صديقك أو زميلك عميلاً لـ Constant Contact. إليك كيف يمكنك استخدام رابط الإحالة الخاص بك',
     'copyAndSendLink' => 'انسخ وأرسل الرابط في رسالة بريد إلكتروني شخصية عادية',
@@ -424,6 +472,7 @@ $lang = array(
     'ourBlogs' => 'مدوناتنا',
     'tradingAccounts' => 'حسابات التداول',
     'everyTrader' => 'كل تاجر',
+    'termandconditions' => 'الشروط والأحكام',
 
 
     // user-tab
@@ -487,9 +536,32 @@ $lang = array(
     'live_chat' => 'الدردشة الحية',    
     "S.No"=>"ر.ت",
     'MT4 Password'=>'كلمة مرور MT4',
+    'Logout'=>'خروج',
+    "no_live_accounts_available" => "لا توجد حسابات حية متاحة",
     
     'controlPanelAccountOverview1' => 'لوحة التحكم | نظرة عامة على الحساب',
     'homeDashboard2' => 'الصفحة الرئيسية > لوحة التحكم',
+    'Amount'=>'المبلغ',
+    "print_invoice_message" => "يرجى طباعة فاتورتك للوصول إلى تفاصيل البنك الخاصة بكل من SEPA و SWIFT<br> للمتابعة مع عملية الدفع الخاصة بك.",
+    "address" => "العنوان",
+    "city" => "المدينة",
+    'frequently_asked_questions_list' => 'قائمة الأسئلة الشائعة',
+    'got_questions' => 'هل لديك أسئلة؟',
+    'we_have_answers' => 'لدينا إجابات!',
+ 
+'banner_image' => 'صورة اللافتة',
+
+'get_started_prompt' => 'هل أنت جاهز للبدء؟',
+'take_business_to_next_level' => 'قم بتطوير عملك إلى المستوى التالي مع وسطاء JMI. لنبدأ',
+'lets_get_started' => 'لنبدأ',
+'enter_your_website' => 'نبدأ الآن',
+
+'our_latest_news' => 'أحدث أخبارنا',
+'read_more' => 'قراءة المزيد',
+'read_less' => 'قراءة أقل',
+'para_read_more'  => 'اقرأ أكثر..',
+
+
 
        // html
        'live_account_null' => 'ليس لديك حساب نشط. يمكنك <a class="fs-4 text-primary" href="add-existing-account.php">إضافة حسابك من هنا</a> أو فتح حساب جديد من <a class="fs-4 text-primary" href="open-live-account.php">هنا</a>',
@@ -500,7 +572,51 @@ $lang = array(
        'th_Micro_Lot' => 'الوحدة الصغيرة<br>(وحدات 1,000)',
        'currencies_heat_map_description' => '<p>خريطة حرارة العملات هي مجموعة من الجداول التي تعرض القوة النسبية لأزواج العملات الرئيسية بالمقارنة مع بعضها البعض، مصممة لتعطي لمحة عن سوق الفوركس عبر إطارات زمنية مختلفة. سواء كنت Scalper أو Day Trader أو Swing Trader أو Position Trader، إنها أداة قوية إذا كنت تبحث عن استراتيجيات تداول جديدة ومبتكرة لإضافتها إلى مجموعتك. انتقل إلى أسفل هذه الخريطة الحرارية للفوركس لعرض المفتاح الذي يحتوي على شروحات لرموز الألوان.</p>',
 
+    //alerts
+    'title_not_selected' => 'الرجاء اختيار اللقب.',
+    'full_name_required' => 'الرجاء إدخال اسمك الكامل.',
+    'company_name_required' => 'الرجاء إدخال اسم شركتك.',
+    'email_required' => 'الرجاء إدخال عنوان بريدك الإلكتروني.',
+    'valid_email_required' => 'الرجاء إدخال عنوان بريد إلكتروني صالح.',
+    'head_office_location_not_selected' => 'الرجاء اختيار موقع مقر الشركة.',
+    'city_required' => 'الرجاء إدخال اسم المدينة.',
+    'country_code_not_selected' => 'الرجاء اختيار رمز البلد.',
+    'phone_number_required' => 'الرجاء إدخال رقم هاتفك.',
+    'valid_10_digit_phone_required' => 'الرجاء إدخال رقم هاتف صالح مكون من 10 أرقام.',
+    'account_added_successfully' => 'تمت إضافة حسابك بنجاح.',
+    'error_prefix' => 'خطأ: ',
 
 
+    // Contact_Us
+
+    'get_in_touch' => 'ابقى على تواصل',
+    'get_back' => 'املأ النموذج وسيقوم فريقنا بالرد عليك خلال 24 ساعة',
+    'first_name' => 'الاسم الأول',
+    'last_name' => 'اسم العائلة',
+    'messages' => 'رسائل',
+    'send_messages' => 'إرسل رسائل',
+    'address_details' => 'تفاصيل العنوان',
+    'contact_info' => 'معلومات الاتصال',
+    'phone_no' => 'رقم الهاتف:',
+    'e-mail' => 'بريد إلكتروني:',
+
+
+    //career
+
+    'community' => 'كن عضوا في المجتمع',
+    'upload_cv' => 'حمل سيرتك الذاتية',
+    'choose_file' => 'اختر ملف',
+    'size' => 'النوع المسموح به:.PDF - الحجم الأقصى: 2 ميجابايت',
+    'upload' => 'رفع',
+
+    //Becomee-partner
+
+    'mr' => 'السيد',
+    'mrs'=> 'السّيدة',
+    'miss'=> 'يفتقد',
+    'company' => 'شركة',
+    'location' => 'موقع المكتب الرئيسي',
+    'country_code' => 'الرقم الدولي',
+    'partner' => 'كن شريكنا',
 );
 ?>

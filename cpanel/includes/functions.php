@@ -353,12 +353,13 @@ function getNotificationsForUser($userId)
 function sendMailsToAdmin($mailBody,$mailSubject){
     require_once '../../vendor/autoload.php';
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('support@jmibrokers.com');
+    $transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Duiuw^%^&tw$@@$er$%&^gf*');
+    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
     $mailer = new Swift_Mailer($transport);
        
-    $mailTo="support@jmibrokers.com";
+    // $mailTo="support@jmibrokers.com";
+    $mailTo="gopi.smiksystems@gmail.com";
     $mailsBody='<!DOCTYPE html>
     <html lang="en">
     
@@ -413,7 +414,7 @@ function sendMailsToAdmin($mailBody,$mailSubject){
     </body>
     </html>';
     $message = (new Swift_Message(''))
-            ->setFrom(['support@jmibrokers.com' => 'Jmi brokers'])
+            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
             ->setTo($mailTo)
             ->setBody($mailsBody,'text/html')
             ->setSubject($mailSubject);
@@ -458,8 +459,8 @@ function sendDocumentToMail($filePath, $invoiceId,  $mailSubject,$mailBody,$toEm
 
         // Create the Swift_SmtpTransport instance
         $transport = new Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-        $transport->setUsername('support@jmibrokers.com');
-        $transport->setPassword('Duiuw^%^&tw$@@$er$%&^gf*');
+        $transport->setUsername('marketing@jmibrokers.com');
+        $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
 
         // Create the Swift_Mailer instance
         $mailer = new Swift_Mailer($transport);
@@ -520,7 +521,7 @@ function sendDocumentToMail($filePath, $invoiceId,  $mailSubject,$mailBody,$toEm
         </html>';
         // Create the Swift_Message instance
         $message = (new Swift_Message(''))
-            ->setFrom(['support@jmibrokers.com' => 'Jmi brokers'])
+            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
             ->setTo($toEmail)
             ->setBody($mailsBody,'text/html')
             ->setSubject($mailSubject);
@@ -610,12 +611,12 @@ function get_string_between($string, $start, $end)
 function sendMailsToUser($mailBody,$mailSubject,$mailTo){
     require_once '../../vendor/autoload.php';
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('info@jmibrokers.com');
+    $transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Duiuw^%^&tw$@@$er$%&^gf*');
+    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
     $mailer = new Swift_Mailer($transport);
        
-    // $mailTo="yasir.smiksystems@gmail.com";
+   
     $mailsbody='<!DOCTYPE html>
   <html lang="en">
   
@@ -673,7 +674,7 @@ function sendMailsToUser($mailBody,$mailSubject,$mailTo){
   </body>
   </html>';
     $message = (new Swift_Message(''))
-            ->setFrom(['info@jmibrokers.com' => 'Jmi brokers'])
+            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
             ->setTo($mailTo)
             ->setBody($mailsbody,'text/html')
             ->setSubject($mailSubject);

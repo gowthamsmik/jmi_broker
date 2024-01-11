@@ -51,8 +51,8 @@
 				</nav> -->
 
 			<div class="col">
-			<button type="button" class="btn bgcolor my-3" id="deleteAllButton" onclick="deletetechnicalanalysis()"
-                    style="display: none;">Delete All</button>
+				<button type="button" class="btn bgcolor my-3" id="deleteAllenfaqButton" onclick="deleteenfaqs()"
+					style="display: none;">Delete All</button>
 			</div>
 			<div class="tab-content" id="orders-table-tab-content">
 				<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
@@ -63,8 +63,8 @@
 									<thead>
 										<tr>
 											<th class="cell">
-												<input type="checkbox" id="selectAllCheckbox"
-													onclick="toggleSelectAll()">
+												<input type="checkbox" id="selectAllenfaqCheckbox"
+													onclick="toggleenfaqSelectAll()">
 											</th>
 											<th class="cell">ID</th>
 											<th class="cell">Question</th>
@@ -82,7 +82,7 @@
 											foreach ($getAllfaqs as $thisFaq) { ?>
 												<tr>
 													<td class="cell">
-														<input type="checkbox" name="selectedRows[]"
+														<input type="checkbox" name="selectedenfaqRows[]"
 															value="<?php echo $thisFaq['id']; ?>" />
 													</td>
 													<td class="cell">
@@ -97,8 +97,8 @@
 													<td class="cell">
 														<a class="btn-sm app-btn-secondary"
 															href="edit-faq.php?id=<?php echo $thisFaq['id']; ?>">Edit</a>
-															<button type="button" class="btn-sm app-btn-secondary"
-                                                                onclick="deletetechnicalanalysis(this);">Delete</button>
+														<button type="button" class="btn-sm app-btn-secondary"
+															onclick="deleteenfaqs(this);">Delete</button>
 													</td>
 												</tr>
 											<?php }
@@ -170,98 +170,99 @@
 		</div>
 	</footer><!--//app-footer-->
 	<script>
-            function deletetechnicalanalysis() {
-                var selectedRows = document.querySelectorAll('input[name="selectedRows[]"]:checked');
-                var currentPage = <?php echo $page; ?>;
-                var perPage = <?php echo $perPage; ?>;
+		function deleteenfaqs() {
+			var selectedenfaqRows = document.querySelectorAll('input[name="selectedenfaqRows[]"]:checked');
+			var currentPage = <?php echo $page; ?>;
+			var perPage = <?php echo $perPage; ?>;
 
-                if (selectedRows.length === 0) {
-                    alert('Please select at least one row to delete.');
-                    return;
-                }
+			if (selectedenfaqRows.length === 0) {
+				alert('Please select at least one row to delete.');
+				return;
+			}
 
-                if (confirm('Are you sure you want to delete the selected records?')) {
-                    var ids = Array.from(selectedRows).map(function (row) {
-                        return row.value;
-                    });
-					console.log("avhcjhc",ids);
-                    // Send an AJAX request to delete the selected records on the current page
-                    $.ajax({
-                        url: 'includes/softwareinclude/ajax.php',
-                        type: 'post',
-                        data: { type: 'delete-faq', ids: ids, page: currentPage },
-                        success: function (res) {
-                            console.log("cddsdddddddddddddddddddd", res);
-							alert(0);
-                            // var successMessageDiv = document.getElementById('success-message');
-                            // successMessageDiv.innerHTML = 'Selected Records Deleted';
-                            // successMessageDiv.style.display = 'block';
+			if (confirm('Are you sure you want to delete the selected records?')) {
+				var ids = Array.from(selectedenfaqRows).map(function (row) {
+					return row.value;
+				});
+				console.log("avhcjhc", ids);
+				// Send an AJAX request to delete the selected records on the current page
+				$.ajax({
+					url: 'includes/softwareinclude/ajax.php',
+					type: 'post',
+					data: { type: 'delete-faq', ids: ids, page: currentPage },
+					success: function (res) {
+						console.log("cddsdddddddddddddddddddd", res);
+						//alert(0);
+						// var successMessageDiv = document.getElementById('success-message');
+						// successMessageDiv.innerHTML = 'Selected Records Deleted';
+						// successMessageDiv.style.display = 'block';
 
-                            // var successMessageDiv = document.getElementById('success-message');
-                            // successMessageDiv.innerHTML = 'Selected technical Has Been Deleted';
-                            // successMessageDiv.style.display = 'block';
-                            // $('html, body').animate({ scrollTop: 0 }, 'fast');
-                            // setTimeout(function () {
-                                 window.location.reload();
-                            // }, 2500);
-                        },
-                        error: function (err) {
-                            console.error(err);
-                            alert('Error deleting Website Accounts');
-                        }
-                    });
-                }
-            }
+						// var successMessageDiv = document.getElementById('success-message');
+						// successMessageDiv.innerHTML = 'Selected technical Has Been Deleted';
+						// successMessageDiv.style.display = 'block';
+						// $('html, body').animate({ scrollTop: 0 }, 'fast');
+						// setTimeout(function () {
+						window.location.reload();
+						// }, 2500);
+					},
+					error: function (err) {
+						console.error(err);
+						alert('Error deleting Website Accounts');
+					}
+				});
+			}
+		}
 
-            function toggleSelectAll() {
-                var checkboxes = document.querySelectorAll('input[name="selectedRows[]"]');
-                var selectAllCheckbox = document.getElementById('selectAllCheckbox');
-                var deleteAllButton = document.getElementById('deleteAllButton');
+		function toggleenfaqSelectAll() {
+			var checkboxes = document.querySelectorAll('input[name="selectedenfaqRows[]"]');
+			var selectAllenfaqCheckbox = document.getElementById('selectAllenfaqCheckbox');
+			var deleteAllenfaqButton = document.getElementById('deleteAllenfaqButton');
 
-                checkboxes.forEach(function (checkbox) {
-                    checkbox.checked = selectAllCheckbox.checked;
-                });
+			checkboxes.forEach(function (checkbox) {
+				checkbox.checked = selectAllenfaqCheckbox.checked;
+			});
 
-                // Enable or disable the "Delete All" button based on the number of selected checkboxes
-                deleteAllButton.disabled = !checkboxesChecked();
-                deleteAllButton.style = checkboxesChecked() ? 'active' : 'disabled';
-            }
+			// Enable or disable the "Delete All" button based on the number of selected checkboxes
+			deleteAllenfaqButton.disabled = !checkboxesenfaqChecked();
+			deleteAllenfaqButton.style = checkboxesenfaqChecked() ? 'active' : 'disabled';
+		}
 
-            function checkboxesChecked() {
-                var checkboxes = document.querySelectorAll('input[name="selectedRows[]"]');
-                var checkedCount = 0;
 
-                checkboxes.forEach(function (checkbox) {
-                    if (checkbox.checked) {
-                        checkedCount++;
-                    }
-                });
+		function checkboxesenfaqChecked() {
+			var checkboxes = document.querySelectorAll('input[name="selectedenfaqRows[]"]');
+			var checkedCount = 0;
 
-                return checkedCount > 1;
-            }
+			checkboxes.forEach(function (checkbox) {
+				if (checkbox.checked) {
+					checkedCount++;
+				}
+			});
 
-            // Call toggleSelectAll on page load to set the initial state of the button
-            window.onload = function () {
-                toggleSelectAll();
-            };
-            // function submitForm() {
-            //     var form = document.getElementById('technicalForm');
-            //     form.submit();
-            // }
-            // function viewTechnicalAnalysis(id, view) {
-            //     $.ajax({
-            //         type: 'POST',
-            //         url: 'includes/softwareinclude/ajax.php',
-            //         data: { viewType: view, type: 'session-store-technical' },
-            //         success: function (response) {
-            //             window.location.href = 'view-technical-analysis.php?id=' + id;
-            //         },
-            //         error: function (error) {
-            //             console.error('Error setting session variable:', error);
-            //         }
-            //     });
-            // }
+			return checkedCount > 1;
+		}
 
-        </script>
+		// Call toggleenfaqSelectAll on page load to set the initial state of the button
+		window.onload = function () {
+			toggleenfaqSelectAll();
+		};
+		// function submitForm() {
+		//     var form = document.getElementById('technicalForm');
+		//     form.submit();
+		// }
+		// function viewTechnicalAnalysis(id, view) {
+		//     $.ajax({
+		//         type: 'POST',
+		//         url: 'includes/softwareinclude/ajax.php',
+		//         data: { viewType: view, type: 'session-store-technical' },
+		//         success: function (response) {
+		//             window.location.href = 'view-technical-analysis.php?id=' + id;
+		//         },
+		//         error: function (error) {
+		//             console.error('Error setting session variable:', error);
+		//         }
+		//     });
+		// }
+
+	</script>
 </div><!--//app-wrapper-->
 <?php include('includes/footer.php'); ?>

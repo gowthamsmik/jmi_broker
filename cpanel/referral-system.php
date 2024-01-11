@@ -94,13 +94,13 @@
 
 <body>
 <?php include("../includes/header.php"); ?>
-    <div class='layout'>
+    <div class='layout cpanal_banar'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
     <div class="d-flex">
         <h2 class="fs-4"><?php echo  $lang['controlPanelReferralSystemOverview']?></h2>
-        <div class="d-flex ms-auto"><img src='<?php echo $siteurl."assets/images/svg/account_circle.svg" ?>' class="account_circle" alt="">
+        <div class="d-flex <?php echo ($userPreferredLanguage === 'ar') ? 'me-auto' : 'ms-auto'; ?>"><img src='<?php echo $siteurl."assets/images/svg/account_circle.svg" ?>' class="account_circle" alt="">
             <p class="mt-1 ms-2"><?php echo $lang['welcome1'] ?>,  <?php echo $_SESSION['sessionusername']; ?></p>
         </div>
     </div>
@@ -119,8 +119,8 @@
             </p>
 
             <div class="input-group mb-3 mt-4">
-                <input type="text" class="form-control border" id="MyRef" readonly placeholder="<?php echo $siteurl;?>index.php?myref=<?php echo $_SESSION['sessionuserid']+10000;?>">
-                <button class="btn btn-success custom-button"  onclick="CopyText()" type="submit">Copy Link</button>
+                <input type="text" class="form-control border <?php echo ($userPreferredLanguage === 'ar') ? 'rounded-start-0 rounded-end' : 'rounded-start rounded-end-0'; ?>" id="MyRef" readonly placeholder="<?php echo $siteurl;?>index.php?myref=<?php echo $_SESSION['sessionuserid']+10000;?>">
+                <button class="btn text-white custom-button <?php echo ($userPreferredLanguage === 'ar') ? 'rounded-start rounded-end-0' : ''; ?>"  onclick="CopyText()" type="submit"><?php echo $lang['copyLink']?></button>
             </div>
 
         </div>

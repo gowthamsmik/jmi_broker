@@ -13,7 +13,7 @@
    <body>
       <?php include("includes/header.php"); ?>
 
-      <section class="partner-banner money-banner">
+      <section class="partner-banner money-banner banner">
         <div class="container">
             <div class="partnerBannner-cont">
                <div class="banner-cont mn-hd mn-btn">

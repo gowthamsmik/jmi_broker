@@ -1,8 +1,8 @@
-<section class="about-section5">
+<!-- <section class="about-section5">
     <div class="container">
         <div class="sec5-top">
             <div class="mn-hd">
-                <h4 class="tx-blue">Our Latest News</h4>
+                <h4 class="tx-blue"><?php echo $lang['our_latest_news'] ?></h4>
             </div>
         </div>
 
@@ -23,11 +23,21 @@
                                 <div class="mn-hd">
                                     <div class="abtCard-body">
                                         <h6 class="tx-blue">
-                                            <?php echo $thisFrontNews['heading']; ?>
+                                            <?php echo
+                                            isset($_SESSION['user_language']) ? 
+                                            ($_SESSION['user_language'] == "ar" ?$thisFrontNews['ar_heading'] : 
+                                            ($_SESSION['user_language'] == "ru" ? $thisFrontNews['ru_heading'] : $thisFrontNews['heading'])) : 
+                                            $thisFrontNews['heading'];
+                                            ?>
                                         </h6>
                                         <div class="newsdesc">
                                             <p class="tx-grey300 p-fs5 ">
-                                                <?php echo $thisFrontNews['description']; ?>
+                                                <?php echo 
+                                                 isset($_SESSION['user_language']) ? 
+                                                 ($_SESSION['user_language'] == "ar" ?$thisFrontNews['ar_description'] : 
+                                                 ($_SESSION['user_language'] == "ru" ? $thisFrontNews['ru_description'] : $thisFrontNews['description'])) : 
+                                                 $thisFrontNews['description'];
+                                               ?>
                                             </p>
                                         </div>
                                     </div>
@@ -50,11 +60,10 @@
                                        
 
                               <div class="show-more-btn" <?php if (!$showMoreButton)
-                                 echo 'style="display: none; "'; ?>>Read
-                                 more</div>
+                                 echo 'style="display: none; "'; ?>>
+                                 <?php echo $lang['read_more'] ?></div>
                               <div class="show-less-btn" <?php if ($showMoreButton)
-                                 echo 'style="display: none;"'; ?>>Read
-                                 less</div>
+                                 echo 'style="display: none;"'; ?>><?php echo $lang['read_less'] ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -93,4 +102,4 @@
       });
 
    </script>
-</section>
+</section> -->

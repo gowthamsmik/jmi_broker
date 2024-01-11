@@ -11,7 +11,7 @@
    <body>
       <?php include("includes/header.php"); ?>
 
-      <section class="partner-banner downloadfile-banner " style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(20, 'Banner Background', 'Banner'); ?>');">
+      <section class="partner-banner banner downloadfile-banner " style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(20, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
            <div class="partnerBannner-cont w-100  banner-pt1 banner-pb1 pdX8 text-center">
                <div class="banner-cont mn-hd mn-btn">

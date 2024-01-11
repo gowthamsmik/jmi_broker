@@ -156,8 +156,9 @@ if ($_POST['type'] == 'add-news') {
 }
 if ($_POST['type'] == 'update-news') {
     extract($_POST);
-    update_news($id, $heading, $description, $posted_by, $news_files);
+    update_news($id, $heading, $description,$ar_title,$ar_details,$ru_heading,$ru_details, $posted_by, $news_files);
 }
+
 
 if ($_POST['type'] == 'add-fanalysis') {
     extract($_POST);
@@ -354,8 +355,10 @@ if ($_POST['type'] == 'update-fundamental-analysis') {
         } else {
             echo "File upload failed.";
         }
-    } else {
-        echo "Errorrrrrrrrrrrr: " . $updatefundamental;
+    } else{
+        $targetFile="null";
+        updateFundamentalAnalysis($id, $heading, $description, $targetFile);
+        echo "File uploaded and analysis added successfully.";
     }
 }
 
@@ -832,3 +835,31 @@ if ($_POST['type'] == 'notificationId') {
     notificationId($notificationId);
     
 }
+if ($_POST['type'] === 'extract-all-copy-trade') {
+    extractcopytrade();
+      
+  }
+  if ($_POST['type'] === 'extract-all-deposite-copy-trade') {
+    extractdeposite();
+      
+  }
+  if ($_POST['type'] === 'extract-all-withdraw-copy-trade') {
+    extractwithdraw();
+      
+  }
+  if ($_POST['type'] === 'extract-all-internal-copy-trade') {
+    extractinternal();
+      
+  }
+  if ($_POST['type'] === 'extract-all-search-search-url') {
+    extractallsearchurl();
+      
+  }
+  if ($_POST['type'] === 'extract-all-landing-users') {
+    extractalllandingusers();
+      
+  }
+  if ($_POST['type'] === 'extract-all-mailer') {
+    extractallmailer();
+      
+  }

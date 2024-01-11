@@ -15,7 +15,7 @@
    <body>
       <?php include('includes/header.php'); ?>
 
-      <section class='partner-banner money-banner'>
+      <section class='partner-banner banner money-banner'>
         <div class='container'>
             <div class='partnerBannner-cont'>
                <div class='banner-cont mn-hd mn-btn'>
@@ -47,7 +47,7 @@
                   <div class='col-md-6'>
                      <div class='mn-hd partnerSec1-cont hd-pad'>
                         <h3 class='tx-blue'><?php echo getPageMetaByIDKeyGroup(14,'Heading','Our Money Managers');?></h3>
-                        <p class='p-fs5 tx-grey300 paraPdR'><?php echo getPageMetaByIDKeyGroup(14,'Description','Our Money Managers');?></p>
+                        <p class='p-fs5 tx-grey300 paraPdR <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>'><?php echo getPageMetaByIDKeyGroup(14,'Description','Our Money Managers');?></p>
                      </div>
                   </div>
 
@@ -61,8 +61,8 @@
                <div class='row'>
                   <div class='col-md-6'>
                      <div class='mn-hd partnerSec1-cont'>
-                        <p class='p-fs2 tx-blue paraPad bld'><?php echo getPageMetaByIDKeyGroup(14,'Heading','We offer various allocation methods');?></p>
-                        <ol class='greySec-ol'>
+                        <p class='p-fs2 tx-blue paraPad bld <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>'><?php echo getPageMetaByIDKeyGroup(14,'Heading','We offer various allocation methods');?></p>
+                        <ol class='greySec-ol <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>'>
                            <?php echo getPageMetaByIDKeyGroup(14,'Description','We offer various allocation methods');?>
                         </ol>
                      </div>
@@ -70,8 +70,8 @@
 
                   <div class='col-md-6'>
                      <div class='mn-hd partnerSec1-cont'>
-                        <p class='p-fs2 tx-blue paraPad bld'><?php echo getPageMetaByIDKeyGroup(14,'Heading','Our comprehensive reporting system');?></p>
-                        <ol class='greySec-ol'>
+                        <p class='p-fs2 tx-blue paraPad bld <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>'><?php echo getPageMetaByIDKeyGroup(14,'Heading','Our comprehensive reporting system');?></p>
+                        <ol class='greySec-ol <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>'>
                            <?php echo getPageMetaByIDKeyGroup(14,'Description','Our comprehensive reporting system');?>
                         </ol>
                      </div>

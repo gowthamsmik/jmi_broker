@@ -15,7 +15,7 @@
    <body>
       <?php include('includes/header.php'); ?>
 
-      <section class='partner-banner money-banner'>
+      <section class='partner-banner banner money-banner'>
         <div class='container'>
             <div class='partnerBannner-cont'>
                <div class='banner-cont mn-hd mn-btn'>

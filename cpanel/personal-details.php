@@ -52,11 +52,11 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
 
             <p class="fs-4 mt-4"><?php echo $lang["personal_details"] ?></p>
             <hr>
-            <div class="px-5 mx-5 mt-4">
+            <div class="px-3 mx-3 mt-4">
                 <form action="#">
-                    <div class="d-flex align-items-center gap-5 row">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["title"] ?></label></div>
-                        <div class="col-7">
+                    <div class="d-flex align-items-center gap-2 row">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["title"] ?></label></div>
+                        <div class="col-md-7">
                             <select id="titleDropdown" class="form-select rounded-3 box-shadow py-2 px-3">
                                 <option value="1" <?php echo ($profileDetails['title'] == 1) ? 'selected' : ''; ?>>Mr
                                 </option>
@@ -67,17 +67,17 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["full_name"] ?></label></div>
-                        <div class="col-7"><input type="text" class="form-control rounded-3 box-shadow border bg-white"
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["full_name"] ?></label></div>
+                        <div class="col-md-7"><input type="text" class="form-control rounded-3 box-shadow border bg-white"
                                 name="fullName" id="fullName" placeholder="Enter Name"
                                 value="<?php echo isset($profileDetails['fullname']) ? $profileDetails['fullname'] : ''; ?>">
                             <small id="fullNameError" class="text-danger"></small>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["email"] ?></label></div>
-                        <div class="col-7">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["email"] ?></label></div>
+                        <div class="col-md-7">
                             <input type="email" class="form-control rounded-3 box-shadow border bg-white" name="email"
                                 id="emailInput" placeholder="Enter mail"
                                 value="<?php echo isset($profileDetails['email']) ? $profileDetails['email'] : ''; ?>">
@@ -85,10 +85,10 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                             <!-- <button class="btn button_color" id="changeEmailBtn">Change Email</button> -->
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["username"] ?></label>
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["username"] ?></label>
                         </div>
-                        <div class="col-7">
+                        <div class="col-md-7">
                             <input type="text" class="form-control rounded-3 box-shadow border bg-white"
                                 placeholder="Enter user name" name="username" id="username" oninput="validateUsername()"
                                 value="<?php echo isset($profileDetails['username']) ? $profileDetails['username'] : ''; ?>">
@@ -98,14 +98,14 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                                 Username</button> -->
                         </div>
                     </div>
-                    <!-- <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["password"] ?></label></div>
-                        <div class="col-7"><button onclick="showRoute('link15')"
+                    <!-- <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["password"] ?></label></div>
+                        <div class="col-md-7"><button onclick="showRoute('link15')"
                                 class="btn button_color"><?php echo $lang["change_password"] ?></button></div>
                     </div> -->
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["gender"] ?></label></div>
-                        <div class="col-7">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["gender"] ?></label></div>
+                        <div class="col-md-7">
                             <select class="form-select rounded-3 box-shadow py-2 px-3" id="genderDropdown">
                                 <option value="-1" disabled>-Select-</option>
                                 <option value="1" <?php echo (isset($profileDetails['gender']) && $profileDetails['gender'] == 1) ? 'selected' : ''; ?>>Male</option>
@@ -113,9 +113,9 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["date_of_birth"] ?></label></div>
-                        <div class="d-flex col-7 gap-3">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["date_of_birth"] ?></label></div>
+                        <div class="d-flex flex-wrap col-md-7 gap-3">
                             <select id="dateDropdown" class="form-select rounded-3 box-shadow py-2 px-3">
                                 <option value="">-select-</option>
                                 <!-- Use a loop to generate options from 1 to 31 -->
@@ -166,44 +166,44 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
 
             <p class="fs-4 mt-4"><?php echo $lang["home_address"] ?></p>
             <hr>
-            <div class="px-5 mx-5 mt-4">
+            <div class="px-3 mx-3 mt-4">
                 <form action="\">
-                    <div class="d-flex align-items-center gap-5 row">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["address_1"] ?></label></div>
-                        <div class="col-7">
+                    <div class="d-flex align-items-center gap-2 row">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["address_1"] ?></label></div>
+                        <div class="col-md-7">
                             <input type="text" class="form-control rounded-3 box-shadow border bg-white" name=""
                                 id="address1"
                                 value="<?php echo isset($profileDetails['address1']) ? $profileDetails['address1'] : ''; ?>"
                                 placeholder="Address">
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["address_2"] ?></label></div>
-                        <div class="col-7"><input type="text" class="form-control rounded-3 box-shadow border bg-white"
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["address_2"] ?></label></div>
+                        <div class="col-md-7"><input type="text" class="form-control rounded-3 box-shadow border bg-white"
                                 value="<?php echo isset($profileDetails['address2']) ? $profileDetails['address2'] : ''; ?>"
                                 name="" id="address2" placeholder="Address 2"></div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["town_city"] ?></label></div>
-                        <div class="col-7">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["town_city"] ?></label></div>
+                        <div class="col-md-7">
                             <input type="text" class="form-control rounded-3 box-shadow border bg-white" name=""
                                 id="town_city"
                                 value="<?php echo isset($profileDetails['town_city']) ? $profileDetails['town_city'] : ''; ?>"
                                 placeholder="Enter mail">
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["post_code"] ?></label>
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["post_code"] ?></label>
                         </div>
-                        <div class="col-7">
+                        <div class="col-md-7">
                             <input type="text" class="form-control rounded-3 box-shadow border bg-white" id="post_code"
                                 value="<?php echo isset($profileDetails['post_code']) ? $profileDetails['post_code'] : ''; ?>"
                                 placeholder="Enter user name" name="" id="">
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["country"] ?></label></div>
-                        <div class="col-7">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["country"] ?></label></div>
+                        <div class="col-md-7">
                             <select class="form-select rounded-3 box-shadow py-2 px-3" id="country">
                                 <option>-Select-</option>
                                 <?php
@@ -229,9 +229,9 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["home"] ?></label></div>
-                        <div class="col-7 d-flex gap-3">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["home"] ?></label></div>
+                        <div class="col-md-7 d-flex gap-3">
                             <div class="col-3 p-0">
                                 <select class="form-select rounded-3 box-shadow py-2 px-3" id="home_code">
                                     <option>-Select-</option>
@@ -261,9 +261,9 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang["mobile"] ?></label></div>
-                        <div class="col-7 d-flex gap-3">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["mobile"] ?></label></div>
+                        <div class="col-md-7 d-flex gap-3">
                             <div class="col-3 p-0">
                                 <select class="form-select rounded-3 box-shadow py-2 px-3" id="mobile_code">
                                     <option>-Select-</option>
@@ -298,11 +298,11 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
 
             <p class="fs-4 mt-4"><?php echo $lang["additional_details"] ?></p>
             <hr>
-            <div class="px-5 mx-5 mt-4">
+            <div class="px-3 mx-3 mt-4">
                 <form action="">
-                    <div class="d-flex align-items-center gap-4 row mt-4">
-                        <div class="col-4"><label for="" class="form-label fs-5"><?php echo $lang["employment_status"] ?></label></div>
-                        <div class="col-6">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-4"><label for="" class="form-label fs-5"><?php echo $lang["employment_status"] ?></label></div>
+                        <div class="col-md-6">
                             <select class="form-select rounded-3 box-shadow py-2 px-3" id="employment_status">
                                 <option value="-1" disabled>-Select-</option>
                                 <option value="1" <?php echo (isset($profileDetails['employment_status']) && $profileDetails['employment_status'] == 1) ? 'selected' : ''; ?>>Employed</option>
@@ -315,9 +315,9 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-4 row mt-4">
-                        <div class="col-4"><label for="" class="form-label fs-5"><?php echo $lang["nature_of_business"] ?></label></div>
-                        <div class="col-6">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-4"><label for="" class="form-label fs-5"><?php echo $lang["nature_of_business"] ?></label></div>
+                        <div class="col-md-6">
                             <select class="form-select rounded-3 box-shadow py-2 px-3" id="nature_of_business">
                                 <option value="-1" disabled>-Select-</option>
                                 <option value="1" <?php echo (isset($profileDetails['nature_of_business']) && $profileDetails['nature_of_business'] == 1) ? 'selected' : ''; ?>>Accountancy</option>
@@ -331,9 +331,9 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-4 row mt-4">
-                        <div class="col-4"><label for="" class="form-label fs-5"><?php echo $lang["estimated_annual_income"] ?></label></div>
-                        <div class="col-6">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-4"><label for="" class="form-label fs-5"><?php echo $lang["estimated_annual_income"] ?></label></div>
+                        <div class="col-md-6">
                             <select class="form-select rounded-3 box-shadow py-2 px-3" id="annual_income">
                                 <option value="-1" disabled>-Select-</option>
                                 <option value="1" <?php echo ($profileDetails['annual_income'] == 1) ? 'selected' : ''; ?>>Lessthan $15,000</option>
@@ -345,9 +345,9 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-4 row mt-4">
-                        <div class="col-4"><label for="" class="form-label fs-5"><?php echo $lang["estimated_net_worth"] ?></label></div>
-                        <div class="col-6">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-4"><label for="" class="form-label fs-5"><?php echo $lang["estimated_net_worth"] ?></label></div>
+                        <div class="col-md-6">
                             <select class="form-select rounded-3 box-shadow py-2 px-3" id="net_worth">
                                 <option value=" -1" disabled>-Select-</option>
                                 <option value="1" <?php echo ($profileDetails['net_worth'] == 1) ? 'selected' : ''; ?>>
@@ -365,9 +365,9 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-4 row mt-4">
-                        <div class="col-4"></div>
-                        <div class="col-6">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-6">
                             <button class="btn button_color w-100 text-white" onclick="patchprofile()"><?php echo $lang["update_profile"] ?></button>
                         </div>
                     </div>

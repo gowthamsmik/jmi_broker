@@ -54,7 +54,7 @@
                                  
                                  <?php echo $thisPackage['description'];?>
                                  
-                                 <a href="<?php echo getPageMetaByIDKeyGroup(21,'Banner Button URL','Package');?>" class="gd-btn mt-4">Buy Package</a>
+                                 <a href="<?php echo getPageMetaByIDKeyGroup(21,'Banner Button URL','Package');?>" class="gd-btn mt-4"><?php echo $lang['buy_package']?></a>
                               </div>
                            </div>
                         </div>
@@ -67,7 +67,7 @@
                   <p class="p-fs3">
                   <?php echo getPageMetaByIDKeyGroup(1,'Description 2','Package');?>
                   </p>
-                  <a class="theam-btn text-black  signUp" href="<?php echo getPageMetaByIDKeyGroup(1,'Banner Button URL','Package');?>"><?php echo getPageMetaByIDKeyGroup(1,'Banner Button Text','Package');?>
+                  <a class="theam-btn gd-btn text-black  signUp" href="<?php echo getPageMetaByIDKeyGroup(1,'Banner Button URL','Package');?>"><?php echo getPageMetaByIDKeyGroup(1,'Banner Button Text','Package');?>
                      <span>
                            <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>

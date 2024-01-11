@@ -15,7 +15,7 @@
 <body>
     <?php include("includes/header.php"); ?>
 
-    <section class="commodities-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(5, 'Banner Background', 'Banner'); ?>');">
+    <section class="commodities-banner banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(5, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd mn-btn">
                 <h2 class="pdB1"><?php echo getPageMetaByIDKeyGroup(5,'Banner Heading 1','Banner');?></h2>
@@ -43,7 +43,7 @@
                         <div class="header-top">
                             <h5 class="tx-blue"><?php echo getPageMetaByIDKeyGroup(5,'Heading','Commodities');?></h5>
                             <div class="forex-tag">
-                                <span data-targetit="box-table1" class="p-fs5 tx-grey-new4 padR2 current"><?php echo getPageMetaByIDKeyGroup(5,'Short Text','Commodities');?></span>
+                                <span data-targetit="box-table1" class="p-fs5 tx-grey-new4 padR2 current <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>"><?php echo getPageMetaByIDKeyGroup(5,'Short Text','Commodities');?></span>
                                 <span data-targetit="box-table2" class="p-fs5 tx-grey-new4"><?php echo getPageMetaByIDKeyGroup(5,'Short Text 2','Commodities');?></span>
                             </div>
                         </div>

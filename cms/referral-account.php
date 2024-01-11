@@ -1,281 +1,314 @@
-<?php include('includes/header.php'); ?>
-<div class="app-wrapper">
+<?php include('includes/header.php');
+$myReferrals = getMyReferralscms();
+?>
 
+
+<div class="app-wrapper">
 	<div class="app-content pt-3 p-md-3 p-lg-4">
 		<div class="container-xl">
-
 			<div class="row g-3 mb-4 align-items-center justify-content-between">
 				<div class="col-auto">
-					<h1 class="app-page-title mb-0">referal Account</h1>
+					<h1 class="app-page-title mb-0">referral Account</h1>
 				</div>
-				<div class="col-auto">
+			</div>
+			<!-- <?php if (count($myReferrals) <= 0): ?>
+					<div class="white-box mt-3">
+						<h3>Don't Have Any Referalls Yet</h3>
+
+						<div class="input-group mb-3 mt-4">
+							<input type="text" class="form-control border <?php echo ($userPreferredLanguage === 'ar') ? 'rounded-start-0 rounded-end' : 'rounded-start rounded-end-0'; ?>" id="MyRef" readonly
+								placeholder="<?php echo $siteurl; ?>index.php?myref=<?php echo $_SESSION['sessionuserid'] + 10000; ?>">
+							<button class="btn btn-success custom-button <?php echo ($userPreferredLanguage === 'ar') ? 'rounded-start rounded-end-0' : ''; ?>" onclick="CopyText()" type="submit">Copy
+								Link</button>
+						</div>
+					</div>
+
+				<?php endif; ?> -->
+			<?php if (count($myReferrals) > 0): ?>
+				<div class="table-container">
+					<!-- <h4 class="fs-4 mt-3"> <?php echo $lang['linked_copy_trade'] ?></h4> -->
+					<table class="class='gap-3 bg-white table mt-3'" id="referral-account-table">
+						<thead class="border">
+							<tr>
+								<td>#</td>
+								<td>Full Name</td>
+								<td>Email</td>
+								<td>Country</td>
+								<td>Mobile</td>
+								<td>Live Accounts</td>
+								<td>Demo Accounts</td>
+								<td>Created Date</td>
+							</tr>
+						</thead>
+						<tbody>
 
 
+						</tbody>
+					</table>
 				</div>
-				<div class="col-auto">
-					<button class="btn app-btn-secondary">
-						<a class="" href="add-account.php?id=<?php echo urlencode(4); ?>">Add Account</a>
-					</button>
 
-					<button type="button" class="btn app-btn-secondary" id="deleteAllButton"
-						onclick="deleteWebsiteAccount()" style="display: none;">Delete All</button>
+				<div id="pagination-container" class="pagination float-end">
+
 				</div>
-			</div><!--//row-->
-			<div class="tab-content" id="orders-table-tab-content">
-				<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
-					<div class="app-card app-card-orders-table shadow-sm mb-5">
-						<div class="app-card-body">
-							<div class="table-responsive">
-								<table class="table app-table-hover mb-0 text-left">
+
+			<?php endif; ?>
+			<div id="modal-wrapper" onclick="closeModal()">
+				<div id="modal-content">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+							</div>
+							<div class="modal-body">
+
+								<table class="table table-bordered" id="live-account-table">
 									<thead>
-										<tr class="text-center">
-											<th class="cell">
-												<input type="checkbox" id="selectAllCheckbox"
-													onclick="toggleSelectAll()">
-											</th>
+										<tr>
+											<td>#</td>
 
-											<th class="cell">ID</th>
-											<th class="cell">Account ID</th>
-											<th class="cell">Account Type</th>
-											<th class="cell">Account Group</th>
-											<th class="cell">Created Date</th>
-											<!-- <th class="cell">Updated Date</th> -->
-											<th class="cell">Status</th>
-											<th class="cell">Action</th>
+											<td>Account</td>
+											<td>Server</td>
+											<td>Type</td>
+											<td>Group</td>
+											<td>Currency</td>
+											<td>Leverage</td>
+											<td>Investor</td>
+
 										</tr>
 									</thead>
 									<tbody>
-										<?php
-										$perPage = 10;
-										$index = 0;
-										$page = isset($_GET['page']) ? $_GET['page'] : 1;
-										$getAllwebsiteaccount = getAllrefferalaccount($page, $perPage);
-										if ($getAllwebsiteaccount->num_rows > 0) {
-											foreach ($getAllwebsiteaccount as $websiteaccount) {
-												$index++;
-												?>
-												<tr class="text-center">
-													<td class="cell">
-														<input type="checkbox" name="selectedRows[]"
-															value="<?php echo $websiteaccount['account_id']; ?>" />
-													</td>
-													<td class="cell">
-														<?php echo $websiteaccount['id']; ?>
-													</td>
-													<td class="cell"><span class="truncate">
-															<?php echo $websiteaccount['account_id']; ?>
-														</span></td>
-													<td class="cell">
-														<?php
-														$statusValue = $websiteaccount['account_type'];
-														$statusLabel = '';
 
-														switch ($statusValue) {
-															case '1':
-																$statusLabel = 'Website Account';
-																break;
-															case '2':
-																$statusLabel = 'Demo Account';
-																break;
-															case '3':
-																$statusLabel = 'Live Account';
-																break;
-															default:
-																$statusLabel = 'Refferal Account';
-																break;
-														}
 
-														echo $statusLabel;
-														?>
-													</td>
-													<td class="cell"><span class="truncate">
-															<?php echo $websiteaccount['account_group']; ?>
-														</span></td>
-													<td class="cell"><span class="truncate">
-															<?php echo $websiteaccount['created_at']; ?>
-														</span></td>
-													<!-- <td class="cell"><span class="truncate">
-															<?php echo $websiteaccount['updated_at']; ?>
-														</span></td> -->
-													<td class="cell"><span class="truncate">
-															<?php echo $websiteaccount['status']; ?>
-														</span></td>
-													<td class="cell">
-														<a class="btn-sm app-btn-secondary mx-1"
-															href="list-account.php?id=<?php echo $websiteaccount['account_id']; ?>">
-															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-																fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-																<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-																<path
-																	d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-															</svg>
-														</a>
-														<a class="btn-sm app-btn-secondary mx-1"
-															href="edit-account.php?id=<?php echo $websiteaccount['account_id']; ?>">
-															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-																fill="currentColor" class="bi bi-pencil-square"
-																viewBox="0 0 16 16">
-																<path
-																	d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-																<path fill-rule="evenodd"
-																	d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-															</svg>
-														</a>
-														<a class="btn-sm app-btn-secondary mx-1" href="#"
-															data-id="<?php echo $websiteaccount['id']; ?>"
-															onclick="deleteWebsiteAccount(this);">
-															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-																fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-																<path
-																	d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-															</svg>
-														</a>
-													</td>
-												</tr>
-											<?php }
-										} ?>
 
 
 
 									</tbody>
 								</table>
-							</div><!--//table-responsive-->
-
-						</div><!--//app-card-body-->
-					</div><!--//app-card-->
-					<nav class="app-pagination">
-							<ul class="pagination justify-content-end">
-					<?php
-                    $totalRecords = getTotalreferalAccounts();
-                    $limit = 10; // Set the number of records to display per page
-                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-
-                    // Calculate the total number of pages
-                    $totalPages = ceil($totalRecords / $limit);
-
-                    // Determine the starting and ending page numbers to display
-                    $startPage = max($currentPage - 3, 1);
-                    $endPage = min($startPage + 5, $totalPages);
-
-                    // Display pagination links
-                    echo '<ul class="pagination justify-content-end">';
-
-                    // First button
-                    echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
-
-                    // Previous button
-                    $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
-                    echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
-
-                    // Page numbers
-                    for ($i = $startPage; $i <= $endPage; $i++) {
-                        echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-                    }
-
-                    // Next button
-                    $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
-                    echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
-
-                    // Last button
-                    echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
-
-                    echo '</ul>';
-                    ?>
-					</ul>
-				</nav>
-					
-					
-					
-
-				</div><!--//tab-pane-->
-
-			</div><!--//tab-content-->
 
 
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" onclick="closeModal()"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
 
-		</div><!--//container-fluid-->
-	</div><!--//app-content-->
-
-	<footer class="app-footer">
-		<div class="container text-center py-3">
-			<!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-
-
+					</div>
+				</div>
+			</div>
 		</div>
-	</footer><!--//app-footer-->
-	<script>
-		function deleteWebsiteAccount() {
-			var selectedRows = document.querySelectorAll('input[name="selectedRows[]"]:checked');
-			var currentPage = <?php echo $page; ?>;
-			var perPage = <?php echo $perPage; ?>;
+	</div>
+</div>
+<?php include("../../includes/footer.php"); ?>
+<?php include("../../includes/scripts.php"); ?>
+<style>
+	.current-num-btn {
+		background-color: #007bff;
+		/* Set the background color for the active page */
+		color: #fff;
+		/* Set the text color for the active page */
+	}
+</style>
+<script type="text/javascript">
+	loadReferralAccounts(1);
+	function CopyText() {
+		$('input#MyRef').val('<?php echo $siteurl; ?>index.php?myref=<?php echo $_SESSION['sessionuserid'] + 10000; ?>');
+		var copyText = document.getElementById("MyRef");
+		copyText.select();
+		document.execCommand("Copy");
+	}
 
-			if (selectedRows.length === 0) {
-				alert('Please select at least one row to delete.');
-				return;
-			}
 
-			if (confirm('Are you sure you want to delete the selected records?')) {
-				var ids = Array.from(selectedRows).map(function (row) {
-					return row.value;
-				});
-
-				// Send an AJAX request to delete the selected records on the current page
-				$.ajax({
-					url: 'includes/softwareinclude/ajax.php',
-					type: 'post',
-					data: { type: 'delete-website-accounts', ids: ids, page: currentPage },
-					success: function (res) {
-						console.log(res);
-						alert('Selected Accounts Deleted');
-
-						// Optionally, you can reload the page or update the table without a page reload
-						window.location.href = "refferal-account.php";
-
-						// Update the "Delete All" button status after deletion
-						var deleteAllButton = document.getElementById('deleteAllButton');
-						deleteAllButton.disabled = true;
-						deleteAllButton.style.display = 'none';  // Hide the button after deletion
-					},
-					error: function (err) {
-						console.error(err);
-						alert('Error deleting selected Accounts');
+	function loadReferralAccounts(page) {
+		i = 1;
+		$('#referral-account-table tbody').empty();
+		$('#pagination-container').empty();
+		$.ajax({
+			url: 'includes/softwareinclude/referral-table.php?page=' + page,
+			method: "GET",
+			dataType: 'json',
+			success: function (data) {
+				$.each(data.referralAccounts, function (index, referralAccounts) {
+					const serialNumber = (page - 1) * 10 + index + 1;
+					var accountsShow = '';
+					if (referralAccounts.totalLiveAccounts != 0) {
+						accountsShow = '<span class="btn btn-success" onclick="openModalsacc(' + referralAccounts.website_accounts_live_id + ')">' + referralAccounts.totalLiveAccounts + ' Show</span>';
 					}
+					var accountsShowDemo = '';
+					if (referralAccounts.totalDemoAccounts != 0) {
+						accountsShowDemo = '<span class="btn btn-success" onclick="openModalsacc(' + referralAccounts.website_accounts_demo_id + ')">' + referralAccounts.totalDemoAccounts + ' Show</span>';
+					}
+
+					$('#referral-account-table tbody').append('<tr>' +
+						'<td>' + serialNumber + '</td>' +
+						'<td>' + referralAccounts.fullname + '</td>' +
+						'<td>' + referralAccounts.email + '</td>' +
+						'<td>' + referralAccounts.country + '</td>' +
+						'<td>' + referralAccounts.country_code + "" + referralAccounts.mobile + '</td>' +
+						'<td>' + accountsShow + '</td>' +
+						'<td>' + accountsShowDemo + '</td>' +
+						'<td>' + referralAccounts.created_at + '</td>' +
+						'</tr>');
 				});
+
+				if (data.referralAccounts.length > 0) {
+					updatePagination(data.totalPages, page, 'none', 'loadReferralAccounts');
+				}
+			},
+			error: function (xhr, status, error) {
+				console.error('AJAX error:', error);
+			}
+		});
+	}
+
+
+
+	function openModalsacc(id) {
+		console.log("id", id);
+		loadLiveAccounts(id);
+		document.getElementById("modal-wrapper").style.display = "flex";
+	}
+	function closeModal() {
+		document.getElementById("modal-wrapper").style.display = "none";
+	}
+
+
+	function loadLiveAccounts(id) {
+		i = 1;
+		$('#live-account-table tbody').empty();
+		$.ajax({
+			url: 'includes/softwareinclude/referral-table.php?id=' + id,
+			method: "GET",
+			dataType: 'json',
+			success: function (data) {
+
+
+				$.each(data.liveAccounts, function (index, liveAccounts) {
+
+
+
+
+					var accountType = liveAccounts.account_type != 0 ? "Individual Account" : "IB Account";
+					var accountGroup = ''
+					if (liveAccounts.account_group == 3) { accountGroup = "Variable Spread Account" }
+
+					else if (liveAccounts.account_group == 5) { accountGroup = "Scalping Account" }
+
+					else if (liveAccounts.account_group == 1) { accountGroup = "Fixed Spread Account" }
+					else if (liveAccounts.account_group == 4) { accountGroup = "Bonus Account" }
+
+
+
+
+					$('#live-account-table tbody').append('<tr>' + '<td>' + index + '</td>' +
+						'<td>' + liveAccounts.account_id + '</td>' +
+						'<td>JMI-Server </td>' +
+						'<td>' + accountType + '</td>' +
+						'<td>' + accountGroup + '</td>' +
+						'<td> USD </td>' +
+
+						'<td>1:' + liveAccounts.leverage + '</td>' +
+
+
+						'<td>' + liveAccounts.investor_password + '</td></tr>'
+					)
+
+
+				});
+
+
+
+			},
+			error: function (xhr, status, error) {
+				console.error('AJAX error:', status, error);
+			}
+		})
+
+	}
+
+
+	function updatePagination(totalPages, currentPage, type, updateFunction) {
+
+		$('#pagination-container').empty();
+		if (updateFunction == 'loadTransactions') {
+			if (currentPage > 1) {
+				$('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(1, \'' + type + '\')">&laquo;&laquo;</button>');
+			} else {
+				$('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&laquo;&laquo;</button>');
+			}
+
+			if (currentPage > 1) {
+				$('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + (currentPage - 1) + ', \'' + type + '\')">&laquo;</button>');
+			} else {
+				$('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&laquo;</button>');
+			}
+
+			$('#pagination-container').append('<button class="current-num-btn" disabled>' + currentPage + '</button>');
+
+			for (var i = currentPage + 1; i <= Math.min(currentPage + 2, totalPages - 1); i++) {
+				$('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + i + ', \'' + type + '\')">' + i + '</button>');
+			}
+
+			if (currentPage + 2 < totalPages - 1) {
+				// Display ellipsis or any other indicator for more pages
+				$('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&hellip;</button>');
+			}
+
+			if (totalPages > currentPage) {
+				$('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + (currentPage + 1) + ', \'' + type + '\')">&raquo;</button>');
+			} else {
+				$('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&raquo;</button>');
+			}
+
+			if (totalPages > currentPage) {
+				$('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + totalPages + ', \'' + type + '\')">&raquo;&raquo;</button>');
+			} else {
+				$('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&raquo;&raquo;</button>');
 			}
 		}
+		else {
 
-		function toggleSelectAll() {
-			var checkboxes = document.querySelectorAll('input[name="selectedRows[]"]');
-			var selectAllCheckbox = document.getElementById('selectAllCheckbox');
-			var deleteAllButton = document.getElementById('deleteAllButton');
 
-			checkboxes.forEach(function (checkbox) {
-				checkbox.checked = selectAllCheckbox.checked;
-			});
+			if (currentPage > 1) {
+				$('#pagination-container').append('<button class="opt-num-btn btn " onclick="' + updateFunction + '(1)">&laquo;&laquo;</button>');
+			} else {
+				$('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&laquo;&laquo;</button>');
+			}
 
-			// Enable or disable the "Delete All" button based on the number of selected checkboxes
-			deleteAllButton.disabled = !checkboxesChecked();
-			deleteAllButton.style.display = checkboxesChecked() ? 'inline-block' : 'none';
+			if (currentPage > 1) {
+				$('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + (currentPage - 1) + ')">&laquo;</button>');
+			} else {
+				$('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&laquo;</button>');
+			}
+
+			$('#pagination-container').append('<button class="current-num-btn" disabled>' + currentPage + '</button>');
+
+			for (var i = currentPage + 1; i <= Math.min(currentPage + 2, totalPages - 1); i++) {
+				$('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + i + ')">' + i + '</button>');
+			}
+
+			if (currentPage + 2 < totalPages - 1) {
+				// Display ellipsis or any other indicator for more pages
+				$('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&hellip;</button>');
+			}
+
+			if (totalPages > currentPage) {
+				$('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + (currentPage + 1) + ')">&raquo;</button>');
+			} else {
+				$('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&raquo;</button>');
+			}
+
+			if (totalPages > currentPage) {
+				$('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(' + totalPages + ')">&raquo;&raquo;</button>');
+			} else {
+				$('#pagination-container').append('<button class="opt-num-btn pagination-disabled-button" disabled>&raquo;&raquo;</button>');
+			}
+
+
+
 		}
+	}
+</script>
 
-		function checkboxesChecked() {
-			var checkboxes = document.querySelectorAll('input[name="selectedRows[]"]');
-			var checkedCount = 0;
-
-			checkboxes.forEach(function (checkbox) {
-				if (checkbox.checked) {
-					checkedCount++;
-				}
-			});
-
-			return checkedCount > 1;
-		}
-
-		// Call toggleSelectAll on page load to set the initial state of the button
-		window.onload = function () {
-			toggleSelectAll();
-		};
-	</script>
-
-</div><!--//app-wrapper-->
-<?php include('includes/footer.php'); ?>

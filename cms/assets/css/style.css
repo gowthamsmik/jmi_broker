@@ -331,7 +331,7 @@ button {
 }
 
 .mn-hd h1 {
-  font-size: 150px;
+  font-size: 100px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -1.346px;
@@ -927,6 +927,16 @@ ul.dropdown li a:hover {
   position: relative;
   background-color: #0343AE;
 }
+
+@media screen and (min-width:350px) and (max-width:766px) {
+	.banner{
+	  margin-top: 198px !important;
+	}
+	.mainBanner {
+	  margin-top: 198px !important;
+	}
+  }
+
 .mainBanner::after {
   content: "";
   width: 1260px;
@@ -1053,7 +1063,7 @@ ul.dropdown li a:hover {
   border-radius: 8.59px;
   border: 1.074px solid #424242;
   background: #053B9E;
-  padding: 30px 20px 40px;
+  padding: 80px 20px 80px !important;
   font-size: 14px;
   min-width:220px !important;
 }
@@ -1242,7 +1252,7 @@ ul.dropdown li a:hover {
 
 .homeCta {
   background: linear-gradient(0deg, rgba(3, 67, 174, 0.5) 0%, rgba(3, 67, 174, 0.5) 100%), url(../images/cta-bg.jpg), lightgray 0px -460.167px/100% 326.599% no-repeat;
-  padding: 70px 0 90px;
+  padding: 50px 0 50px;
   text-align: center;
 }
 
@@ -1318,7 +1328,7 @@ ul.dropdown li a:hover {
 }
 
 .about-section2 {
-  padding: 160px 0;
+  padding: 60px 0 !important;
 }
 .about-section2 .aboutSec2-top {
   padding-bottom: 90px;
@@ -1382,17 +1392,19 @@ ul.dropdown li a:hover {
   border-radius: 22.278px;
   background: #00163F;
   position: relative;
-  height: 177px;
+  height: 100%;
+  width:100%;
 }
 .about-section4 .about-card2 p {
   font-weight: 700;
-  padding-left: 35px;
-  width: 240px;
+  padding-left: 25px;
+  width: 210px;
 }
 .about-section4 .about-card2 img {
   position: absolute;
   right: 0;
   bottom: 0;
+  width: 40%;
 }
 
 .about-section5 {
@@ -1513,8 +1525,10 @@ footer .footer-top {
 }
 footer .footer-top .footer-sponser {
   position: absolute;
-  bottom: 30px;
+  bottom: 10px;
   right: 50px;
+  max-width:500px;
+  min-width: 300px;
 }
 footer .footer-top .footer-sponser .sponser1 {
   display: flex;
@@ -3057,7 +3071,7 @@ footer .copyright p span {
     padding-left: 3%;
   }
   .mn-hd h1 {
-    font-size: 115px;
+    font-size: 100px;
   }
   .mn-hd h3 {
     font-size: 45px;
@@ -3122,7 +3136,7 @@ footer .copyright p span {
   footer .footer-top .footer-sponser .sponser1 {
     width: 300px;
     margin: auto;
-    margin-right: 0;
+    /* margin-right: 0; */
   }
   footer .footer-top .footer-sponser .sponser1 .spon1-cont2 {
     display: flex;
@@ -3141,8 +3155,9 @@ footer .copyright p span {
   .about-section4 .about-card2 {
     align-items: normal;
     position: relative;
-    height: 170px;
-    padding: 30px 0 22px;
+    height: 100%;
+    width:100%;
+    padding: 25px 10px;
   }
   .about-section4 .about-card2 p {
     width: 200px;
@@ -3151,7 +3166,7 @@ footer .copyright p span {
     display: none;
   }
   .about-section4 .about-card2 img {
-    width: 45%;
+    width: 40%;
   }
   .careerSection1 .greySec-cont1 p {
     padding-top: 0;
@@ -3328,8 +3343,10 @@ footer .copyright p span {
   }
   .about-section4 .about-card2 {
     align-items: normal;
-    padding: 25px;
+    padding: 25px 10px;
     overflow: hidden;
+    height: 100%;
+    width:100%;
   }
   .about-section4 .about-card2 p {
     padding-left: 0;
@@ -3339,7 +3356,7 @@ footer .copyright p span {
     display: none;
   }
   .about-section4 .about-card2 img {
-    width: 45%;
+    width: 40%;
   }
   .about-section5 .sec5-main .about-card3 .mn-hd {
     padding: 30px 20px;
@@ -3623,7 +3640,8 @@ footer .copyright p span {
     padding: 10px 20px;
   }
   .about-section4 .about-card2 {
-    height: 150px;
+    height: 100%;
+    width:100%;
   }
   .about-section4 {
     padding: 60px 0;
@@ -4215,7 +4233,8 @@ footer .copyright p span {
     padding: 40px 0 50px;
   }
   .about-section4 .about-card2 {
-    height: 120px;
+    height: 100%;
+    width:100%;
   }
   section.about-section7 .cont2 {
     padding: 0 15px;
@@ -4422,6 +4441,7 @@ footer .copyright p span {
   }
 }
 @media (max-width: 767px) {
+  
   .top-header {
     padding: 5px 0;
   }
@@ -4587,7 +4607,8 @@ footer .copyright p span {
     font-size: 14px;
   }
   .about-section4 .about-card2 {
-    height: 120px;
+    height: 100%;
+    width:100%;
     margin-bottom: 10px;
   }
   .about-section4 .about-card2 img {

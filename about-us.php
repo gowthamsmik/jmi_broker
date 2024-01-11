@@ -15,7 +15,7 @@
 <body>
     <?php include("includes/header.php"); ?>
 
-    <section class="about-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(2,'Banner Background','Banner');?>');">
+    <section class="about-banner banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(2,'Banner Background','Banner');?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd mn-btn">
                 <h2><?php echo getPageMetaByIDKeyGroup(2,'Banner Heading','Banner');?></h2>
@@ -53,12 +53,12 @@
                     <h3 class="padY2">
                         <?php echo getPageMetaByIDKeyGroup(2, 'Heading', 'Vision'); ?>
                     </h3>
-                    <p class="p-fs5" style="text-align:justify;">
+                    <p class="<?php echo ($userPreferredLanguage === 'ar') ? '' : 'p-fs5'; ?>" style="text-align:justify;">
                         <?php echo getPageMetaByIDKeyGroup(2, 'Description', 'Vision'); ?>
                     </p>
                 </div>
                 <div class="col-md-6 mn-hd">
-                    <h3 class="padY2">
+                    <h3 class="padY2" style="<?php echo ($userPreferredLanguage === 'ar') ? 'padding-right:60px;' : ''; ?>">
                         <?php echo getPageMetaByIDKeyGroup(2, 'Heading', 'Mission'); ?>
                     </h3>
                     <p class="p-fs5" style="text-align:justify;">
@@ -119,7 +119,7 @@
                     <p class="tx-grey300 p-fs3 text-center">
                     <?php echo getPageMetaByIDKeyGroup(2, 'Description', 'Statistics'); ?>
                     </p>
-                    <a class="theam-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo getPageMetaByIDKeyGroup(2,'banner button url','about') ?>">Lets Get Started
+                    <a class="theam-btn gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo getPageMetaByIDKeyGroup(2,'banner button url','about') ?>">Lets Get Started
                         <span>
                             <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

@@ -50,13 +50,13 @@ if(isset($_SESSION['intltrnsfersuccess'])){
     }
     ?>
 </div>
-    <div class='layout'>
+    <div class='layout cpanal_banar'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
     <div class="d-flex">
         <h2 class="fs-4"><?php echo $lang['internalTransfer'] ?></h2>
-        <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
+        <div class="d-flex <?php echo ($userPreferredLanguage === 'ar') ? 'me-auto' : 'ms-auto'; ?>"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
             <p class="mt-1 ms-2"><?php echo $lang['welcome'] ?>,  <?php echo $_SESSION['sessionusername']; ?></p>
         </div>
     </div>
@@ -118,7 +118,7 @@ if(isset($_SESSION['intltrnsfersuccess'])){
                     <input type="number" class="form-control border rounded-3 mt-2" placeholder="0.00" name="amount" required>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 border-0 mt-4">
-                    <label for=""><?php echo $lang['accountPassword'] ?>:</label>
+                    <label for=""><?php echo $lang['MT4 Password'] ?>:</label>
                     <input type="password" class="form-control border rounded-3 mt-2" placeholder="MT4 Password"
                         name="password" required>
                 </div>

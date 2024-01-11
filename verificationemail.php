@@ -7,9 +7,9 @@ $activationcode = $token;
 try {
   require_once 'vendor/autoload.php';
   $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-  $transport->setUsername('support@jmibrokers.com');
+  $transport->setUsername('marketing@jmibrokers.com');
   //$transport->setPassword('JMI159BROKERS');
-  $transport->setPassword('Duiuw^%^&tw$@@$er$%&^gf*');
+  $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
 
   // Create the Mailer using your created Transport
   $mailer = new Swift_Mailer($transport);
@@ -76,7 +76,7 @@ try {
   </html>';
   // Create a message
   $message = (new Swift_Message('Verification From JMI'))
-    ->setFrom(['support@jmibrokers.com' => 'Jmi brokers'])
+    ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
     ->setTo($email)
     ->setBody($mailbody,'text/html')
   ;
@@ -87,7 +87,6 @@ if ($checkInUserSql->num_rows <= 0) {
 
   // Send the message
   $result = $mailer->send($message);
-  echo $result;
   $columnToCheck='email';
   $checkExistingSql = "SELECT * FROM email_verification WHERE email = '$email'";
   $checkExistingResult = $conn->query($checkExistingSql);

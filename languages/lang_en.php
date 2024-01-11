@@ -17,9 +17,9 @@ $lang = array(
     'faqs' => 'FAQ\'s',
     'careers' => 'Careers',
     'partnership_programs' => 'Partnership Programs',
-    'our_philosophy'=>'Our Philosophy',
-    'risk_management'=>"Risk Management",
-    'our_culture'=>'Our Culture',
+    'our_philosophy' => 'Our Philosophy',
+    'risk_management' => "Risk Management",
+    'our_culture' => 'Our Culture',
 
 
     "tools" => "TOOLS",
@@ -77,10 +77,10 @@ $lang = array(
     'select_dial_code' => 'Select Dial Code',
     'phone_number' => 'Phone Number',
 
-    'personal_details' => 'Personal Details',  
+    'personal_details' => 'Personal Details',
     'uploadDocuments' => 'Upload Documents',
     'my_account' => 'My Account',
-   
+
 
 
 
@@ -268,11 +268,56 @@ $lang = array(
 
 
     //deposit function
-    'deposit_account' => 'Deposit Account',
+'deposit_account' => 'Deposit Account',
+    'epay' => 'Epay',
+    'coin_base' => "Coin Base",
+    'bank_wire' => "Bank Wire",
+    'request_new_invoice' => 'Request new invoice',
+    'view_recent_invoices' => 'View recent invoices',
+    'submit_swift' => 'Submit SWIFT Copy',
+    'bank_wire_funding_details' => 'Bank Wire Funding Details',
+    'full_name' => 'Full Name:',
+    'account_number' => 'Account Number',
+    "deposit_amount" => "Deposit Amount",
+    "deposit_now" => "Deposit Now",
+    "epay_deposit_details" => "Epay Deposit Details",
+    "express_deposit_12_hours" => "Express Deposit (12 hours)",
+    "amount_to_deposit" => "Amount To Deposit",
+    "coinbase_deposit_details" => "CoinBase Deposit Details",
+    "bank_account_currency_note" => "In case your bank account currency is different than the deposit currency assigned, the conversion will be performed by your bank / Card Issuer",
+    "upload_invoice" => "Upload Invoice",
+    "upload_tt_copy_file" => "Upload a TT Copy File",
+    "recent_invoices" => "Recent Invoices",
+    "invoice"=>"Invoice",
 
 
+
+   
+
+
+    
     //withdraw  account
     'withdraw_account' => 'Withdraw Account',
+    'deposit_amount' => 'Withdraw Amount',
+    'bank_name' => 'Bank Name',
+    'bank_swift' => 'Bank Swift',
+    'bank_iban' => 'Bank Account or IBan',
+    'withdraw_now' => 'Withdraw Now',
+
+    'bank_wire_withdrawing_details' => 'Bank Wire Withdrawing Details',
+
+    'important_terms_and_conditions' => 'Important Terms and Conditions <br /> Kindly note that by funding your account and/or by submitting a withdrawal request you agree on all the terms and conditions including those in relation to deposits and withdrawals. <br /> The following are an integral part of the terms and conditions: <br /> The Client agrees that the Company may charge the Client transfer fees and/or any other charges in any case where a withdrawal request is made by the Client without any trading activity taking place between that withdrawal request and the last deposit of the Client. <br /> The Client agrees that the Company may, at its own discretion and at any time and/or when in its sole opinion an abuse of the 0.00% transfer fees benefit has occurred, request and/or deduct any and/or all the transfer fee amounts from the client’s account(s) and/or close the client’s account(s) and/or take any other action may consider necessary, as a compensation for the said abuse. <br />The Client acknowledges and confirms that the Company may, at its own discretion and at any time and/or for whatsoever reason and/or without any prior notification to the client and/or without the prior consent of the client, to increase the amount of 0.00% transfer fees which is demonstrated at the Company’s Website-Trading Accounts-Account Funding page to any other amount the Company believes necessary.',
+
+    'epay_account' => 'Epay Account',
+    'amount_to_withdraw' => 'Amount To Withdraw',
+    'epay_withdraw_details' => 'Epay Withdraw Details',
+
+    'express_withdrawal_12_hours' => 'Express Withdrawl (12 hours)',
+
+    'coinbase_withdraw_details' => 'CoinBase Withdraw Details',
+    'coinbase_account' => 'CoinBase Account',
+    'withdraw_amount' => 'Withdraw Amount',
+
 
 
     //internal transfer
@@ -440,19 +485,19 @@ $lang = array(
     'ask' => 'Ask',
 
     //Upload document
-    'profile_documents'=>"Profile Documents",
-    'document_type'=>"Document Type",
-    'select_file'=>"Select File",
-    'document_description'=>"Description",
-    'document_update'=>"Update",
-    'documnet_subheader'=>"Your Uploaded Documents",
-    "document_filetype"=>"File Type",
-    "document_file"=>"File",
-    "document_description"=>"Description",
-    "document_status"=>"Status",
-    "document_action"=>"Action",
-    "document_view"=>"View Document",
-    "document_delete"=>"Delete",
+    'profile_documents' => "Profile Documents",
+    'document_type' => "Document Type",
+    'select_file' => "Select File",
+    'document_description' => "Description",
+    'document_update' => "Update",
+    'documnet_subheader' => "Your Uploaded Documents",
+    "document_filetype" => "File Type",
+    "document_file" => "File",
+    "document_description" => "Description",
+    "document_status" => "Status",
+    "document_action" => "Action",
+    "document_view" => "View Document",
+    "document_delete" => "Delete",
 
     // Profile:
     'profile' => 'Profile',
@@ -478,15 +523,36 @@ $lang = array(
     'estimated_annual_income' => 'Estimated Annual Income',
     'estimated_net_worth' => 'Estimated Net Worth',
     'update_profile' => 'Update Profile',
-    'change_password'=>'Change Password',
+    'change_password' => 'Change Password',
 
     // common
-    'controlPanel'=> 'Control Panel',
-    'home'=>'Home',
-    'dashboard'=>'Dashboard',
-    "S.No"=>" S.No",
+    'controlPanel' => 'Control Panel',
+    'home' => 'Home',
+    'dashboard' => 'Dashboard',
+    "S.No" => " S.No",
     'live_chat' => 'Live Chat',
-    'MT4 Password'=>'MT4 Password','كلمة مرور MT4',
+    'MT4 Password' => 'MT4 Password',
+    'Logout' => 'Logout',
+    "no_live_accounts_available" => "No live accounts available",
+    'Amount'=>'Amount',
+    "print_invoice_message" => "Please print your invoice to access both SEPA and SWIFT<br> Bank details to proceed with your payment.",
+    "address" => "Address",
+     "city" => "City",
+     'frequently_asked_questions_list' => 'Frequently Asked Questions List',
+     'got_questions' => 'Got Questions?',
+     'we_have_answers' => 'We Have Answers!',
+     'banner_image' => 'Banner Image',
+     'get_started_prompt' => 'Ready to get started?',
+'take_business_to_next_level' => 'Take your business to the next level with JMI Brokers.',
+'lets_get_started' => 'Let\'s Get Started',
+'enter_your_website' => 'Get Started Now',
+'our_latest_news' => 'Our Latest News',
+'read_more' => 'Read More',
+'read_less' => 'Read Less',
+'para_read_more'  => 'Read more..',
+
+
+
 
     // html
     'live_account_null' => 'You Have no live account, You can add your account from  <a class="fs-4 text-primary" href="add-existing-account.php">Here</a>  or open a new account from  <a class="fs-4 text-primary" href="open-live-account.php">Here</a>',
@@ -494,13 +560,52 @@ $lang = array(
     'th_Price' => 'Price',
     'th_Standard_Lot' => 'Standard Lot<br>(Units 100,000)',
     'th_Mini_Lot' => 'Mini Lot<br>(Units 10,000)',
-    'th_Micro_Lot' => 'Micro Lot<br>(Units 1,000)',    
+    'th_Micro_Lot' => 'Micro Lot<br>(Units 1,000)',
     'currencies_heat_map_description' => '<p>The Currencies Heat Map is a set of tables which display the relative strengths of major currency pairs in comparison with each other, designed to give an overview of the forex market across various time frames. Whether you\'re a scalper, day, swing, or position trader, it is a powerful tool if you\'re looking for new and innovative trading strategies to add to your repertoire. Scroll down to the bottom of this forex heat map to view the key containing explanations for the color codes.</p>',
-    
-  
 
 
+    //alerts
+    'title_not_selected' => 'Please select a title.',
+    'full_name_required' => 'Please enter your full name.',
+    'company_name_required' => 'Please enter your company name.',
+    'email_required' => 'Please enter your email address.',
+    'valid_email_required' => 'Please enter a valid email address.',
+    'head_office_location_not_selected' => 'Please select the location of the head office.',
+    'city_required' => 'Please enter the city.',
+    'country_code_not_selected' => 'Please select the country code.',
+    'phone_number_required' => 'Please enter your phone number.',
+    'valid_10_digit_phone_required' => 'Please enter a valid 10-digit phone number.',
+    'account_added_successfully' => 'Your account added successfully.',
+    'error_prefix' => 'Error: ',
 
+    // Contact_Us
 
+    'get_in_touch' => 'Get in Touch',
+    'get_back' => 'Fill up the form our team will get back to you within 24 Hours',
+    'first_name' => 'First Name',
+    'last_name' => 'Last Name',
+    'messages' => 'Messages',
+    'send_messages' => 'Send Messages',
+    'address_details' => 'Address Details',
+    'contact_info' => 'Contact Info',
+    'phone_no' => 'Phone no:',
+    'e-mail' => 'E-mail:',
 
+    //career
+
+    'community' => 'Be a Member of the Community',
+    'upload_cv' => 'Upload your CV',
+    'choose_file' => 'Choose File',
+    'size' => 'Allowed Type:.PDF - Max Size:2MB',
+    'upload' => 'Upload',
+
+    //Becomee-partner
+
+    'mr' => 'Mr',
+    'mrs'=> 'Mrs',
+    'miss'=> 'Miss',
+    'company' => 'Company',
+    'location' => 'Location of Head office',
+    'country_code' => 'Country Code',
+    'partner' => 'Become Our Partner',
 ); ?>

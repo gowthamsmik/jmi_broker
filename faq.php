@@ -65,7 +65,7 @@
 <body>
     <?php include("includes/header.php"); ?>
 
-    <section class="faq-banner"
+    <section class="faq-banner banner"
         style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(27, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd mn-btn">
@@ -113,13 +113,19 @@
                                                 foreach ($get_faqs as $thisFaq) { ?>
                                                     <li>
                                                         <div class="acc_title" id="general-title-<?php echo $thisFaq['id']; ?>">
-                                                            <?php echo $thisFaq['question']; ?>
+                                                            <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_question'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_question'] :  $thisFaq['question'])) : 
+                                                                $thisFaq['question'] ?>
                                                             <i class="far fa-plus-square"></i>
                                                         </div>
                                                         <div class="acc_desc" style="display: none;"
                                                             id="general-slide-<?php echo $thisFaq['id']; ?>">
                                                             <p>
-                                                                <?php echo $thisFaq['answer']; ?>
+                                                                <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_answer'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_answer'] :  $thisFaq['answer'])) : 
+                                                                $thisFaq['answer'] ?>
                                                             </p>
                                                         </div>
                                                     </li>
@@ -145,13 +151,19 @@
                                                 foreach ($get_faqs as $thisFaq) { ?>
                                                     <li>
                                                         <div class="acc_title" id="payments-title-<?php echo $thisFaq['id']; ?>">
-                                                            <?php echo $thisFaq['question']; ?>
+                                                              <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_question'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_question'] :  $thisFaq['question'])) : 
+                                                                $thisFaq['question'] ?>
                                                             <i class="far fa-plus-square"></i>
                                                         </div>
                                                         <div class="acc_desc" style="display: none;"
                                                             id="payments-slide-<?php echo $thisFaq['id']; ?>">
                                                             <p>
-                                                                <?php echo $thisFaq['answer']; ?>
+                                                                 <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_answer'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_answer'] :  $thisFaq['answer'])) : 
+                                                                $thisFaq['answer']  ?>
                                                             </p>
                                                         </div>
                                                     </li>
@@ -176,13 +188,19 @@
                                                 foreach ($get_faqs as $thisFaq) { ?>
                                                     <li>
                                                         <div class="acc_title" id="services-title-<?php echo $thisFaq['id']; ?>">
-                                                            <?php echo $thisFaq['question']; ?>
+                                                              <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_question'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_question'] :  $thisFaq['question'])) : 
+                                                                $thisFaq['question'] ?>
                                                             <i class="far fa-plus-square"></i>
                                                         </div>
                                                         <div class="acc_desc" style="display: none;"
                                                             id="services-slide-<?php echo $thisFaq['id']; ?>">
                                                             <p>
-                                                                <?php echo $thisFaq['answer']; ?>
+                                                                 <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_answer'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_answer'] :  $thisFaq['answer'])) : 
+                                                                $thisFaq['answer']  ?>
                                                             </p>
                                                         </div>
                                                     </li>
@@ -207,13 +225,19 @@
                                                 foreach ($get_faqs as $thisFaq) { ?>
                                                     <li>
                                                         <div class="acc_title" id="refund-title-<?php echo $thisFaq['id']; ?>">
-                                                            <?php echo $thisFaq['question']; ?>
+                                                              <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_question'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_question'] :  $thisFaq['question'])) : 
+                                                                $thisFaq['question'] ?>
                                                             <i class="far fa-plus-square"></i>
                                                         </div>
                                                         <div class="acc_desc" style="display: none;"
                                                             id="refund-slide-<?php echo $thisFaq['id']; ?>">
                                                             <p>
-                                                                <?php echo $thisFaq['answer']; ?>
+                                                                 <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_answer'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_answer'] :  $thisFaq['answer'])) : 
+                                                                $thisFaq['answer'];  ?>
                                                             </p>
                                                         </div>
                                                     </li>
@@ -239,13 +263,19 @@
                                                 foreach ($get_faqs as $thisFaq) { ?>
                                                     <li>
                                                         <div class="acc_title" id="contact-title-<?php echo $thisFaq['id']; ?>">
-                                                            <?php echo $thisFaq['question']; ?>
+                                                              <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_question'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_question'] :  $thisFaq['question'])) : 
+                                                                $thisFaq['question'] ?>
                                                             <i class="far fa-plus-square"></i>
                                                         </div>
                                                         <div class="acc_desc" style="display: none;"
                                                             id="contact-slide-<?php echo $thisFaq['id']; ?>">
                                                             <p>
-                                                                <?php echo $thisFaq['answer']; ?>
+                                                                 <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_answer'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_answer'] :  $thisFaq['answer'])) : 
+                                                                $thisFaq['answer'] ?>
                                                             </p>
                                                         </div>
                                                     </li>
@@ -273,10 +303,16 @@
                             <div class="col-md-4">
                                 <div class="mn-hd mx-3" id="contact-title-<?php echo $thisFaq['id']; ?>">
                                     <p class="tx-blue p-fs4 bld">
-                                        <?php echo $thisFaq['question']; ?>
+                                          <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_question'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_question'] :  $thisFaq['question'])) : 
+                                                                $thisFaq['question'] ?>
                                     </p>
                                     <p class="tx-grey300 p-fs4">
-                                        <?php echo $thisFaq['answer']; ?>
+                                         <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_answer'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_answer'] :  $thisFaq['answer'])) : 
+                                                                $thisFaq['answer']  ?>
                                     </p>
                                 </div>
                             </div>

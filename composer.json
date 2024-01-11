@@ -2,6 +2,7 @@
     "require": {
         "phpmailer/phpmailer": "^6.8",
         "swiftmailer/swiftmailer": "^6.0",
-        "symfony/dom-crawler": "^6.4"
+        "symfony/dom-crawler": "^6.4",
+        "firebase/php-jwt": "^6.10"
     }
 }

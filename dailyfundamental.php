@@ -60,7 +60,7 @@
 <body>
    <?php include("includes/header.php"); ?>
 
-   <section class="partner-banner money-banner dailyfundamentalBanner"
+   <section class="partner-banner banner money-banner dailyfundamentalBanner"
    style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(19, 'Banner Background', 'Banner'); ?>');">
       <div class="container">
          <div class="partnerBannner-cont w-100  banner-pt1 banner-pb1 pdX12 text-center">
@@ -96,11 +96,13 @@
          <div class="row align-items-stretch justify-content-center">
             <?php $getAllFundamentalAnalysisFront = getAllFundamentalAnalysisFront();
             if ($getAllFundamentalAnalysisFront->num_rows > 0) {
-               foreach ($getAllFundamentalAnalysisFront as $thisData) { ?>
+               foreach ($getAllFundamentalAnalysisFront as $thisData) { 
+                  
+                  ?>
                   <div class="col-md-4">
                      <div class="dailyfundamentalSec1-card">
                         <div class="dailyfundamentalSec1-cardImg">
-                           <img src="cms/<?php echo $thisData['image']; ?>" alt="">
+                           <img src="<?php echo $thisData['image']; ?>" alt="404">
                         </div>
 
                         <div class="dailyfundamentalSec1-cardCont">
@@ -108,9 +110,7 @@
                               <?php echo $thisData['heading']; ?>
                            </h6>
                            <div class="content w-100">
-                              <p class="description w-100">
                                  <?php echo $thisData['description']; ?>
-                              </p>
                            </div>
 
                            <div class="dailyfundamentalSec1-cardCont-bottom">

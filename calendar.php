@@ -15,7 +15,7 @@
 <body>
     <?php include("includes/header.php"); ?>
 
-    <section class="calendar-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(17, 'Banner Background', 'Banner'); ?>');">
+    <section class="calendar-banner banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(17, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd mn-btn">
                 <h2 class="pdB1"><?php echo getPageMetaByIDKeyGroup(17,'Banner Heading 1','Banner');?></h2>

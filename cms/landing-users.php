@@ -126,7 +126,7 @@
                     </form>
                     <div class="row mt-5 my-3">
                         <div class="col">
-                            <button type="button" class="btn btn-success">Export All</button>
+                            <button type="button" class="btn btn-success" id="extractalllandingusers">Export CSV</button>
                         </div>
                         <div class="col">
                             <button type="button" class="btn btn-success" onclick="deletelandingusers()">Delete
@@ -333,6 +333,30 @@
             window.onload = function () {
                 toggleSelectAll();
             };
+            $(document).on('click', '#extractalllandingusers', function () {
+				// Make an AJAX request to a PHP script that extracts and downloads the CSV
+				$.ajax({
+					url: 'includes/softwareinclude/ajax.php',
+					type: 'post',
+					data: { type: 'extract-all-landing-users' },
+					success: function (res) {
+						alert('CSV extraction successful. Download will begin shortly.');
+						var csvData = res;
+						console.log(csvData)
+						var blob = new Blob([csvData], { type: 'text/csv' });
+						var link = document.createElement('a');
+						link.href = window.URL.createObjectURL(blob);
+						link.download = 'all_landing_users_data.csv';
+						document.body.appendChild(link);
+						link.click();
+						document.body.removeChild(link);
+					},
+					error: function (err) {
+						console.error(err);
+						alert('Error extracting data.');
+					}
+				});
+			});
         </script>
     </div>
 </body>

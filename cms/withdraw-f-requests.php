@@ -80,13 +80,23 @@
 
 					</div>
 				</div><!--//row-->
-				<div class="mb-3">
-					<div class="status-buttons">
+				<div class="mb-3 row">
+					<div class="status-buttons col-6">
 						<button type="button" class="btn but1 active" onclick="filterTable('all')">All</button>
 						<button type="button" class="btn but2" onclick="filterTable('1')">Done</button>
 						<button type="button" class="btn but3" onclick="filterTable('0')">Pending</button>
 						<button type="button" class="btn but4" onclick="filterTable('9')">Rejected</button>
 					</div>
+					<div class="col-4 ">
+						<button type="button" class="btn btn-primary float-end" id="extractAllwithdrawButton">Export CSV</button>
+					</div>
+					<div class="col-2">
+                        <?php $sort = isset($_GET['sort']) && $_GET['sort'] == "asc" ? "asc" : "desc";?>
+                        <select name="" id="withdraw-fund-req" class="ms-auto me-3 px-3 py-1" onchange="updateSort()">
+                            <option value="asc" <?php echo ($sort == "asc") ? "selected" : ''; ?>>Asc</option>
+                            <option value="desc" <?php echo ($sort == "desc") ? "selected" : ''; ?>>Desc</option>
+                        </select>
+                    </div>
 				</div>
 
 				<div class="tab-content" id="orders-table-tab-content">
@@ -119,7 +129,7 @@
 											$perPage = 10;
 											$index = 0;
 											$page = isset($_GET['page']) ? $_GET['page'] : 1;
-											$getAllfundrequests = getAllwithdrawrequest($page, $perPage);
+											$getAllfundrequests = getAllwithdrawrequest($page, $perPage,$sort);
 											if ($getAllfundrequests->num_rows > 0) {
 												foreach ($getAllfundrequests as $getAllfundrequests) {
 													$index++;
@@ -497,6 +507,37 @@
 					}
 				});
 			}
+			$(document).on('click', '#extractAllwithdrawButton', function () {
+				// Make an AJAX request to a PHP script that extracts and downloads the CSV
+				$.ajax({
+					url: 'includes/softwareinclude/ajax.php',
+					type: 'post',
+					data: { type: 'extract-all-withdraw-copy-trade' },
+					success: function (res) {
+						alert('CSV extraction successful. Download will begin shortly.');
+						var csvData = res;
+						console.log(csvData)
+						var blob = new Blob([csvData], { type: 'text/csv' });
+						var link = document.createElement('a');
+						link.href = window.URL.createObjectURL(blob);
+						link.download = 'withdraw_fund_request_data.csv';
+						document.body.appendChild(link);
+						link.click();
+						document.body.removeChild(link);
+					},
+					error: function (err) {
+						console.error(err);
+						alert('Error extracting data.');
+					}
+				});
+			});
+
+			
+			function updateSort() {
+            var selectedValue = document.getElementById("withdraw-fund-req").value;
+			
+            window.location.href = "?page=1&sort=" + selectedValue;
+        }
 		</script>
 	</div><!--//app-wrapper-->
 	<?php include('includes/footer.php'); ?>

@@ -108,9 +108,9 @@ function mailSendToAdmin($mailSubject,$mailTo,$mailBody)
 {
     require_once '../../vendor/autoload.php';
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('support@jmibrokers.com');
+    $transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Duiuw^%^&tw$@@$er$%&^gf*');
+    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
 
     // Create the Mailer using your created Transport
     $mailer = new Swift_Mailer($transport);
@@ -173,9 +173,9 @@ function mailSendToAdmin($mailSubject,$mailTo,$mailBody)
     </body>
     </html>';
     $message = (new Swift_Message(''))
-            ->setFrom(['support@jmibrokers.com' => 'Jmi brokers'])
+            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
             ->setTo($mailTo)
-            ->setBody($mailsBody)
+            ->setBody($mailsBody,'text/html')
             ->setSubject($mailSubject);
 
         // Send the email and check for success
@@ -186,9 +186,9 @@ function mailSendToAdmin($mailSubject,$mailTo,$mailBody)
 function sendMailForDocumentUpload($mailBody,$mailSubject){
     require_once '../../vendor/autoload.php';
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('support@jmibrokers.com');
+    $transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Duiuw^%^&tw$@@$er$%&^gf*');
+    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
     $mailer = new Swift_Mailer($transport);
        
     $mailTo="support@jmibrokers.com";
@@ -248,7 +248,7 @@ function sendMailForDocumentUpload($mailBody,$mailSubject){
     </body>
     </html>';
     $message = (new Swift_Message(''))
-            ->setFrom(['support@jmibrokers.com' => 'Jmi brokers'])
+            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
             ->setTo($mailTo)
             ->setBody($mailsBody,'text/html')
             ->setSubject($mailSubject);
@@ -267,4 +267,6 @@ function add_become_partner($title, $name, $email, $company, $headOfficeLocation
     }
     return $res;
 }
+
+
 ?>

@@ -15,7 +15,7 @@
    <body>
       <?php include("includes/header.php"); ?>
 
-      <section class="partner-banner money-banner">
+      <section class="partner-banner banner money-banner">
         <div class="container">
             <div class="partnerBannner-cont">
                <div class="banner-cont mn-hd mn-btn">
@@ -70,7 +70,7 @@
                   <div class="col-md-6">
                      <div class="mn-hd partnerSec1-cont">
                         <h3 class="tx-blue"><?php echo getPageMetaByIDKeyGroup(11,'Heading','Label Program');?></h3>
-                        <p class="p-fs3 tx-grey300 paraPdR"><?php echo getPageMetaByIDKeyGroup(11,'Description 1','Label Program');?></p>
+                        <p class="p-fs3 tx-grey300 paraPdR <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>"><?php echo getPageMetaByIDKeyGroup(11,'Description 1','Label Program');?></p>
                      </div>
                   </div>
 

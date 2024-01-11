@@ -41,7 +41,7 @@
 <body>
    <?php include('includes/header.php'); ?>
 
-   <section class='career-banner' style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(13, 'Banner Background', 'Banner'); ?>');">
+   <section class='career-banner banner' style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(13, 'Banner Background', 'Banner'); ?>');">
       <div class='container'>
          <div class='banner-cont text-center tx-white mn-hd mn-btn'>
             <h2>
@@ -127,7 +127,7 @@
                            <button class='gd-btn read-less-btn'
                               href='<?php echo getPageMetaByIDKeyGroup(13, 'Button URL', 'JMIs goal'); ?>'>
                               <!-- <?php echo getPageMetaByIDKeyGroup(13, 'Button Text', 'JMIs goal'); ?> -->
-                           Read Less
+                              <?php echo $lang['read_less'] ?>
                               <span>
                                  <svg xmlns='http://www.w3.org/2000/svg' width='30' height='21' viewBox='0 0 30 21'
                                     fill='none'>
@@ -171,7 +171,7 @@
                               href='<?php echo getPageMetaByIDKeyGroup(13, 'Button URL', 'A focus on employees'); ?>'
                               >
                               <!-- <?php echo getPageMetaByIDKeyGroup(13, 'Button Text', 'A focus on employees'); ?> -->
-                           Read Less
+                              <?php echo $lang['read_less'] ?>
                               <span>
                                  <svg xmlns='http://www.w3.org/2000/svg' width='30' height='21' viewBox='0 0 30 21'
                                     fill='none'>
@@ -228,7 +228,7 @@
                            <button class='gd-btn read-less-btn'
                               href='<?php echo getPageMetaByIDKeyGroup(13, 'Button URL', 'International career opportunities'); ?>'>
                               <!-- <?php echo getPageMetaByIDKeyGroup(13, 'Button Text', 'International career opportunities'); ?> -->
-                           Read Less
+                              <?php echo $lang['read_less'] ?>
                               <span>
                                  <svg xmlns='http://www.w3.org/2000/svg' width='30' height='21' viewBox='0 0 30 21'
                                     fill='none'>
@@ -284,7 +284,7 @@
                            <button class='gd-btn read-less-btn'
                               href='<?php echo getPageMetaByIDKeyGroup(13, 'Button URL', 'JMI Health'); ?>'>
                               <!-- <?php echo getPageMetaByIDKeyGroup(13, 'Button Text', 'JMI Health'); ?> -->
-                           Read Less
+                              <?php echo $lang['read_less'] ?>
                               <span>
                                  <svg xmlns='http://www.w3.org/2000/svg' width='30' height='21' viewBox='0 0 30 21'
                                     fill='none'>
@@ -322,7 +322,7 @@
          <div class='careerSec3-card'>
             <div class='card-cont'>
                <div class='mn-hd mn-btn'>
-                  <h3 class='tx-gd'>Be a Member of the <br> Community</h3>
+                  <h3 class='tx-gd'><?php echo $lang['community'] ?></h3>
                   <div class='card-form'>
                      <!-- <form class="d-flex">
                         <div class="input-group">
@@ -335,22 +335,22 @@
                         <div class="input-group">
                            <input type="file" id="fileInput" class="form-control p-3" accept=".pdf"
                               style="display: none;">
-                           <input type="text" class="form-control p-3 rounded-start" id="fileName" placeholder="Upload your CV"
+                           <input type="text" class="form-control p-3 <?php echo ($userPreferredLanguage === 'ar') ? 'rounded-end' : 'rounded-start'; ?>" id="fileName" placeholder="<?php echo $lang['upload_cv'] ?>"
                               readonly>
-                           <label for="fileInput" class="input-group-text bg_color" style="cursor: pointer;">Choose File</label>
+                           <label for="fileInput" class="input-group-text bg_color <?php echo ($userPreferredLanguage === 'ar') ? 'rounded-start rounded-end-0' : 'rounded-end'; ?>" style="cursor: pointer;"><?php echo $lang['choose_file']?></label>
                         </div>
                         
                      </form>
 
 
                   </div>
-                  <p class='tx-white p-fs6'>Allowed Type:.PDF - Max Size:2MB</p>
-                  <button type="button" class="btn ml-2 bg_color text-black" onclick="uploadFile()">Upload</button>
+                  <p class='tx-white p-fs6'><?php echo $lang['size'] ?></p>
+                  <button type="button" class="btn ml-2 bg_color text-black" onclick="uploadFile()"><?php echo $lang['upload']?></button>
                </div>
             </div>
 
-            <div class='card-img text-end w-75'>
-               <img src='assets/images/career/2.png' alt='404'>
+            <div class='card-img w-75 <?php echo ($userPreferredLanguage === 'ar') ? 'text-start' : 'text-end'; ?>'>
+               <img src='assets/images/career/2.png' alt='404' >
             </div>
          </div>
       </div>

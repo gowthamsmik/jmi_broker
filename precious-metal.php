@@ -15,7 +15,7 @@
 <body>
     <?php include('includes/header.php'); ?>
 
-    <section class='precious-banner' style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(30, 'Banner Background', 'Banner'); ?>');">
+    <section class='precious-banner banner' style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(30, 'Banner Background', 'Banner'); ?>');">
         <div class='container'>
             <div class='banner-cont text-center mn-hd mn-btn'>
                 <h2 class='pdB1'><?php echo getPageMetaByIDKeyGroup(30,'Banner Heading 1','Banner');?></h2>
@@ -86,8 +86,8 @@
                         <div class='header-top'>
                             <h5 class='tx-blue'><?php echo getPageMetaByIDKeyGroup(30,'Heading','Major Currencies');?></h5>
 
-                            <div class='forex-tag'>
-                                <span class='p-fs5 tx-blue bld padR2'>FX 4D major</span>
+                            <div class='forex-tag '>
+                                <span class='p-fs5 tx-blue bld padR2 <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>'>FX 4D major</span>
                                 <span class='p-fs5 tx-grey-new4'>FX 5D major</span>
                             </div>
                         </div>

@@ -26,39 +26,39 @@
 
 <body>
 
-    <div class="container row mx-auto justify-content-center">
+    <div class="container-fluid row mx-auto justify-content-center p-0">
         <div class="col-md-6">
             <form class="become-partner">
                 <div class="row">
                     <div class="col-3">
                         <select class="form-select rounded-3 select" id="title" name="title">
-                            <option disabled selected>Title</option>
-                            <option>Mr</option>
-                            <option>Mrs</option>
-                            <option>Miss</option>
+                            <option disabled selected><?php echo $lang['title'] ?></option>
+                            <option><?php echo $lang['mr'] ?></option>
+                            <option><?php echo $lang['mrs'] ?></option>
+                            <option><?php echo $lang['miss'] ?></option>
                         </select>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control border rounded-3" placeholder="Full Name *" name="name">
+                        <input type="text" class="form-control border rounded-3" placeholder="<?php echo $lang['full_name'] ?> *" name="name">
                     </div>
                 </div>
                 <div class="row my-3">
                     <div class="col">
-                        <input type="text" class="form-control border rounded-3" placeholder="Company *" name="company">
+                        <input type="text" class="form-control border rounded-3" placeholder="<?php echo $lang['company'] ?> *" name="company">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control border rounded-3" placeholder="Email *" name="email">
+                        <input type="text" class="form-control border rounded-3" placeholder="<?php echo $lang['email'] ?> *" name="email">
                     </div>
                 </div>
                 <div class="row my-3">
                     <div class="col">
                         <select class="form-control border rounded-3 select" id="dynamicDropdown"
                             name="headOfficeLocation">
-                            <option value="" disabled selected>Location of Head office *</option>
+                            <option value="" disabled selected><?php echo $lang['location'] ?> *</option>
                         </select>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control border rounded-3" placeholder="City *" name="city">
+                        <input type="text" class="form-control border rounded-3" placeholder="<?php echo $lang['city'] ?> *" name="city">
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                         <div class="col-3 p-0">
                             <select class="form-select rounded-3 box-shadow py-2 px-3 select" id="country_code"
                                 name="country_code">
-                                <option disabled selected>Country Code</option>
+                                <option disabled selected><?php echo $lang['country_code'] ?></option>
                                 <?php
 
                                 $countriesJson = file_get_contents('./assets/json/countries.json');
@@ -88,12 +88,12 @@
                             </select>
                         </div>
                         <div class="col">
-                            <input type="number" class="form-control border rounded-3" placeholder="Phone *"
+                            <input type="number" class="form-control border rounded-3" placeholder="<?php echo $lang['phone_number'] ?> *"
                                 name="phoneno">
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn Button_color my-3 px-5">Become Our Partner</button>
+                        <button type="submit" class="btn Button_color my-3 px-5"><?php echo $lang['partner'] ?></button>
                     </div>
 
             </form>

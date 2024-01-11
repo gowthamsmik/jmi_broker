@@ -77,7 +77,7 @@
 										$perPage = 10;
 										$index = 0;
 										$page = isset($_GET['page']) ? $_GET['page'] : 1;
-										$getAllfaqs = getAllArfaqs($page, $perPage);
+										$getAllfaqs = getAllfaqs($page, $perPage);
 										if ($getAllfaqs->num_rows > 0) {
 											foreach ($getAllfaqs as $thisFaq) { ?>
 												<tr>
@@ -89,7 +89,7 @@
 														<?php echo $thisFaq['id']; ?>
 													</td>
 													<td class="cell"><span class="truncate">
-															<?php echo $thisFaq['question']; ?>
+															<?php echo $thisFaq['ar_question']; ?>
 														</span></td>
 													<td class="cell"><span class="truncate">
 															<?php echo $thisFaq['type']; ?>

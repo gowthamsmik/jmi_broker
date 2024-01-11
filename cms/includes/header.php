@@ -47,6 +47,51 @@ $notcount = getcountnotification();
 		.unread {
 			background-color: #e6f7ff;
 		}
+		#modal-wrapper {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			justify-content: center;
+			align-items: center;
+		}
+
+		#modal-content {
+			background: #fff;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			max-width: 600px;
+			z-index: auto !important;
+			margin: auto;
+		}
+
+		#open-modal-btn {
+			cursor: pointer;
+			padding: 10px 20px;
+			background: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+		}
+
+		#live-account-table {
+			/* max-height: 180px; */
+			/* Set your desired fixed height */
+			overflow-y: auto;
+			/* Add vertical scroll if needed */
+			overflow-x: auto;
+		}
+
+		#modal-content .modal-body {
+			max-height: 210px;
+			/* Set your desired maximum height */
+			overflow-x: auto;
+			/* Add vertical scroll if needed */
+		}
 	</style>
 <!-- Add this script after the modal HTML -->
 
@@ -84,7 +129,7 @@ $notcount = getcountnotification();
 						</div> -->
 
 						<div class="app-utilities col-auto">
-							<div class="app-utility-item app-notifications-dropdown dropdown" onclick=seennotification()>
+							<div class="app-utility-item app-notifications-dropdown dropdown" >
 								<a class="dropdown-toggle text-success" data-toggle="dropdown" href="#" role="button"
 									aria-haspopup="true" aria-expanded="false" >
 									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon"
@@ -94,7 +139,7 @@ $notcount = getcountnotification();
 											d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
 									</svg>
 									<span class="icon-badge">
-										<?php echo $notcount ?>
+										<?php echo count(getAllNotifications()) ?>
 									</span>
 								</a>
 
@@ -599,7 +644,7 @@ $notcount = getcountnotification();
 							<div id="submenu-13" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
 								<ul class="submenu-list list-unstyled">
 									<li class="submenu-item"><a class="submenu-link"
-											href="deposite-f-requests.php">Deposite Fund Requests</a></li>
+											href="deposite-f-requests.php">Deposit Fund Requests</a></li>
 									<li class="submenu-item"><a class="submenu-link"
 											href="withdraw-f-requests.php">Withdraw Fund Requests</a></li>
 									<li class="submenu-item"><a class="submenu-link"

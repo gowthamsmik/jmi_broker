@@ -21,7 +21,7 @@
    <body>
       <?php include('includes/header.php'); ?>
 
-      <section class='partner-banner'>
+      <section class='partner-banner banner'>
         <div class='container'>
             <div class='partnerBannner-cont'>
                <div class='banner-cont mn-hd mn-btn'>
@@ -53,7 +53,7 @@
                   <div class='col-md-6'>
                      <div class='mn-hd partnerSec1-cont'>
                         <h3 class='tx-blue'><?php echo getPageMetaByIDKeyGroup(23,'Heading','Introducing Broker');?></h3>
-                        <p class='p-fs5 tx-grey300'><?php echo getPageMetaByIDKeyGroup(23,'Description 1','Introducing Broker');?></p>
+                        <p class='p-fs5 tx-grey300 <?php echo ($userPreferredLanguage === 'ar') ? 'pe-0' : ''; ?>'><?php echo getPageMetaByIDKeyGroup(23,'Description 1','Introducing Broker');?></p>
                      </div>
                   </div>
 
@@ -78,15 +78,15 @@
                   <div class='col-md-6'>
                      <div class='mn-hd partnerSec1-cont'>
                         <h3 class='tx-blue pdB1'><?php echo getPageMetaByIDKeyGroup(23,'Heading','Introducing Broker Services');?></h3>
-                        <p class='p-fs5 tx-grey300'><?php echo getPageMetaByIDKeyGroup(23,'Description 1','Introducing Broker Services');?></p>
-                        <p class='p-fs5 tx-grey300'><?php echo getPageMetaByIDKeyGroup(23,'Description 2','Introducing Broker Services');?></p>
+                        <p class='p-fs5 tx-grey300 <?php echo ($userPreferredLanguage === 'ar') ? 'pe-0 ps-5' : ''; ?>'><?php echo getPageMetaByIDKeyGroup(23,'Description 1','Introducing Broker Services');?></p>
+                        <p class='p-fs5 tx-grey300 <?php echo ($userPreferredLanguage === 'ar') ? 'pe-0 ps-5' : ''; ?>'><?php echo getPageMetaByIDKeyGroup(23,'Description 2','Introducing Broker Services');?></p>
                      </div>
                   </div>
 
                   <div class='col-md-6'>
                      <div class='mn-hd partnerSec1-cont'>
                         <h3 class='tx-blue pdB1'><?php echo getPageMetaByIDKeyGroup(23,'Heading','Other types of partner');?></h3>
-                        <p class='p-fs5 tx-grey300'>
+                        <p class='p-fs5 tx-grey300 <?php echo ($userPreferredLanguage === 'ar') ? 'pe-0' : ''; ?>'>
                            <span class='p-fs2 bld'><?php echo getPageMetaByIDKeyGroup(23,'Heading 1','Other types of partner');?></span> <br>
                            <?php echo getPageMetaByIDKeyGroup(23,'Description 1','Other types of partner');?>
                            <br>

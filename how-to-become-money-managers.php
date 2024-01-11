@@ -15,10 +15,10 @@
    <body>
       <?php include('includes/header.php'); ?>
 
-      <section class='partner-banner money-banner'>
+      <section class='partner-banner banner money-banner <?php echo ($userPreferredLanguage === 'ru') ? 'h-auto' : ''; ?>'>
         <div class='container'>
             <div class='partnerBannner-cont'>
-               <div class='banner-cont mn-hd mn-btn'>
+               <div class='banner-cont mn-hd mn-btn <?php echo ($userPreferredLanguage === 'ru') ? 'pb-5' : ''; ?>'>
                   <h2 class='tx-white'><?php echo getPageMetaByIDKeyGroup(15, 'Banner Heading 1','Banner');?></h2>
                   <div class='banner-btn'>
                      <a class='gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(15, 'Banner Button URL','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(15, 'Banner Button Text','Banner');?>
@@ -72,7 +72,7 @@
                   <div class='col-md-6'>
                      <div class='mn-hd partnerSec1-cont'>
                         <h3 class='tx-blue'><?php echo getPageMetaByIDKeyGroup(15, 'Heading','Label Program');?></h3>
-                        <p class='p-fs3 tx-grey300 paraPdR'><?php echo getPageMetaByIDKeyGroup(15, 'Description 1','Label Program');?></p>
+                        <p class='p-fs3 tx-grey300 paraPdR <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>'><?php echo getPageMetaByIDKeyGroup(15, 'Description 1','Label Program');?></p>
                      </div>
                   </div>
 

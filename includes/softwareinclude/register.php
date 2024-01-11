@@ -1,7 +1,7 @@
 <?php
 error_reporting(3);
 include('config.php');
-include ('../../cpanel/includes/functions.php')
+include ('../../cpanel/includes/functions.php');
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,7 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_status = 1;
     $mobile_status = 1;
 
-    $invited_by=$_POST['myref'];
+    // $invited_by = isset($_POST['myref']) ? $_POST['myref'] : null;
+    
+    $invited_by = $_POST['myref'];
+
 
     // Check if the email already exists
     $checkExistingSql = "SELECT * FROM website_accounts WHERE email = '$email' OR mobile = '$phone' OR username = '$userName'";
@@ -30,36 +33,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         while ($row = $checkExistingResult->fetch_assoc()) {
             if ($row['email'] == $email) {
                 // Email already exists, output an error message
-                echo "Email already exists";
-                break;
+                
+                echo json_encode(['status' => 400, 'message' => "Email already exists."]);
+                exit();
+               
+                
             }
             if ($row['mobile'] == $phone) {
                 // Phone number already exists, output an error message
-                echo "Phone Number already exists";
-                break;
+              
+                echo json_encode(['status' => 400, 'message' => "Phone Number already exists."]);
+                exit();
             }
             if ($row['username'] == $userName) {
                 // User name already exists, output an error message
-                echo "Username already exists";
-                break;
+             
+                echo json_encode(['status' => 400, 'message' => "Username already exists"]);
+                exit();
             }
         }
     } else {
         $invited_by_ib_details='';
-        if($_POST['myref']){
+        if($invited_by!='0'){
             $insertUserSql = "INSERT INTO website_accounts (title,email, password,fullname,gender,mobile,username,country_code,account_status,mobile_status,email_status,updated_at,created_at,invited_by) 
             VALUES ('$gender','$email', '$password','$name','$gender','$phone','$userName','$dialCode','$account_status','$mobile_status','$email_status','$currentTimestamp','$currentTimestamp','$invited_by')";
            
-           $invited_by_id=$invited_by-10000;
-           $invited_by_ibSql = "SELECT * FROM website_accounts WHERE id = '$invited_by_id'";
-           $invited_by_ibResult = $conn->query($invited_by_ibSql);
+           $invited_by_id = $invited_by - 10000;
+           $invited_by_ibSql = "SELECT * FROM website_accounts WHERE id = ?";
+           $invited_by_ibResult = $conn->prepare($invited_by_ibSql);
+           $invited_by_ibResult->bind_param("i", $invited_by_id);
            $invited_by_ibResult->execute();
-           $invited_by_ibArray=$invited_by_ibResult->get_result();
-           $invited_by_ib= $invited_by_ibResult->fetch_assoc();
-
-           if(count($invited_by_ib)>0)
-           $invited_by_ib_details='<br>IB_Name :'.$invited_by_ib[0]['fullname'].'<br>IB_Username :'.$invited_by_ib[0]['username'].'<br>IB_EMail :'.$invited_by_ib[0]['email'];
-
+           $invited_by_ibArray = $invited_by_ibResult->get_result();
+           $invited_by_ib = $invited_by_ibArray->fetch_assoc();
+           
+           if ($invited_by_ib) {
+               $invited_by_ib_details = '<br>IB_Name: ' . $invited_by_ib['fullname'] . '<br>IB_Username: ' . $invited_by_ib['username'] . '<br>IB_Email: ' . $invited_by_ib['email'];
+           }
+           else{
+            echo json_encode(['status' => 400, 'message' => "Invalid Referral Link."]);
+                exit();
+           }
+           
         }
         else{
             $insertUserSql = "INSERT INTO website_accounts (title,email, password,fullname,gender,mobile,username,country_code,account_status,mobile_status,email_status,updated_at,created_at) 
@@ -72,24 +86,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $lastInsertedId=0;
         if ($res) {
             // Retrieve the last inserted ID
-            $lastInsertedId = $conn->lastInsertId();
+            $lastInsertedId = $conn->insert_id;
         }
 
 
         $data['title']=1;
         $data['name']='Admin';
-        $data['details']='Name : '.$input['fullname'].'<br>'.'UserName : '.$input['username'].'<br>'.'Email : '.$input['email'].'<br>'.$invited_by_ib_details;
+        $data['details']='Name : '.$name.'<br>'.'UserName : '.$userName.'<br>'.'Email : '.$email.'<br>'.$invited_by_ib_details;
         $subject='New Website Account';
         sendMailsToAdmin($data['details'],$subject);       
-        sendMailsToUser($data['details'],'Welcome to JMI Brokers','support@jmibrokers.com');
+        sendMailsToUser($data['details'],'Welcome to JMI Brokers',$email);
 
 
-        $insertmailistSql = "INSERT INTO maillist (mail,title, name) 
-        VALUES ('$email', 0,'userName')";
-         $resMailList = $conn->query($insertmailistSql);
+        $checkExistingSql = "SELECT * FROM maillist WHERE mail = '$email'";
+        $checkExistingResult = $conn->query($checkExistingSql);
+        if ($checkExistingResult->num_rows <= 0) {
+            $insertmailistSql = "INSERT INTO maillist (mail,title, name) 
+            VALUES ('$email', 0,'$userName')";
+             $resMailList = $conn->query($insertmailistSql);
+        }
+
+       
 
 
-         $registered_user=website_accounts::where('email',($input['email']))->get()->first();
+       
 
       
          $website_accounts_id=999999999;
@@ -137,15 +157,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($res === TRUE) {
             // Insert successful
-            echo "User successfully registered!";
+           
+            echo json_encode(['status' => 201, 'message' => "User successfully registered!."]);
+            exit();
         } else {
             // Error inserting user, output error message and the MySQL error
-            echo "Error: " . $insertUserSql . "<br>" . $conn->error;
+          
+            echo json_encode(['status' => 400, 'message' => "Something went wrong please try again later."]);
+            exit();
         }
     }
 } else {
     // Handle non-POST requests
     echo "Invalid request method";
+    exit;
 }
 
 $conn->close();

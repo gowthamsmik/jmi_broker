@@ -117,7 +117,7 @@
                         <button type="reset" value="Clear" class="btn btn-secondary">Clear</button>
                     </form>
                     <div class="d-flex justify-content-between my-3">
-                        <button type="button" class="btn btn-success">Export All</button>
+                        <button type="button" class="btn btn-success" id="extractAllmailer">Export CSV</button>
                         <button type="button" class="btn btn-success" onclick="deletemailer()">Delete Selected</button>
                     </div>
                 </div>
@@ -307,6 +307,30 @@
             window.onload = function () {
                 toggleSelectAll();
             };
+            $(document).on('click', '#extractAllmailer', function () {
+				// Make an AJAX request to a PHP script that extracts and downloads the CSV
+				$.ajax({
+					url: 'includes/softwareinclude/ajax.php',
+					type: 'post',
+					data: { type: 'extract-all-mailer' },
+					success: function (res) {
+						alert('CSV extraction successful. Download will begin shortly.');
+						var csvData = res;
+						console.log(csvData)
+						var blob = new Blob([csvData], { type: 'text/csv' });
+						var link = document.createElement('a');
+						link.href = window.URL.createObjectURL(blob);
+						link.download = 'all_mailer_data.csv';
+						document.body.appendChild(link);
+						link.click();
+						document.body.removeChild(link);
+					},
+					error: function (err) {
+						console.error(err);
+						alert('Error extracting data.');
+					}
+				});
+			});
         </script>
     </div>
 </body>

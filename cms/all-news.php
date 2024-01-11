@@ -70,8 +70,9 @@
 												<th class="cell">ID</th>
 												<th class="cell">Heading</th>
 												<th class="cell">arabic_title</th>
+												<th class="cell">russian_title</th>
 												<th class="cell">Posted By</th>
-												<th class="cell"></th>
+												<th class="cell">Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -89,6 +90,8 @@
 													</td>
 														<td class="cell"><?php echo $thisNews['id'];?></td>
 														<td class="cell"><span class="truncate"><?php echo $thisNews['heading'];?></span></td>
+														<td class="cell"><span class="truncate"><?php echo $thisNews['ar_heading'];?></span></td>
+														<td class="cell"><span class="truncate"><?php echo $thisNews['ru_heading'];?></span></td>
 														<td class="cell"><span class="truncate"><?php echo $thisNews['posted_by'];?></span></td>
 														<td class="cell">
 															<a class="btn-sm app-btn-secondary" href="edit-news.php?id=<?php echo $thisNews['id'];?>">Edit</a>

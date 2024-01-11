@@ -39,7 +39,8 @@
                   </div>
 
                   <div class="col-md-6">
-                     <div class="mainBanner-img">Banner Image
+                     <div class="mainBanner-img">
+                        <?php echo $lang['banner_image']?>
                         <img src="cms/<?php echo getPageMetaByIDKeyGroup(1,'Banner Image','Banner');?>" alt="">
                      </div>
                   </div>
@@ -68,13 +69,13 @@
                   <div class="col">
                      <div class="bitcoin-change mn-hd">
                         <p class="tx-grey p-fs6"><?php echo getPageMetaByIDKeyGroup(1,'Price Heading 2','Analytics');?></p>
-                        <h6 class="tx-grey fw-medium"><?php echo getPageMetaByIDKeyGroup(1,'Price Amount 2','Analytics');?> <i class="fas fa-caret-up"></i></h6>
+                        <p class="tx-grey fw-medium p-fs6"><?php echo getPageMetaByIDKeyGroup(1,'Price Amount 2','Analytics');?> <i class="fas fa-caret-up text-success"></i></p>
                      </div>
                   </div>
                   <div class="col">
                      <div class="bitcoin-lastPrice mn-hd">
                         <p class="tx-grey p-fs6"><?php echo getPageMetaByIDKeyGroup(1,'Price Heading 1','Analytics');?></p>
-                        <h6 class="tx-grey fw-medium"><?php echo getPageMetaByIDKeyGroup(1,'Price Amount 1','Analytics');?> <i class="fas fa-caret-down"></i></h6>
+                        <p class="tx-grey fw-medium p-fs6"><?php echo getPageMetaByIDKeyGroup(1,'Price Amount 1','Analytics');?> <i class="fas fa-caret-down text-danger"></i></p>
                      </div>
                   </div>
 
@@ -123,13 +124,13 @@
                         <div class="hSec1-cardCont mn-hd">
                            <h6 class="tx-white"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Investment Choices Box 1');?></h6>
                            <div class="d-flex align-items-center pb-2">
-                              <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 1');?> </h3>
+                              <h6 class="tx-gd fw-bold"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 1');?> </h6>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 1');?></span>
                            </div>
                            <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 1');?>
                            </p>
-                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 1');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
+                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 1');?>" class="text-white hover-yellow"> <?php echo $lang['read_more'] ?> <i class="fas fa-angle-right ps-2"></i></a>
                         </div>
                      </div>
 
@@ -141,13 +142,13 @@
                         <div class="hSec1-cardCont mn-hd">
                            <h6 class="tx-white"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Investment Choices Box 2');?></h6>
                            <div class="d-flex align-items-center pb-2">
-                              <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 2');?> </h3>
+                              <h6 class="tx-gd fw-bold"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 2');?> </h6>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 2');?></span>
                            </div>
                            <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 2');?>
                            </p>
-                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 2');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
+                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 2');?>" class="text-white hover-yellow"><?php echo $lang['read_more'] ?><i class="fas fa-angle-right ps-2"></i></a>
                         </div>
                      </div>
 
@@ -160,13 +161,13 @@
                         <div class="hSec1-cardCont mn-hd">
                            <h6 class="tx-white"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Investment Choices Box 3');?></h6>
                            <div class="d-flex align-items-center pb-2">
-                              <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 3');?> </h3>
+                              <h6 class="tx-gd fw-bold"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 3');?> </h6>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 3');?></span>
                            </div>
                            <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 3');?>
                            </p>
-                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 3');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
+                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 3');?>" class="text-white hover-yellow"><?php echo $lang['read_more'] ?><i class="fas fa-angle-right ps-2"></i></a>
                         </div>
                      </div>
 
@@ -183,13 +184,13 @@
                         <div class="hSec1-cardCont mn-hd">
                            <h6 class="tx-white"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Investment Choices Box 4');?></h6>
                            <div class="d-flex align-items-center pb-2">
-                              <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 4');?> </h3>
+                              <h6 class="tx-gd fw-bold"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 4');?> </h6>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 4');?></span>
                            </div>
                            <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 4');?>
                            </p>
-                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 4');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
+                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 4');?>" class="text-white hover-yellow"><?php echo $lang['read_more'] ?><i class="fas fa-angle-right ps-2"></i></a>
                         </div>
                      </div>
 
@@ -202,13 +203,13 @@
                         <div class="hSec1-cardCont mn-hd">
                            <h6 class="tx-white"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Investment Choices Box 5');?></h6>
                            <div class="d-flex align-items-center pb-2">
-                              <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 5');?> </h3>
+                              <h6 class="tx-gd fw-bold"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 5');?> </h6>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 5');?></span>
                            </div>
                            <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 5');?>
                            </p>
-                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 5');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
+                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 5');?>" class="text-white hover-yellow"><?php echo $lang['read_more'] ?><i class="fas fa-angle-right ps-2"></i></a>
                         </div>
                      </div>
 
@@ -221,13 +222,13 @@
                         <div class="hSec1-cardCont mn-hd">
                            <h6 class="tx-white"><?php echo getPageMetaByIDKeyGroup(1,'Heading','Investment Choices Box 6');?></h6>
                            <div class="d-flex align-items-center pb-2">
-                              <h3 class="tx-gd"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 6');?> </h3>
+                              <h6 class="tx-gd fw-bold"><?php echo getPageMetaByIDKeyGroup(1,'Heading 2','Investment Choices Box 6');?> </h6>
                               <span class="tx-white ps-4 pt-3"><?php echo getPageMetaByIDKeyGroup(1,'Small Text','Investment Choices Box 6');?></span>
                            </div>
                            <p class="p-fs2 tx-white" style="text-align:justify;">
                            <?php echo getPageMetaByIDKeyGroup(1,'Description','Investment Choices Box 6');?>
                            </p>
-                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 6');?>" class="text-white hover-yellow">Read More <i class="fas fa-angle-right ps-2"></i></a>
+                           <a href="<?php echo getPageMetaByIDKeyGroup(1,'Read More Link','Investment Choices Box 6');?>" class="text-white hover-yellow"><?php echo $lang['read_more'] ?><i class="fas fa-angle-right ps-2"></i></a>
                         </div>
                      </div>
 
@@ -273,7 +274,7 @@
                     <p class="tx-grey p-fs3">
                        <?php echo getPageMetaByIDKeyGroup(1,'Description','Statistics');?>
                     </p>
-                    <a class="theam-btn signUp" href="<?php echo getPageMetaByIDKeyGroup(1,'Banner Button URL','Statistics');?>"><?php echo getPageMetaByIDKeyGroup(1,'Banner Button Text','Statistics');?>
+                    <a  class="text-uppercase gd-btn signUp" href="<?php echo getPageMetaByIDKeyGroup(1,'Banner Button URL','Statistics');?>"><?php echo getPageMetaByIDKeyGroup(1,'Banner Button Text','Statistics');?>
                         <span>
                             <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -316,6 +317,7 @@
    
                               <p style="text-align:justify;">
                                  <?php echo getPageMetaByIDKeyGroup(1,'Gold prices Description','Fundamental Analysis');?>
+                                 <a href="dailyfundamental.php"><?php echo $lang['para_read_more']?></a>
                               </p>
                            </div>
                         </li>
@@ -330,6 +332,7 @@
    
                               <p style="text-align:justify;">
                               <?php echo getPageMetaByIDKeyGroup(1,'US dollar Description','Fundamental Analysis');?>
+                              <a href="dailyfundamental.php"><?php echo $lang['para_read_more']?></a>
                               </p>
                            </div>
                         </li>
@@ -398,8 +401,8 @@
 
                <div class="col-md-6 faqscrool">
                   <div class="faqSec-cont mn-hd pe-0">
-                     <h3 class="tx-blue">Got Questions? <br> We Have Answers!</h3>
-                     <p class="tx-grey300 p-fs3">Frequently Asked Questions List</p>
+                  <h3 class="tx-blue"><?php echo $lang['got_questions']?> <br> <?php echo $lang['we_have_answers']?></h3>
+                     <p class="tx-grey300 p-fs3"><?php echo $lang['frequently_asked_questions_list']?></p>
                      <div class="innerFAQSec-accordion">
                      <ul class="accordion">
                      <?php $get_faqs = get_faqs_by_cat('general');
@@ -409,12 +412,18 @@
                                 <li>
                                     <div class="acc_title fs-6" data-bs-toggle="collapse" >
                                         
-                                        <?php echo $thisFaq['question'];?>
+                                    <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_question'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_question'] :  $thisFaq['question'])) : 
+                                                                $thisFaq['question'] ?>
                                         <i class="far fa-plus"></i>
                                     </div>
                                     <div class="acc_desc collapse fs-6"  >
                                         <p style="text-align:justify;">
-                                        <?php echo $thisFaq['answer'];?>
+                                        <?php echo isset($_SESSION['user_language']) ? 
+                                                                ($_SESSION['user_language'] == "ar" ? $thisFaq['ar_answer'] : 
+                                                                ($_SESSION['user_language'] == "ru" ?  $thisFaq['ru_answer'] :  $thisFaq['answer'])) : 
+                                                                $thisFaq['answer']  ?>
                                         
                                         </p>
                                     </div>
@@ -442,7 +451,7 @@
    
                         <span class="tx-grey300 p-fs2 fw-bold pb-2">Download App</span>
    
-                        <ul class="applist p-0 position-absolute" style="z-index:100;">
+                        <ul class="applist p-0 position-absolute" style="z-index:1;">
                                 <li>
                                     <a
                                         href="https://play.google.com/store/apps/details?id=net.metaquotes.metatrader4&hl=en&refer[…]292009626949028%26server%3dJMIBrokers-Demo%252cJMIBrokers-JMI"><img
@@ -537,15 +546,16 @@
          <div class="container">
             <div class="pdX12">
                <div class="hCta-hd mn-hd">
-                  <h3 class="tx-gd">Ready to get started?</h3>
-                  <p class="p-fs3 tx-white">Take your business to the next level with JMI Brokers.</p>
+                  <h3 class="tx-gd"><?php echo $lang['get_started_prompt']?></h3>
+                  <p class="p-fs3 tx-white"><?php echo $lang['take_business_to_next_level']?></p>
                </div>
 
-               <div class="hCta-form mn-btn pdX8">
-                  <form>
-                     <input class="rounded" type="text" placeholder="Enter Your Website">
-                     <button class="gd-btn rounded-end">
-                        Lets Get Started
+               <div class="mn-btn pdX8 " >
+                  <!-- <form>
+                     <input class="rounded" type="text" placeholder="<?php echo $lang['lets_get_started']?>"> -->
+                     <a class="<?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $siteurl."cpanel/account-overview.php" : getPageMetaByIDKeyGroup(2, 'Banner Button URL 2', 'Banner'); ?>">
+                     <button class="gd-btn rounded-end px-4 py-3">
+                     <?php echo $lang['enter_your_website']?>
                         <span>
                            <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -553,7 +563,8 @@
                            </svg>
                         </span>
                      </button>
-                  </form>
+                     </a>
+                  <!-- </form> -->
                </div>
             </div>
          </div>

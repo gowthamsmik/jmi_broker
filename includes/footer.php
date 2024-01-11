@@ -204,9 +204,9 @@ a{
 <script>
 var firebaseConfig = {
     apiKey: "AIzaSyCFVvsn6dt0WsVQljltQiW-ed-NOLRN9J8",
-    authDomain: "en.jmibrokers.com",
+    authDomain: "jmibrokers.com",
     projectId: "jmi-brokers",
-    storageBucket: "en.jmibrokers.com",
+    storageBucket: "jmibrokers.com",
     messagingSenderId: "698047998267",
     appId: "1:698047998267:web:3f68d50ce3c78ef29e2f1e",
     measurementId: "G-FTZC0TXY4K"
@@ -258,7 +258,7 @@ function phoneSendAuth() {
     });
     $.ajax({
         type: "get",
-        url: "https://en.jmibrokers.com/checkmobileexist.php?phone=" + phone,
+        url: "https://jmibrokers.com/checkmobileexist.php?phone=" + phone,
 
         success: function(result) {
             console.log("return result", result)
@@ -342,7 +342,7 @@ function emailSendAuth() {
    
     $.ajax({
         type: "get",
-        url: "<?php echo $siteurl;?>verificationemail.php?email=" + email,
+        url: "verificationemail.php?email=" + email,
 
         success: function(result) {
             console.log("result email", result);
@@ -488,7 +488,7 @@ function toggleLiveChat() {
         'block' : 'none';
 }
 </script>
-<footer class="mt-0">
+<footer class="mt-0 me-2">
     <div class="container ">
         <?php if (!$isUserWebsitePage): ?>
         <div class="footer-top">
@@ -574,7 +574,7 @@ function toggleLiveChat() {
                 </div>
 
                 <div class="col">
-                    <div class="footerT-cont">
+                    <div class="footerT-cont mb-4">
                         <ul>
                             <li class="tx-gd"><?php echo $lang['tradingAccounts'] ?></li>
                             <li><a href=<?php echo $siteurl."forex-trading.php"?>><?php echo $lang['everyTrader'] ?></a></li>
@@ -582,7 +582,7 @@ function toggleLiveChat() {
                     </div>
                 </div>
             </div>
-            <div class="footer-sponser">
+            <div class="footer-sponser mt-3" style="bottom:0; <?php echo ($userPreferredLanguage === 'ar') ? 'left:0px' : 'right:10px;'; ?>">
                 <div class="sponser1">
                     <div class="spon1-cont1">
                         <img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Logo 1', 'Logos'); ?>
@@ -629,9 +629,9 @@ function toggleLiveChat() {
                     <div class="cont-title">
                         <span>
                             <img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Image 1', 'Bottom'); ?>
-                                alt="">
+                                alt="404" class="fma_img">
                         </span>
-                        <p class="tx-grey-new3 p-fs7">
+                        <p class="tx-grey-new3 p-fs7 w-75">
                             <?php echo getSectionMetaByIDKeyGroup('1', 'Heading 1', 'Bottom'); ?>
                         </p>
                     </div>
@@ -644,7 +644,7 @@ function toggleLiveChat() {
                     <div class="cont-title">
                         <span>
                             <img src=<?php echo $siteurl."cms/"?><?php echo getSectionMetaByIDKeyGroup('1', 'Image 2', 'Bottom'); ?>
-                                alt="">
+                                alt="404" class="fma_img">
                         </span>
                         <p class="tx-grey-new3 p-fs7">
                             <?php echo getSectionMetaByIDKeyGroup('1', 'Heading 2', 'Bottom'); ?>
@@ -1034,7 +1034,7 @@ $(document).ready(function() {
     })
 
     $('#registerButton ').on('click', function(e) {
-        console.log("juileb")
+       
         //if (emailverified && smsverified)
         if (emailverified) {
             e.preventDefault(); // Prevent the default form submission
@@ -1081,6 +1081,22 @@ $(document).ready(function() {
                 return;
             }
 
+            
+            var currentUrl = window.location.href;
+
+
+        var url = new URL(currentUrl);
+
+       
+        var myrefValue='0';
+        if (url.searchParams.has("myref")) {
+  
+            myrefValue = url.searchParams.get("myref");
+          
+ 
+} 
+
+
             $.ajax({
                 url: 'includes/softwareinclude/register.php',
                 type: 'POST',
@@ -1091,12 +1107,14 @@ $(document).ready(function() {
                     gender: gender,
                     userName: userName,
                     phone: phone,
-                    dialCode: country
+                    dialCode: country,
+                    myref:myrefValue
                     // Add other data fields as needed
                 },
+                  dataType:'json',
                 success: function(response) {
-                    alert(response);
-                    if (response == "User successfully registered!") {
+                    alert(response.message);
+                    if (response.status == 201) {
                         console.log("Success", response);
                         $('.signUppopup-waper').fadeOut();
                         $('.overlay').fadeOut();
@@ -1107,7 +1125,40 @@ $(document).ready(function() {
                         $("#SendphoneCode").css("display", 'flex');
                         $('#phoneverifiedLink').css("display", 'none');
                         $('#emailverifiedLink').css("display", 'none');
+                        $.ajax({
+                url: 'includes/softwareinclude/login.php',
+                type: 'POST',
+                data: {
+                    userNameorPhone: userName,
+                    password: password,
+                },
+                success: function (loginResponse) {
+                    alert(loginResponse);
 
+                    console.log("Login Success", loginResponse);
+                    if (loginResponse == 'Login Successful') {
+                        // Reset registration form
+                        $('#registerform').trigger("reset");
+                        emailverified = false;
+                        smsverified = false;
+                        $("#SencodeEmail").css("display", 'flex');
+                        $("#SendphoneCode").css("display", 'flex');
+                        $('#phoneverifiedLink').css("display", 'none');
+                        $('#emailverifiedLink').css("display", 'none');
+
+                        // Close registration popup
+                        $('.signUppopup-waper').fadeOut();
+                        $('.overlay').fadeOut();
+
+                        // Redirect to account overview page
+                        window.location.href = 'cpanel/account-overview.php';
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("Login Error", xhr.responseText);
+                    // Handle login error response
+                }
+            });
 
                     } else(
                         console.log('errorrrt', response)

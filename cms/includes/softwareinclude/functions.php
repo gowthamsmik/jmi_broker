@@ -59,7 +59,7 @@ function add_ru_faq($question, $answer, $faqtype)
     global $conn;
     $question = $conn->real_escape_string($question);
     $answer = $conn->real_escape_string($answer);
-    $sql = "INSERT INTO `ru_faqs`( `question`, `answer`, `type`) VALUES ('$question','$answer','$faqtype')";
+    $sql = "INSERT INTO `faqs`( `ru_question`, `ru_answer`, `type`) VALUES ('$question','$answer','$faqtype')";
     $res = $conn->query($sql);
     return $res;
 }
@@ -68,7 +68,7 @@ function add_ar_faq($question, $answer, $faqtype)
     global $conn;
     $question = $conn->real_escape_string($question);
     $answer = $conn->real_escape_string($answer);
-    $sql = "INSERT INTO `ar_faqs`( `question`, `answer`, `type`) VALUES ('$question','$answer','$faqtype')";
+    $sql = "INSERT INTO `faqs`( `ar_question`, `ar_answer`, `type`) VALUES ('$question','$answer','$faqtype')";
     $res = $conn->query($sql);
     return $res;
 }
@@ -86,7 +86,7 @@ function update_ru_faq($id, $question, $answer, $faqtype)
     global $conn;
     $question = $conn->real_escape_string($question);
     $answer = $conn->real_escape_string($answer);
-    $sql = "UPDATE ru_faqs SET question = '$question' , answer = '$answer' , type = '$faqtype' WHERE id = '$id'";
+    $sql = "UPDATE faqs SET ru_question = '$question' , ru_answer = '$answer' , type = '$faqtype' WHERE id = '$id'";
     $res = $conn->query($sql);
     return $res;
 }
@@ -95,7 +95,7 @@ function update_ar_faq($id, $question, $answer, $faqtype)
     global $conn;
     $question = $conn->real_escape_string($question);
     $answer = $conn->real_escape_string($answer);
-    $sql = "UPDATE ar_faqs SET question = '$question' , answer = '$answer' , type = '$faqtype' WHERE id = '$id'";
+    $sql = "UPDATE faqs SET ar_question = '$question' , ar_answer = '$answer' , type = '$faqtype' WHERE id = '$id'";
     $res = $conn->query($sql);
     return $res;
 }
@@ -124,7 +124,7 @@ function getRuFaqById($faqid)
 function getArFaqById($faqid)
 {
     global $conn;
-    $sql = "SELECT * FROM ar_faqs WHERE id = '$faqid'";
+    $sql = "SELECT * FROM faqs WHERE id = '$faqid'";
     $res = $conn->query($sql);
     if ($res->num_rows > 0) {
         while ($row = $res->fetch_assoc()) {
@@ -217,14 +217,14 @@ function getPageGroups($pid)
 function getRuPageGroups($pid)
 {
     global $conn;
-    $sql = "SELECT * FROM ru_page_meta WHERE page_id = '$pid' GROUP BY group_name ORDER BY `ru_page_meta`.`id` ASC";
+    $sql = "SELECT * FROM page_meta WHERE page_id = '$pid' GROUP BY group_name ORDER BY `page_meta`.`id` ASC";
     $res = $conn->query($sql);
     return $res;
 }
 function getArPageGroups($pid)
 {
     global $conn;
-    $sql = "SELECT * FROM ar_page_meta WHERE page_id = '$pid' GROUP BY group_name ORDER BY `ar_page_meta`.`id` ASC";
+    $sql = "SELECT * FROM page_meta WHERE page_id = '$pid' GROUP BY group_name ORDER BY `page_meta`.`id` ASC";
     $res = $conn->query($sql);
     return $res;
 }
@@ -259,14 +259,14 @@ function getPageFieldsByGroup($pid, $group)
 function getRuPageFieldsByGroup($pid, $group)
 {
     global $conn;
-    $sql = "SELECT * FROM ru_page_meta WHERE page_id = '$pid' AND group_name = '$group'";
+    $sql = "SELECT * FROM page_meta WHERE page_id = '$pid' AND group_name = '$group'";
     $res = $conn->query($sql);
     return $res;
 }
 function getArPageFieldsByGroup($pid, $group)
 {
     global $conn;
-    $sql = "SELECT * FROM ar_page_meta WHERE page_id = '$pid' AND group_name = '$group'";
+    $sql = "SELECT * FROM page_meta WHERE page_id = '$pid' AND group_name = '$group'";
     $res = $conn->query($sql);
     return $res;
 }
@@ -321,30 +321,98 @@ function getfxaccount($id)
         return null; // or handle the error as needed
     }
 }
-function getAlldepositerequest($page, $perPage)
+// function getAlldepositerequest($page, $perPage)
+// {
+//     global $conn;
+//     $offset = ($page - 1) * $perPage;
+//     $sql = "SELECT * FROM transactions WHERE type = '0' ORDER BY id DESC LIMIT $offset, $perPage";
+
+//     $res = $conn->query($sql);
+//     return $res;
+// }
+
+function getAlldepositerequest($page, $perPage, $sort)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM transactions WHERE type = '0' ORDER BY id DESC LIMIT $offset, $perPage";
+
+    $sql = "SELECT * FROM transactions";
+
+    // Add ORDER BY clause
+    $sql .= " ORDER BY id " . ($sort == "desc" ? "DESC" : "ASC");
+
+    // Add LIMIT clause
+    $sql .= " LIMIT $offset, $perPage";
 
     $res = $conn->query($sql);
+
+    if (!$res) {
+        echo "Error: " . $conn->error;
+    }
+
     return $res;
 }
 
-function getAllwithdrawrequest($page, $perPage)
+// function getAllwithdrawrequest($page, $perPage)
+// {
+//     global $conn;
+//     $offset = ($page - 1) * $perPage;
+//     $sql = "SELECT * FROM transactions WHERE type = '1' ORDER BY id DESC LIMIT $offset, $perPage";
+//     $res = $conn->query($sql);
+//     return $res;
+// }
+
+function getAllwithdrawrequest($page, $perPage, $sort)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM transactions WHERE type = '1' ORDER BY id DESC LIMIT $offset, $perPage";
+
+    $sql = "SELECT * FROM transactions";
+
+    // Add ORDER BY clause
+    $sql .= " ORDER BY id " . ($sort == "desc" ? "DESC" : "ASC");
+
+    // Add LIMIT clause
+    $sql .= " LIMIT $offset, $perPage";
+
     $res = $conn->query($sql);
+
+    if (!$res) {
+        echo "Error: " . $conn->error;
+    }
+
     return $res;
 }
-function getAllinternalrequest($page, $perPage)
+
+
+// function getAllinternalrequest($page, $perPage)
+// {
+//     global $conn;
+//     $offset = ($page - 1) * $perPage;
+//     $sql = "SELECT * FROM transactions WHERE type = '2' ORDER BY id DESC LIMIT $offset, $perPage";
+//     $res = $conn->query($sql);
+//     return $res;
+// }
+
+function getAllinternalrequest($page, $perPage, $sort)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM transactions WHERE type = '2' ORDER BY id DESC LIMIT $offset, $perPage";
+
+    $sql = "SELECT * FROM transactions";
+
+    // Add ORDER BY clause
+    $sql .= " ORDER BY id " . ($sort == "desc" ? "DESC" : "ASC");
+
+    // Add LIMIT clause
+    $sql .= " LIMIT $offset, $perPage";
+
     $res = $conn->query($sql);
+
+    if (!$res) {
+        echo "Error: " . $conn->error;
+    }
+
     return $res;
 }
 function getTotalWebsiteAccounts()
@@ -391,7 +459,7 @@ function getArTotalfaqs()
 {
     global $conn;
 
-    $sql = "SELECT COUNT(*) as total FROM ar_faqs ";
+    $sql = "SELECT COUNT(*) as total FROM faqs where ar_question is not null";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
@@ -589,7 +657,7 @@ function update_ru_field_meta($filed_name, $value, $group, $page_id)
     $value = $conn->real_escape_string($value);
     $filed_name = str_replace('_', ' ', $filed_name);
     $group = str_replace('_', ' ', $group);
-    echo $sql = "UPDATE `ru_page_meta` SET `field_value`='$value' WHERE `field_name`='$filed_name' AND `page_id`='$page_id' AND `group_name`='$group'";
+    echo $sql = "UPDATE `page_meta` SET `ru_field_value`='$value' WHERE `field_name`='$filed_name' AND `page_id`='$page_id' AND `group_name`='$group'";
     $res = $conn->query($sql);
 }
 function update_ar_field_meta($filed_name, $value, $group, $page_id)
@@ -598,7 +666,7 @@ function update_ar_field_meta($filed_name, $value, $group, $page_id)
     $value = $conn->real_escape_string($value);
     $filed_name = str_replace('_', ' ', $filed_name);
     $group = str_replace('_', ' ', $group);
-    echo $sql = "UPDATE `ar_page_meta` SET `field_value`='$value' WHERE `field_name`='$filed_name' AND `page_id`='$page_id' AND `group_name`='$group'";
+    echo $sql = "UPDATE `page_meta` SET `ar_field_value`='$value' WHERE `field_name`='$filed_name' AND `page_id`='$page_id' AND `group_name`='$group'";
     $res = $conn->query($sql);
 }
 function update_section_field_meta($filed_name, $value, $group, $section_id)
@@ -651,22 +719,23 @@ function getNewsById($id)
 function add_news($heading, $description, $ar_title, $ar_details, $ru_title, $ru_details, $posted_by, $news_files)
 {
     global $conn;
-    $heading = $conn->real_escape_string($heading);
-    $description = $conn->real_escape_string($description);
-    $posted_by = $conn->real_escape_string($posted_by);
+    // $heading = $conn->real_escape_string($heading);
+    // $description = $conn->real_escape_string($description);
+    // $posted_by = $conn->real_escape_string($posted_by);
     $time = time();
-    $sql = "INSERT INTO `news`( `heading`, `description`,`arabic_title`,`arabic_details`,`russian_title`,`russian_details`, `posted_by`, `posted_on`, `image`) VALUES ('$heading','$description','$posted_by', '$time', '$news_files')";
-    echo "sql-" . $sql;
+    $sql = "INSERT INTO `news`( `heading`, `description`,`ar_heading`,`ar_description`,`ru_heading`,`ru_description`, `posted_by`, `created_at`, `image`) VALUES ('$heading','$description','$ar_title','$ar_details','$ru_title','$ru_details','$posted_by', '$time', '$news_files')";
+   
     $res = $conn->query($sql);
     return $res;
 }
-function update_news($id, $heading, $description, $posted_by, $news_files)
+function update_news($id, $heading, $description,$ar_title,$ar_details,$ru_heading,$ru_details, $posted_by, $news_files)
 {
     global $conn;
-    $heading = $conn->real_escape_string($heading);
-    $description = $conn->real_escape_string($description);
-    $posted_by = $conn->real_escape_string($posted_by);
-    $sql = "UPDATE news SET heading = '$heading' , description = '$description' , posted_by = '$posted_by', image = '$news_files' WHERE id = '$id'";
+    $now = date('Y-m-d H:i:s');
+    // $heading = $conn->real_escape_string($heading);
+    // $description = $conn->real_escape_string($description);
+    // $posted_by = $conn->real_escape_string($posted_by);
+    $sql = "UPDATE news SET heading = '$heading' , description = '$description' , ar_heading='$ar_title',ar_description='$ar_details',ru_heading='$ru_heading',ru_description='$ru_details', posted_by = '$posted_by', image = '$news_files',updated_at='$now' WHERE id = '$id'";
     $res = $conn->query($sql);
     return $res;
 }
@@ -1334,17 +1403,29 @@ function getfundamentalview($id)
     return $details;
 }
 function updateFundamentalAnalysis($id, $heading, $description, $targetFile)
-{
-    global $conn;
-    $now = date('Y-m-d H:i:s');
-    $sql = "UPDATE fundamental_analysis SET heading= '$heading',description = '$description' ,image='$targetFile' WHERE id='$id'";
-    $res = $conn->query($sql);
-    echo "sql===============", $sql;
-    if (!$res) {
-        echo "Error: " . $conn->error;
+{   
+    if($targetFile=='null'){
+        global $conn;
+        $now = date('Y-m-d H:i:s');
+        $sql = "UPDATE fundamental_analysis SET heading= '$heading',description = '$description' WHERE id='$id'";
+        $res = $conn->query($sql);
+        echo "sql===============", $sql;
+        if (!$res) {
+            echo "Error: " . $conn->error;
+        }
+        return $res;
+    }else{
+        global $conn;
+        $now = date('Y-m-d H:i:s');
+        $sql = "UPDATE fundamental_analysis SET heading= '$heading',description = '$description' ,image='$targetFile' WHERE id='$id'";
+        $res = $conn->query($sql);
+        echo "sql===============", $sql;
+        if (!$res) {
+            echo "Error: " . $conn->error;
+        }
+        return $res;
     }
-
-    return $res;
+    
 }
 
 function addoffers($offertype, $title, $details, $offerstatus, $arabic_title, $arabic_details, $targetFile, $russian_title, $russian_details)
@@ -2219,8 +2300,8 @@ function emailQueueOld()
 
                 require_once '../vendor/autoload.php';
                 $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-                $transport->setUsername('support@jmibrokers.com');
-                $transport->setPassword('Duiuw^%^&tw$@@$er$%&^gf*');
+                $transport->setUsername('marketing@jmibrokers.com');
+                $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
 
                 $mailer = new Swift_Mailer($transport);
                 $emailBatches = array_chunk($emailAddress, $sendCount);
@@ -2230,7 +2311,7 @@ function emailQueueOld()
                     foreach ($batch as $to) {
                         // Create a message for each recipient
                         $message = (new Swift_Message(''))
-                            ->setFrom(['support@jmibrokers.com' => 'Jmi brokers'])
+                            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
                             ->setTo($to)
                             ->setBody($body, 'text/html')
                             ->setSubject($subject);
@@ -2302,9 +2383,9 @@ function emailQueue()
                 
                 }
                 require_once '../vendor/autoload.php';
-                $transport = new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls');
-                $transport->setUsername('gopi.smiksystems@gmail.com');
-                $transport->setPassword('mvov xtll vhbz uqzi');
+                $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
+                $transport->setUsername('marketing@jmibrokers.com');
+                $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
 
                 $mailer = new Swift_Mailer($transport);
                 $emailBatches = array_chunk($emailAddress, $sendCount);
@@ -2371,7 +2452,7 @@ function emailQueue()
                 </body>
                 </html>';
                         $message = (new Swift_Message(''))
-                            ->setFrom(['gopi.smiksystems@gmail.com' => 'Jmi brokers'])
+                            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
                             ->setTo($to)
                             ->setBody($sendBody, 'text/html')
                             ->setSubject($subject);
@@ -2652,19 +2733,45 @@ function approvetrade($id, $status)
         echo json_encode(array('error' => $conn->error));
     }
 }
-function getAllcopytrade($page, $perPage)
+// function getAllcopytrade($page, $perPage,$sort)
+// {
+//     global $conn;
+//     $offset = ($page - 1) * $perPage;
+    
+//     $sql = "SELECT * FROM copy_trade ORDER BY id DESC";
+//     if($sort!="desc")
+//         $sql = "SELECT * FROM copy_trade ORDER BY id ASC";
+//     $end = ($offset + $perPage);
+//     $sql .= " LIMIT $offset,$end ";
+//     $res = $conn->query($sql);
+//     if (!$res) {
+//         echo "Error: " . $conn->error;
+//     }
+//     return $res;
+// }
+
+function getAllcopytrade($page, $perPage, $sort)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM copy_trade ORDER BY id DESC";
-    $end = ($offset + $perPage);
-    $sql .= " LIMIT $offset,$end ";
+
+    $sql = "SELECT * FROM copy_trade";
+
+    // Add ORDER BY clause
+    $sql .= " ORDER BY id " . ($sort == "desc" ? "DESC" : "ASC");
+
+    // Add LIMIT clause
+    $sql .= " LIMIT $offset, $perPage";
+
     $res = $conn->query($sql);
+
     if (!$res) {
         echo "Error: " . $conn->error;
     }
+
     return $res;
 }
+
 
 function deletetrade($id)
 {
@@ -2823,7 +2930,7 @@ function demo_accounts()
 function getAllNotifications()
 {
     global $conn;
-    $sql = "SELECT * FROM notifications WHERE website_accounts_id = '999999999' ORDER BY id DESC LIMIT 50";
+    $sql = "SELECT * FROM notifications WHERE website_accounts_id = '999999999' and notification_status='0' ORDER BY id DESC LIMIT 50";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -3179,4 +3286,286 @@ function seennotification()
     $sql = "UPDATE notifications SET notification_status=1 WHERE website_accounts_id'='999999999'";
     $res = $conn->query($sql);
     return $res;
+
+}
+function extractcopytrade()
+{
+    global $conn;
+    $query = "SELECT copy_trade.id, website_accounts.email, copy_trade.copy_from, copy_trade.copy_to, copy_trade.percentage, copy_trade.status, copy_trade.created_at, copy_trade.updated_at
+              FROM copy_trade
+              LEFT JOIN website_accounts ON copy_trade.website_accounts_id = website_accounts.id";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo json_encode(['success' => false, 'message' => 'Error fetching data from the database']);
+        exit;
+    }
+    $csvFileName = "all_copy_trade_datas.csv";
+    $csvFile = fopen($csvFileName, 'w');
+    $headerRow = ['id', 'email', 'copy_from', 'copy_to', 'percentage', 'status', 'created_at', 'updated_at'];
+    fputcsv($csvFile, $headerRow);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $row['status'] = getStatusLabel($row['status']);
+        $row['created_at'] = (new DateTime($row['created_at']))->format('c');
+        $row['updated_at'] = (new DateTime($row['updated_at']))->format('c');
+        fputcsv($csvFile, $row);
+    }
+    fclose($csvFile);
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="' . $csvFileName . '"');
+    readfile($csvFileName);
+    unlink($csvFileName);
+    echo json_encode(['success' => true, 'message' => 'CSV extraction successful']);
+    exit;
+}
+function getStatusLabel($statusValue)
+{
+    switch ($statusValue) {
+        case '0':
+            return 'pending';
+        case '1':
+            return 'copying';
+        case '8':
+            return 'cancelling';
+        case '9':
+            return 'cancelled';
+        default:
+            return '';
+    }
+}
+function extractdeposite()
+{
+    global $conn;
+    $query = "SELECT transactions.id, transactions.type, transactions.via,transactions.account, transactions.amount,transactions.status,transactions.details_admin,transactions.created_at
+              FROM transactions where type = '0'";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo json_encode(['success' => false, 'message' => 'Error fetching data from the database']);
+        exit;
+    }
+    $csvFileName = "all_copy_trade_datas.csv";
+    $csvFile = fopen($csvFileName, 'w');
+    $headerRow = ['id', 'type', 'via', 'account', 'amount', 'status', 'details_admin', 'created_at'];
+    fputcsv($csvFile, $headerRow);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $row['type'] = gettransactionname($row['type']);
+        $row['status'] = getStatustransaction($row['status']);
+        $row['created_at'] = (new DateTime($row['created_at']))->format('c');
+        fputcsv($csvFile, $row);
+    }
+    fclose($csvFile);
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="' . $csvFileName . '"');
+    readfile($csvFileName);
+    unlink($csvFileName);
+    echo json_encode(['success' => true, 'message' => 'CSV extraction successful']);
+    exit;
+}
+function extractwithdraw()
+{
+    global $conn;
+    $query = "SELECT transactions.id, transactions.type, transactions.via,transactions.account, transactions.amount,transactions.status,transactions.details_admin,transactions.created_at
+              FROM transactions where type = '1'";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo json_encode(['success' => false, 'message' => 'Error fetching data from the database']);
+        exit;
+    }
+    $csvFileName = "all_copy_trade_datas.csv";
+    $csvFile = fopen($csvFileName, 'w');
+    $headerRow = ['id', 'type', 'via', 'account', 'amount', 'status', 'details_admin', 'created_at'];
+    fputcsv($csvFile, $headerRow);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $row['type'] = gettransactionname($row['type']);
+        $row['status'] = getStatustransaction($row['status']);
+        $row['created_at'] = (new DateTime($row['created_at']))->format('c');
+        fputcsv($csvFile, $row);
+    }
+    fclose($csvFile);
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="' . $csvFileName . '"');
+    readfile($csvFileName);
+    unlink($csvFileName);
+    echo json_encode(['success' => true, 'message' => 'CSV extraction successful']);
+    exit;
+}
+function extractinternal()
+{
+    global $conn;
+    $query = "SELECT transactions.id, transactions.type, transactions.via,transactions.account, transactions.amount,transactions.status,transactions.details_admin,transactions.created_at
+              FROM transactions where type = '2'";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo json_encode(['success' => false, 'message' => 'Error fetching data from the database']);
+        exit;
+    }
+    $csvFileName = "all_copy_trade_datas.csv";
+    $csvFile = fopen($csvFileName, 'w');
+    $headerRow = ['id', 'type', 'via', 'account', 'amount', 'status', 'details_admin', 'created_at'];
+    fputcsv($csvFile, $headerRow);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $row['type'] = gettransactionname($row['type']);
+        $row['status'] = getStatustransaction($row['status']);
+        $row['created_at'] = (new DateTime($row['created_at']))->format('c');
+        fputcsv($csvFile, $row);
+    }
+    fclose($csvFile);
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="' . $csvFileName . '"');
+    readfile($csvFileName);
+    unlink($csvFileName);
+    echo json_encode(['success' => true, 'message' => 'CSV extraction successful']);
+    exit;
+}
+function getStatustransaction($statusValue)
+{
+    switch ($statusValue) {
+        case '1':
+            return'Done';
+        case '0':
+            return 'Pending';
+        case '9':
+            return 'Rejected';
+        default:
+        return 'Unknown';
+    }
+}
+function gettransactionname($transactionType){
+    switch ($transactionType) {
+        case '0':
+            return 'Deposit';
+        case '1':
+            return 'Withdraw';
+        case '2':
+            return 'Internal Transfer';
+        default:
+        return 'Internal Transfer';
+    }
+}
+function extractallsearchurl()
+{
+    global $conn;
+    $query = "SELECT search.id, search.url, search.en_title, search.ar_title, search.created_at
+              FROM search ";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo json_encode(['success' => false, 'message' => 'Error fetching data from the database']);
+        exit;
+    }
+
+    $csvFileName = "all_copy_trade_datas.csv";
+    $csvFile = fopen($csvFileName, 'w');
+
+    // Add BOM (Byte Order Mark) to support UTF-8 in Excel
+    fputs($csvFile, $bom = (chr(0xEF) . chr(0xBB) . chr(0xBF)));
+
+    $headerRow = ['id', 'url', 'en_title', 'ar_title', 'created_at'];
+    fputcsv($csvFile, $headerRow);
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        // Convert date to ISO 8601 format
+        $row['created_at'] = (new DateTime($row['created_at']))->format('c');
+
+        fputcsv($csvFile, $row);
+    }
+
+    fclose($csvFile);
+
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="' . $csvFileName . '"');
+
+    readfile($csvFileName);
+    unlink($csvFileName);
+
+    echo json_encode(['success' => true, 'message' => 'CSV extraction successful']);
+    exit;
+}
+
+
+// Function to manually encode Arabic characters to UTF-8
+function utf8_encode_arabic($string)
+{
+    $utf8String = '';
+    for ($i = 0; $i < mb_strlen($string, 'UTF-8'); $i++) {
+        $char = mb_substr($string, $i, 1, 'UTF-8');
+        if (ord($char) > 127) {
+            $utf8String .= utf8_encode($char);
+        } else {
+            $utf8String .= $char;
+        }
+    }
+    return $utf8String;
+}
+function extractalllandingusers()
+{
+    global $conn;
+    $query = "SELECT landingusers.id, landingusers.name, landingusers.email,landingusers.country, landingusers.phone,landingusers.created_at,landingusers.landing_name,landingusers.cookie
+              FROM landingusers";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo json_encode(['success' => false, 'message' => 'Error fetching data from the database']);
+        exit;
+    }
+    $csvFileName = "all_copy_trade_datas.csv";
+    $csvFile = fopen($csvFileName, 'w');
+    $headerRow = ['id', 'name', 'email', 'country', 'phone', 'Date', 'landing', 'cookie'];
+    fputcsv($csvFile, $headerRow);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $row['type'] = gettransactionname($row['type']);
+        $row['status'] = getStatustransaction($row['status']);
+        $row['created_at'] = (new DateTime($row['created_at']))->format('c');
+        fputcsv($csvFile, $row);
+    }
+    fclose($csvFile);
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="' . $csvFileName . '"');
+    readfile($csvFileName);
+    unlink($csvFileName);
+    echo json_encode(['success' => true, 'message' => 'CSV extraction successful']);
+    exit;
+}
+function extractallmailer()
+{
+    global $conn;
+    $query = "SELECT maillist.id, maillist.mail, maillist.name,maillist.created_at
+              FROM maillist";
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        echo json_encode(['success' => false, 'message' => 'Error fetching data from the database']);
+        exit;
+    }
+    $csvFileName = "all_copy_trade_datas.csv";
+    $csvFile = fopen($csvFileName, 'w');
+    $headerRow = ['id', 'mail', 'name', 'date'];
+    fputcsv($csvFile, $headerRow);
+    while ($row = mysqli_fetch_assoc($result)) {
+        // $row['type'] = gettransactionname($row['type']);
+        // $row['status'] = getStatustransaction($row['status']);
+        $row['created_at'] = (new DateTime($row['created_at']))->format('c');
+        fputcsv($csvFile, $row);
+    }
+    fclose($csvFile);
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="' . $csvFileName . '"');
+    readfile($csvFileName);
+    unlink($csvFileName);
+    echo json_encode(['success' => true, 'message' => 'CSV extraction successful']);
+    exit;
+}
+function getMyReferralscms() {
+    global $conn;
+    // $referralId = $userId + 10000;
+    $sql = "SELECT * FROM website_accounts WHERE invited_by > 10000";
+    $res = $conn->query($sql);
+
+    if (!$res) {
+        echo "Error: " . $conn->error;
+    }
+
+    // Fetch all rows as an associative array
+    $referralsArray = array();
+    while ($row = $res->fetch_assoc()) {
+        $referralsArray[] = $row;
+    }
+
+    return $referralsArray;
 }

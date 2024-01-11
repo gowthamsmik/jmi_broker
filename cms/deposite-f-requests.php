@@ -47,7 +47,8 @@
 			background-color: green !important;
 			color: white;
 		}
-		.danger{
+
+		.danger {
 			background-color: red !important;
 			color: white;
 		}
@@ -79,18 +80,29 @@
 
 						<!-- <button type="button" class="btn app-btn-secondary" id="deleteAllButton"
 							onclick="deletefundrequests()" style="display: none;">Delete All</button> -->
+						<!-- <button type="button" class="btn btn-primary" id="extractAlldepositeButton">Extract All</button> -->
 
 					</div>
 				</div><!--//row-->
 				<!-- ... (previous code) ... -->
 
-				<div class="mb-3">
-					<div class="status-buttons">
+				<div class="mb-3 row">
+					<div class="status-buttons col-6">
 						<button type="button" class="btn but1 active" onclick="filterTable('all')">All</button>
 						<button type="button" class="btn but2" onclick="filterTable('1')">Done</button>
 						<button type="button" class="btn but3" onclick="filterTable('0')">Pending</button>
 						<button type="button" class="btn but4" onclick="filterTable('9')">Rejected</button>
 					</div>
+					<div class="col-4 ">
+						<button type="button" class="btn btn-primary float-end" id="extractAlldepositeButton">Export CSV</button>
+					</div>
+					<div class="col-2">
+                        <?php $sort = isset($_GET['sort']) && $_GET['sort'] == "asc" ? "asc" : "desc";?>
+                        <select name="" id="deposit-fund-request" class="ms-auto me-3 px-3 py-1" onchange="updateSort()">
+                            <option value="asc" <?php echo ($sort == "asc") ? "selected" : ''; ?>>Asc</option>
+                            <option value="desc" <?php echo ($sort == "desc") ? "selected" : ''; ?>>Desc</option>
+                        </select>
+                    </div>
 				</div>
 
 
@@ -126,7 +138,7 @@
 											$perPage = 10;
 											$index = 0;
 											$page = isset($_GET['page']) ? $_GET['page'] : 1;
-											$getAllfundrequests = getAlldepositerequest($page, $perPage);
+											$getAllfundrequests = getAlldepositerequest($page, $perPage,$sort);
 											if ($getAllfundrequests->num_rows > 0) {
 												foreach ($getAllfundrequests as $getAllfundrequests) {
 													$index++;
@@ -201,15 +213,15 @@
 														</td>
 
 														<td class="cell"><span class="truncate">
-																<?php if( $getAllfundrequests['via']=='Bank Wire')
-																{?>
-																	<a class="btn btn-primary" href="<?php echo $getAllfundrequests['details_admin'] ?>" target="__blank">Show TT Copy</a>
-																<?php }
-																else{
+																<?php if ($getAllfundrequests['via'] == 'Bank Wire') { ?>
+																	<a class="btn btn-primary"
+																		href="<?php echo $getAllfundrequests['details_admin'] ?>"
+																		target="__blank">Show TT Copy</a>
+																<?php } else {
 																	echo $getAllfundrequests['details_admin'];
 																}
-																 ?>
-																
+																?>
+
 															</span></td>
 														<td class="cell"><span class="truncate">
 																<?php echo $getAllfundrequests['created_at']; ?>
@@ -333,45 +345,45 @@
 						</div>
 						<nav class="app-pagination">
 							<ul class="pagination justify-content-end">
-					<?php
-                    $totalRecords = getTotalpagedepositerequest();
-                    $limit = 10; // Set the number of records to display per page
-                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+								<?php
+								$totalRecords = getTotalpagedepositerequest();
+								$limit = 10; // Set the number of records to display per page
+								$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-                    // Calculate the total number of pages
-                    $totalPages = ceil($totalRecords / $limit);
+								// Calculate the total number of pages
+								$totalPages = ceil($totalRecords / $limit);
 
-                    // Determine the starting and ending page numbers to display
-                    $startPage = max($currentPage - 3, 1);
-                    $endPage = min($startPage + 5, $totalPages);
+								// Determine the starting and ending page numbers to display
+								$startPage = max($currentPage - 3, 1);
+								$endPage = min($startPage + 5, $totalPages);
 
-                    // Display pagination links
-                    echo '<ul class="pagination justify-content-end">';
+								// Display pagination links
+								echo '<ul class="pagination justify-content-end">';
 
-                    // First button
-                    echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
+								// First button
+								echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
 
-                    // Previous button
-                    $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
-                    echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+								// Previous button
+								$prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+								echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
 
-                    // Page numbers
-                    for ($i = $startPage; $i <= $endPage; $i++) {
-                        echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-                    }
+								// Page numbers
+								for ($i = $startPage; $i <= $endPage; $i++) {
+									echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+								}
 
-                    // Next button
-                    $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
-                    echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+								// Next button
+								$nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+								echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
 
-                    // Last button
-                    echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
+								// Last button
+								echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
 
-                    echo '</ul>';
-                    ?>
-					</ul>
-				</nav>
-						
+								echo '</ul>';
+								?>
+							</ul>
+						</nav>
+
 
 					</div><!--//tab-pane-->
 
@@ -504,7 +516,38 @@
 					}
 				});
 			}
+			$(document).on('click', '#extractAlldepositeButton', function () {
+				// Make an AJAX request to a PHP script that extracts and downloads the CSV
+				$.ajax({
+					url: 'includes/softwareinclude/ajax.php',
+					type: 'post',
+					data: { type: 'extract-all-deposite-copy-trade' },
+					success: function (res) {
+						alert('CSV extraction successful. Download will begin shortly.');
+						var csvData = res;
+						console.log(csvData)
+						var blob = new Blob([csvData], { type: 'text/csv' });
+						var link = document.createElement('a');
+						link.href = window.URL.createObjectURL(blob);
+						link.download = 'deposite_fund_request_data.csv';
+						document.body.appendChild(link);
+						link.click();
+						document.body.removeChild(link);
+					},
+					error: function (err) {
+						console.error(err);
+						alert('Error extracting data.');
+					}
+				});
+			});
 
+
+
+			function updateSort() {
+            var selectedValue = document.getElementById("deposit-fund-request").value;
+			
+            window.location.href = "?page=1&sort=" + selectedValue;
+        }
 		</script>
 	</div><!--//app-wrapper-->
 	<?php include('includes/footer.php'); ?>

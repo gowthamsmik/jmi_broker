@@ -41,9 +41,9 @@ function emailQueue() {
                 
                 }
                 require_once 'vendor/autoload.php';
-                $transport = new \Swift_SmtpTransport('smtp.gmail.com', 587, 'tls');
-                $transport->setUsername('gopi.smiksystems@gmail.com');
-                $transport->setPassword('mvov xtll vhbz uqzi');
+                $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
+                $transport->setUsername('marketing@jmibrokers.com');
+                $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
 
                 $mailer = new Swift_Mailer($transport);
                 $emailBatches = array_chunk($emailAddress, $sendCount);
@@ -110,7 +110,7 @@ function emailQueue() {
                 </body>
                 </html>';
                         $message = (new Swift_Message(''))
-                            ->setFrom(['gopi.smiksystems@gmail.com' => 'Jmi brokers'])
+                            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
                             ->setTo($to)
                             ->setBody($sendBody, 'text/html')
                             ->setSubject($subject);

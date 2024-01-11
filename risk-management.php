@@ -19,7 +19,7 @@
     <?php include("includes/header.php"); ?>
 
     <section class="container-fluid p-0">
-        <img src="cms/<?php echo getPageMetaByIDKeyGroup(39,'Banner Image','Banner');?>" alt="" class="w-100">
+        <img src="cms/<?php echo getPageMetaByIDKeyGroup(39,'Banner Image','Banner');?>" alt="" class="w-100 banner">
     </section>
 
     <div class="container">

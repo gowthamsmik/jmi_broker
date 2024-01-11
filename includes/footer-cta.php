@@ -1,7 +1,7 @@
 <section>
-    <img src="assets/images/awards.jpeg" alt="404" class="w-100">
+<img src="assets/images/Latest_awards.jpeg" alt="404" class="w-100" style="padding: 50px;">
 </section>
-
+<!-- 
 <section class="paymentMethodsSection">
     <div class="container">
         <div class="row paymethod-slider gap-2">
@@ -16,7 +16,7 @@
             <div class="col"><img src="assets/images/pay-methods/4.png"/></div>
         </div>
     </div>
-</section>
+</section> -->
 
 
 

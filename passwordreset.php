@@ -10,9 +10,9 @@ try {
   // echo "post" .$_SERVER["REQUEST_METHOD"] .$_POST['email'];exit(0);
 
   $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-  $transport->setUsername('support@jmibrokers.com');
+  $transport->setUsername('marketing@jmibrokers.com');
   //$transport->setPassword('JMI159BROKERS');
-  $transport->setPassword('Duiuw^%^&tw$@@$er$%&^gf*');
+  $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
 
 
   // Create the Mailer using your created Transport
@@ -105,7 +105,7 @@ if ($checkInUserSql->num_rows > 0) {
     </html>';
      // Create a message
     $message = (new Swift_Message('Verfication Code For Your Password Resetting '))
-    ->setFrom(['support@jmibrokers.com' => 'Jmi brokers'])
+    ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
     ->setTo($email)
     ->setBody($mailtmpBody,'text/html');
 

@@ -22,11 +22,11 @@
 				    </div>
 					<div class="mb-3">
 						<label for="setting-input-1" class="form-label">Arabic Title</label>
-				        <input name="ar_title" type="text" class="form-control" value="" >
+				        <input name="ar_title" type="text" class="form-control" value="" dir="rtl">
 				    </div>
 				    <div class="mb-3">
 						<label for="setting-input-1" class="form-label">Arabic Details</label>
-						<textarea name="ar_details" class="form-control"></textarea>
+						<textarea name="ar_details" class="form-control" dir="rtl"></textarea>
 				    </div>
 					<div class="mb-3">
 						<label for="setting-input-1" class="form-label">Russian Title</label>

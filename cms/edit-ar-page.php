@@ -17,7 +17,9 @@ if(isset($_GET['id'])){
 					<input type="hidden" name="page_id" value="<?php echo $pid;?>" />
 					<?php $getPageGroups = getArPageGroups($pid);
 					if($getPageGroups->num_rows > 0){
-						foreach($getPageGroups as $thisGroup){ ?>
+						foreach($getPageGroups as $thisGroup){ 
+							
+							?>
 
 						
 						<div class="row g-4 settings-section">
@@ -31,29 +33,34 @@ if(isset($_GET['id'])){
 									<div class="app-card-body">
 										<?php $getPageFieldsByGroup = getArPageFieldsByGroup($pid,$thisGroup['group_name']);
 										if($getPageFieldsByGroup->num_rows > 0){
-											foreach($getPageFieldsByGroup as $thisField){ ?>
+											foreach($getPageFieldsByGroup as $thisField){ 
+												
+												?>
 												<div class="mb-3">
 													<label for="setting-input-1" class="form-label"><?php echo $thisField['field_name'];?></label>
 													<?php if($thisField['field_type'] == 'textarea'){ ?>
-														<textarea name="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>" class="form-control"   value="<?php  echo $thisField['field_value'];?>" ><?php  echo $thisField['field_value'];?></textarea>
+														<textarea name="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>" class="form-control"   value="<?php  echo $thisField['ar_field_value'];?>" ><?php  echo $thisField['ar_field_value'];?></textarea>
 													<?php }else if($thisField['field_type'] == 'file'){ ?>
-													    <?php if($thisField['field_value'] != ''){ ?>
-													        <img src="<?php echo $thisField['field_value'];?>" style="display:block;max-width: 100%;">
+													    <?php if($thisField['ar_field_value'] != ''){ ?>
+													        <img src="<?php echo $thisField['ar_field_value'];?>" style="display:block;max-width: 100%;">
 													    <?php } ?>
-														<input rel="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>" type="<?php echo $thisField['field_type'];?>" class="form-control" value="<?php  echo $thisField['field_value'];?>" >
-														<input name="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>" type="hidden" class="form-control" value="<?php  echo $thisField['field_value'];?>" >
+														<input rel="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>" type="<?php echo $thisField['field_type'];?>" class="form-control" value="<?php  echo $thisField['ar_field_value'];?>" >
+														<input name="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>" type="hidden" class="form-control" value="<?php  echo $thisField['ar_field_value'];?>" >
 													<?php } else if($thisField['field_type'] == 'list'){ ?>
-														<!-- <select name="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>[]" class="form-control" multiple>
+														 <select name="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>[]" class="form-control" multiple>
 															<option value="" selected disabled>--</option>
-															<?php $get_data_from_table = get_data_from_table($thisGroup['group_name']);
+															<?php 
+															
+															$get_data_from_table = get_data_from_table("ar_package");
+															 
 															if($get_data_from_table->num_rows > 0){
 																foreach($get_data_from_table as $thisdata){ ?>
 																	<option value="<?php echo $thisdata['id'];?>"><?php echo $thisdata['name'];?></option>
 																<?php }
-															} ?> -->
+															} ?> 
 														</select>
 													<?php } else{ ?>
-														<input name="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>" type="<?php echo $thisField['field_type'];?>" class="form-control" value="<?php  echo $thisField['field_value'];?>" >
+														<input name="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>" type="<?php echo $thisField['field_type'];?>" class="form-control" value="<?php  echo $thisField['ar_field_value'];?>" >
 													<?php } ?>
 													
 												</div>
@@ -68,7 +75,7 @@ if(isset($_GET['id'])){
 								</div><!--//app-card-->
 							</div>
 						</div><!--//row-->
-						<hr class="my-4">
+						<hr class="my-4" />
 					<?php }
 					}?>
 					<button type="submit" class="btn app-btn-primary" >Save Changes</button>
