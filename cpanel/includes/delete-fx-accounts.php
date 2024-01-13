@@ -47,7 +47,7 @@ if ($user) {
 
         // Save notification for admin
         $notification=$user['email'] . ' Has Request Account Deleting';
-        $notification_link='/spanel/website-accounts?&bymail=' . $user['email'] . '&';
+        $notification_link='/cms/website-account?&bymail=' . $user['email'] . '&';
         $stmtAdminNotification = $conn->prepare("INSERT INTO Notifications (website_accounts_id, notification_status, notification, notification_link) VALUES ('999999999', 0, ?, ?)");
         $stmtAdminNotification->bind_param("ss",$notification, $notification_link);
         $stmtAdminNotification->execute();
@@ -60,7 +60,7 @@ if ($user) {
          'تمت استلام طلب حذف  الحساب بنجاح ، وسيتم إعلامك عند الانتهاء', 
          'Запрос на удаление учетной записи успешно обработан, вы получите уведомление, когда это будет сделано.', 
          'Запрос на удаление учетной записи успешно обработан, вы получите уведомление, когда это будет сделано.', 
-         '/cpanel/live-accounts')");
+         '/cpanel/live-account')");
         $stmtUserNotification->bind_param("i",$user['id']);
         $stmtUserNotification->execute();
 

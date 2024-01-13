@@ -5,16 +5,15 @@ session_start();
 global $siteurl;
 global $webeurl;
 global $hostname;
-$hostname = 'jmibroker.net';
-$siteurl = 'https://jmibroker.net/cms/';
-$webeurl = 'https://jmibroker.net/';
+$hostname = 'jmibrokers.com';
+$siteurl = 'https://jmibrokers.com/cms/';
+$webeurl = 'https://jmibrokers.com/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'jmi';
+$dbname = 'jmibroker';
 global $conn;
 $conn = new mysqli( $servername, $username, $password, $dbname );
-// Check connection
 if ( $conn->connect_error ) {
 	die( "Connection failed: " . $conn->connect_error );
 }

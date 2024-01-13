@@ -4,8 +4,8 @@ session_start();
 $uriSegments = explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 global $siteurl;
 global $webeurl;
-$siteurl = 'https://jmibroker.net/';
-$webeurl = 'https://jmibroker.net/';
+$siteurl = 'https://jmibrokers.com/';
+$webeurl = 'https://jmibrokers.com/';
 
 if($uriSegments[1]=='cpanel'){
 	
@@ -17,7 +17,7 @@ if($uriSegments[1]=='cpanel'){
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'jmi';
+$dbname = 'jmibroker';
 $demoAccountURL = $siteurl . "cpanel/open-demo-account.php?tab=1";
 $liveAccountURL = $siteurl . "cpanel/open-live-account.php?tab=1";
 global $conn;

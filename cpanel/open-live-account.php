@@ -10,7 +10,7 @@ $userDocumentsCount = count($userDocuments);
 
 
 // // Check if 'country' is not set in $userdetails
-if (!$userdetails[0]['country']) {
+if (!$userdetails[0]['country'] or !$userdetails[0]['mobile']) {
     // Redirect to the specified location using JavaScript
     echo '<script>window.location.href="personal-details.php";</script>';
     // It's a good practice to exit the script after a redirect to prevent further execution
@@ -121,8 +121,8 @@ if (!$userdetails[0]['country']) {
         label {
             color: #000000;
             float: left;
-            margin-left: 80px;
-            margin-bottom: 40px;
+            /* margin-left: 80px; */
+            margin-bottom: 10px;
         }
 
         .caa {
@@ -195,27 +195,127 @@ if (!$userdetails[0]['country']) {
         #bottomUl li{font-weight: bold; list-style-type: none;margin-top: 5px;}
         #bottomUl{padding: 0px;}
         li span , li span a{color: #4f81bd; font-weight: bold;}
+        .pakageCard-live{
+		padding-bottom: 20px;
+		margin-bottom: 17px;
+		border-bottom: 1.5px solid #ffffffbd;
+		h6{
+			color: #FFF;
+			font-size: 16px;
+			font-weight: 700;
+			line-height: normal;
+			padding-bottom: 5px;
+			text-transform: uppercase;
+		}
+		h5{
+			font-size: 28px;
+			font-weight: 700;
+			line-height: 1.2;
+			background: linear-gradient(137deg, #FEDC18 0%, #FFF7C5 100%);
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			padding-bottom: 5px;
+		}
+		h4{
+			color: #727C68;
+			font-size: 12px;
+			font-weight: 700;
+			line-height: 1;
+			padding-bottom: 4px;
+			text-transform: uppercase;
+		}
+		span{
+			color: #D2D2D2;
+			font-size: 13px;
+			font-weight: 400;
+			line-height: 1.2;
+		}
+	}
+    .pakageCard-des{
+		font-size:13px;
+        line-height: 2;
+	}
+    .overflowscroll{
+        overflow-x:auto;
+    }
     </style>
 </head>
 
 <body>
     <?php include("../includes/header.php"); ?>
-    <div class='layout'>
+    <div class='layout cpanal_banar'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
                 <div>
                     <div class="d-flex mb-3">
-                        <h2 class="fs-4"><?php echo $lang['open_live_account1']?>  </h2>
-                        <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg"
-                                class="account_circle" alt="">
+                        <h2 class="fs-4"><?php echo $lang['open_live_account1'] ?> </h2>
+                        <div class="d-flex <?php echo ($userPreferredLanguage === 'ar') ? 'me-auto' : 'ms-auto'; ?>">
+                            <img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
                             <p class="mt-1 ms-2"><?php echo $lang['welcome1'] ?>,
                                 <?php echo $_SESSION['sessionusername']; ?>
                             </p>
                         </div>
                     </div>
-                    <div class="d-flex gap-2">
-                        <div class="fsa fm" id="leverage1">
+                    <div class="d-flex gap-2 overflowscroll">
+                     <?php $get_packages = get_packages();
+                     if ($get_packages->num_rows > 0) {
+                         $i = 0;
+                         foreach ($get_packages as $thisPackage) {
+                             $i++;
+                             $leverageValue = ($i == 2) ? 'leverage3' : (($i == 3) ? 'leverage5' :'leverage'. $i);
+                             ?>
+                                <div class="col " id='leverage<?php echo $i; ?>'>
+                                   <div class="pakageCard h-100">
+                                      <div class="pakageCard-icon">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="43" height="35" viewBox="0 0 43 35" fill="none">
+                                            <path d="M17.431 29.0003C17.2416 28.6703 17.0616 28.3403 16.9004 28.001C16.9004 28.001 2.40116 28.001 2.33012 28.0104C1.31949 28.1266 0.554525 28.9816 0.550781 29.9997V32.9997C0.554531 34.1022 1.44703 34.9965 2.5514 35.0003H23.5512C23.7499 35.0003 23.9506 34.9703 24.14 34.9103C23.5193 34.6515 22.9175 34.3459 22.34 33.9991C20.3094 32.7728 18.62 31.0534 17.431 29.0003Z" fill="url(#paint0_linear_623_67364)"/>
+                                            <path d="M2.82078 21.9991C2.64453 22.3028 2.55078 22.6478 2.55078 23.0003V26.0003C2.55078 26.3509 2.64453 26.6959 2.82078 26.9996H16.48C15.8631 25.404 15.5481 23.709 15.55 21.999L2.82078 21.9991Z" fill="url(#paint1_linear_623_67364)"/>
+                                            <path opacity="0.3" d="M2.33018 20.9909C2.4033 20.9984 2.47643 21.0021 2.55143 21.0003H15.59C15.6106 20.6609 15.65 20.3309 15.6894 20.0009H15.6913C15.9444 18.2366 16.535 16.5397 17.4313 15.0003C17.6244 14.6553 17.8381 14.3216 18.0706 14.001H2.5514C1.44703 14.0029 0.554525 14.8972 0.550781 15.9997V18.9997C0.560156 20.0159 1.32147 20.869 2.33018 20.9909Z" fill="white"/>
+                                            <path opacity="0.3" d="M3.82078 8.00005C3.64453 8.30379 3.55078 8.64881 3.55078 8.9994V11.9994C3.55078 12.35 3.64453 12.695 3.82078 12.9987H18.8413C20.9562 10.4694 23.9019 8.7725 27.1509 8.21C26.9784 8.075 26.7684 8.00188 26.551 8L3.82078 8.00005Z" fill="white"/>
+                                            <path opacity="0.3" d="M3.33204 6.98996C3.40142 6.99934 24.5512 6.99934 24.5512 6.99934C25.0818 6.99934 25.5899 6.78934 25.9649 6.41432C26.3399 6.0393 26.5518 5.53123 26.5518 5.00059V2.00062C26.5481 0.896247 25.6537 0.00374396 24.5512 0H3.5514C2.4489 0.00374972 1.55453 0.896247 1.55078 2.00062V5.00059C1.55453 6.01871 2.31959 6.87371 3.33204 6.98996Z" fill="white"/>
+                                            <path d="M29.5552 14.001C27.4327 14.001 25.3983 14.8428 23.8984 16.3428C22.3985 17.8428 21.5547 19.879 21.5547 21.9996C21.5547 24.1221 22.3984 26.1564 23.8984 27.6563C25.3984 29.1562 27.4328 30 29.5552 30C31.6758 30 33.712 29.1563 35.2119 27.6563C36.7118 26.1563 37.5537 24.122 37.5537 21.9996C37.5519 19.879 36.7081 17.8465 35.2082 16.3467C33.7082 14.8468 31.6756 14.0028 29.5552 14.001ZM31.5558 21.0003H31.5539C31.8201 21.0003 32.0733 21.1053 32.2608 21.2928C32.4483 21.4803 32.5552 21.7353 32.5552 21.9997V24.9996C32.5552 25.2659 32.4483 25.519 32.2608 25.7065C32.0733 25.894 31.8202 26.0009 31.5539 26.0009H30.5545C30.5545 26.5521 30.1064 27.0002 29.5552 27.0002C29.0021 27.0002 28.554 26.5521 28.554 26.0009H27.5546C27.0015 26.0009 26.5553 25.5528 26.5553 24.9997C26.5553 24.4484 27.0015 24.0003 27.5546 24.0003H30.5546V23.001H27.5546C27.0015 23.001 26.5553 22.5528 26.5553 21.9997V18.9998C26.5553 18.4485 27.0015 18.0004 27.5546 18.0004H28.554C28.554 17.4473 29.0021 17.0011 29.5552 17.0011C30.1064 17.0011 30.5545 17.4473 30.5545 18.0004H31.5539C32.107 18.0004 32.5551 18.4485 32.5551 18.9998C32.5551 19.5529 32.107 20.001 31.5539 20.001H28.5539V21.0003L31.5558 21.0003Z" fill="url(#paint2_linear_623_67364)"/>
+                                            <path d="M29.5519 8.9991C25.8957 8.9916 22.4081 10.5328 19.952 13.2384C19.7326 13.4878 19.5114 13.7391 19.3126 13.9978L19.3108 13.9996C19.0576 14.3203 18.8214 14.654 18.602 14.999C17.6232 16.5177 16.9764 18.224 16.7008 20.0092C16.607 20.6692 16.5564 21.3329 16.5508 21.9985C16.5508 23.716 16.892 25.4147 17.552 26.9991C17.8201 27.6497 18.1445 28.2741 18.5214 28.8685C19.862 31.0322 21.8101 32.7534 24.1219 33.8182C24.4519 33.9588 24.7819 34.0975 25.1213 34.2175V34.2194C26.5388 34.7406 28.0406 35.005 29.5519 34.9994C34.1962 34.9994 38.488 32.5207 40.8092 28.4988C43.1323 24.477 43.1323 19.5215 40.8092 15.4996C38.488 11.4759 34.1963 8.9991 29.5519 8.9991ZM29.5519 31.9995C26.8988 31.9995 24.3564 30.9458 22.4796 29.0708C20.6047 27.1939 19.5509 24.6515 19.5509 21.9985C19.5509 19.3473 20.6046 16.8031 22.4796 14.9282C24.3565 13.0532 26.899 11.9995 29.5519 11.9995C32.2031 11.9995 34.7474 13.0532 36.6222 14.9282C38.4971 16.8032 39.551 19.3475 39.551 21.9985C39.5472 24.6497 38.4916 27.1901 36.6166 29.0655C34.7435 30.9404 32.2014 31.9939 29.5519 31.9995Z" fill="url(#paint3_linear_623_67364)"/>
+                                            <defs>
+                                               <linearGradient id="paint0_linear_623_67364" x1="-0.502307" y1="28.001" x2="23.9311" y2="36.3517" gradientUnits="userSpaceOnUse">
+                                                  <stop stop-color="#FEDC18"/>
+                                                  <stop offset="1" stop-color="#FFF7C5"/>
+                                               </linearGradient>
+                                               <linearGradient id="paint1_linear_623_67364" x1="1.92894" y1="21.999" x2="16.8512" y2="26.2143" gradientUnits="userSpaceOnUse">
+                                                  <stop stop-color="#FEDC18"/>
+                                                  <stop offset="1" stop-color="#FFF7C5"/>
+                                               </linearGradient>
+                                               <linearGradient id="paint2_linear_623_67364" x1="20.8404" y1="14.001" x2="39.1594" y2="15.8587" gradientUnits="userSpaceOnUse">
+                                                  <stop stop-color="#FEDC18"/>
+                                                  <stop offset="1" stop-color="#FFF7C5"/>
+                                               </linearGradient>
+                                               <linearGradient id="paint3_linear_623_67364" x1="15.39" y1="8.99903" x2="45.161" y2="12.0182" gradientUnits="userSpaceOnUse">
+                                                  <stop stop-color="#FEDC18"/>
+                                                  <stop offset="1" stop-color="#FFF7C5"/>
+                                               </linearGradient>
+                                            </defs>
+                                            </svg>
+                                      </div>
+      
+                                      <div class="pakageCard-live">
+                                         <h6><?php echo $thisPackage['name']; ?></h6>
+                                         <h5><?php echo $thisPackage['price']; ?> USD</h5>
+                                         <h4 ><?php echo $thisPackage['discount_line']; ?></h4>
+                                         <span ><?php echo $thisPackage['tag_line']; ?></span>
+                                      </div>
+      
+                                      <div class="pakageCard-des mn-btn text-white line-height-3">
+                                    
+                                         <?php echo $thisPackage['description']; ?>
+                                 
+                                         <button class="button1" onclick="select_leverage(<?php echo $i ?>)">Buy Package</button>
+                                      </div>
+                                   </div>
+                                </div>
+                         <?php }
+                     } ?>
+                        <!-- <div class="fsa fm" id="leverage1">
                             <div class="pl">
                                 <img src="../assets/images/group.png" alt="" class="log">
                                 <h1 class="min">MINIMUM FUNDING</h1>
@@ -319,42 +419,46 @@ if (!$userdetails[0]['country']) {
                                 <button class="button1" onclick="leverage_select('4')">Buy Package</button>
                             </div>
 
-                        </div>
+                        </div> -->
                     </div>
-                    <div style="float:left;margin-top:8%;margin-bottom:5%">
+                    <div style="<?php echo ($userPreferredLanguage === 'ar') ? 'float:right;margin:4% 5% 5% 5%;' : 'float:left;margin:8% 0 5% 5%;'; ?>">
                         <form action="">
                             <div class="row border-0">
-                                <div class="col border-0">
-                                    <label for=""><?php echo $lang['account_type']?></label>
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-3 border-0">
+                                    <label for=""
+                                        class="<?php echo ($userPreferredLanguage === 'ar') ? 'w-100' : ''; ?>"><?php echo $lang['account_type'] ?></label>
                                     <select class="form-select mt-2" id="account_type" name="sellist1">
-                                        <option disabled ><?php echo $lang['select']?></option>
-                                        <option value="1"><?php echo $lang['individual']?></option>
-                                        <option value="2"><?php echo $lang['ib']?></option>
+                                        <option disabled ><?php echo $lang['select'] ?></option>
+                                        <option value="1"><?php echo $lang['individual'] ?></option>
+                                        <option value="2"><?php echo $lang['ib'] ?></option>
                                     </select>
                                 </div>
-                                <div class="col border-0">
-                                    <label for=""><?php echo $lang['account_group']?></label>
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-3 border-0">
+                                    <label for=""
+                                        class="<?php echo ($userPreferredLanguage === 'ar') ? 'w-100' : ''; ?>"><?php echo $lang['account_group'] ?></label>
                                     <select class="form-select mt-2" id="account_group" name="sellist1">
-                                        <option disabled><?php echo $lang['select']?></option>
-                                        <option value="1"><?php echo $lang['fixed_spread_account']?></option>
-                                        <option value="2"><?php echo $lang['variable_spread_account']?></option>
-                                        <option value="3"><?php echo $lang['scalping_account']?></option>
-                                        <option value="4"><?php echo $lang['bonus_account']?></option>
+                                        <option disabled><?php echo $lang['select'] ?></option>
+                                        <option value="1"><?php echo $lang['fixed_spread_account'] ?></option>
+                                        <option value="3"><?php echo $lang['variable_spread_account'] ?></option>
+                                        <option value="5"><?php echo $lang['scalping_account'] ?></option>
+                                        <option value="4"><?php echo $lang['bonus_account'] ?></option>
                                     </select>
                                 </div>
-                                <div class="col border-0">
-                                    <label for=""><?php echo $lang['currency']?></label>
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-3 border-0">
+                                    <label for=""
+                                        class="<?php echo ($userPreferredLanguage === 'ar') ? 'w-100' : ''; ?>"><?php echo $lang['currency'] ?></label>
                                     <select class="form-select mt-2" id="currency" name="sellist1">
                                         <option>USD</option>
                                     </select>
                                 </div>
                             </div>
+                            <button class="caa my-3" style="<?php echo ($userPreferredLanguage === 'ar') ? '' : ''; ?>">
+                                <p class="p11"><?php echo $lang['customer_account_agreement'] ?></p>
+                            </button>
                         </form>
                     </div>
 
-                    <button class="caa my-3">
-                        <p class="p11"><?php echo $lang['customer_account_agreement']?></p>
-                    </button>
+
                     <!-- <div class="foo rounded">
                         <div class="p-4">
                             <p class="fw-bold mb-2">JMI Brokers LTD is licensed broker from Vanuatu Financial Services
@@ -791,7 +895,7 @@ if (!$userdetails[0]['country']) {
                                 <li>Address:  1276, Govant Building, Kumul Highway, Port Vila, Republic of Vanuatu:</li>
                                 <li>Phone no: +678 24404</li>
                                 <li>Fax  no:  +678 23693</li>
-                                <li>Website:  <a href="https://www.jmibroker.net">www.jmibroker.net</a></li>
+                                <li>Website:  <a href="https://www.jmibrokers.com">www.jmibrokers.com</a></li>
                                 </p>
                                                 </div>
 
@@ -802,10 +906,10 @@ if (!$userdetails[0]['country']) {
                             <div class="row mt-4 ms-4">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something" checked>
-                                    <label class="form-check-label mt-1 ms-0" for="check1"><?php echo $lang['agree_terms_conditions']?></label>
+                                    <label class="form-check-label mt-1 ms-0" for="check1"><?php echo $lang['agree_terms_conditions'] ?></label>
                                 </div>
                             </div>
-                            <button type="button" class="buttonprimary rounded py-2 w-25 mb-3 ms-4" id="openAccountBtn" disabled onclick="openAccount()"><?php echo $lang['open_account']?></button>
+                            <button type="button" class="buttonprimary rounded py-2 w-25 mb-3 mx-4" id="openAccountBtn" disabled onclick="openAccount()"><?php echo $lang['open_account'] ?></button>
                         </div> 
                     </div>
                 </div>
@@ -867,29 +971,36 @@ if (!$userdetails[0]['country']) {
             currencyBase: currencyBase
         },
         success: function (response) {
-            if (response == "x1") {
+            var trimmedResponse = response.trim();
+            
+            if(trimmedResponse =="x0")
+            {
+                alert("Please upload your documents first.");
+                window.location.href = 'upload-documents.php';
+            }
+            if (trimmedResponse == "x1") {
                 alert("Account Creation Failed. Please wait 60 secs and try again.");
                 window.location.href = 'live-account.php';
-            } else if (response == "x2") {
+            } else if (trimmedResponse == "x2") {
                 alert("Account Created Successfully");
                 window.location.href = 'live-account.php';
-            } else if (response == "x3") {
+            } else if (trimmedResponse == "x3") {
                 alert("open-live-account");
                 window.location.href = 'deposit.php';
-            } else if (response == "x4") {
+            } else if (trimmedResponse == "x4") {
                 alert("Opening account request processed successfully");
                 window.location.href = 'live-account.php';
-            } else if (response == "x5") {
+            } else if (trimmedResponse == "x5") {
                 alert("Account Created Successfully");
                 window.location.href = 'live-account.php';
-            } else if (response == "x6") {
+            } else if (trimmedResponse == "x6") {
                 alert("Account Creation Failed");
                 window.location.href = 'open-live-account.php';
             } else {
                 alert("Error creating account");
-                window.location.href='open-live-account.php'
+                 window.location.href='open-live-account.php'
             }
-            console.log("Response:", response);
+          
         },
         error: function (error) {
             console.error(error);
@@ -898,28 +1009,43 @@ if (!$userdetails[0]['country']) {
     });
 }
 
-
+function select_leverage(i){
+    console.log("ii",i)
+    if(i==1){
+        leverage_select(1)
+    }
+    else if(i==2){
+        leverage_select(3)
+    }
+    else if(i==3){
+        leverage_select(5)
+    }
+    else if(i==4){
+        leverage_select(4)
+    }
+}
 
     function leverage_select(value){
             console.log("value",value);
             document.getElementById('account_group').value = value;
+
             hideAllDivs();
 
 // Get the selected value
     var selectedValue = value;
-
+console.log("sekect",selectedValue)
     // Show the corresponding div based on the selected value
-    if (selectedValue === '1') {
+    if (selectedValue == '1') {
         document.getElementById('leverage1').style.opacity = 1;
 
-    } else if (selectedValue === '2') {
+    } else if (selectedValue == '3') {
         document.getElementById('leverage2').style.opacity = 1;
     
-    }else if (selectedValue === '3') {
+    }else if (selectedValue == '5') {
     
         document.getElementById('leverage3').style.opacity = 1;
-    }else if (selectedValue === '4') {
-
+    }else if (selectedValue == '4') {
+        console.log("hjcbhv")
         document.getElementById('leverage4').style.opacity = 1;
     }
 

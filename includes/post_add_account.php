@@ -61,7 +61,7 @@ if (empty($input['account_id']) || empty($input['password']) || empty($input['ac
 
 // Add demo account
 $ret = 'error';
-$ptr = @fsockopen('85.234.143.239', '443', $errno, $errstr, 5);
+$ptr = fsockopen('85.234.143.239', '443', $errno, $errstr, 5);
 
 if ($ptr) {
     if (fputs($ptr, "WUSERINFO-login=$login|password=$password\nQUIT\n")) {
@@ -94,7 +94,7 @@ if (strpos($ret, 'Invalid Account') === false && strpos($fx_balance, '.') !== fa
     $stmtNotification->bindParam(':website_accounts_id', 999999999);
     $stmtNotification->bindParam(':notification_status', 0);
     $stmtNotification->bindParam(':notification', $user['email'] . ' Has Added A New Demo Account');
-    $stmtNotification->bindParam(':notification_link', '/spanel/website-accounts?&bymail=' . $user['email']);
+    $stmtNotification->bindParam(':notification_link', '/cms/website-account?&bymail=' . $user['email']);
     $stmtNotification->execute();
 
     // Redirect based on the language segment
@@ -137,7 +137,7 @@ if (strpos($ret, 'Invalid Account') === false && strpos($fx_balance, '.') !== fa
 
     $ret = 'error';
     // Open socket
-    $ptr = @fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
+    $ptr = fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
     // Check connection
     if ($ptr) {
         // Send request
@@ -156,7 +156,7 @@ if (strpos($ret, 'Invalid Account') === false && strpos($fx_balance, '.') !== fa
 
     if ($ret == null || $ret == 'error') {
         // Open socket
-        $ptr = @fsockopen('92.204.139.189', '443', $errno, $errstr, 5);
+        $ptr = fsockopen('92.204.139.189', '443', $errno, $errstr, 5);
         // Check connection
         if ($ptr) {
             // Send request
@@ -210,14 +210,14 @@ if (strpos($ret, 'Invalid Account') === false && strpos($fx_balance, '.') !== fa
         $stmtNotification->bindParam(':website_accounts_id', 999999999);
         $stmtNotification->bindParam(':notification_status', 0);
         $stmtNotification->bindParam(':notification', $user->email . ' Has Added A New Live Account');
-        $stmtNotification->bindParam(':notification_link', '/spanel/website-accounts?&bymail=' . $user->email);
+        $stmtNotification->bindParam(':notification_link', '/cms/website-account?&bymail=' . $user->email);
         $stmtNotification->execute();
 
         $stmtNotification1 = $conn->prepare("INSERT INTO notifications (website_accounts_id, notification_status, notification, notification_link, details, notification_ar, details_ar, notification_ru, details_ru) VALUES (:website_accounts_id, :notification_status, :notification, :notification_link, :details, :notification_ar, :details_ar, :notification_ru, :details_ru)");
         $stmtNotification1->bindParam(':website_accounts_id', $user->id);
         $stmtNotification1->bindParam(':notification_status', 0);
         $stmtNotification1->bindParam(':notification', "Account number " . $input['account_id'] . " has been added to your account list successfully");
-        $stmtNotification1->bindParam(':notification_link', '/cpanel/live-accounts');
+        $stmtNotification1->bindParam(':notification_link', '/cpanel/live-account');
         $stmtNotification1->bindParam(':details', "Account number " . $input['account_id'] . " has been added to your account list successfully");
         $stmtNotification1->bindParam(':notification_ar', 'تمت إضافة رقم الحساب ' . $input['account_id'] . ' إلى قائمة حسابك بنجاح');
         $stmtNotification1->bindParam(':details_ar', 'تمت إضافة رقم الحساب ' . $input['account_id'] . ' إلى قائمة حسابك بنجاح');
@@ -226,7 +226,7 @@ if (strpos($ret, 'Invalid Account') === false && strpos($fx_balance, '.') !== fa
         $stmtNotification1->execute();
 
         // Redirect based on the language segment
-        $redirectUrl = '/' . Request::segment(1) . '/cpanel/live-accounts';
+        $redirectUrl = '/' . Request::segment(1) . '/cpanel/live-account';
         header("Location: $redirectUrl?status-success=تم اضافة الحساب بنجاح");
         exit;
 

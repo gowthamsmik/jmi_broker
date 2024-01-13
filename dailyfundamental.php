@@ -60,7 +60,7 @@
 <body>
    <?php include("includes/header.php"); ?>
 
-   <section class="partner-banner money-banner dailyfundamentalBanner"
+   <section class="partner-banner banner money-banner dailyfundamentalBanner"
    style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(19, 'Banner Background', 'Banner'); ?>');">
       <div class="container">
          <div class="partnerBannner-cont w-100  banner-pt1 banner-pb1 pdX12 text-center">
@@ -72,7 +72,7 @@
                   <?php echo getPageMetaByIDKeyGroup(19, 'Description', 'Banner'); ?>
                </p>
                <div class="banner-btn">
-                  <a class="gd-btn signUp" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(19, 'Banner Button URL', 'Banner'); ?>"
+                  <a class="gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(19, 'Banner Button URL', 'Banner'); ?>"
                      >
                      <?php echo getPageMetaByIDKeyGroup(19, 'Banner Button Text', 'Banner'); ?>
                      <span>
@@ -84,7 +84,7 @@
                         </svg>
                      </span>
                   </a>
-                  <a class="ol-btn loginUp" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>" >Open Live Account</a>
+                  <a class="ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>" >Open Live Account</a>
                </div>
             </div>
          </div>
@@ -96,11 +96,13 @@
          <div class="row align-items-stretch justify-content-center">
             <?php $getAllFundamentalAnalysisFront = getAllFundamentalAnalysisFront();
             if ($getAllFundamentalAnalysisFront->num_rows > 0) {
-               foreach ($getAllFundamentalAnalysisFront as $thisData) { ?>
+               foreach ($getAllFundamentalAnalysisFront as $thisData) { 
+                  
+                  ?>
                   <div class="col-md-4">
                      <div class="dailyfundamentalSec1-card">
                         <div class="dailyfundamentalSec1-cardImg">
-                           <img src="cms/<?php echo $thisData['image']; ?>" alt="">
+                           <img src="<?php echo $thisData['image']; ?>" alt="404">
                         </div>
 
                         <div class="dailyfundamentalSec1-cardCont">
@@ -108,9 +110,7 @@
                               <?php echo $thisData['heading']; ?>
                            </h6>
                            <div class="content w-100">
-                              <p class="description w-100">
                                  <?php echo $thisData['description']; ?>
-                              </p>
                            </div>
 
                            <div class="dailyfundamentalSec1-cardCont-bottom">
@@ -120,7 +120,7 @@
                                  </span>
                               </h4>
 
-                              <a href="#">
+                              <a href="<?php echo ($thisData['id'] <= 2 ? 'commodities.php' : 'forex-trading.php') ?>">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58"
                                     fill="none">
                                     <path d="M16.918 41.0846L41.0846 16.918" stroke="url(#paint0_linear_455_36892)"

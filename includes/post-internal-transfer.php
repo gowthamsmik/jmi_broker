@@ -11,29 +11,34 @@ $input = $_REQUEST;
 
 $transfer_to = $input['transfer_to'];
 
-if ($input['transfer_to'] == 'other') {
-    $transfer_to = $input['other_account'];
 
-    if (!preg_match('/^[0-9]*$/', $input['other_account']) || strlen($input['other_account']) > 9) {
-        die("Other account validation failed.");
-    }
-} else {
-    if (!preg_match('/^[0-9]*$/', $input['transfer_to']) || strlen($input['transfer_to']) > 9) {
-        die("Transfer to validation failed.");
-    }
-}
+// if ($input['transfer_to'] == 'other') {
+//     $transfer_to = $input['other_account'];
 
-if (!is_numeric($input['amount']) || $input['amount'] < 0) {
-    die("Amount validation failed.");
-}
+//     if (!preg_match('/^[0-9]*$/', $input['other_account']) || strlen($input['other_account']) > 9) {
+//         die("Other account validation failed.");
+//     }
+// } else {
+//     if (!preg_match('/^[0-9]*$/', $input['transfer_to']) || strlen($input['transfer_to']) > 9) {
+//         die("Transfer to validation failed.");
+//     }
+// }
 
-if (!preg_match('/^[0-9]*$/', $input['transfer_from']) || strlen($input['transfer_from']) > 9) {
-    die("Transfer from validation failed.");
-}
+// if (!is_numeric($input['amount']) || $input['amount'] < 0) {
+//     die("Amount validation failed.");
+// }
 
-if (!preg_match('/^[0-9]*$/', $input['currency']) || $input['currency'] < 1 || $input['currency'] > 1) {
-    die("Currency validation failed.");
-}
+// if (($input['transfer_from']) == $input['transfer_to']) {
+//     die("Can't be transfer same account");
+// }
+
+// if (!preg_match('/^[0-9]*$/', $input['transfer_from']) || strlen($input['transfer_from']) > 9) {
+//     die("Transfer from validation failed.");
+// }
+
+// if (!preg_match('/^[0-9]*$/', $input['currency']) || $input['currency'] < 1 || $input['currency'] > 1) {
+//     die("Currency validation failed.");
+// }
 
 $query = "|MODE=7|LOGIN=" . $input['transfer_from'] . "|CPASS=" . $input['password'];
 
@@ -42,7 +47,7 @@ $query1 = "|MODE=4|LOGIN=" . $input['transfer_from'] . "|CPASS=" . $input['passw
 $ret = 'error';
 
 $q = "WMQWEBAPI MASTER=jmi2020" . $query . "\nQUIT\n";
-$ptr = @fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
+$ptr = fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
 
 if ($ptr) {
     if (fputs($ptr, $q) != FALSE) {
@@ -59,7 +64,7 @@ if ($ptr) {
 if ($ret == Null or $ret == 'error') {
     $ret = 'error';
     $q = "WMQWEBAPI MASTER=jmi2020" . $query . "\nQUIT\n";
-    $ptr = @fsockopen('92.204.139.189', '443', $errno, $errstr, 5);
+    $ptr = fsockopen('92.204.139.189', '443', $errno, $errstr, 5);
     if ($ptr) {
         if (fputs($ptr, $q) != FALSE) {
             $ret = '';
@@ -79,7 +84,7 @@ $result = json_decode($ret);
 if (is_object($result) && isset($result->result) && $result->result == 0) {
     $ret1 = 'error';
     $q = "WMQWEBAPI MASTER=jmi2020" . $query1 . "\nQUIT\n";
-    $ptr = @fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
+    $ptr = fsockopen('89.116.30.28', '443', $errno, $errstr, 5);
     if ($ptr) {
         if (fputs($ptr, $q) != FALSE) {
             $ret1 = '';
@@ -94,7 +99,7 @@ if (is_object($result) && isset($result->result) && $result->result == 0) {
 
     if ($ret1 == Null or $ret1 == 'error') {
         $q = "WMQWEBAPI MASTER=jmi2020" . $query1 . "\nQUIT\n";
-        $ptr = @fsockopen('92.204.139.189', '443', $errno, $errstr, 5);
+        $ptr = fsockopen('92.204.139.189', '443', $errno, $errstr, 5);
         if ($ptr) {
             if (fputs($ptr, $q) != FALSE) {
                 $ret1 = '';

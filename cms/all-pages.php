@@ -1,12 +1,12 @@
-<?php include('includes/header.php'); ?>
-<div class="app-wrapper">
+
+<div class="">
 
 	<div class="app-content pt-3 p-md-3 p-lg-4">
 		<div class="container-xl">
 
 			<div class="row g-3 mb-4 align-items-center justify-content-between">
 				<div class="col-auto">
-					<h1 class="app-page-title mb-0">All Pages</h1>
+					<h1 class="app-page-title mb-0">English Pages</h1>
 				</div>
 				<div>
 
@@ -85,7 +85,6 @@
 												</tr>
 											<?php }
 										} ?>
-
 									</tbody>
 								</table>
 							</div><!--//table-responsive-->

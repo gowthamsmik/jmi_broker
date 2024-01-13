@@ -60,11 +60,11 @@ if (isset($_SESSION['sessionkeyadmin'])) {
                                                 </label>
                                             </div>
                                         </div><!--//col-6-->
-                                        <div class="col-6">
+                                        <!-- <div class="col-6">
                                             <div class="forgot-password text-end">
                                                 <a href="reset-password.html">Forgot password?</a>
                                             </div>
-                                        </div><!--//col-6-->
+                                        </div> -->
                                     </div><!--//extra-->
                                 </div><!--//form-group-->
                                 <div class="text-center">

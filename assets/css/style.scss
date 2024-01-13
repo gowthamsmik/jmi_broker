@@ -143,7 +143,7 @@ header{-webkit-transition:all 0.4s ease-In-out;-moz-transition:all 0.4s ease-In-
 .topHeader-btn{
 	display: flex;
 	align-items: center;
-	border-left: 1px solid #ECECEC;
+	// border-left: 1px solid #ECECEC;
 	margin-left: 40px;
 	padding-left: 30px;
 
@@ -306,7 +306,8 @@ ul.dropdown li a:hover{color:#0244B0!important;}
 	background-repeat:no-repeat;
 	display:flex;
 	align-items:center;
-	position:relative;
+	// position:relative;
+	margin-top: 170px;
 	background-color: #0343AE;
 
 	&::after{
@@ -324,6 +325,24 @@ ul.dropdown li a:hover{color:#0244B0!important;}
 		opacity: 0.3;
 	}
 }
+
+@media screen and (min-width:767px) and (max-width:1280px) {
+	.banner{
+	  margin-top: 150px !important;
+	}
+	.mainBanner {
+	  margin-top: 150px !important;
+	}
+  }
+
+  @media screen and (min-width:350px) and (max-width:766px) {
+	.banner{
+	  margin-top: 198px !important;
+	}
+	.mainBanner {
+	  margin-top: 198px !important;
+	}
+  }
 
 .maniBanner-cont{
 	padding-top: 120px;
@@ -451,11 +470,15 @@ ul.dropdown li a:hover{color:#0244B0!important;}
 	padding: 85px 0 120px;
 }
 
+
+
 .pakageCard{
 	border-radius: 8.59px;
 	border: 1.074px solid #424242;
 	background: #053B9E;
-	padding: 30px 20px 40px;
+	padding: 80px 20px 80px !important;
+	font-size: 14px;
+  	min-width:220px !important;
 
 	.pakageCard-icon{
 		padding-bottom: 20px;
@@ -526,6 +549,7 @@ ul.dropdown li a:hover{color:#0244B0!important;}
 			}
 		}
 	}
+	
 }
 
 // FAQ
@@ -670,7 +694,7 @@ ul.dropdown li a:hover{color:#0244B0!important;}
 // CTA
 .homeCta{
 	background: linear-gradient(0deg, rgba(3, 67, 174, 0.50) 0%, rgba(3, 67, 174, 0.50) 100%), url(../images/cta-bg.jpg), lightgray 0px -460.167px / 100% 326.599% no-repeat;
-	padding: 70px 0 90px;
+	padding: 50px 0 50px;
 	text-align: center;
 }
 
@@ -787,7 +811,7 @@ ul.dropdown li a:hover{color:#0244B0!important;}
 }
 
 .about-section2{
-	padding: 160px 0;
+	padding: 60px 0 !important;
 
 	.aboutSec2-top{
 		 padding-bottom: 90px;
@@ -1101,7 +1125,7 @@ footer{
 							color: #fff;
 
 							&:hover{
-								color: #B3CCF5;
+								color: #FEDC18 !important;
 							}
 						}
 
@@ -2107,7 +2131,7 @@ footer{
 	}
 }
 .forex-section4{
-	padding-bottom: 50px;
+	padding-bottom: 50px !important;
 
 	.mn-btn{
 		 padding-top: 60px;
@@ -2652,7 +2676,7 @@ footer{
 		padding-left: 3%;
 	}
 	.mn-hd h1 {
-		font-size: 115px;
+		font-size: 100px;
 	}
 	.mn-hd h3 {
 		font-size: 45px;
@@ -2719,7 +2743,7 @@ footer{
 	footer .footer-top .footer-sponser .sponser1 {
     	width: 300px;
     	margin: auto;
-    	margin-right: 0;
+    	// margin-right: 0;
 		.spon1-cont2 {
 			display: flex;
 			column-gap: 10px;
@@ -2739,8 +2763,9 @@ footer{
 	.about-section4 .about-card2 {
 		align-items: normal;
 		position: relative;
-		height: 170px;
-		padding: 30px 0 22px;
+		height: 100%;
+    	width:100%;
+		padding: 25px 10px;
 	}
 	.about-section4 .about-card2 p {
 		width: 200px;
@@ -2750,7 +2775,7 @@ footer{
 		}
 	}
 	.about-section4 .about-card2 img {
-		width: 45%;
+		width: 40%;
 	}
 
 	.careerSection1 .greySec-cont1 p {
@@ -2933,8 +2958,10 @@ footer{
 	}
 	.about-section4 .about-card2 {
 		align-items: normal;
-		padding: 25px;
+		padding: 25px 10px;
 		overflow: hidden;
+		height: 100%;
+    	width:100%;
 	}
 	.about-section4 .about-card2 p {
 		padding-left: 0;
@@ -2945,7 +2972,7 @@ footer{
 		}
 	}
 	.about-section4 .about-card2 img {
-		width: calc(45%);
+		width: calc(40%);
 	}
 	.about-section5 .sec5-main .about-card3 .mn-hd {
 		padding: 30px 20px;
@@ -3254,7 +3281,8 @@ footer{
 		padding: 10px 20px;
 	}
 	.about-section4 .about-card2 {
-		height: 150px;
+		height: 100%;
+    	width:100%;
 	}
 	.about-section4 {
 		padding: 60px 0;
@@ -3359,7 +3387,7 @@ footer{
 	ul.dropdown {
 		position: absolute;
 		width: 100%;
-		left: 0px;
+		// left: 0px;
 		margin: auto;
 		background: transparent;
 		padding: 0 0 0 15px;
@@ -3726,7 +3754,6 @@ footer{
 		position: absolute;
 		right: 0;
 		top: -7px;
-		opacity: 0;
 	}
 	.pdX8, .pdX5 {
 		padding-right: 0%;
@@ -3823,7 +3850,8 @@ footer{
 		padding: 40px 0 50px;
 	}
 	.about-section4 .about-card2 {
-		height: 120px;
+		height: 100%;
+    	width:100%;
 	}
 	section.about-section7 .cont2 {
 		padding: 0 15px;
@@ -3840,7 +3868,7 @@ footer{
 	footer .footer-top .footer-sponser {
 		position: absolute;
 		bottom: 10px;
-		right: 0px;
+		// right: 0px;
 	}
 	footer .footer-middle .middle-cont .cont-title p br{
 		display: none;
@@ -4232,7 +4260,8 @@ footer{
 		font-size: 14px;
 	}
 	.about-section4 .about-card2 {
-		height: 120px;
+		height: 100%;
+    	width:100%;
 		margin-bottom: 10px;
 	}
 	.about-section4 .about-card2 img {

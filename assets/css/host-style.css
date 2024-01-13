@@ -21,7 +21,7 @@
 }
 
 .career-section2 .careerSec-cont .career-card a {
-    display: none !important;
+    display: block !important;
 }
 .paymethod-slider {
     padding-bottom: 60px;

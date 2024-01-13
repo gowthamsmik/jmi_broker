@@ -73,11 +73,11 @@ $userbyadmin=getUser($SessionUserId);?>
 
             <p class="fs-4 mt-4"><?php echo $lang['profile_documents']?></p>
             <hr>
-            <div class="px-5 mx-5 mt-4">
+            <div class="px-3 mx-3 mt-4">
                 <div>
-                    <div class="d-flex align-items-center gap-5 row">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang['document_type']?></label></div>
-                        <div class="col-7">
+                    <div class="d-flex align-items-center gap-2 row">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang['document_type']?></label></div>
+                        <div class="col-md-7">
                             <select class="form-select rounded-3 box-shadow py-2 px-3" id="docType">
                                 <option disabled>-Select-</option>
                                 <optgroup label="Proof of ID">
@@ -97,33 +97,33 @@ $userbyadmin=getUser($SessionUserId);?>
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang['select_file']?></label></div>
-                        <div class="col-7">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang['select_file']?></label></div>
+                        <div class="col-md-7">
                             <input type="file" name="fileInput" id="fileInput"
                                 class="form-control px-4 py-3 h-auto rounded-3 box-shadow border bg-white"
                                 accept="image/*,application/pdf">
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"><label for="" class="form-label fs-5"><?php echo $lang['document_description']?></label></div>
-                        <div class="col-7">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang['document_description']?></label></div>
+                        <div class="col-md-7">
                             <textarea name="" id="description" cols="10" rows="3"
                                 class="form-control px-4 py-3 h-auto rounded-3 box-shadow border bg-white"></textarea>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-5 row mt-4">
-                        <div class="col-3"></div>
-                        <div class="col-7">
+                    <div class="d-flex align-items-center gap-2 row mt-4">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-7">
                             <button class="btn button_color w-100 text-white" onclick="uploadDocument()"><?php echo $lang['document_update']?></button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-5" style="display:<?php echo $userDocumentsCount > 0 ? '' : 'none' ?>">
+            <div class="mt-5 table_scroll" style="display:<?php echo $userDocumentsCount > 0 ? '' : 'none' ?>">
                 <div class="fs-3 border-bottom border-gray"><?php echo $lang['documnet_subheader']?></div>
 
-                <div class="table m-5">
+                <div class="table m-5" style="width:800px;">
                     <table border="1">
                         <tr class="p-5">
                             <th class="header">#</th>

@@ -24,23 +24,24 @@
 
 <body>
     <?php include("../includes/header.php"); ?>
-    <div class='layout'>
+    <div class='layout cpanal_banar'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
                 <div class="d-flex">
-                    <h2 class="fs-4">Control panel | <?php echo $lang['controlPanelEBooks'] ?></h2>
-                    <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg"
+                    <h2 class="fs-4"><?php echo $lang['ebooks'] ?></h2>
+                    <div class="d-flex <?php echo ($userPreferredLanguage === 'ar') ? 'me-auto' : 'ms-auto'; ?>"><img src="../assets/images/svg/account_circle.svg"
                             class="account_circle" alt="">
                         <p class="mt-1 ms-2"><?php echo $lang['welcome'] ?>,
                             <?php echo $_SESSION['sessionusername']; ?>
+                            
                         </p>
                     </div>
 
 
                 </div>
                 <div class="ml-auto">
-                    <iframe class="mt-5" src="https://www.jmibroker.net/assets/downloads/Company-Profile 2023(en).pdf"
+                    <iframe class="mt-5" src="<?php echo $webeurl;?>assets/Downloads/company-profile-2023-<?php echo $userPreferredLanguage?>.pdf"
                         frameborder="0" scrolling="no" width="100%" height="748px"></iframe>
 
                 </div>

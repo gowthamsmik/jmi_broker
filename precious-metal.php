@@ -3,7 +3,7 @@
 <head>
     <?php include('includes/compatibility.php'); ?>
     <meta name='description' content=''>
-    <title>Title Here</title>
+    <title>Precious Metal</title>
     <?php include("includes/softwareinclude/config.php"); ?>
     <?php include('includes/style.php'); ?>
     <style>
@@ -15,12 +15,12 @@
 <body>
     <?php include('includes/header.php'); ?>
 
-    <section class='precious-banner' style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(30, 'Banner Background', 'Banner'); ?>');">
+    <section class='precious-banner banner' style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(30, 'Banner Background', 'Banner'); ?>');">
         <div class='container'>
             <div class='banner-cont text-center mn-hd mn-btn'>
                 <h2 class='pdB1'><?php echo getPageMetaByIDKeyGroup(30,'Banner Heading 1','Banner');?></h2>
                 <p class='p-fs4 tx-white pdB1 text-center'><?php echo getPageMetaByIDKeyGroup(30,'Banner Description','Banner');?></p>
-                <a class='gd-btn marR1 signUp' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(30, 'Banner Button URL', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(30,'Banner Button Text','Banner');?>
+                <a class='gd-btn marR1 <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(30, 'Banner Button URL', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(30,'Banner Button Text','Banner');?>
                     <span>
                         <svg width='21' height='16' viewBox='0 0 21 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
                             <path d='M2 9L19 9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
@@ -28,7 +28,7 @@
                         </svg>
                     </span>
                 </a>
-                <a class='ol-btn loginUp' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>">Open Live Account</a>
+                <a class='ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>">Open Live Account</a>
             </div>
         </div>
     </section>
@@ -86,8 +86,8 @@
                         <div class='header-top'>
                             <h5 class='tx-blue'><?php echo getPageMetaByIDKeyGroup(30,'Heading','Major Currencies');?></h5>
 
-                            <div class='forex-tag'>
-                                <span class='p-fs5 tx-blue bld padR2'>FX 4D major</span>
+                            <div class='forex-tag '>
+                                <span class='p-fs5 tx-blue bld padR2 <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>'>FX 4D major</span>
                                 <span class='p-fs5 tx-grey-new4'>FX 5D major</span>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                 </div>
 
                 <div class='forex-table-main'>
-                    <iframe src="https://www.jmibrokers.com/en/metals" style="width: 100%; height: 500px;"></iframe>
+                    <iframe src="https://www.jmibrokers.com/metals.php" style="width: 100%; height: 500px;"></iframe>
                     <!--<table>-->
                     <!--    <thead>-->
                     <!--        <tr>-->
@@ -291,7 +291,7 @@
                     </li>
                 </ul>
                 <div class='mn-btn'>
-                    <a class='gd-btn marR1 signUp' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(30, 'Banner Button URL 1', 'Bottom Buttons'); ?>"><?php echo getPageMetaByIDKeyGroup(30,'Button Text 1','Bottom Buttons');?>
+                    <a class='gd-btn marR1 <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(30, 'Banner Button URL 1', 'Bottom Buttons'); ?>"><?php echo getPageMetaByIDKeyGroup(30,'Button Text 1','Bottom Buttons');?>
                     <span>
                         <svg xmlns='http://www.w3.org/2000/svg' width='21' height='16' viewBox='0 0 21 16' fill='none'>
                             <path d='M2 9L19 9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
@@ -299,7 +299,7 @@
                         </svg>
                     </span>
                     </a>
-                    <a class='ol-btn loginUp' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(30, 'Banner Button URL 2', 'Bottom Buttons'); ?>"><?php echo getPageMetaByIDKeyGroup(30,'Button Text 2','Bottom Buttons');?></a>
+                    <a class='ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(30, 'Banner Button URL 2', 'Bottom Buttons'); ?>"><?php echo getPageMetaByIDKeyGroup(30,'Button Text 2','Bottom Buttons');?></a>
                 </div>
             </div>
         </div>

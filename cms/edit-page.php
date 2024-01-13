@@ -46,6 +46,7 @@ if(isset($_GET['id'])){
 														<!-- <select name="<?php  echo $thisField['field_name'].'|'.$thisGroup['group_name'];?>[]" class="form-control" multiple>
 															<option value="" selected disabled>--</option>
 															<?php $get_data_from_table = get_data_from_table($thisGroup['group_name']);
+															echo "--------".$thisGroup['group_name'];
 															if($get_data_from_table->num_rows > 0){
 																foreach($get_data_from_table as $thisdata){ ?>
 																	<option value="<?php echo $thisdata['id'];?>"><?php echo $thisdata['name'];?></option>

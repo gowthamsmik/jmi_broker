@@ -9,18 +9,19 @@
     <?php include("includes/style.php");
    $demoAccountURL = $siteurl . "cpanel/open-demo-account.php?tab=1";
    $liveAccountURL = $siteurl . "cpanel/open-live-account.php?tab=1";
+   $howitworkimage=$siteurl."cms/".getPageMetaByIDKeyGroup(2,'Image','How It Works');
    ?>
 </head>
 <body>
     <?php include("includes/header.php"); ?>
 
-    <section class="about-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(2,'Banner Background','Banner');?>');">
+    <section class="about-banner banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(2,'Banner Background','Banner');?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd mn-btn">
                 <h2><?php echo getPageMetaByIDKeyGroup(2,'Banner Heading','Banner');?></h2>
                 <p class="p-fs4"><?php echo getPageMetaByIDKeyGroup(2,'Banner Description','Banner');?></p>
                 <h6><?php echo getPageMetaByIDKeyGroup(2,'Banner Description 2','Banner');?></h6>
-                <a class="theam-btn signUp" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(2, 'Banner Button URL 1', 'Banner'); ?>">
+                <a class="theam-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(2, 'Banner Button URL 1', 'Banner'); ?>">
                     <?php echo getPageMetaByIDKeyGroup(2,'Banner Button Text 1','Banner');?> 
                     <span>
                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +30,7 @@
                         </svg>
                     </span>
                 </a>
-                <a class="ol-btn loginUp" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(2, 'Banner Button URL 2', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(2,'Banner Button Text 2','Banner');?></a>
+                <a class="ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(2, 'Banner Button URL 2', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(2,'Banner Button Text 2','Banner');?></a>
             </div>
         </div>
     </section>
@@ -52,12 +53,12 @@
                     <h3 class="padY2">
                         <?php echo getPageMetaByIDKeyGroup(2, 'Heading', 'Vision'); ?>
                     </h3>
-                    <p class="p-fs5" style="text-align:justify;">
+                    <p class="<?php echo ($userPreferredLanguage === 'ar') ? '' : 'p-fs5'; ?>" style="text-align:justify;">
                         <?php echo getPageMetaByIDKeyGroup(2, 'Description', 'Vision'); ?>
                     </p>
                 </div>
                 <div class="col-md-6 mn-hd">
-                    <h3 class="padY2">
+                    <h3 class="padY2" style="<?php echo ($userPreferredLanguage === 'ar') ? 'padding-right:60px;' : ''; ?>">
                         <?php echo getPageMetaByIDKeyGroup(2, 'Heading', 'Mission'); ?>
                     </h3>
                     <p class="p-fs5" style="text-align:justify;">
@@ -83,32 +84,32 @@
             <div class="row">
                <div class="col">
                    <div class="padR1 mn-hd">
-                       <h4 class="text-center">99k</h4>
-                       <p class="p-fs7">Lorem ipsum dolor sit amet consectetur. Elementum risus</p>
+                       <h4 class="text-center"><?php echo getPageMetaByIDKeyGroup(2, 'Heading 1', 'Statistics'); ?></h4>
+                       <p class="p-fs7"><?php echo getPageMetaByIDKeyGroup(2, 'Stats 1', 'Statistics'); ?></p>
                    </div>
                </div>
                <div class="col">
                    <div class="padR1 mn-hd">
-                       <h4 class="text-center">12%</h4>
-                       <p class="p-fs7">Lorem ipsum dolor sit amet consectetur. Elementum risus</p>
+                       <h4 class="text-center"><?php echo getPageMetaByIDKeyGroup(2, 'Heading 2', 'Statistics'); ?></h4>
+                       <p class="p-fs7"><?php echo getPageMetaByIDKeyGroup(2, 'Stats 2', 'Statistics'); ?></p>
                    </div>
                </div>
                <div class="col">
                    <div class="padR1 mn-hd">
-                       <h4 class="text-center">99k</h4>
-                       <p class="p-fs7">Lorem ipsum dolor sit amet consectetur. Elementum risus</p>
+                       <h4 class="text-center"><?php echo getPageMetaByIDKeyGroup(2, 'Heading 3', 'Statistics'); ?></h4>
+                       <p class="p-fs7"><?php echo getPageMetaByIDKeyGroup(2, 'Stats 3', 'Statistics'); ?></p>
                    </div>
                </div>
                <div class="col">
                    <div class="padR1 mn-hd">
-                       <h4 class="text-center">12%</h4>
-                       <p class="p-fs7">Lorem ipsum dolor sit amet consectetur. Elementum risus</p>
+                       <h4 class="text-center"><?php echo getPageMetaByIDKeyGroup(2, 'Heading 4', 'Statistics'); ?></h4>
+                       <p class="p-fs7"><?php echo getPageMetaByIDKeyGroup(2, 'Stats 4', 'Statistics'); ?></p>
                    </div>
                </div>
                <div class="col">
                    <div class="padR1 mn-hd">
-                       <h4 class="text-center">99k</h4>
-                       <p class="p-fs7">Lorem ipsum dolor sit amet consectetur. Elementum risus</p>
+                       <h4 class="text-center"><?php echo getPageMetaByIDKeyGroup(2, 'Heading 5', 'Statistics'); ?></h4>
+                       <p class="p-fs7"><?php echo getPageMetaByIDKeyGroup(2, 'Stats 5', 'Statistics'); ?></p>
                    </div>
                </div>
             </div>
@@ -116,9 +117,9 @@
             <div class="aboutSec-bottom">
                 <div class="mn-hd mn-btn text-center">
                     <p class="tx-grey300 p-fs3 text-center">
-                       Lorem ipsum dolor sit amet consectetur. Elementum risus tempor at vivamus <br> curabitur viverra diam nec.
+                    <?php echo getPageMetaByIDKeyGroup(2, 'Description', 'Statistics'); ?>
                     </p>
-                    <a class="theam-btn signUp" href="<?php echo getPageMetaByIDKeyGroup(2,'banner button url','about') ?>">Lets Get Started
+                    <a class="theam-btn gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo getPageMetaByIDKeyGroup(2,'banner button url','about') ?>">Lets Get Started
                         <span>
                             <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -135,15 +136,15 @@
         <div class="container pdX5">
             <div class="aboutSec2-top">
                 <div class="text-center mn-hd">
-                    <h3 class="tx-blue">How It Works:</h3>
-                    <p class="tx-grey300 p-fs3 text-center">Lorem ipsum dolor sit amet consectetur. Elementum risus tempor at vivamus curabitur viverra diam nec.</p>
+                    <h3 class="tx-blue"><?php echo getPageMetaByIDKeyGroup(2, 'Heading', 'How It Works'); ?></h3>
+                    <p class="tx-grey300 p-fs3 text-center"><?php echo getPageMetaByIDKeyGroup(2, 'Description', 'How it works'); ?></p>
                 </div>
             </div>
 
             <div class="aboutSec2-main">
                 <div class="row">
                     <div class="col-md-6">
-                        <img class="main-image" src="assets/images/about-main.jpg" alt="">
+                        <img class="main-image" src="cms/<?php echo getPageMetaByIDKeyGroup(2, 'Image', 'How it works'); ?>" alt="404">
                     </div>
 
                     <div class="col-md-6">
@@ -153,10 +154,10 @@
                                     <span class="tx-blue">
                                         01
                                     </span>
-                                    Expertise and Experience:
+                                    <?php echo getPageMetaByIDKeyGroup(2, 'Heading 1', 'How it works'); ?>
                                 </h6>
                                 <p class="p-fs5" style="text-align:justify;">
-                                    With a team of seasoned professionals, we bring a wealth of knowledge and experience to the table. Our expertise spans various financial sectors, allowing us to offer comprehensive solutions and insights that give our clients a competitive edge.
+                                <?php echo getPageMetaByIDKeyGroup(2, 'Description 1', 'How it works'); ?>
                                 </p>
                             </div>
 
@@ -165,10 +166,10 @@
                                     <span class="tx-blue">
                                         02
                                     </span>
-                                    Client-Centric Approach:
+                                    <?php echo getPageMetaByIDKeyGroup(2, 'Heading 2', 'How it works'); ?>
                                 </h6>
                                 <p class="p-fs5" style="text-align:justify;">
-                                    With a team of seasoned professionals, we bring a wealth of knowledge and experience to the table. Our expertise spans various financial sectors, allowing us to offer comprehensive solutions and insights that give our clients a competitive edge.
+                                <?php echo getPageMetaByIDKeyGroup(2, 'Description 2', 'How it works'); ?>
                                 </p>
                             </div>
 
@@ -177,10 +178,10 @@
                                     <span class="tx-blue">
                                         03
                                     </span>
-                                    Cutting-Edge Technology:
+                                    <?php echo getPageMetaByIDKeyGroup(2, 'Heading 3', 'How it works'); ?>
                                 </h6>
                                 <p class="p-fs5" style="text-align:justify;">
-                                    With a team of seasoned professionals, we bring a wealth of knowledge and experience to the table. Our expertise spans various financial sectors, allowing us to offer comprehensive solutions and insights that give our clients a competitive edge.
+                                <?php echo getPageMetaByIDKeyGroup(2, 'Description 3', 'How it works'); ?>
                                 </p>
                             </div>
 
@@ -189,10 +190,10 @@
                                     <span class="tx-blue">
                                         04
                                     </span>
-                                    Global Reach:
+                                    <?php echo getPageMetaByIDKeyGroup(2, 'Heading 4', 'How it works'); ?>
                                 </h6>
                                 <p class="p-fs5" style="text-align:justify;">
-                                    With a team of seasoned professionals, we bring a wealth of knowledge and experience to the table. Our expertise spans various financial sectors, allowing us to offer comprehensive solutions and insights that give our clients a competitive edge.
+                                <?php echo getPageMetaByIDKeyGroup(2, 'Description 4', 'How it works'); ?>
                                 </p>
                             </div>
                         </div>
@@ -208,10 +209,10 @@
                 <div class="aboutSec3-top text-center">
                     <div class="mn-hd">
                         <h3 class="tx-gd">
-                            How It Works:
+                        <?php echo getPageMetaByIDKeyGroup(2, 'Heading', 'How it works 2'); ?>
                         </h3>
                         <p class="p-fs3 tx-white text-center">
-                            Lorem ipsum dolor sit amet consectetur. Elementum risus tempor at vivamus curabitur viverra diam nec.
+                        <?php echo getPageMetaByIDKeyGroup(2, 'Description', 'How it works 2'); ?>
                         </p>
                     </div>
                 </div>
@@ -225,14 +226,14 @@
                                         
                                         <p class="tx-white p-fs2">
                                             <span>
-                                                <img src="assets/images/png/1.png" alt="">
+                                                <img src="cms/<?php echo getPageMetaByIDKeyGroup(2, 'Image 1', 'How it works 2'); ?>" alt="404">
                                             </span>
-                                            Consultation:
+                                            <?php echo getPageMetaByIDKeyGroup(2, 'Heading 1', 'How it works 2'); ?>
                                         </p>
                                     </div>
                                     <div class="abtCard-body">
                                         <p class="tx-white p-fs6" style="text-align:justify;">
-                                            We begin by understanding your financial goals, risk tolerance, and investment preferences. Our dedicated team of professionals will guide you through the process, ensuring that we have a clear understanding of your needs.
+                                        <?php echo getPageMetaByIDKeyGroup(2, 'Description 1', 'How it works 2'); ?>
                                         </p>
                                     </div>
                                 </div>
@@ -246,14 +247,14 @@
                                         
                                         <p class="tx-white p-fs2">
                                             <span>
-                                                <img src="assets/images/png/2.png" alt="">
+                                            <img src="cms/<?php echo getPageMetaByIDKeyGroup(2, 'Image 2', 'How it works 2'); ?>" alt="404">
                                             </span>
-                                            Customized <br> Solutions:
+                                            <?php echo getPageMetaByIDKeyGroup(2, 'Heading 2', 'How it works 2'); ?>
                                         </p>
                                     </div>
                                     <div class="abtCard-body">
                                         <p class="tx-white p-fs6" style="text-align:justify;">
-                                            Based on the information gathered during the consultation, we develop a personalized financial strategy that aligns with your objectives. We take into account various factors such as market conditions, investment products, and risk management.
+                                        <?php echo getPageMetaByIDKeyGroup(2, 'Description 2', 'How it works 2'); ?>
                                         </p>
                                     </div>
                                 </div>
@@ -267,14 +268,14 @@
                                         
                                         <p class="tx-white p-fs2">
                                             <span>
-                                                <img src="assets/images/png/3.png" alt="">
+                                            <img src="cms/<?php echo getPageMetaByIDKeyGroup(2, 'Image 3', 'How it works 2'); ?>" alt="404">
                                             </span>
-                                            Execution
+                                            <?php echo getPageMetaByIDKeyGroup(2, 'Heading 3', 'How it works 2'); ?>
                                         </p>
                                     </div>
                                     <div class="abtCard-body">
                                         <p class="tx-white p-fs6" style="text-align:justify;">
-                                            Once the strategy is finalized, our team will help you execute the plan efficiently. We provide access to a wide range of investment products and trading platforms, allowing you to implement your investment decisions seamlessly.
+                                        <?php echo getPageMetaByIDKeyGroup(2, 'Description 3', 'How it works 2'); ?>
                                         </p>
                                     </div>
                                 </div>
@@ -288,14 +289,14 @@
                                         
                                         <p class="tx-white p-fs2">
                                             <span>
-                                                <img src="assets/images/png/4.png" alt="">
+                                            <img src="cms/<?php echo getPageMetaByIDKeyGroup(2, 'Image 4', 'How it works 2'); ?>" alt="404">
                                             </span>
-                                            Ongoing Support:
+                                            <?php echo getPageMetaByIDKeyGroup(2, 'Heading 4', 'How it works 2'); ?>
                                         </p>
                                     </div>
                                     <div class="abtCard-body">
                                         <p class="tx-white p-fs6" style="text-align:justify;">
-                                            Our commitment doesn't end with execution. We offer continuous support and monitoring to ensure your portfolio remains on track. Our team regularly reviews your investments, provides market updates, and suggests adjustments when necessary.
+                                        <?php echo getPageMetaByIDKeyGroup(2, 'Description 4', 'How it works 2'); ?>
                                         </p>
                                     </div>
                                 </div>

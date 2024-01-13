@@ -354,11 +354,22 @@ global $hostname; ?>
                             <ul class="pagination justify-content-end">
                                 <?php
                                 $totalRecords = getTotalofferAnalysis();
-                                $totalPages = ceil($totalRecords / $perPage);
-
-                                for ($i = 1; $i <= $totalPages; $i++) {
-                                    echo '<li class="page-item ' . ($page == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                $limit = 10; // Set the number of records to display per page
+                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+            
+                                // Calculate the total number of pages
+                                $totalPages = ceil($totalRecords / $limit);
+            
+                                // Determine the starting and ending page numbers to display
+                                $startPage = max($currentPage - 3, 1);
+                                $endPage = min($startPage + 5, $totalPages);
+            
+                                // Display pagination links
+                                echo '<ul class="pagination">';
+                                for ($i = $startPage; $i <= $endPage; $i++) {
+                                    echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
                                 }
+                                echo '</ul>';
                                 ?>
                             </ul>
                         </nav>

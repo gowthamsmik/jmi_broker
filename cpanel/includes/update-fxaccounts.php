@@ -90,7 +90,7 @@ function sendWebSocketRequest($query, $ip = '89.116.30.28')
 {
     $ret = 'error';
     $q = "WMQWEBAPI MASTER=jmi2020" . $query . "\nQUIT\n";
-    $ptr = @fsockopen($ip, '443', $errno, $errstr, 5);
+    $ptr = fsockopen($ip, '443', $errno, $errstr, 5);
 
     if ($ptr) {
         if (fputs($ptr, $q) != FALSE) {

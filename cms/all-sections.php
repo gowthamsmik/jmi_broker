@@ -1,5 +1,5 @@
-<?php include('includes/header.php');?>
-    <div class="app-wrapper">
+
+    <div class="">
 	    
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">

@@ -90,9 +90,9 @@
     <div class="app-wrapper">
 
         <div class="app-content pt-3 p-md-3 p-lg-4">
-            <div class="container-xl">
-
-                <div class="row g-3 mb-4 align-items-center justify-content-between card">
+            <div class=" card">
+            <hr style="height:3px;border-width:0;color:gray;background-color:#0ffcf8;margin-top:0px">
+                <div class=" container-xl row g-3 mb-4 align-items-center justify-content-between ">
                     <div class="col-auto">
                         <h1 class="app-page-title mb-0">Mailer Center</h1>
                     </div>
@@ -105,9 +105,9 @@
 
                         <label for="title">Title:</label>
                         <select id="title" name="title">
-                            <option value="Mr">Mr</option>
-                            <option value="Mrs">Mrs</option>
-                            <option value="Miss">Miss</option>
+                            <option value="0">Mr</option>
+                            <option value="1">Mrs</option>
+                            <option value="2">Miss</option>
                         </select>
 
                         <label for="email">Email:</label>
@@ -117,11 +117,11 @@
                         <button type="reset" value="Clear" class="btn btn-secondary">Clear</button>
                     </form>
                     <div class="d-flex justify-content-between my-3">
-                        <button type="button" class="btn btn-success">Export All</button>
+                        <button type="button" class="btn btn-success" id="extractAllmailer">Export CSV</button>
                         <button type="button" class="btn btn-success" onclick="deletemailer()">Delete Selected</button>
                     </div>
                 </div>
-                <div class="tab-content" id="orders-table-tab-content">
+                <div class="container tab-content" id="orders-table-tab-content">
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel"
                         aria-labelledby="orders-all-tab">
                         <div class="app-card app-card-orders-table shadow-sm mb-5">
@@ -137,7 +137,6 @@
 
                                                 <th class="cell">#</th>
                                                 <th class="cell">Mail</th>
-                                                <th class="cell">Title</th>
                                                 <th class="cell">Name</th>
                                                 <th class="cell">Manage</th>
                                             </tr>
@@ -158,13 +157,10 @@
                                                                 value="<?php echo $mailListAccount['id']; ?>" />
                                                         </td>
                                                         <td class="cell">
-                                                            <?php echo $index; ?>
+                                                            <?php echo $mailListAccount['id']; ?>
                                                         </td>
                                                         <td class="cell"><span class="truncate">
                                                                 <?php echo $mailListAccount['mail']; ?>
-                                                            </span></td>
-                                                        <td class="cell"><span class="truncate">
-                                                                <?php echo $mailListAccount['title']; ?>
                                                             </span></td>
                                                         <td class="cell"><span class="truncate">
                                                                 <?php echo $mailListAccount['name']; ?>
@@ -189,11 +185,39 @@
                             <ul class="pagination justify-content-end">
                                 <?php
                                 $totalRecords = getTotalMailListAccounts();
-                                $totalPages = ceil($totalRecords / $perPage);
+                                $limit = 10; // Set the number of records to display per page
+                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-                                for ($i = 1; $i <= $totalPages; $i++) {
-                                    echo '<li class="page-item ' . ($page == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                // Calculate the total number of pages
+                                $totalPages = ceil($totalRecords / $limit);
+
+                                // Determine the starting and ending page numbers to display
+                                $startPage = max($currentPage - 3, 1);
+                                $endPage = min($startPage + 5, $totalPages);
+
+                                // Display pagination links
+                                echo '<ul class="pagination justify-content-end">';
+
+                                // First button
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
+
+                                // Previous button
+                                $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+
+                                // Page numbers
+                                for ($i = $startPage; $i <= $endPage; $i++) {
+                                    echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
                                 }
+
+                                // Next button
+                                $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+
+                                // Last button
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
+
+                                echo '</ul>';
                                 ?>
                             </ul>
                         </nav>
@@ -283,6 +307,30 @@
             window.onload = function () {
                 toggleSelectAll();
             };
+            $(document).on('click', '#extractAllmailer', function () {
+				// Make an AJAX request to a PHP script that extracts and downloads the CSV
+				$.ajax({
+					url: 'includes/softwareinclude/ajax.php',
+					type: 'post',
+					data: { type: 'extract-all-mailer' },
+					success: function (res) {
+						alert('CSV extraction successful. Download will begin shortly.');
+						var csvData = res;
+						console.log(csvData)
+						var blob = new Blob([csvData], { type: 'text/csv' });
+						var link = document.createElement('a');
+						link.href = window.URL.createObjectURL(blob);
+						link.download = 'all_mailer_data.csv';
+						document.body.appendChild(link);
+						link.click();
+						document.body.removeChild(link);
+					},
+					error: function (err) {
+						console.error(err);
+						alert('Error extracting data.');
+					}
+				});
+			});
         </script>
     </div>
 </body>

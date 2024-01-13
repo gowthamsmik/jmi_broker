@@ -36,12 +36,12 @@ if ($user) {
 
         // Save notification for admin
         $stmtAdminNotification = $conn->prepare("INSERT INTO Notifications (website_accounts_id, notification_status, notification, notification_link) VALUES (?, 0, ?, ?)");
-        $stmtAdminNotification->bind_param("iss", 999999999, $user['email'] . ' Has Request Account Deleting', '/spanel/website-accounts?&bymail=' . $user['email'] . '&');
+        $stmtAdminNotification->bind_param("iss", 999999999, $user['email'] . ' Has Request Account Deleting', '/cms/website-account?&bymail=' . $user['email'] . '&');
         $stmtAdminNotification->execute();
 
         // Save notification for user
         $stmtUserNotification = $conn->prepare("INSERT INTO Notifications (website_accounts_id, notification_status, notification, details, notification_ar, details_ar, notification_ru, details_ru, notification_link) VALUES (?, 0, ?, ?, ?, ?, ?, ?, ?)");
-        $stmtUserNotification->bind_param("ississsss", $user['id'], 'Account deleting request processed successfully, You will be notified when it\'s done.', 'Account deleting request processed successfully, You will be notified when it\'s done.', 'تمت استلام طلب حذف  الحساب بنجاح ، وسيتم إعلامك عند الانتهاء', 'تمت استلام طلب حذف  الحساب بنجاح ، وسيتم إعلامك عند الانتهاء', 'Запрос на удаление учетной записи успешно обработан, вы получите уведомление, когда это будет сделано.', 'Запрос на удаление учетной записи успешно обработан, вы получите уведомление, когда это будет сделано.', '/cpanel/live-accounts');
+        $stmtUserNotification->bind_param("ississsss", $user['id'], 'Account deleting request processed successfully, You will be notified when it\'s done.', 'Account deleting request processed successfully, You will be notified when it\'s done.', 'تمت استلام طلب حذف  الحساب بنجاح ، وسيتم إعلامك عند الانتهاء', 'تمت استلام طلب حذف  الحساب بنجاح ، وسيتم إعلامك عند الانتهاء', 'Запрос на удаление учетной записи успешно обработан, вы получите уведомление, когда это будет сделано.', 'Запрос на удаление учетной записи успешно обработан, вы получите уведомление, когда это будет сделано.', '/cpanel/live-account');
         $stmtUserNotification->execute();
 
         // Send email notification to admin

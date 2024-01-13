@@ -11,14 +11,14 @@
    <body>
       <?php include("includes/header.php"); ?>
 
-      <section class="partner-banner downloadfile-banner " style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(20, 'Banner Background', 'Banner'); ?>');">
+      <section class="partner-banner banner downloadfile-banner " style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(20, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
            <div class="partnerBannner-cont w-100  banner-pt1 banner-pb1 pdX8 text-center">
                <div class="banner-cont mn-hd mn-btn">
                   <h2 class="tx-white pb-4"><?php echo getPageMetaByIDKeyGroup(20,'Banner Heading 1','Banner');?></h2>
                   <p class="p-fs4 tx-white pdX5"><?php echo getPageMetaByIDKeyGroup(20,'Description','Banner');?></p>
                   <div class="banner-btn">
-                     <a class="gd-btn signUp" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(20,'Banner Button URL','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(20,'Banner Button Text','Banner');?> 
+                     <a class="gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(20,'Banner Button URL','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(20,'Banner Button Text','Banner');?> 
                         <span>
                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="16" viewBox="0 0 21 16" fill="none">
                               <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,7 +26,7 @@
                            </svg>
                         </span>
                      </a>
-                     <a class="ol-btn loginUp" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>">Open Live Account</a>
+                     <a class="ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>">Open Live Account</a>
                   </div>
                </div>
             </div>

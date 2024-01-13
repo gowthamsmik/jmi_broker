@@ -33,18 +33,23 @@ session_start();
         $names=array();
         $account_history=array();
 
+       
 
         foreach($accounts as $account){
 
             $ret='error';
             $ret2='error';
             //---- open socket
-            $ptr=@fsockopen('85.234.143.239','443',$errno,$errstr,5);
+            $ptr=fsockopen('85.234.143.239','443',$errno,$errstr,5);
             //---- check connection
+
+            $accountId=$account['account_id'];
+            $accountPassword=$account['password']
+
             if($ptr)
             {
                 //---- send request
-                if(fputs($ptr,"WUSERINFO-login=$account->account_id|password=$account->password\nQUIT\n"))
+                if(fputs($ptr,"WUSERINFO-login=$accountId|password=$accountPassword\nQUIT\n"))
                 {
                     //---- clear default answer
                     $ret='';
@@ -65,12 +70,12 @@ session_start();
             $startTime = mktime(0, 0, 0, 1, 1, date('Y')-4);    //last 3 years
             $endTime = time();  // current time
 
-            $ptr2=@fsockopen('85.234.143.239','443',$errno,$errstr,5);
+            $ptr2=fsockopen('85.234.143.239','443',$errno,$errstr,5);
             //---- check connection
             if($ptr2)
             {
                 //---- send request
-                if(fputs($ptr2,"WUSERHISTORY-login=$account->account_id|password=$account->password|from=$startTime|to=$endTime\nQUIT\n"))
+                if(fputs($ptr2,"WUSERHISTORY-login=$accountId|password=$accountPassword|from=$startTime|to=$endTime\nQUIT\n"))
                 {
                     //---- clear default answer
                     $ret3='';

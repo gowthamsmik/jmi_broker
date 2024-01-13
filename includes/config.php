@@ -1,17 +1,19 @@
 <?php 
 
 global $webeurl;
-$webeurl = 'https://jmibroker.net/';
+$webeurl = 'https://jmibrokers.com/';
 $servername = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'jmi';
+$dbname = 'jmibroker';
 global $conn;
 $conn = new mysqli( $servername, $username, $password, $dbname );
 // Check connection
 if ( $conn->connect_error ) {
 	die( "Connection failed: " . $conn->connect_error );
 }
+
+
 function getPageDetail($pid){
     global $conn;
     $sql = "SELECT * FROM pages WHERE page_id = '$pid'";
@@ -28,7 +30,10 @@ function getPageMetaByIDKeyGroup($id,$key,$grouup){
     $res = $conn->query($sql);
     if($res->num_rows > 0){
         while($row = $res->fetch_assoc()){
-            return $row['field_value'];
+            return  isset($_SESSION['user_language']) ? 
+            ($_SESSION['user_language'] == "ar" ? $row['ar_field_value'] : 
+            ($_SESSION['user_language'] == "ru" ? $row['ru_field_value'] : $row['field_value'])) : 
+            $row['field_value'];
         }
     } 
 }
@@ -38,13 +43,21 @@ function getSectionMetaByIDKeyGroup($id,$key,$grouup){
     $res = $conn->query($sql);
     if($res->num_rows > 0){
         while($row = $res->fetch_assoc()){
-            return $row['field_value'];
+             return  isset($_SESSION['user_language']) ? 
+            ($_SESSION['user_language'] == "ar" ? $row['ar_field_value'] : 
+            ($_SESSION['user_language'] == "ru" ? $row['ru_field_value'] : $row['field_value'])) : 
+            $row['field_value'];
         }
     } 
 }
 function get_packages(){
+    $tableName=isset($_SESSION['user_language']) ? 
+    ($_SESSION['user_language'] == "ar" ? 'ar_package' : 
+    ($_SESSION['user_language'] == "ru" ? 'ru_package' :'package')) : 
+  'package';
+
     global $conn;
-    $sql = "SELECT * FROM package";
+    $sql = "SELECT * FROM $tableName";
     $res = $conn->query($sql);
     return $res;
 }
@@ -74,7 +87,8 @@ function getAllNewsFront(){
 
 function getAllFundamentalAnalysisFront(){
     global $conn;
-    $sql = "SELECT * FROM fundamental_analysis";
+    //$sql = "SELECT * FROM fundamental_analysis";
+    $sql= "SELECT * FROM fundamental_analysis ORDER BY id DESC LIMIT 5";
     $res = $conn->query($sql);
     return $res;
 }

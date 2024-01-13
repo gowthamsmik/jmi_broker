@@ -15,12 +15,12 @@
 <body>
     <?php include("includes/header.php"); ?>
 
-    <section class="calendar-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(17, 'Banner Background', 'Banner'); ?>');">
+    <section class="calendar-banner banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(17, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd mn-btn">
                 <h2 class="pdB1"><?php echo getPageMetaByIDKeyGroup(17,'Banner Heading 1','Banner');?></h2>
                 <p class="p-fs4 tx-white pdB1 text-center"><?php echo getPageMetaByIDKeyGroup(17,'Description','Banner');?></p>
-                <a class="gd-btn marR1 signUp" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(17,'Banner Button URL','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(17,'Banner Button Text','Banner');?>
+                <a class="gd-btn marR1 <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(17,'Banner Button URL','Banner'); ?>" ><?php echo getPageMetaByIDKeyGroup(17,'Banner Button Text','Banner');?>
                     <span>
                         <svg width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2 9L19 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -28,7 +28,7 @@
                         </svg>
                     </span>
                 </a>
-                <a class="ol-btn loginUp" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>" >Open Live Account</a>
+                <a class="ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>" href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>" >Open Live Account</a>
             </div>
         </div>
     </section>
@@ -39,7 +39,7 @@
                 <div class="mn-hd">
                     <div class="header-cont">
                         <div class="cont1">
-                            <h5 class="tx-blue">Economic Calendar</h5>
+                            <h5 class="tx-blue"><?php echo getPageMetaByIDKeyGroup(17,'Banner Heading 1','Banner');?></h5>
                         </div>
                         <!--<div class="cont2">-->
                         <!--    <div class="d-flex align-items-center">-->
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="table100 tablefirstremove">
-                <iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://www.tradays.com/en/economic-calendar/widget?mode=2&amp;utm_source=www.jmibroker.net" style="width: 100%; min-height: 500px;"></iframe>
+                <iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://www.tradays.com/en/economic-calendar/widget?mode=2&amp;utm_source=www.jmibrokers.com" style="width: 100%; min-height: 500px;"></iframe>
                 <!--<table>-->
                 <!--    <thead>-->
                 <!--        <tr>-->

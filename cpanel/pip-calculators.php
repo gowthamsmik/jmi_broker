@@ -34,14 +34,14 @@ $pipDataCount=count($pipData);
 
 <body>
 <?php include("../includes/header.php"); ?>
-    <div class='layout'>
+    <div class='layout cpanal_banar'>
         <?php include("sidebar.php"); ?>
         <div class="content">
             <div class="route-content" id="link1">
     <div class="d-flex">
-        <h2 class="fs-4">JMI Brokers | Pip Calculator </h2>
-        <div class="d-flex ms-auto"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
-            <p class="mt-1 ms-2">Welcome,
+        <h2 class="fs-4"><?php echo $lang['pip_calculator'] ?> </h2>
+        <div class="d-flex <?php echo ($userPreferredLanguage === 'ar') ? 'me-auto' : 'ms-auto'; ?>"><img src="../assets/images/svg/account_circle.svg" class="account_circle" alt="">
+            <p class="mt-1 ms-2"><?php echo $lang['welcome'] ?> ,
                 <?php echo $_SESSION['sessionusername']; ?>
             </p>
         </div>
@@ -50,11 +50,11 @@ $pipDataCount=count($pipData);
     <table class="table mt-3">
         <thead>
             <tr>
-                <th>Currency</th>
-                <th>Price</th>
-                <th>Standard_Lot<br>(Units 100,000)</th>
-                <th>Mini_Lot<br>(Units 10,000)</th>
-                <th>Micro_Lot<br>(Units 1,000)</th>
+                <th><?php echo $lang['th_Currency']; ?></th>
+                <th><?php echo $lang['th_Price']; ?></th>
+                <th><?php echo $lang['th_Standard_Lot']; ?></th>
+                <th><?php echo $lang['th_Mini_Lot']; ?></th>
+                <th><?php echo $lang['th_Micro_Lot']; ?></th>
             </tr>
         </thead>
         <tbody>

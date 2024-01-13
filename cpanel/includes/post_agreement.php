@@ -454,7 +454,7 @@ indirect or otherwise), liabilities costs and expenses (including attorney fees 
 <li>Address:  <span >1276, Govant Building, Kumul Highway, Port Vila, Republic of Vanuatu:</span></li>
 <li>Phone no: <span>+678 24404</span></li>
 <li>Fax  no:  <span>+678 23693</span></li>
-<li>Website:  <span><a href="https://www.jmibroker.net">www.jmibroker.net</a></span></li>
+<li>Website:  <span><a href="https://www.jmibrokers.com">www.jmibrokers.com</a></span></li>
 </ul>
 <br />
 <h5 class="bold">Best Regard</h5>

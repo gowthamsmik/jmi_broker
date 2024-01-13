@@ -21,9 +21,9 @@
 <script src="assets/js/app.js"></script>
 <script src="assets/js/jquery.js"></script>
 <script>
-    var homepag=false;
+    var homepag = false;
     $(document).on('submit', '.settings-form', function (e) {
-        if(homepag){
+        if (homepag) {
             return;
         }
         e.preventDefault();
@@ -36,14 +36,54 @@
             success: function (res) {
                 console.log(res);
                 alert('Page Updated');
-                location.reload();
+                window.location.href='all-lang-pages.php';
             }
         })
-        homepag=true;
+        homepag = true;
     })
-    var secform=false;
+    var homerupag = false;
+    $(document).on('submit', '.settings-ru-form', function (e) {
+        if (homerupag) {
+            return;
+        }
+        e.preventDefault();
+        console.log($(this).serialize())
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=page-ru-save',
+            success: function (res) {
+                console.log(res);
+                alert('Page Updated');
+                window.location.href='all-lang-pages.php';
+            }
+        })
+        homerupag = true;
+    })
+    var homearpag = false;
+    $(document).on('submit', '.settings-ar-form', function (e) {
+        if (homearpag) {
+            return;
+        }
+        e.preventDefault();
+        console.log($(this).serialize())
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=page-ar-save',
+            success: function (res) {
+                console.log(res);
+                alert('Page Updated');
+                window.location.href='all-lang-pages.php';
+            }
+        })
+        homearpag = true;
+    })
+    var secform = false;
     $(document).on('submit', '.section-form', function (e) {
-        if(secform){
+        if (secform) {
             return;
         }
         e.preventDefault();
@@ -56,14 +96,54 @@
             success: function (res) {
                 console.log(res);
                 alert('Section Updated');
-                location.reload();
+                window.location.href='all-lang-sections.php';
             }
         })
-        secform=true;
+        secform = true;
     })
-    var addfaq=false;
+    var secruform = false;
+    $(document).on('submit', '.section-ru-form', function (e) {
+        if (secruform) {
+            return;
+        }
+        e.preventDefault();
+        console.log($(this).serialize())
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=section-ru-save',
+            success: function (res) {
+                console.log(res);
+                alert('Section Updated');
+                window.location.href='all-lang-sections.php';
+            }
+        })
+        secruform = true;
+    })
+    var secarform = false;
+    $(document).on('submit', '.section-ar-form', function (e) {
+        if (secarform) {
+            return;
+        }
+        e.preventDefault();
+        console.log($(this).serialize())
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=section-ar-save',
+            success: function (res) {
+                console.log(res);
+                alert('Section Updated');
+                window.location.href='all-lang-sections.php';
+            }
+        })
+        secarform = true;
+    })
+    var addfaq = false;
     $(document).on('submit', '.add-faq', function (e) {
-        if(addfaq){
+        if (addfaq) {
             return;
         }
         e.preventDefault();
@@ -75,10 +155,48 @@
             success: function (res) {
                 console.log(res);
                 alert('FAQ Added');
-                window.location.href = "all-faqs.php"
+                window.location.href = "all-lang-faqs.php"
             }
         })
-        addfaq=true;
+        addfaq = true;
+    })
+    var addfaq = false;
+    $(document).on('submit', '.add-ru-faq', function (e) {
+        if (addfaq) {
+            return;
+        }
+        e.preventDefault();
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=add-ru-faq',
+            success: function (res) {
+                console.log(res);
+                alert('FAQ Added');
+                window.location.href = "all-lang-faqs.php"
+            }
+        })
+        addfaq = true;
+    })
+    var addfaq = false;
+    $(document).on('submit', '.add-ar-faq', function (e) {
+        if (addfaq) {
+            return;
+        }
+        e.preventDefault();
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=add-ar-faq',
+            success: function (res) {
+                console.log(res);
+                alert('FAQ Added');
+                window.location.href = "all-lang-faqs.php"
+            }
+        })
+        addfaq = true;
     })
     function validateField(fieldId) {
         var field = $('#' + fieldId);
@@ -156,9 +274,9 @@
         }
         addfunds = true;
     })
-    var upfaq=false;
+    var upfaq = false;
     $(document).on('submit', '.update-faq', function (e) {
-        if(upfaq){
+        if (upfaq) {
             return;
         }
         e.preventDefault();
@@ -170,14 +288,14 @@
             success: function (res) {
                 console.log(res);
                 alert('FAQ Updated');
-                window.location.href = "all-faqs.php"
+                window.location.href = "all-lang-faqs.php"
             }
         })
-        upfaq=true;
+        upfaq = true;
     })
-    var updateweb = false;
-    $(document).on('submit', '.update-website-account', function (e) {
-        if (updateweb) {
+    var uprufaq = false;
+    $(document).on('submit', '.update-ru-faq', function (e) {
+        if (uprufaq) {
             return;
         }
         e.preventDefault();
@@ -185,11 +303,61 @@
         $.ajax({
             url: 'includes/softwareinclude/ajax.php',
             type: 'post',
+            data: forms + '&type=update-ru-faq',
+            success: function (res) {
+                console.log(res);
+                alert('FAQ Updated');
+                window.location.href = "all-lang-faqs.php"
+            }
+        })
+        uprufaq = true;
+    })
+    var uparfaq = false;
+    $(document).on('submit', '.update-ar-faq', function (e) {
+        if (uparfaq) {
+            return;
+        }
+        e.preventDefault();
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=update-ar-faq',
+            success: function (res) {
+                console.log(res);
+                alert('FAQ Updated');
+                window.location.href = "all-lang-faqs.php"
+            }
+        })
+        uparfaq = true;
+    })
+    var updateweb = false;
+    $(document).on('submit', '.update-website-account', function (e) {
+        if (updateweb) {
+            return;
+        }
+        e.preventDefault();
+        var id = $('#notification_id');
+        var user_id = $('#user_id').val();
+        var account_id = $('#account_id').val();
+        var account_type = $('#account_type').val();
+        var account_group = $('#account_group').val();
+        var leverage = $('#leverage').val();
+
+        // if (!user_id || !account_id || !account_type || !account_group || !leverage) {
+        //     // Display an alert for validation errors
+        //     alert('Please fill in all required fields.');
+        //     return;
+        // }
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
             data: forms + '&type=update-website-account',
             success: function (res) {
                 console.log(res);
-                alert('Website Account Updated');
-                history.back();
+                alert(' Account Updated');
+                window.location.reload();
             }
         })
         updateweb = true;
@@ -213,12 +381,45 @@
         })
         updatedemo = true;
     })
-    var addnewses=false;
+    var addnewses = false;
     $(document).on('submit', '.add-news', function (e) {
-        if(addnewses){
+        if (addnewses) {
             return;
         }
         e.preventDefault();
+        var heading = $("input[name='heading']").val();
+        var description = $("textarea[name='description']").val();
+        var arTitle = $("input[name='ar_title']").val();
+        var arDetails = $("textarea[name='ar_details']").val();
+        var ruTitle = $("input[name='ru_title']").val();
+        var ruDetails = $("textarea[name='ru_details']").val();
+        var postedBy = $("input[name='posted_by']").val();
+
+        if (heading.trim() === '') {
+            alert('Please enter a heading/title.');
+            return;
+        }
+
+        if (description.trim() === '') {
+            alert('Please enter a description.');
+            return;
+        }
+        if (arTitle.trim() === '') {
+            alert('Please enter a arabic title');
+            return;
+        }
+        if (arDetails.trim() === '') {
+            alert('Please enter a arabic details');
+            return;
+        }
+        if (ruTitle.trim() === '') {
+            alert('Please enter a russian title');
+            return;
+        }
+        if (ruDetails.trim() === '') {
+            alert('Please enter a russian details');
+            return;
+        }
         var forms = $(this).serialize();
         $.ajax({
             url: 'includes/softwareinclude/ajax.php',
@@ -230,14 +431,46 @@
                 window.location.href = "all-news.php"
             }
         })
-        addnewses=true;
+        addnewses = true;
     })
-    var upnew=false;
+    var upnew = false;
     $(document).on('submit', '.update-news', function (e) {
-        if(upnew){
+        if (upnew) {
             return;
         }
         e.preventDefault();
+        var heading = $("input[name='heading']").val();
+        var description = $("textarea[name='description']").val();
+        var arTitle = $("input[name='ar_title']").val();
+        var arDetails = $("textarea[name='ar_details']").val();
+        var ruHeading = $("input[name='ru_heading']").val();
+        var ruDescription = $("textarea[name='ru_description']").val();
+        var postedBy = $("input[name='posted_by']").val();
+
+        if (heading.trim() === '') {
+            alert('Please enter a heading/title.');
+            return;
+        }
+        if (description.trim() === '') {
+            alert('Please enter a description');
+            return;
+        }
+        if (arTitle.trim() === '') {
+            alert('Please enter a arabic title');
+            return;
+        }
+        if (arDetails.trim() === '') {
+            alert('Please enter a arabic details');
+            return;
+        }
+        if (ruHeading.trim() === '') {
+            alert('Please enter a russian title');
+            return;
+        }
+        if (ruDescription.trim() === '') {
+            alert('Please enter a russian details');
+            return;
+        }
         var forms = $(this).serialize();
         $.ajax({
             url: 'includes/softwareinclude/ajax.php',
@@ -249,7 +482,26 @@
                 window.location.href = "all-news.php"
             }
         })
-        upnew=true;
+        upnew = true;
+    })
+    var addfundanal = false;
+    $(document).on('submit', '.add-fanalysis', function (e) {
+        if (addfundanal) {
+            return;
+        }
+        e.preventDefault();
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=add-fanalysis',
+            success: function (res) {
+                console.log(res);
+                alert('News Added');
+                window.location.reload();
+            }
+        })
+        addfundanal = true;
     })
     var addfundanal = false;
     $(document).on('submit', '.add-fanalysis', function (e) {
@@ -547,6 +799,14 @@
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
     });
+    $('#donestatus').on('hide.bs.modal', function () {
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    });
+    $('#rejectstatus').on('hide.bs.modal', function () {
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    });
     var uptech = false;
     $(document).on('submit', '.update-technical', function (e) {
         if (uptech) {
@@ -582,28 +842,30 @@
             return;
         }
         e.preventDefault();
-        var forms = $(this).serialize();
-        console.log("forms", forms);
-        console.log("hey")
+        var forms = new FormData(this);
+        forms.append('type', 'update-fundamental-analysis');
+
         $.ajax({
             url: 'includes/softwareinclude/ajax.php',
             type: 'post',
-            data: forms + '&type=update-fundamental-analysis',
+            data: forms,
+            contentType: false,
+            processData: false,
             success: function (res) {
-                console.log(res);
-                $('#editfundamentalModal').modal('hide');
-                $('.modal-backdrop').remove();
+                console.log("hhhhhh", res);
+
                 var successMessageDiv = document.getElementById('success-message');
-                successMessageDiv.innerHTML = 'Selected Fundamental Has Been Updated';
+                successMessageDiv.innerHTML = 'Fundamental  Has Been Updated';
                 successMessageDiv.style.display = 'block';
                 $('html, body').animate({ scrollTop: 0 }, 'fast');
                 setTimeout(function () {
                     window.location.reload();
-                }, 2500);
+                }, 3000);
             }
-        })
+        });
         upfa = true;
-    })
+    });
+
     var addoff = false;
     $(document).on('submit', '.add-offers', function (e) {
         if (addoff) {
@@ -635,24 +897,24 @@
         });
         addoff = true;
     });
-    $(document).on('submit', '.add-news', function (e) {
-        e.preventDefault();
-        var forms = new FormData(this);
-        forms.append('type', 'add-news');
+    // $(document).on('submit', '.add-news', function (e) {
+    //     e.preventDefault();
+    //     var forms = new FormData(this);
+    //     forms.append('type', 'add-news');
 
-        $.ajax({
-            url: 'includes/softwareinclude/ajax.php',
-            type: 'post',
-            data: forms,
-            contentType: false,
-            processData: false,
-            success: function (res) {
-                console.log(res);
-                alert('News analysis added Successfully');
-                window.location.href = "ofnewsfers.php"
-            }
-        });
-    });
+    //     $.ajax({
+    //         url: 'includes/softwareinclude/ajax.php',
+    //         type: 'post',
+    //         data: forms,
+    //         contentType: false,
+    //         processData: false,
+    //         success: function (res) {
+    //             console.log(res);
+    //             alert('News analysis added Successfully');
+    //             window.location.href = "ofnewsfers.php"
+    //         }
+    //     });
+    // });
     var editoff = false;
     $(document).on('click', '.editoffersButton', function () {
         if (editoff) {
@@ -914,22 +1176,33 @@
         formSubmitted = true;
     });
     var formSub = false;
+
     $(document).on('submit', '.change-user-password', function (e) {
         e.preventDefault();
         if (formSub) {
             return;
         }
+        formSub = true;
+
         var email = $('#email').val();
         var newPassword = $('#newpass').val();
         var confirmNewPassword = $('#confirmnewpass').val();
-        console.log("sevgvd", email, newPassword, confirmNewPassword);
+
         if (email === '' || newPassword === '' || confirmNewPassword === '') {
             alert('All fields are required.');
+
             return;
         }
 
         if (newPassword !== confirmNewPassword) {
             alert('New passwords do not match.');
+
+            return;
+        }
+
+        if (newPassword.length < 8) {
+            alert('Password must have at least 8 characters');
+
             return;
         }
 
@@ -937,12 +1210,13 @@
         $.ajax({
             url: 'includes/softwareinclude/ajax.php',
             type: 'post',
-            data: forms + '&type=change-user-password',
+            data: forms + '&type=changuspassw',
             dataType: 'json',
             success: function (response) {
                 if (response.status === 'success') {
                     alert("Password updated successfully");
-                    $('#changeuserpasswordPopup').on('hide.bs.modal', function () {
+                    window.location.reload();
+                    $('#changepasswordPopup').on('hide.bs.modal', function () {
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();
                     });
@@ -955,9 +1229,6 @@
                 console.log("AJAX Error:", error);
             }
         });
-
-        // Prevent the default form submission and stop propagation
-        formSub = true;
     });
     var enslide = false;
     $(document).on('submit', '.en-slideshow', function (e) {
@@ -1166,6 +1437,35 @@
             return;
         }
         e.preventDefault();
+        var name = $('input[name="name"]').val().trim();
+        if (name === '') {
+            alert('Please enter a name.');
+            return;
+        }
+
+        var price = $('input[name="price"]').val().trim();
+        if (price === '' || isNaN(price)) {
+            alert('Please enter a valid price.');
+            return;
+        }
+
+        var discount_line = $('input[name="discount_line"]').val().trim();
+        if (discount_line === '') {
+            alert('Please enter a discount line.');
+            return;
+        }
+
+        var tag_line = $('input[name="tag_line"]').val().trim();
+        if (tag_line === '') {
+            alert('Please enter a tag line.');
+            return;
+        }
+
+        var description = $('textarea[name="description"]').val().trim();
+        if (description === '') {
+            alert('Please enter a description.');
+            return;
+        }
         var forms = $(this).serialize();
         $.ajax({
             url: 'includes/softwareinclude/ajax.php',
@@ -1174,10 +1474,106 @@
             success: function (res) {
                 console.log(res);
                 alert('Packages Added');
-                window.location.href = "all-packages.php"
+                window.location.href = "all-lang-packages.php"
             }
         })
         pack = true;
+    })
+    var rupack = false;
+    $(document).on('submit', '.add-ru-package', function (e) {
+        if (rupack) {
+            return;
+        }
+        e.preventDefault();
+        var name = $('input[name="name"]').val().trim();
+        if (name === '') {
+            alert('Please enter a name.');
+            return;
+        }
+
+        var price = $('input[name="price"]').val().trim();
+        if (price === '' || isNaN(price)) {
+            alert('Please enter a valid price.');
+            return;
+        }
+
+        var discount_line = $('input[name="discount_line"]').val().trim();
+        if (discount_line === '') {
+            alert('Please enter a discount line.');
+            return;
+        }
+
+        var tag_line = $('input[name="tag_line"]').val().trim();
+        if (tag_line === '') {
+            alert('Please enter a tag line.');
+            return;
+        }
+
+        var description = $('textarea[name="description"]').val().trim();
+        if (description === '') {
+            alert('Please enter a description.');
+            return;
+        }
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=add-ru-package',
+            success: function (res) {
+                console.log(res);
+                alert('Packages Added');
+                window.location.href = "all-lang-packages.php"
+            }
+        })
+        rupack = true;
+    })
+    var arpack = false;
+    $(document).on('submit', '.add-ar-package', function (e) {
+        if (arpack) {
+            return;
+        }
+        e.preventDefault();
+        var name = $('input[name="name"]').val().trim();
+        if (name === '') {
+            alert('Please enter a name.');
+            return;
+        }
+
+        var price = $('input[name="price"]').val().trim();
+        if (price === '' || isNaN(price)) {
+            alert('Please enter a valid price.');
+            return;
+        }
+
+        var discount_line = $('input[name="discount_line"]').val().trim();
+        if (discount_line === '') {
+            alert('Please enter a discount line.');
+            return;
+        }
+
+        var tag_line = $('input[name="tag_line"]').val().trim();
+        if (tag_line === '') {
+            alert('Please enter a tag line.');
+            return;
+        }
+
+        var description = $('textarea[name="description"]').val().trim();
+        if (description === '') {
+            alert('Please enter a description.');
+            return;
+        }
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=add-ar-package',
+            success: function (res) {
+                console.log(res);
+                alert('Packages ar Added');
+                window.location.href = "all-lang-packages.php"
+            }
+        })
+        arpack = true;
     })
     var updatepackage = false;
     $(document).on('submit', '.update-package', function (e) {
@@ -1193,10 +1589,48 @@
             success: function (res) {
                 console.log(res);
                 alert('Package Updated');
-                window.location.href = "all-packages.php"
+                window.location.href = "all-lang-packages.php"
             }
         })
         updatepackage = true;
+    })
+    var updaterupackage = false;
+    $(document).on('submit', '.update-ru-package', function (e) {
+        if (updaterupackage) {
+            return;
+        }
+        e.preventDefault();
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=update-ru-package',
+            success: function (res) {
+                console.log(res);
+                alert('Package Updated');
+                window.location.href = "all-lang-packages.php"
+            }
+        })
+        updaterupackage = true;
+    })
+    var updatearpackage = false;
+    $(document).on('submit', '.update-ar-package', function (e) {
+        if (updatearpackage) {
+            return;
+        }
+        e.preventDefault();
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=update-ar-package',
+            success: function (res) {
+                console.log(res);
+                alert('Package Updated');
+                window.location.href = "all-lang-packages.php"
+            }
+        })
+        updatearpackage = true;
     })
     // $(document).on('click', '.action', function () {
     //     console.log("hello");
@@ -1222,6 +1656,114 @@
 
     //         });
     //     });
+    var openlive = false;
+    $(document).on('click', '.openlive', function () {
+        if (openlive) {
+            return;
+        }
+        var liveId = $(this).data('id');
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: { type: 'openlive', id: liveId },
+            dataType: 'json',  // Specify the expected data type
+            success: function (res) {
+                console.log("fun1", res);
+                if (res.error) {
+                    console.error('Error from server:', res.error);
+                } else {
+                    $('#id').text(res.id);
+                    $('#account_id').text(res.account_id);
+                    $('#account_type').text(res.account_type);
+                    $('#account_group').text(res.account_group);
+                    $('#currency').text(res.currency);
+                    $('#leverage').text(res.leverage);
+                    $('#investor_password').text(res.investor_password);
+                    // $('#adminid').val(res.id);
+                    // $('#adminname').val(res.name);
+                    // $('#adminemail').val(res.email);
+                    // $('#adminroll').val(res.user_role);
+                    $('#editreferralliveModal').modal('show');
+                }
+            },
+            error: function (err) {
+                console.error('AJAX error:', err);
+            }
+        });
+        openlive = true;
+    });
+    var openlive = false;
+    $(document).on('submit', '.open-live', function (e) {
+        if (openlive) {
+            return;
+        }
+        e.preventDefault();
+        var forms = $(this).serialize();
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: forms + '&type=add-live-account',
+            success: function (res) {
+                console.log(res);
+                alert('Live account added done');
+                window.location.reload();
+            }
+        })
+        openlive = true;
+    })
+    var editlive = false;
+    $(document).on('click', '.editlive', function (e) {
+        e.preventDefault();
+        var notificationValue = $(this).data('login');
+        var parts = notificationValue.split(/\s+/);
+        var accountPart = parts.find(part => part.includes('Account_id='));
+        var accountId = null;
+        if (accountPart) {
+            accountId = accountPart.split('=')[1];
+        }
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: 'accountId=' + accountId + '&type=modal-edit-account',
+            success: function (res) {
+                console.log("fun1", res);
+                var jsonData = JSON.parse(res);
+                console.log("jsonData", jsonData);
+                $('#user_id').val(jsonData.id);
+                $('#account_id').val(jsonData.account_id);
+                $('#account_type').val(jsonData.account_type);
+                $('#account_group').val(jsonData.account_group);
+                $('#currency').val(jsonData.currency);
+                $('#leverage').val(jsonData.leverage);
+                $('#edit_live_account').modal('show');
+            }
+
+        })
+        return editlive = true;
+    })
+    var notificationupdate = false;
+    $(document).on('click', '.notificationupdate', function (e) {
+        if (notificationupdate) {
+            return;
+        }
+        e.preventDefault();
+        var notificationId = $(this).data('notification-id');
+        var location=$(this).data('location');
+        console.log("Notification ID:", notificationId);
+
+        $.ajax({
+            url: 'includes/softwareinclude/ajax.php',
+            type: 'post',
+            data: 'notificationId=' + notificationId + '&type=notificationId',
+            success: function (res) {
+                // alert(0);
+                window.location.href = location + '.php';
+
+            }
+
+        })
+        return notificationupdate = true;
+    })
 </script>
 
 

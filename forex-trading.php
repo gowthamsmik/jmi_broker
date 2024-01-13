@@ -18,12 +18,12 @@
 <body>
     <?php include("includes/header.php"); ?>
 
-    <section class="forex-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(32, 'Banner Background', 'Banner'); ?>');">
+    <section class="forex-banner banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(32, 'Banner Background', 'Banner'); ?>');">
         <div class='container'>
             <div class='banner-cont text-center mn-hd mn-btn'>
                 <h2 class='pdB1'><?php echo getPageMetaByIDKeyGroup(32,'Banner Heading 1','Banner');?></h2>
                 <p class='p-fs4 tx-white pdB1'><?php echo getPageMetaByIDKeyGroup(32,'Banner Description','Banner');?></p>
-                <a class='gd-btn marR1 signUp' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(32, 'Banner Button URL', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(32,'Banner Button Text','Banner');?>
+                <a class='gd-btn marR1 <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(32, 'Banner Button URL', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(32,'Banner Button Text','Banner');?>
                     <span>
                         <svg width='21' height='16' viewBox='0 0 21 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
                             <path d='M2 9L19 9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
@@ -31,7 +31,7 @@
                         </svg>
                     </span>
                 </a>
-                <a class='ol-btn loginUp' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>">Open Live Account</a>
+                <a class='ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : '#'; ?>">Open Live Account</a>
             </div>
         </div>
     </section>
@@ -76,7 +76,7 @@
             <div class="aboutSec2-main">
                 <div class="row">
                     <div class="col-md-6">
-                        <img class="main-image" src="assets/images/forex/1.jpg" alt="">
+                        <img class="main-image" src="cms/<?php echo getPageMetaByIDKeyGroup(32,'Image','How It Works');?>" alt="">
                     </div>
 
                     <div class="col-md-6">
@@ -155,7 +155,7 @@
                        <div class='header-top'>
                             <h5 class='tx-blue'><?php echo getPageMetaByIDKeyGroup(32,'Heading','Major Currencies');?></h5>
                             <div class="forex-tag">
-                                <span data-targetit="box-table1" class="p-fs5 tx-grey-new4 padR2 current">FX 4D major</span>
+                                <span data-targetit="box-table1" class="p-fs5 tx-grey-new4 padR2 current <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>">FX 4D major</span>
                                 <span data-targetit="box-table2" class="p-fs5 tx-grey-new4">FX 5D major</span>
                             </div>
                         </div>
@@ -167,10 +167,10 @@
 
                 <div class="forex-table-main">
                     <div class="box-table1 showfirst">
-                        <iframe src="https://www.jmibrokers.com/en/FX4Dmajor1" style="width: 100%; height: 500px;"></iframe>
+                        <iframe src="https://www.jmibrokers.com/FX4Dmajor1.php" style="width: 100%; height: 500px;"></iframe>
                     </div>
                     <div class="box-table2">
-                        <iframe src="https://www.jmibrokers.com/en/FX4Dmajor2" style="width: 100%; height: 500px;"></iframe>
+                        <iframe src="https://www.jmibrokers.com/FX4Dmajor2.php" style="width: 100%; height: 500px;"></iframe>
                     </div>
                     <!--<table>-->
                     <!--    <thead>-->
@@ -342,7 +342,7 @@
                             <h5 class='tx-blue'><?php echo getPageMetaByIDKeyGroup(32,'Heading','Major Currencies 1');?></h5>
 
                             <div class="forex-tag">
-                                <span data-targetit="box-table3" class="p-fs5 tx-grey-new4 padR2 current">FX 4D major cross</span>
+                                <span data-targetit="box-table3" class="p-fs5 tx-grey-new4 padR2 current <?php echo ($userPreferredLanguage === 'ar') ? 'ps-5 pe-0' : ''; ?>">FX 4D major cross</span>
                                 <span data-targetit="box-table4" class="p-fs5 tx-grey-new4">FX 5D major cross</span>
                             </div>
                         </div>
@@ -354,10 +354,10 @@
 
                 <div class="forex-table-main">
                     <div class="box-table3 showfirst">
-                        <iframe src="https://www.jmibrokers.com/en/FX4DmajorCross" style="width: 100%; height: 500px;"></iframe>
+                        <iframe src="https://www.jmibrokers.com/FX4DmajorCross.php" style="width: 100%; height: 500px;"></iframe>
                     </div>
                     <div class="box-table4">
-                        <iframe src="https://www.jmibrokers.com/en/FX5DmajorCross" style="width: 100%; height: 500px;"></iframe>
+                        <iframe src="https://www.jmibrokers.com/FX5DmajorCross.php" style="width: 100%; height: 500px;"></iframe>
                     </div>
                     <!--<table>-->
                     <!--    <thead>-->
@@ -535,7 +535,7 @@
                 </div>
 
                 <div class="forex-table-main">
-                    <iframe src="https://www.jmibrokers.com/en/FXCrossRates" style="width: 100%; height: 500px;"></iframe>
+                    <iframe src="https://www.jmibrokers.com/FXCrossRates.php" style="width: 100%; height: 500px;"></iframe>
                     <!--<table>-->
                     <!--    <thead>-->
                     <!--        <tr>-->
@@ -697,7 +697,7 @@
         </div>
     </section>
 
-    <section class='forex-section4 pb200'>
+    <section class='forex-section4'>
         <div class='container'>
             <div class='forexSec4-cont'>
                 <ul>
@@ -728,7 +728,7 @@
                     </li>
                 </ul>
                 <div class='mn-btn'>
-                    <a class='gd-btn marR1 signUp' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(32, 'Banner Button URL 1', 'Bottom Buttons'); ?>"><?php echo getPageMetaByIDKeyGroup(32,'Button Text 1','Bottom Buttons');?>
+                    <a class='gd-btn marR1 <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(32, 'Banner Button URL 1', 'Bottom Buttons'); ?>"><?php echo getPageMetaByIDKeyGroup(32,'Button Text 1','Bottom Buttons');?>
                     <span>
                         <svg xmlns='http://www.w3.org/2000/svg' width='21' height='16' viewBox='0 0 21 16' fill='none'>
                             <path d='M2 9L19 9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
@@ -736,7 +736,7 @@
                         </svg>
                     </span>
                     </a>
-                    <a class='ol-btn loginUp' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(32, 'Banner Button URL 2', 'Bottom Buttons'); ?>"><?php echo getPageMetaByIDKeyGroup(32,'Button Text 2','Bottom Buttons');?></a>
+                    <a class='ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(32, 'Banner Button URL 2', 'Bottom Buttons'); ?>"><?php echo getPageMetaByIDKeyGroup(32,'Button Text 2','Bottom Buttons');?></a>
                 </div>
             </div>
         </div>

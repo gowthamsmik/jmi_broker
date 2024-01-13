@@ -3,7 +3,7 @@
    <head>
       <?php include('includes/compatibility.php'); ?>
       <meta name='description' content=''>
-      <title>Title Here</title>
+      <title>Partnership programs</title>
       <?php include("includes/softwareinclude/config.php"); ?>
       <?php include("includes/style.php");
    $demoAccountURL = $siteurl . "cpanel/open-demo-account.php?tab=1";
@@ -21,13 +21,13 @@
    <body>
       <?php include('includes/header.php'); ?>
 
-      <section class='partner-banner'>
+      <section class='partner-banner banner'>
         <div class='container'>
             <div class='partnerBannner-cont'>
                <div class='banner-cont mn-hd mn-btn'>
                   <h2 class='tx-white'><?php echo getPageMetaByIDKeyGroup(23,'Banner Heading 1','Banner');?></h2>
                   <div class='banner-btn'>
-                     <a class='gd-btn signUp' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(23, 'Banner Button URL', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(23,'Banner Button Text','Banner');?> 
+                     <a class='gd-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $demoAccountURL : getPageMetaByIDKeyGroup(23, 'Banner Button URL', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(23,'Banner Button Text','Banner');?> 
                         <span>
                            <svg xmlns='http://www.w3.org/2000/svg' width='21' height='16' viewBox='0 0 21 16' fill='none'>
                               <path d='M2 9L19 9' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
@@ -35,7 +35,7 @@
                            </svg>
                         </span>
                      </a>
-                     <a class='ol-btn loginUp' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(23, 'Banner Button URL 2', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(23,'Banner Button Text 2','Banner');?></a>
+                     <a class='ol-btn <?php echo isset($_SESSION['sessionuser']) ? '' : 'signUp'; ?>' href="<?php echo isset($_SESSION['sessionuser']) ? $liveAccountURL : getPageMetaByIDKeyGroup(23, 'Banner Button URL 2', 'Banner'); ?>"><?php echo getPageMetaByIDKeyGroup(23,'Banner Button Text 2','Banner');?></a>
                   </div>
                </div>
 
@@ -53,7 +53,7 @@
                   <div class='col-md-6'>
                      <div class='mn-hd partnerSec1-cont'>
                         <h3 class='tx-blue'><?php echo getPageMetaByIDKeyGroup(23,'Heading','Introducing Broker');?></h3>
-                        <p class='p-fs5 tx-grey300'><?php echo getPageMetaByIDKeyGroup(23,'Description 1','Introducing Broker');?></p>
+                        <p class='p-fs5 tx-grey300 <?php echo ($userPreferredLanguage === 'ar') ? 'pe-0' : ''; ?>'><?php echo getPageMetaByIDKeyGroup(23,'Description 1','Introducing Broker');?></p>
                      </div>
                   </div>
 
@@ -78,15 +78,15 @@
                   <div class='col-md-6'>
                      <div class='mn-hd partnerSec1-cont'>
                         <h3 class='tx-blue pdB1'><?php echo getPageMetaByIDKeyGroup(23,'Heading','Introducing Broker Services');?></h3>
-                        <p class='p-fs5 tx-grey300'><?php echo getPageMetaByIDKeyGroup(23,'Description 1','Introducing Broker Services');?></p>
-                        <p class='p-fs5 tx-grey300'><?php echo getPageMetaByIDKeyGroup(23,'Description 2','Introducing Broker Services');?></p>
+                        <p class='p-fs5 tx-grey300 <?php echo ($userPreferredLanguage === 'ar') ? 'pe-0 ps-5' : ''; ?>'><?php echo getPageMetaByIDKeyGroup(23,'Description 1','Introducing Broker Services');?></p>
+                        <p class='p-fs5 tx-grey300 <?php echo ($userPreferredLanguage === 'ar') ? 'pe-0 ps-5' : ''; ?>'><?php echo getPageMetaByIDKeyGroup(23,'Description 2','Introducing Broker Services');?></p>
                      </div>
                   </div>
 
                   <div class='col-md-6'>
                      <div class='mn-hd partnerSec1-cont'>
                         <h3 class='tx-blue pdB1'><?php echo getPageMetaByIDKeyGroup(23,'Heading','Other types of partner');?></h3>
-                        <p class='p-fs5 tx-grey300'>
+                        <p class='p-fs5 tx-grey300 <?php echo ($userPreferredLanguage === 'ar') ? 'pe-0' : ''; ?>'>
                            <span class='p-fs2 bld'><?php echo getPageMetaByIDKeyGroup(23,'Heading 1','Other types of partner');?></span> <br>
                            <?php echo getPageMetaByIDKeyGroup(23,'Description 1','Other types of partner');?>
                            <br>

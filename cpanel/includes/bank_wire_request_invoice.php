@@ -55,7 +55,7 @@ if ($stmtInvoiceResult) {
      'تم إرسال الفاتورة المطلوبة والتفاصيل المصرفية بنجاح إلى بريدك ، يرجى تزويد البنك الذي تتعامل معه بالفاتورة لتسهيل عملية الدفع.',
      'Запрошенный счет-фактура и банковские реквизиты были успешно отправлены на вашу почту. Пожалуйста, предоставьте своему банку счет-фактуру, чтобы облегчить вашу оплату.',
       'Запрошенный счет-фактура и банковские реквизиты были успешно отправлены на вашу почту. Пожалуйста, предоставьте своему банку счет-фактуру, чтобы облегчить вашу оплату.', 
-      '/cpanel/deposit', NOW())");
+      '/cpanel/transactional-history', NOW())");
 
     // Create variables and pass references to bind_param
     $website_accounts_id_notification = $user_id;
@@ -366,7 +366,7 @@ $html = '<!DOCTYPE html>
           </div>
           <div class="block">
             <h2>Phone: +678-24404</h2>
-            <h2>Email: finance@jmibroker.net</h2>
+            <h2>Email: finance@jmibrokers.com</h2>
             </div>
             <div class="block">
               <hr style="height:1px;color:#eee;background:#eee;" />

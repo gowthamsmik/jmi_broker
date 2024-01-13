@@ -4,9 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Include PHPMailer classes manually
-require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require '../vendor/phpmailer/phpmailer/src/Exception.php';
-require '../vendor/phpmailer/phpmailer/src/SMTP.php';
+
 session_start();
 include("includes/softwareinclude/functions.php");
 include("includes/softwareinclude/config.php");
@@ -17,8 +15,12 @@ $sendType = $_POST['sendto'];
 $everySecond = $_POST['sendevery'];
 $sendemailcount = $_POST['sendtoevery'];
 $mailSubject = $_POST['mailsubject'];
+
+// exit(0);
 $_SESSION['mailmsg'] = "Emails Sent Successfully";
 $selectedMails = json_decode($_POST['selectedMails'], true);
+// echo $selectedMails;
+// exit(0);
 try {
     if ($sendType == 1) {
        
@@ -30,11 +32,14 @@ try {
             $save_document_stmt->execute();
 
             $queueId = $save_document_stmt->insert_id;
-            // Insert email addresses into email_addresses table
-            foreach ($maill as $email) {
-                $insertEmailSql = "INSERT INTO emails_queue (email_address, queue_id) VALUES (?, ?)";
+            foreach ($maill as $data) {
+                $email = $data['mail'];
+                $name = $data['name'];  
+                $title = $data['title'];  
+            
+                $insertEmailSql = "INSERT INTO emails_queue (email_address, name, title, queue_id) VALUES (?, ?, ?, ?)";
                 $insertEmailStmt = $conn->prepare($insertEmailSql);
-                $insertEmailStmt->bind_param("si", $email, $queueId);
+                $insertEmailStmt->bind_param("sssi", $email, $name, $title, $queueId);
                 $insertEmailStmt->execute();
             }
     
@@ -51,10 +56,13 @@ try {
             
             $queueId = $save_document_stmt->insert_id;
             // Insert email addresses into email_addresses table
-            foreach ($selectedMails as $email) {
-                $insertEmailSql = "INSERT INTO emails_queue (email_address, queue_id) VALUES (?, ?)";
+            foreach ($selectedMails as $data) {
+                $email = $data['mail'];
+                $name = $data['name'];  
+                $title = $data['title'];  
+                $insertEmailSql = "INSERT INTO emails_queue (email_address, name, title, queue_id) VALUES (?, ?, ?, ?)";
                 $insertEmailStmt = $conn->prepare($insertEmailSql);
-                $insertEmailStmt->bind_param("si", $email, $queueId);
+                $insertEmailStmt->bind_param("sssi", $email, $name, $title, $queueId);
                 $insertEmailStmt->execute();
             }
         }

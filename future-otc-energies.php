@@ -87,7 +87,7 @@
                 </div>
 
                 <div class='forex-table-main'>
-                    <iframe src="https://www.jmibrokers.com/en/datatable1" style="width: 100%; height: 500px;"></iframe>
+                    <iframe src="https://www.jmibrokers.com/datatable1.php" style="width: 100%; height: 500px;"></iframe>
                     <!--<table>-->
                     <!--    <thead>-->
                     <!--        <tr>-->

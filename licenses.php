@@ -15,7 +15,7 @@
    <body>
       <?php include("includes/header.php"); ?>
 
-      <section class="licenses-banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(3, 'Banner Background', 'Banner'); ?>');">
+      <section class="licenses-banner banner" style="background-image: url('cms/<?php echo getPageMetaByIDKeyGroup(3, 'Banner Background', 'Banner'); ?>');">
         <div class="container">
             <div class="banner-cont text-center mn-hd">
                 <h2><?php echo getPageMetaByIDKeyGroup(3,'Banner Heading','Banner');?></h2>
@@ -40,7 +40,7 @@
                <div class="middle-cont">
                   <h5>
                      <span>
-                        <img src="assets/images/licenses/1.png" alt="">
+                        <img src="cms/<?php echo getPageMetaByIDKeyGroup(3,'Image 1','Licenses and Regulations');?>" alt="">
                      </span>
                      <?php echo getPageMetaByIDKeyGroup(3,'Description 2','Licenses and Regulations');?>
                   </h5>
@@ -64,7 +64,7 @@
 
                         <div class="bottom-cont2">
                            <div class="licenses-btn mn-btn text-center">
-                              <button type="submit" class="theam-btn signUp">
+                              <button type="submit" class="theam-btn gd-btn signUp">
                                  <?php echo getPageMetaByIDKeyGroup(3,'Button text','Licenses and Regulations Left Box');?>
                               </button>
                            </div>
@@ -93,11 +93,6 @@
                               <p class="tx-grey300 p-fs3">
                                  <?php echo getPageMetaByIDKeyGroup(3,'Description','Licenses and Regulations Right Box');?>
                               </p>
-                              <ol>
-                                 <li class="tx-grey300 p-fs3">5.000.000 VT (+/- 50.000 USD) for each claim,</li>
-                                 <li class="tx-grey300 p-fs3">with an aggregate cover of not lessthan 50.000.000 VT (+/- 500.000 USD) and,</li>
-                                 <li class="tx-grey300 p-fs3">a maximum deductible amount of 10.000.000 VT (+/- 100.000 USD)</li>
-                              </ol>
                            </div>
                         </div>
                      </div>
