@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+// include("config.php");
 include("functions.php");
 error_reporting(3);
 
@@ -965,10 +965,12 @@ $outputFilePath =$directoryPath . $newfilename . '.pdf';
 file_put_contents($outputFilePath, $dompdf->output());
 
 // Output a message or redirect to another page if needed
-sendDocumentToMail($outputFilePath, $insertedId ,  "Bank Payment Details","New Request Invoice",$user['email']);
+// sendDocumentToMail($outputFilePath, $insertedId ,  "Bank Payment Details","New Request Invoice",$user['email']);
+
+marketingEmail("Bank Payment Details","New Request Invoice", $user['email'], $outputFilePath);
 }
 
 ?>
  <script>
-    window.location.href = '<?php echo $siteurl."cpanel/deposit.php?type=" ?>' + "Bank Wire";
+    window.location.href = '<?php echo $siteurl."cpanel/deposit.php?type=" ?>' + "bank_wire";
 </script>

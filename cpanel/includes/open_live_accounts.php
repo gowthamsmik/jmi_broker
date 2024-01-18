@@ -80,8 +80,8 @@ $input=$_POST;
        $data['name']='Admin';
        $data['details']=' New Open live account request <br />Name= '.$user[0]['fullname'].' <br />Type='.$account_type_text.' - <br />gourp='.$account_group_text.' - <br />user_id='.$user[0]['id'];
        $subject='New Live Account Request';
-       sendMailsToAdmin($data['details'],$subject);
-      
+      //  sendMailsToAdmin($data['details'],$subject);
+       supportEmail($data['details'], $subject,$adminEmail,'');
 
 
       

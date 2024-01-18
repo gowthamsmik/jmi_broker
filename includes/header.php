@@ -182,9 +182,9 @@ if (file_exists($langFilePath)) {
                         <option id="options" value="ar"
                             <?php echo ($userPreferredLanguage === 'ar') ? 'selected' : ''; ?>>العربية
                         </option>
-                        <option id="options" value="ru"
+                        <!-- <option id="options" value="ru"
                             <?php echo ($userPreferredLanguage === 'ru') ? 'selected' : ''; ?>>русский язык
-                        </option>
+                        </option> -->
 
                     </select>
                 </div>

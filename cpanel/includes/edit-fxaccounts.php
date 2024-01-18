@@ -64,7 +64,8 @@ if ($SessionUserId) {
     $data['name'] = 'Admin';
     $data['details'] = 'New Edit live account request <br /> Type='.$account_type_text.'<br /> - leverage='.$input['leverage'].'<br /> - gourp='.$account_group_text.'<br /> - Account_id='.$input['account_login'].'<br /> - user_id='. $SessionUserId.'<br /> - Login='.$input['account_login'];
     $subject = 'Live Account Edit Request';
-    sendMailsToAdmin($data['details'],$subject);
+    // sendMailsToAdmin($data['details'],$subject);
+    supportEmail($data['details'], $subject,$adminEmail,'');
 
     $_SESSION['live_account_meesage'] = "Account Update Rquest sent successfully.";
     echo '<script>window.location.href = "'.$siteurl.'cpanel/live-account.php";</script>';

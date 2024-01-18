@@ -94,8 +94,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data['name']='Admin';
         $data['details']='Name : '.$name.'<br>'.'UserName : '.$userName.'<br>'.'Email : '.$email.'<br>'.$invited_by_ib_details;
         $subject='New Website Account';
-        sendMailsToAdmin($data['details'],$subject);       
-        sendMailsToUser($data['details'],'Welcome to JMI Brokers',$email);
+        // sendMailsToAdmin($data['details'],$subject); 
+        supportEmail($data['details'], $subject,$adminEmail,'');  
+
+        // sendMailsToUser($data['details'],'Welcome to JMI Brokers',$email);
+        
+        marketingEmail($data['details'], 'Welcome to JMI Brokers', $email, '');
 
 
         $checkExistingSql = "SELECT * FROM maillist WHERE mail = '$email'";

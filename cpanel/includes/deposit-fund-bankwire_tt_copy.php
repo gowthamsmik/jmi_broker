@@ -84,7 +84,8 @@ $subject = $amount . ' ' . $currency . ' New Bank Deposited By ' . $user['email'
 
 // // Restore your original mailer
 // $mailer = $backup;
-sendMailsToAdmin($data['details'] ,$subject);
+// sendMailsToAdmin($data['details'] ,$subject);
+supportEmail($data['details'], $subject,$adminEmail,'');
 
 
 // // Insert another notification into database

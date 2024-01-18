@@ -74,7 +74,8 @@ if ($user) {
         // Mail::setSwiftMailer($backup);
 
        
-        sendMailsToAdmin($data['details'],$subject);
+        // sendMailsToAdmin($data['details'],$subject);
+        supportEmail($data['details'], $subject,$adminEmail,'');
        
     }
 }

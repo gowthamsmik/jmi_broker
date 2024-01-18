@@ -151,7 +151,8 @@ $websiteAccountId = $_SESSION["sessionuserid"];
     // $stmtEmail->bind_param('ss', $subject, $mailContent);
     // $stmtEmail->execute();
     
-    sendMailsToAdmin($mailContent ,$subject);
+    // sendMailsToAdmin($mailContent ,$subject);
+    supportEmail($mailContent, $subject,$adminEmail,'');
 
     
     // // Insert into Notifications table (for user)
