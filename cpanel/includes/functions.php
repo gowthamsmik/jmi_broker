@@ -352,10 +352,13 @@ function getNotificationsForUser($userId)
 
 function sendMailsToAdmin($mailBody,$mailSubject){
     require_once '../../vendor/autoload.php';
+    try{
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('marketing@jmibrokers.com');
+    //$transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+    //$transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+    $transport->setUsername('support.s@jmibrokers.com');
+    $transport->setPassword('dkkkiiuudddshh2024@');
     $mailer = new Swift_Mailer($transport);
        
     // $mailTo="support@jmibrokers.com";
@@ -422,6 +425,10 @@ function sendMailsToAdmin($mailBody,$mailSubject){
         // Send the email and check for success
         $mailSent = $mailer->send($message);
         return '';
+    }
+    catch(Exception){
+        return '';
+    }
 }
 
 
@@ -610,6 +617,7 @@ function get_string_between($string, $start, $end)
 
 function sendMailsToUser($mailBody,$mailSubject,$mailTo){
     require_once '../../vendor/autoload.php';
+    try{
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
     $transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
@@ -682,6 +690,10 @@ function sendMailsToUser($mailBody,$mailSubject,$mailTo){
         // Send the email and check for success
         $mailSent = $mailer->send($message);
         return '';
+    }
+    catch(Exception){
+        return '';
+    }
 }
 ?>
 
