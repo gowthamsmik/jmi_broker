@@ -5,37 +5,36 @@ include('common.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-    if (!isset($_GET['id'])) {
-        http_response_code(400);
-        echo json_encode(array("status" => ERROR_STATUS, "message" => ID_REQUIRED_ERROR_MESSAGE));
-        exit();
+    $sql = "SELECT  id,  title, fullname,  username,   email,  gender,  birthday,  birthmonth,  birthyear,  country, town_city, post_code,  country_code, home,  mobile,  address2,   address1,  employment_status, nature_of_business, annual_income, net_worth,invited_by, created_at, updated_at FROM website_accounts WHERE id = ?"; 
 
-    }
+    $websiteAccountStmt = $conn->prepare($sql);
+    $websiteAccountStmt->bind_param("i", $websiteAccountId);
+    $websiteAccountStmt->execute();
+    $websiteAccountStmtResult = $websiteAccountStmt->get_result();
+    $websiteAccount = $websiteAccountStmtResult->fetch_all(MYSQLI_ASSOC);
+
+
+    
+    $sql = "SELECT * FROM fx_accounts where website_accounts_id= ? AND account_radio_type = 1";
+    $accountStmt = $conn->prepare($sql);
+    $accountStmt->bind_param("i",$websiteAccountId);
+    $accountStmt->execute();
+    $accountStmtResult = $accountStmt->get_result();
+    $accounts= $accountStmtResult->fetch_all(MYSQLI_ASSOC);
+
+    $countQuery="SELECT COUNT(*) as totalCopyTrades FROM copy_trade WHERE website_accounts_id = ?";
+    $stmtTotalRecords = $conn->prepare($countQuery);
+    $stmtTotalRecords->bind_param("i",$websiteAccountId);
+    $stmtTotalRecords->execute();
+    $resultTotalRecords = $stmtTotalRecords->get_result();
+    $totalCopyTrades = $resultTotalRecords->fetch_assoc()['totalCopyTrades'];
+
    
-    $accountId=$_GET['id'];
-    $query = "SELECT id, status, account_id, 'JMI Server', account_type, currency, account_group, account_radio_type, leverage, password  FROM fx_accounts WHERE id = ? and website_accounts_id = ? ";
 
-    $stmtAccounts = $conn->prepare($query);
-
-
-    $stmtAccounts->bind_param("ii", $accountId,$websiteAccountId);
-
-
-    $stmtAccounts->execute();
-    $resultAccounts = $stmtAccounts->get_result();
-    $accounts = $resultAccounts->fetch_all(MYSQLI_ASSOC);
-
-   
-
-    if(count($accounts)<=0){
-        echo json_encode(array("status" => ERROR_STATUS, "message" => ACCOUNT_NOT_FOUND_ERROR_MESSAGE));
-        exit();
-    }
-
-   $i=0;
+    $equities=array();
     foreach ($accounts as $account) {
 
-       
+
         $ret = 'error';
         $accountId = $account['account_id'];
         $accountPassword = $account['password'];
@@ -88,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
         }
 
-        
+
 
 
         //account history
@@ -140,38 +139,31 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             }
         }
 
-        $fx_balance = get_string_between($ret, 'Balance:', 'Equity');
+        // $fx_balance = get_string_between($ret, 'Balance:', 'Equity');
         $fx_equity = get_string_between($ret, 'Equity:', 'Margin');
-        $fx_name = get_string_between($ret, $accountId, '202');
+        // $fx_name = get_string_between($ret, $accountId, '202');
 
         $ret2 = $ret3;
 
-        // array_push($balances, $fx_balance);
-// array_push($equities, $fx_equity);
-// array_push($names, $fx_name);
-// array_push($account_history, $ret2);
+        array_push($equities, $fx_equity!=null?$fx_equity:0);
 
-        $accounts[$i]['balances'] = $fx_balance != null ? $fx_balance : '';
-        $accounts[$i]['equities'] = $fx_equity != null ? $fx_equity : '';
-        $accounts[$i]['names'] = $fx_name != null ? $fx_name : '';
-      
-        $i++;
+        
 
-        // $accounts[$i]['details'] = array(
-        //     'balances' => $fx_balance != null ? $fx_balance : '',
-        //     'equities' => $fx_equity != null ? $fx_equity : '',
-        //     'names' => $fx_name != null ? $fx_name : '',
-        //     'account_history' => $ret2 != null ? $ret2 : ''
-        // );
-        // $i++;
-
-        unset($account['password']);
-
+        
+     
     }
+    
+        $websiteAccount[0]['totalFxAccount'] = count($accounts);
+        $websiteAccount[0]['totamAmount'] = array_sum($equities);
+        $websiteAccount[0]['totalTrading'] = $totalCopyTrades;
+        $websiteAccount[0]['referralLink'] = $siteurl.'index.php?myref='.$websiteAccountId+10000;
 
-  
+       
+        
+
+
     http_response_code(200);
-    echo json_encode(array("status" => "success", "message" => GET_ALL_ACCOUNT_SUCCESS_MESSAGE, "data" => $accounts));
+    echo json_encode(array("status" => "success", "message" => GET_USER_PROFILE_SUCCESS_MESSAGE, "data" => $websiteAccount));
     exit();
 
 

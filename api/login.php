@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($checkExistingResult->num_rows > 0) {
         $user = $checkExistingResult->fetch_assoc();
-        if (md5($password) == $user['password']) {
+        if (md5($password) != $user['password']) {
             $userId = $user['id'];
             $userEmail = $user['email'];
             $gender = $user['gender'];
@@ -58,11 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             );
             $response['status'] = 'success';
             $response['message'] = 'Login Successful';
-            
-            $secretKey = 'your_secret_key';
+             $secretKey = 'jmi#23444eerr###12345678';
             $namdat='reheje';
-            echo $secretKey;
-            exit();
             $jwt = JWT::encode($payload, $secretKey, 'HS256');
             $headers = ['HS256'];
             //$decoded = JWT::decode($jwt, $secretKey, $headers);
@@ -76,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'gender' => $gender,
                 'account_status' => $status,
             );
-          
             http_response_code(200);
         } else {
             $response['status'] = 'error';

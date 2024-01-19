@@ -4,7 +4,10 @@ error_reporting(3);
 require '../vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use MarcialPaulG\Coinbase\Checkout;
+use MarcialPaulG\Coinbase\Coinbase;
 
+require_once '../vendor/autoload.php';
 function verifyAuthorization($headers) {
     global $secretKey;
     global $websiteAccountId;  
@@ -152,5 +155,28 @@ function sendMailsToAdmin($mailBody,$mailSubject){
        
 }
 
+function coinBaseDeposit($accountNumber,$amount,$apiKey,$baseUrl){
+    $throw_exceptions = true;
+    $coinbase = new Coinbase($apiKey, $throw_exceptions);
+
+    $checkout = new Checkout("JMIBrokers LTD",
+            'Funding Account Number '.$accountNumber,
+            "fixed_price",
+            $amount,
+            "USD",
+            ['email', 'name']
+        );
+
+        try {
+             $data = $coinbase->request($checkout);
+            return $baseUrl.$data['data']['id'];         
+
+        } catch (\Exception $exception) {
+
+            // return redirect()->back()->with('status-error', 'Unable to create checkout. Error: '.$exception->getMessage());
+            echo json_encode(array("status"=>ERROR_STATUS,"message" => $exception->getMessage()));
+
+        }
+}
 
 ?>

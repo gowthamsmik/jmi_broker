@@ -50,7 +50,7 @@ define('INVALID_CURRENCY_ERROR_MESSAGE', 'Invalid Currency.');
 
 define('MT4_PASSWORD_REQUIRED_ERROR_MESSAGE', 'MT4 Password is required.');
 
-define('TRANSFER_AMOUNT_REQUIRED_ERROR_MESSAGE', 'Transfer Amount is required and should contain only numbers.');
+define('TRANSFER_AMOUNT_REQUIRED_ERROR_MESSAGE', 'Transfer Amount is required and should have min value of 1 .');
 
 define('TRANSFER_TO_REQUIRED_ERROR_MESSAGE', 'Transfer To is required and should contain Account numbers.');
 
@@ -91,5 +91,16 @@ define('DOCUMENT_NOT_UPLOAD_ERROR_MESSAGE', "Please upload your documents first.
 
 define('LIVE_ACCOUNT_OPENING_SUCCESS_MESSAGE', 'Opening account request processed successfully');
 
+define('GET_USER_PROFILE_SUCCESS_MESSAGE', 'User Profile Retrieved Successfully');
+
+define('GET_USER_PROFILE_UPDATE_SUCCESS_MESSAGE', 'User Profile Updated Successfully');
+
+define('GET_COUNTRIES_SUCCESS_MESSAGE', 'Countries Retrieved Successfully');
+
+
+define('INVALID_METHOD_NAME_ERROR_MESSAGE', 'Invalid methodName. It should be epay,bankwire or coinbase.');
+
+define('INVALID_ACCOUNT_NO_ERROR_MESSAGE', 'accountNo is required and should contain only numbers.');
+define('INVALID_AMOUNT_ERROR_MESSAGE', 'Amount is required and should have  min value of 1.');
 
 ?>

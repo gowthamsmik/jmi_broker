@@ -19,11 +19,16 @@ global $data;
 global $headers;
 global $websiteAccountId;
 global $secretKey;
+global $coinBaseApiKey;
+global $coinbaseUrl;
 $method = $_SERVER["REQUEST_METHOD"];
 $requestUri = $_SERVER['REQUEST_URI'];
 $secretKey="jmi#23444eerr###12345678";
+$coinBaseApiKey = '9e47bfc4-929e-4407-adcd-02174e8166aa';
+$coinbaseUrl ='https://commerce.coinbase.com/checkout/';
 $allowedUrls = [
     '/api/login.php',
+    '/api/register.php'
        
 ];
 

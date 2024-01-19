@@ -164,7 +164,7 @@ function internalTransferValidation($data)
         $errors['transferTo'] = TRANSFER_TO_REQUIRED_ERROR_MESSAGE;
     }
 
-    if (!isset($data['transferAmount']) || !is_numeric(trim($data['transferAmount']))) {
+    if (!isset($data['transferAmount']) || !is_numeric(trim($data['transferAmount'])) || $data['transferAmount']<=0) {
         $errors['transferAmount'] = TRANSFER_AMOUNT_REQUIRED_ERROR_MESSAGE;
     }
 
@@ -252,7 +252,203 @@ function openLiveAccountValidation($data)
     }
 }
 
+function validateEditProfileData($data) {
+    http_response_code(400);
+    $errors = array();
 
+   
+
+    // Validate title
+    if (isset($data['title']) && !in_array($data['title'], array(0, 1, 2))) {
+        $errors['title'] = 'title can only be 0, 1, or 2.';
+    }
+
+    // Validate fullname
+    if (isset($data['fullName']) && empty(trim($data['fullName']))) {
+        $errors['fullName'] = 'fullName must be  not empty.';
+    }
+
+    // Validate username
+    if (isset($data['userName']) && empty(trim($data['userName']))) {
+        $errors['userName'] = 'userName must be  not empty.';
+    }
+
+    // Validate email
+    if (isset($data['email'])) {
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = 'Invalid email format.';
+        }
+    }
+
+    // Validate gender
+    if (isset($data['gender']) && !in_array($data['gender'], array(0, 1))) {
+        $errors['gender'] = 'Gender can only be  0 or 1.';
+    }
+
+    if(isset($data['birthDay']) || isset($data['birthYear']) || isset($data['birthMonth']) )
+    {
+        if(!isset($data['birthDay']) || !isset($data['birthYear']) || !isset($data['birthMonth']) ||!is_numeric(trim($data['birthDay']))
+        || !is_numeric(trim($data['birthYear'])) || !is_numeric(trim($data['birthMonth']))){
+            $errors['dateOfBirth'] = 'For DOB updation birthDay,birthMonth and birthYear  is required and it Should  be valid day,month and year.';
+            }
+        else if(!validateBirthday($data['birthDay'],$data['birthMonth'],$data['birthYear'])){
+            $errors['dateOfBirth'] = 'For DOB updation birthDay,birthMonth and birthYear  is required and it Should  be valid day,month and year.';
+        }
+        
+    }
+
+    // // Validate birthday
+    // if (isset($data['birthDay']) && !($data['birthDay'] >= 1 && $data['birthDay'] <= 31)) {
+    //     $errors['birthDay'] = 'Invalid birthDay';
+    // }
+
+    // // Validate birthmonth
+    // if (isset($data['birthMonth']) && !($data['birthMonth'] >= 1 && $data['birthMonth'] <= 12)) {
+    //     $errors['birthMonth'] = 'Invalid Birthmonth';
+    // }
+
+    // // Validate birthyear
+    // if (isset($data['birthYear']) && !((date('Y') - $data['birthYear']) >= 10)) {
+    //     $errors['birthYear'] = 'Birthyear must be optional and at least 10 years old.';
+    // }
+
+    // Validate country
+    $countriesJson = file_get_contents('../assets/json/countries.json');
+    $validCountries = json_decode($countriesJson, true);
+
+    if (isset($data['country']) && !in_array($data['country'], array_column($validCountries, 'country'))) {
+        $errors['country'] = 'Invalid Country.';
+    }
+
+    if (isset($data['countryCode']) && (!ctype_digit((string)$data['countryCode']) || !in_array($data['countryCode'], array_column($validCountries, 'code')))) {
+        $errors['countryCode'] = 'Invalid countryCode.';
+    }
+    
+    // Validate town_city
+    if (isset($data['townCity']) && empty(trim($data['townCity']))) {
+        $errors['townCity'] = 'townCity must be  not empty.';
+    }
+
+    // Validate post_code
+    if (isset($data['postCode']) && !ctype_digit((string)$data['postCode'])) {
+        $errors['postCode'] = 'Invalid postCode.';
+    }
+
+    // // Validate country_code
+    // if (isset($data['country_code']) && !in_array($data['country_code'], array('91', '93'))) {
+    //     $errors['country_code'] = 'Country Code must be optional and from the allowed list.';
+    // }
+
+    // Validate home and mobile numbers
+    if (isset($data['home']) && !preg_match('/^\d{9}$/', $data['home'])) {
+        $errors['home'] = 'Invalid home number format.';
+    }
+
+    if (isset($data['mobile']) && !preg_match('/^\d{9}$/', $data['mobile'])) {
+        $errors['mobile'] = 'Invalid mobile number format.';
+    }
+
+    // Validate address2 and address1
+    if (isset($data['address2']) && empty(trim($data['address2']))) {
+        $errors['address2'] = 'address2 must be not empty.';
+    }
+
+    if (isset($data['address1']) && empty(trim($data['address1']))) {
+        $errors['address1'] = 'address1 must be not empty.';
+    }
+
+    // Validate employment_status, nature_of_business, annual_income, net_worth
+    $validOptions = array(
+        'employmentStatus' => range(1, 5),
+        'natureOfBusiness' => range(1, 26),
+        'annualIncome' => range(1, 6),
+        'netWorth' => range(1, 6),
+    );
+
+    foreach ($validOptions as $field => $options) {
+        if (isset($data[$field]) && !in_array($data[$field], $options)) {
+            $errors[$field] = 'Invalid '.ucfirst(str_replace('_', ' ', $field)) ;
+        }
+    }
+
+    if (count($errors) > 0) {
+        echo json_encode(array("status" => 'error', "message" => $errors));
+    }
+}
+
+function validateBirthday($birthDay, $birthMonth, $birthYear) {
+  
+    if (($birthYear % 4 == 0 && $birthYear % 100 != 0) || ($birthYear % 400 == 0)) {
+      
+        $maxDaysInFeb = 29;
+    } else {
+        
+        $maxDaysInFeb = 28;
+    }
+
+   
+    $daysInMonth = [
+        1 => 31, // January
+        2 => $maxDaysInFeb, // February
+        3 => 31, // March
+        4 => 30, // April
+        5 => 31, // May
+        6 => 30, // June
+        7 => 31, // July
+        8 => 31, // August
+        9 => 30, // September
+        10 => 31, // October
+        11 => 30, // November
+        12 => 31 // December
+    ];
+
+    // Validate day and month
+    if ($birthMonth < 1 || $birthMonth > 12 || $birthDay < 1 || $birthDay > $daysInMonth[$birthMonth]) {
+        // Invalid month or day
+        return false;
+    }
+
+    // Validate year
+    if ($birthYear < 1900 || $birthYear > date('Y')-1) {
+        // Invalid year
+        return false;
+    }
+
+    // All validations passed
+    return true;
+}
+
+function depositValidation($data)
+{
+    http_response_code(400);
+    $errors = array();
+
+    // Validate accountType
+    if (!isset($data['methodName']) || !in_array($data['methodName'], array('epay', 'bankwire','coinbase'))) {
+        $errors['methodName'] = INVALID_METHOD_NAME_ERROR_MESSAGE;
+    }
+
+    if (!isset($data['accountNo']) || !ctype_digit((string)$data['accountNo'])) {
+        $errors['accountNo'] = INVALID_ACCOUNT_NO_ERROR_MESSAGE;
+    }
+
+    if (!isset($data['amount']) || !ctype_digit((string)$data['amount']) || $data['amount'] < 1 ) {
+        $errors['amount'] = INVALID_AMOUNT_ERROR_MESSAGE;
+    }
+
+    
+
+    // Validate currency
+    if (!isset($data['currency']) || strtoupper($data['currency']) !== 'USD') {
+        $errors['currency'] = INVALID_CURRENCY_ERROR_MESSAGE;
+    }
+
+   
+
+    if (count($errors) > 0) {
+        echo json_encode(array("status" => ERROR_STATUS, "message" => $errors));
+    }
+}
 
 
 

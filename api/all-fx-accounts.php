@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 
    
-    $sql = "SELECT id,account_type,account_group,account_radio_type FROM fx_accounts where website_accounts_id= ? order by id desc";
+    $sql = "SELECT id,account_type,account_group,account_radio_type,account_id FROM fx_accounts where website_accounts_id= ? order by id desc";
     $accountStmt = $conn->prepare($sql);
     $accountStmt->bind_param("i",$websiteAccountId);
     $accountStmt->execute();

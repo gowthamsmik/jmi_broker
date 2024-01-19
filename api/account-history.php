@@ -32,7 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         exit();
     }
 
-   $i=0;
+
+   $response = array();
     foreach ($accounts as $account) {
 
        
@@ -146,32 +147,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
         $ret2 = $ret3;
 
-        // array_push($balances, $fx_balance);
-// array_push($equities, $fx_equity);
-// array_push($names, $fx_name);
-// array_push($account_history, $ret2);
-
-        $accounts[$i]['balances'] = $fx_balance != null ? $fx_balance : '';
-        $accounts[$i]['equities'] = $fx_equity != null ? $fx_equity : '';
-        $accounts[$i]['names'] = $fx_name != null ? $fx_name : '';
-      
-        $i++;
-
-        // $accounts[$i]['details'] = array(
-        //     'balances' => $fx_balance != null ? $fx_balance : '',
-        //     'equities' => $fx_equity != null ? $fx_equity : '',
-        //     'names' => $fx_name != null ? $fx_name : '',
-        //     'account_history' => $ret2 != null ? $ret2 : ''
-        // );
-        // $i++;
-
-        unset($account['password']);
+        
+        $response['equities']=$fx_equity != null ? $fx_equity : '';
+        $response['account_history']=$ret2 != null ? $ret2 : '';
 
     }
 
   
     http_response_code(200);
-    echo json_encode(array("status" => "success", "message" => GET_ALL_ACCOUNT_SUCCESS_MESSAGE, "data" => $accounts));
+    echo json_encode(array("status" => "success", "message" => GET_ALL_ACCOUNT_SUCCESS_MESSAGE, "data" => $response));
     exit();
 
 

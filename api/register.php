@@ -9,6 +9,7 @@ include('../cpanel/includes/functions.php');
 function sendMailsToAdmin1($mailBody,$mailSubject){
     //require_once '../vendor/autoload.php';
     include('../vendor/autoload.php');
+    try{
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
     $transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
@@ -79,10 +80,15 @@ function sendMailsToAdmin1($mailBody,$mailSubject){
         // Send the email and check for success
         $mailSent = $mailer->send($message);
         return '';
+    }
+    catch(Exception){
+        return '';
+    }
 }
 
 function sendMailsToUserAp($mailBody,$mailSubject,$mailTo){
     include('../vendor/autoload.php');
+    try{
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
     $transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
@@ -155,10 +161,15 @@ function sendMailsToUserAp($mailBody,$mailSubject,$mailTo){
         // Send the email and check for success
         $mailSent = $mailer->send($message);
         return '';
+    }
+    catch(Exception){
+        return '';
+    }
 }
 
 function sendMailsToUserueje($mailTo,$token){
     include('../vendor/autoload.php');
+    try{
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
     $transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
@@ -234,6 +245,10 @@ function sendMailsToUserueje($mailTo,$token){
         // Send the email and check for success
         $mailSent = $mailer->send($message);
         return '';
+    }
+    catch(Exception){
+        return '';
+    }
 }
 $response = array();
 

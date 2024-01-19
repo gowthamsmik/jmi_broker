@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     //check of password
-    $query = "|MODE=7|LOGIN=" . $data['copyTo'] . "|[CPASS=" . $data['password'];
+    $query = "|MODE=7|LOGIN=" . $data['copyTo'] . "|[CPASS=" . $data['MT4Password'];
     //--- prepare query
 //--- send request
     $ret = 'error';
