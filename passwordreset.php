@@ -9,11 +9,11 @@ try {
   require 'vendor/autoload.php';
   // echo "post" .$_SERVER["REQUEST_METHOD"] .$_POST['email'];exit(0);
 
-  $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-  $transport->setUsername('marketing@jmibrokers.com');
+  $transport = new \Swift_SmtpTransport('smtp-relay.brevo.com', 587, 'tls');
+  $transport->setUsername('jmibrokers@88medias.com');
   //$transport->setPassword('JMI159BROKERS');
-  $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
-
+  //$transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+  $transport->setPassword('MtacbkgqTF9071sX');
 
   // Create the Mailer using your created Transport
   $mailer = new Swift_Mailer($transport);

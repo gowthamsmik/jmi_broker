@@ -26,10 +26,11 @@ try {
             // Send email to admin
             require_once 'vendor/autoload.php';
 
-            $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-            $transport->setUsername('marketing@jmibrokers.com');
-            $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
-            
+            $transport = new \Swift_SmtpTransport('smtp-relay.brevo.com', 587, 'tls');
+            //$transport->setUsername('marketing@jmibrokers.com');
+            //$transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+            $transport->setUsername('jmibrokers@88medias.com');
+            $transport->setPassword('MtacbkgqTF9071sX');
             // Create the Mailer using your created Transport
             $mailer = new Swift_Mailer($transport);
             $filePathAndName = "$targetFile";

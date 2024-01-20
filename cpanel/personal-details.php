@@ -58,11 +58,11 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                         <div class="col-md-3"><label for="" class="form-label fs-5"><?php echo $lang["title"] ?></label></div>
                         <div class="col-md-7">
                             <select id="titleDropdown" class="form-select rounded-3 box-shadow py-2 px-3">
-                                <option value="1" <?php echo ($profileDetails['title'] == 1) ? 'selected' : ''; ?>>Mr
+                                <option value="0" <?php echo ($profileDetails['title'] == 0) ? 'selected' : ''; ?>>Mr
                                 </option>
-                                <option value="2" <?php echo ($profileDetails['title'] == 2) ? 'selected' : ''; ?>>Mrs
+                                <option value="1" <?php echo ($profileDetails['title'] == 1) ? 'selected' : ''; ?>>Mrs
                                 </option>
-                                <option value="3" <?php echo ($profileDetails['title'] == 3) ? 'selected' : ''; ?>>Miss
+                                <option value="2" <?php echo ($profileDetails['title'] == 2) ? 'selected' : ''; ?>>Miss
                                 </option>
                             </select>
                         </div>
@@ -109,7 +109,7 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                             <select class="form-select rounded-3 box-shadow py-2 px-3" id="genderDropdown">
                                 <option value="-1" disabled>-Select-</option>
                                 <option value="1" <?php echo (isset($profileDetails['gender']) && $profileDetails['gender'] == 1) ? 'selected' : ''; ?>>Male</option>
-                                <option value="2" <?php echo (isset($profileDetails['gender']) && $profileDetails['gender'] == 2) ? 'selected' : ''; ?>>Female</option>
+                                <option value="0" <?php echo (isset($profileDetails['gender']) && $profileDetails['gender'] == 0) ? 'selected' : ''; ?>>Female</option>
                             </select>
                         </div>
                     </div>
@@ -318,16 +318,51 @@ $profileDetails = $userdetailsCount > 0 ? $userdetails[0] : null;
                     <div class="d-flex align-items-center gap-2 row mt-4">
                         <div class="col-md-4"><label for="" class="form-label fs-5"><?php echo $lang["nature_of_business"] ?></label></div>
                         <div class="col-md-6">
-                            <select class="form-select rounded-3 box-shadow py-2 px-3" id="nature_of_business">
+                        <select class="form-select rounded-3 box-shadow py-2 px-3" id="nature_of_business">
                                 <option value="-1" disabled>-Select-</option>
-                                <option value="1" <?php echo (isset($profileDetails['nature_of_business']) && $profileDetails['nature_of_business'] == 1) ? 'selected' : ''; ?>>Accountancy</option>
+                                <!-- <option value="1" <?php echo (isset($profileDetails['nature_of_business']) && $profileDetails['nature_of_business'] == 1) ? 'selected' : ''; ?>>Accountancy</option>
                                 <option value="2" <?php echo (isset($profileDetails['nature_of_business']) && $profileDetails['nature_of_business'] == 2) ? 'selected' : ''; ?>>Admin/Secretarial
                                 </option>
                                 <option value="3" <?php echo (isset($profileDetails['nature_of_business']) && $profileDetails['nature_of_business'] == 3) ? 'selected' : ''; ?>>Agriculture</option>
                                 <option value="4" <?php echo (isset($profileDetails['nature_of_business']) && $profileDetails['nature_of_business'] == 4) ? 'selected' : ''; ?>>Financial
                                     Services-Banking</option>
                                 <option value="5" <?php echo (isset($profileDetails['nature_of_business']) && $profileDetails['nature_of_business'] == 5) ? 'selected' : ''; ?>>Catering/Hospitality
-                                </option>
+                                </option> -->
+                                <?php
+    $businessOptions = array(
+        1 => 'Accountancy',
+        2 => 'Admin/Secretarial',
+        3 => 'Agriculture',
+        4 => 'Financial Services - Banking',
+        5 => 'Catering/Hospitality',
+        6 => 'Creative/Media',
+        7 => 'Education',
+        8 => 'Emergency Services',
+        9 => 'Engineering',
+        10 => 'Financial Services - Other',
+        11 => 'Health/Medicine',
+        12 => 'HM Forces',
+        13 => 'HR',
+        14 => 'Financial Services - Insurance',
+        15 => 'IT',
+        16 => 'Legal',
+        17 => 'Leisure/Entertainment/Tourism',
+        18 => 'Manufacturing',
+        19 => 'Marketing/PR/Advertising',
+        20 => 'Pharmaceuticals',
+        21 => 'Property/Construction/Trades',
+        22 => 'Retail',
+        23 => 'Sales',
+        24 => 'Social Care/Services',
+        25 => 'Telecommunications',
+        26 => 'Transport/Logistics'
+    );
+
+    foreach ($businessOptions as $value => $label) {
+        $selected = (isset($profileDetails['nature_of_business']) && $profileDetails['nature_of_business'] == $value) ? 'selected' : '';
+        echo "<option value=\"$value\" $selected>$label</option>";
+    }
+    ?>
                             </select>
                         </div>
                     </div>

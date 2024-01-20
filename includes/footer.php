@@ -1006,13 +1006,13 @@ if(isset($_GET['myref'])) {
 
 // });
 
-function validate() {
-    //if (emailverified && smsverified)
-    if (emailverified) {
-        return true;
-    }
-    return false;
-}
+// function validate() {
+//     //if (emailverified && smsverified)
+//     if (emailverified) {
+//         return true;
+//     }
+//     return false;
+// }
 
 
 $(document).ready(function() {

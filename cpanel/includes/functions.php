@@ -352,14 +352,25 @@ function getNotificationsForUser($userId)
 
 function sendMailsToAdmin($mailBody,$mailSubject){
     require_once '../../vendor/autoload.php';
+    try{
+
+        global $supportUserName;
+        global $supportEmail;
+        global $supportPassword;
+        global $adminEmail;
+
+
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('marketing@jmibrokers.com');
+    //$transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+    //$transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+
+    $transport->setUsername($supportUserName);
+    $transport->setPassword($supportPassword);
     $mailer = new Swift_Mailer($transport);
        
     // $mailTo="support@jmibrokers.com";
-    $mailTo="gopi.smiksystems@gmail.com";
+    $mailTo=$adminEmail;
     $mailsBody='<!DOCTYPE html>
     <html lang="en">
     
@@ -414,7 +425,7 @@ function sendMailsToAdmin($mailBody,$mailSubject){
     </body>
     </html>';
     $message = (new Swift_Message(''))
-            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
+            ->setFrom([$supportEmail => 'Jmi brokers'])
             ->setTo($mailTo)
             ->setBody($mailsBody,'text/html')
             ->setSubject($mailSubject);
@@ -422,6 +433,10 @@ function sendMailsToAdmin($mailBody,$mailSubject){
         // Send the email and check for success
         $mailSent = $mailer->send($message);
         return '';
+    }
+    catch(Exception){
+        return '';
+    }
 }
 
 
@@ -458,9 +473,13 @@ function sendDocumentToMail($filePath, $invoiceId,  $mailSubject,$mailBody,$toEm
         //$mailBody = 'New Railsed Invoice ' . $invoiceId;
 
         // Create the Swift_SmtpTransport instance
+        global $marketingUserName;
+        global $marketingEmail;
+        global $marketingPassword;
+
         $transport = new Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-        $transport->setUsername('marketing@jmibrokers.com');
-        $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+        $transport->setUsername($marketingUserName);
+        $transport->setPassword($marketingPassword);
 
         // Create the Swift_Mailer instance
         $mailer = new Swift_Mailer($transport);
@@ -521,7 +540,7 @@ function sendDocumentToMail($filePath, $invoiceId,  $mailSubject,$mailBody,$toEm
         </html>';
         // Create the Swift_Message instance
         $message = (new Swift_Message(''))
-            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
+            ->setFrom([$marketingEmail => 'Jmi brokers'])
             ->setTo($toEmail)
             ->setBody($mailsBody,'text/html')
             ->setSubject($mailSubject);
@@ -610,10 +629,16 @@ function get_string_between($string, $start, $end)
 
 function sendMailsToUser($mailBody,$mailSubject,$mailTo){
     require_once '../../vendor/autoload.php';
+    try{
+
+    global $marketingUserName;
+    global $marketingEmail;
+    global $marketingPassword;
+
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('marketing@jmibrokers.com');
+    $transport->setUsername($marketingUserName);
     //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+    $transport->setPassword($marketingPassword);
     $mailer = new Swift_Mailer($transport);
        
    
@@ -674,7 +699,7 @@ function sendMailsToUser($mailBody,$mailSubject,$mailTo){
   </body>
   </html>';
     $message = (new Swift_Message(''))
-            ->setFrom(['marketing@jmibrokers.com' => 'Jmi brokers'])
+            ->setFrom([$marketingEmail => 'Jmi brokers'])
             ->setTo($mailTo)
             ->setBody($mailsbody,'text/html')
             ->setSubject($mailSubject);
@@ -682,6 +707,10 @@ function sendMailsToUser($mailBody,$mailSubject,$mailTo){
         // Send the email and check for success
         $mailSent = $mailer->send($message);
         return '';
+    }
+    catch(Exception){
+        return '';
+    }
 }
 ?>
 

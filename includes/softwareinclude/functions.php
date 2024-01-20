@@ -108,9 +108,11 @@ function mailSendToAdmin($mailSubject,$mailTo,$mailBody)
 {
     require_once '../../vendor/autoload.php';
     $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('marketing@jmibrokers.com');
+    //$transport->setUsername('marketing@jmibrokers.com');
     //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+    //$transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+    $transport->setUsername('support.s@jmibrokers.com');
+    $transport->setPassword('dkkkiiuudddshh2024@');
 
     // Create the Mailer using your created Transport
     $mailer = new Swift_Mailer($transport);
