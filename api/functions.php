@@ -26,7 +26,7 @@ function verifyAuthorization($headers) {
         $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
         if ($decoded->exp < time()) {
          http_response_code(401);
-        echo json_encode(array("status"=>ERROR_STATUS,"message" => TOKEN_ERROR_MESSAGE));   
+        echo json_encode(array("status"=>ERROR_STATUS,"message" => TOKEN_EXPIRED_MESSAGE));   
         exit();
 
     }
@@ -175,6 +175,7 @@ function coinBaseDeposit($accountNumber,$amount,$apiKey,$baseUrl){
 
             // return redirect()->back()->with('status-error', 'Unable to create checkout. Error: '.$exception->getMessage());
             echo json_encode(array("status"=>ERROR_STATUS,"message" => $exception->getMessage()));
+            exit();
 
         }
 }

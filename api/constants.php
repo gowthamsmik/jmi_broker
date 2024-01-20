@@ -46,9 +46,9 @@ define('PASSWORD_ERROR_MESSAGE', 'Passwords must be at least 8 characters long a
 define('INVALID_PASSWORD_ERROR_MESSAGE', 'Invalid Password');
 define('PASSWORD_UPDATED_SUCCESS_MESSAGE', 'Password updated successfully.');
 
-define('INVALID_CURRENCY_ERROR_MESSAGE', 'Invalid Currency.');
+define('INVALID_CURRENCY_ERROR_MESSAGE', 'Currency is required and should be valid.');
 
-define('MT4_PASSWORD_REQUIRED_ERROR_MESSAGE', 'MT4 Password is required.');
+define('MT4_PASSWORD_REQUIRED_ERROR_MESSAGE', 'MT4 Password is required and should not be empty.');
 
 define('TRANSFER_AMOUNT_REQUIRED_ERROR_MESSAGE', 'Transfer Amount is required and should have min value of 1 .');
 
@@ -103,4 +103,23 @@ define('INVALID_METHOD_NAME_ERROR_MESSAGE', 'Invalid methodName. It should be ep
 define('INVALID_ACCOUNT_NO_ERROR_MESSAGE', 'accountNo is required and should contain only numbers.');
 define('INVALID_AMOUNT_ERROR_MESSAGE', 'Amount is required and should have  min value of 1.');
 
+define('DEPOSIT_SUCCESS_MESSAGE', 'Your Deposit Is Still Pending Until You Complete The Payment And It Will Be Add To Your Balance During Few Hours');
+
+define('INVALID_ACCOUNT_ERROR_MESSAGE', "Invalid Account Number.");
+
+define('TOKEN_EXPIRED_MESSAGE', "Token Expired.");
+
+define('TTCOPY_INVOICE_REQUIRED_ERROR_MESSAGE', "ttcopy and invoice both are required.");
+define('INVALID_FILE_ERROR_MESSAGE', "Invalid file types or sizes.");
+
+define('DEPOSIT_BANKWIRE_SUCCESS_MESSAGE', 'Thank you for submitting the SWIFT /TT copy. Funds will be deposited into your account once received with thanks.');
+define('INVALID_METHOD_ACCOUNT_NO_ERROR_MESSAGE', 'methodAccount is required and should contain only numbers.');
+
+define('WITHDRAW_SUCCESS_MESSAGE', 'Your withdrawal request has been delivered, our backoffice department will handle it soon.');
+
+define('BANK_NAME_REQUIRED_ERROR_MESSAGE', 'bankName is required and should not be empty.');
+
+define('BANK_SWIFT_REQUIRED_ERROR_MESSAGE', 'bankSwift is required and should not be empty.');
+
+define('BANK_IBAN_REQUIRED_ERROR_MESSAGE', 'bankIban is required and should not be empty.');
 ?>

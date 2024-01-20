@@ -422,7 +422,7 @@ function depositValidation($data)
 {
     http_response_code(400);
     $errors = array();
-
+  
     // Validate accountType
     if (!isset($data['methodName']) || !in_array($data['methodName'], array('epay', 'bankwire','coinbase'))) {
         $errors['methodName'] = INVALID_METHOD_NAME_ERROR_MESSAGE;
@@ -443,14 +443,70 @@ function depositValidation($data)
         $errors['currency'] = INVALID_CURRENCY_ERROR_MESSAGE;
     }
 
+
+
    
 
     if (count($errors) > 0) {
         echo json_encode(array("status" => ERROR_STATUS, "message" => $errors));
+        exit();
     }
 }
 
 
+function withdrawValidation($data)
+{
+    http_response_code(400);
+    $errors = array();
+  
+    // Validate accountType
+    if (!isset($data['methodName']) || !in_array($data['methodName'], array('epay', 'bankwire','coinbase'))) {
+        $errors['methodName'] = INVALID_METHOD_NAME_ERROR_MESSAGE;
+    }
+
+    if (!isset($data['accountNo']) || !ctype_digit((string)$data['accountNo'])) {
+        $errors['accountNo'] = INVALID_ACCOUNT_NO_ERROR_MESSAGE;
+    }
+
+    if (!isset($data['amount']) || !ctype_digit((string)$data['amount']) || $data['amount'] < 1 ) {
+        $errors['amount'] = INVALID_AMOUNT_ERROR_MESSAGE;
+    }
+
+    
+
+    // Validate currency
+    if (!isset($data['currency']) || strtoupper($data['currency']) !== 'USD') {
+        $errors['currency'] = INVALID_CURRENCY_ERROR_MESSAGE;
+    }
+
+
+    if (!isset($data['methodAccount']) || !ctype_digit((string)$data['methodAccount'])) {
+        $errors['methodAccount'] = INVALID_METHOD_ACCOUNT_NO_ERROR_MESSAGE;
+    }
+
+    if($data['methodName']=="bankwire"){
+
+        if (!isset($data['bankName']) || empty(trim($data['bankName']))) {
+            $errors['bankName'] = BANK_NAME_REQUIRED_ERROR_MESSAGE;
+        }
+
+        if (!isset($data['bankSwift']) || empty(trim($data['bankSwift']))) {
+            $errors['bankSwift'] = BANK_SWIFT_REQUIRED_ERROR_MESSAGE;
+        }
+
+        if (!isset($data['bankIban']) || empty(trim($data['bankIban']))) {
+            $errors['bankIban'] = BANK_IBAN_REQUIRED_ERROR_MESSAGE;
+        }
+
+
+    }
+   
+
+    if (count($errors) > 0) {
+        echo json_encode(array("status" => ERROR_STATUS, "message" => $errors));
+        exit();
+    }
+}
 
 
 ?>
