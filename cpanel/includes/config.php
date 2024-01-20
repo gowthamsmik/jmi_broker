@@ -14,6 +14,9 @@ global $supportEmail;
 global $supportPassword;
 global $adminEmail;
 
+global $coinBaseApiKey;
+global $coinbaseUrl;
+
 $siteurl = 'https://jmibrokers.com/';
 $webeurl = 'https://jmibrokers.com/';
 $servername = 'localhost';
@@ -31,6 +34,8 @@ $supportPassword='dkkkiiuudddshh2024@';
 
 $adminEmail='gopi.smiksystems@gmail.com';
 
+$coinBaseApiKey = '9e47bfc4-929e-4407-adcd-02174e8166aa';
+$coinbaseUrl ='https://commerce.coinbase.com/checkout/';
 
 global $conn;
 $conn = new mysqli( $servername, $username, $password, $dbname );
