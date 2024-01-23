@@ -11,22 +11,22 @@ require_once '../vendor/autoload.php';
 function verifyAuthorization($headers) {
     global $secretKey;
     global $websiteAccountId;  
-  
-    if (!isset($headers['Authorization'])) {
+    
+    if (!isset($headers['Authorization']) && !isset($headers['authorization'])) {
 
         echo json_encode(array("status"=>ERROR_STATUS,"message" => TOKEN_REQUIRED_ERROR_MESSAGE));        
         exit();
     }
 
     
-   
-    $token = trim(str_replace("Bearer", "", $headers['Authorization']));
+    $token=isset($headers['Authorization'])?$headers['Authorization']:$headers['authorization'];
+    $token = trim(str_replace("Bearer", "", $token));
     try{
 
         $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
         if ($decoded->exp < time()) {
          http_response_code(401);
-        echo json_encode(array("status"=>ERROR_STATUS,"message" => TOKEN_ERROR_MESSAGE));   
+        echo json_encode(array("status"=>ERROR_STATUS,"message" => TOKEN_EXPIRED_MESSAGE));   
         exit();
 
     }
@@ -175,6 +175,7 @@ function coinBaseDeposit($accountNumber,$amount,$apiKey,$baseUrl){
 
             // return redirect()->back()->with('status-error', 'Unable to create checkout. Error: '.$exception->getMessage());
             echo json_encode(array("status"=>ERROR_STATUS,"message" => $exception->getMessage()));
+            exit();
 
         }
 }

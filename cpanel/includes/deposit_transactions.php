@@ -1,7 +1,11 @@
 <?php
 error_reporting(3);
-include('config.php');
 session_start();
+include('config.php');
+require '../../vendor/autoload.php';
+use MarcialPaulG\Coinbase\Checkout;
+use MarcialPaulG\Coinbase\Coinbase;
+
 $websiteAccountId = $_SESSION["sessionuserid"];
 
  global $conn;
@@ -116,10 +120,39 @@ $websiteAccountId = $_SESSION["sessionuserid"];
 
     $notify= "$amount USD New Coinbase Deposited ";
 
+    
+
+
+   
+    $throw_exceptions = true;
+    $coinbase = new Coinbase($coinBaseApiKey, $throw_exceptions);
+
+    $checkout = new Checkout("JMIBrokers LTD",
+        'Funding Account Number '.$_POST['cbAccountId'],
+        "fixed_price",
+        $amount,
+        "USD",
+        ['email', 'name']
+    );
+
+    try {
+         $data = $coinbase->request($checkout);
+        $url=$coinbaseUrl.$data['data']['id'];
+     
+
+    } catch (\Exception $exception) {
+
+        $_SESSION['deposit_meesage']="Unable to create checkout";
+        header("Location:../deposit.php?type=coin_base");
+        exit();
+      
+        
+    }
+
 
     $transquery = "insert into transactions (account,amount,currency,type,via,website_accounts_id,status) values (?,?,?,?,?,?,?)";
         $trasactions = $conn->prepare($transquery);
-        $account = (float)$_POST['cbAccountId'];
+        $account = (int)$_POST['cbAccountId'];
         $amount = (float)$_POST['cbAmount'];
         $currency = (int)$_POST['cbCurrency'];
         $details_admin = (int)$_POST['cbAccount'];
@@ -130,7 +163,7 @@ $websiteAccountId = $_SESSION["sessionuserid"];
         $trasactions->bind_param("idsisii",$account,$amount,$currency,$type,$via,$website_accounts_id,$status);
         $trasactions->execute();
 
-        echo $notify."stsyhs";
+      
 
 
         $notifyquery = "insert into notifications (website_accounts_id,notification,notification_link,notification_status,created_at) values (?,?,?,?,?)";
@@ -157,9 +190,10 @@ $websiteAccountId = $_SESSION["sessionuserid"];
         $created_at=date('Y-m-d H:i:s');
         $notsfications->bind_param("iissssssss",$website_accounts_id,$notification_status,$notification,$details,$notification_ar,$details_ar,$notification_ru,$details_ru,$notification_link,$created_at);
         $notsfications->execute();
-        echo "end";
+      
 
-        header("Location:../transactional-history.php");
+        header("Location: $url");
+
 
  }
 ?>

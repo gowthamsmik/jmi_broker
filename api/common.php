@@ -28,7 +28,8 @@ $coinBaseApiKey = '9e47bfc4-929e-4407-adcd-02174e8166aa';
 $coinbaseUrl ='https://commerce.coinbase.com/checkout/';
 $allowedUrls = [
     '/api/login.php',
-    '/api/register.php'
+    '/api/register.php',
+    '/api/countries.php'
        
 ];
 
@@ -47,6 +48,8 @@ switch ($method) {
 }
 
 $headers = getallheaders();
+
+
 if (!in_array($requestUri, $allowedUrls)) {
         
           verifyAuthorization($headers);

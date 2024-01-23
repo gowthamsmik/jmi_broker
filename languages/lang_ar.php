@@ -618,5 +618,6 @@ $lang = array(
     'location' => 'موقع المكتب الرئيسي',
     'country_code' => 'الرقم الدولي',
     'partner' => 'كن شريكنا',
+    'first_name_register' => "أدخل اسمك الأول هنا",
 );
 ?>

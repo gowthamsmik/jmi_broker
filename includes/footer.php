@@ -198,6 +198,11 @@
 a{
     text-decoration: none;
 }
+.left-zero-important {
+  left: 2px !important;
+  margin-right: auto;
+
+}
 </style>
 <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
 
@@ -729,7 +734,7 @@ function toggleLiveChat() {
                         <div class="col-md-4">
                             <div class="popupfeild">
                                 <label for=""><?php echo $lang['full_name'] ?></label>
-                                <input name='fullName' type="text" placeholder="Input your first name in here">
+                                <input name='fullName' type="text" placeholder="<?php echo $lang['first_name_register'] ?>">
                             </div>
                         </div>
 
@@ -750,7 +755,7 @@ function toggleLiveChat() {
                                 <label for=""><?php echo $lang['email_address'] ?></label>
                                 <input name='email' type="email" placeholder="<?php echo $lang['type_email'] ?>"
                                     class="pdmoreinput" id="email" oninput="changeStyle('email')">
-                                <a href="#" onclick="emailSendAuth();"
+                                <a href="#" onclick="emailSendAuth();" class=""
                                     id="SencodeEmail"><?php echo $lang['send_now'] ?></a>
                                 <a href="#" id="emailverifiedLink"
                                     style="background-color:green;color:white;display:none;top:37px;height:auto;padding:31px 19px;"><?php echo $lang['verified1'] ?></a>
@@ -1315,7 +1320,16 @@ function passwordSendAuth(e) {
         }
     });
 }
-
+if (userPreferredLanguage === 'ar') {
+  
+  var sendEmail = document.getElementById('SencodeEmail');
+  sendEmail.classList.add('left-zero-important');
+  var anchorElement = document.querySelector('.signUppopup .popupcont .popupfeild a');
+  anchorElement.style.right = '0'; 
+anchorElement.style.borderRadius = "9px 0 0 9px"; 
+  
+  
+  }
 </script>
 
 </html>

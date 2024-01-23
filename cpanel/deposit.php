@@ -650,7 +650,12 @@ div.form-control
 
     </div>
     <?php include("../includes/footer.php"); ?>
-    <?php include("../includes/scripts.php"); ?>
+    <?php include("../includes/scripts.php"); 
+    if (isset($_SESSION['deposit_meesage'])) {
+        echo '<script>alert("' . $_SESSION['deposit_meesage'] . '");</script>';
+        unset($_SESSION['deposit_meesage']);
+
+    }?>
 
 </body>
 <script>

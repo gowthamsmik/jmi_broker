@@ -608,4 +608,5 @@ $lang = array(
     'location' => 'Location of Head office',
     'country_code' => 'Country Code',
     'partner' => 'Become Our Partner',
+    'first_name_register' => "Input your first name in here",
 ); ?>

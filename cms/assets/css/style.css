@@ -2448,7 +2448,7 @@ footer .copyright p span {
   justify-content: center;
   position: absolute;
   bottom: 27px;
-  right: 2px;
+  /* right: 2px; */
   width: 150px;
   height: 71px;
   padding: 14px 19px;

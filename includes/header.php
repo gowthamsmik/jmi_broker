@@ -49,6 +49,10 @@ if (file_exists($langFilePath)) {
 
     .largemenu {
         height: 98px !important;
+        background: linear-gradient(137deg, #FED801 30%, #FFF8CE 100%);
+    }
+    .shortmenu{
+        background: linear-gradient(137deg, #FED801 30%, #FFF8CE 100%);
     }
 
     #languageDropdown {
@@ -754,5 +758,6 @@ function showMatches(query) {
 var userPreferredLanguage = "<?php echo $userPreferredLanguage; ?>";
 if (userPreferredLanguage === 'ar') {
     document.body.style.direction = 'rtl';
+   
 }
 </script>

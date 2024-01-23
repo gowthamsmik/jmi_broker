@@ -5,6 +5,12 @@ include("functions.php");
 session_start();
 $websiteAccountId = $_SESSION["sessionuserid"];
 
+$stmtUser = $conn->prepare("SELECT * FROM website_accounts WHERE id = ? ");
+$stmtUser->bind_param('i', $websiteAccountId);
+$stmtUser->execute();
+$resultUser = $stmtUser->get_result();
+$user = $resultUser->fetch_assoc();
+$userId = $user['id'];
 
  global $conn;
  if($_GET['paymentType']=='epay'){
@@ -23,20 +29,20 @@ $websiteAccountId = $_SESSION["sessionuserid"];
     $notify= "$amount  New Epay Withdraw";
 
 
-    $transquery = "insert into transactions (account,amount,currency,type,via,website_accounts_id,status) values (?,?,?,?,?,?,?)";
+    $transquery = "insert into transactions (account,amount,currency,type,via,website_accounts_id,status,details_admin) values (?,?,?,?,?,?,?,?)";
         $trasactions = $conn->prepare($transquery);
         $account = (float)$_POST['epayAccountId'];
         $amount = (float)$_POST['epayAmount'];
         $currency = (int)$_POST['epayCurrency'];
-        $details_admin = (int)$_POST['epayAccount'];
+        $details_admin ='Epay Account :'. (int)$_POST['epayAccount'];
         $website_accounts_id = $websiteAccountId;
         $via = $_GET['paymentType'];
         $type = 1;
         $status = 0;
-        $trasactions->bind_param("idsisii",$account,$amount,$currency,$type,$via,$website_accounts_id,$status);
+        $trasactions->bind_param("idsisiis",$account,$amount,$currency,$type,$via,$website_accounts_id,$status,$details_admin);
         $trasactions->execute();
 
-        echo $notify."stsyhs";
+       
 
 
         $notifyquery = "insert into notifications (website_accounts_id,notification,notification_link,notification_status,created_at) values (?,?,?,?,?)";
@@ -49,7 +55,7 @@ $websiteAccountId = $_SESSION["sessionuserid"];
         $notfications->bind_param("issis",$website_accounts_id,$notification,$notification_link,$notification_status,$created_at);
         $notfications->execute();
 
-        echo "ehee";
+       
         $notifysquery = "insert into notifications (website_accounts_id,notification_status,notification,details,notification_ar,details_ar,notification_ru,details_ru,notification_link,created_at) values (?,?,?,?,?,?,?,?,?,?)";
         $notsfications = $conn->prepare($notifysquery);
         $website_accounts_id = $websiteAccountId;
@@ -64,7 +70,13 @@ $websiteAccountId = $_SESSION["sessionuserid"];
         $created_at=date('Y-m-d H:i:s');
         $notsfications->bind_param("iissssssss",$website_accounts_id,$notification_status,$notification,$details,$notification_ar,$details_ar,$notification_ru,$details_ru,$notification_link,$created_at);
         $notsfications->execute();
-        echo "end";
+       
+        $currency="USD";
+        $details = $amount . ' ' . $currency . ' New Epay Withdraw By' . $user['email'];
+        $subject = $amount . ' ' . $currency . ' New Epay Withdraw By' . $user['email'];
+
+        sendMailsToAdmin($details, $subject);
+
 
         header("Location:../transactional-history.php");
 
@@ -111,9 +123,9 @@ $websiteAccountId = $_SESSION["sessionuserid"];
  else if($_GET['paymentType']=='bank_wire')
  {
 
-    if ($currency == 1) {
-        $currencyy = 'USD';
-    }
+   
+       
+    $currencyy = 'USD';
     $amount  = $_POST['amount'];
     $account_number  = $_POST['account_number'];
     $currency  = $_POST['currency'];
@@ -167,33 +179,33 @@ $websiteAccountId = $_SESSION["sessionuserid"];
  }
  
  else{
-    $ys =$_GET['paymentType'];
+    // $ys =$_GET['paymentType'];
 
-    $paymentType =$_POST['paymentType'];
+    // $paymentType =$_POST['paymentType'];
     $accountNumber = $_POST['cbAccountId'];
     $currency=$_POST['cbCurrency'];
     $type=1;
     $epayAccountNumber=$_POST['cbAccount'];
     $amount=$_POST['cbAmount'];
-    $website_accounts_id=$_POST['websiteAccountId'];
+    // $website_accounts_id=$_POST['websiteAccountId'];
 
     $notify= "$amount USD New CoinBase Withdraw ";
 
 
-    $transquery = "insert into transactions (account,amount,currency,type,via,website_accounts_id,status) values (?,?,?,?,?,?,?)";
+    $transquery = "insert into transactions (account,amount,currency,type,via,website_accounts_id,status,details_admin) values (?,?,?,?,?,?,?,?)";
         $trasactions = $conn->prepare($transquery);
         $account = (float)$_POST['cbAccountId'];
         $amount = (float)$_POST['cbAmount'];
         $currency = (int)$_POST['cbCurrency'];
-        $details_admin = (int)$_POST['cbAccount'];
+        $details_admin = 'CoinBase Account :' .(int)$_POST['cbAccount'];
         $website_accounts_id = $websiteAccountId;
         $via = $_GET['paymentType'];
         $type = 1;
         $status = 0;
-        $trasactions->bind_param("idsisii",$account,$amount,$currency,$type,$via,$website_accounts_id,$status);
+        $trasactions->bind_param("idsisiis",$account,$amount,$currency,$type,$via,$website_accounts_id,$status,$details_admin);
         $trasactions->execute();
 
-        echo $notify."stsyhs";
+       
 
 
         $notifyquery = "insert into notifications (website_accounts_id,notification,notification_link,notification_status,created_at) values (?,?,?,?,?)";
@@ -220,8 +232,13 @@ $websiteAccountId = $_SESSION["sessionuserid"];
         $created_at=date('Y-m-d H:i:s');
         $notsfications->bind_param("iissssssss",$website_accounts_id,$notification_status,$notification,$details,$notification_ar,$details_ar,$notification_ru,$details_ru,$notification_link,$created_at);
         $notsfications->execute();
-        
-        echo "end";
+       
+        $currency="USD";
+        $details = $amount . ' ' . $currency . ' New CoinBase Withdraw By' . $user['email'];
+        $subject = $amount . ' ' . $currency . ' New CoinBase Withdraw By' . $user['email'];
+
+        sendMailsToAdmin($details, $subject);
+       
 
         header("Location:../transactional-history.php");
 

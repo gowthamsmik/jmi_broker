@@ -39,9 +39,14 @@ if (file_exists($langFilePath)) {
 		a{
 			text-decoration: none;
 		}
-		.largemenu{
-			height: 98px !important;
-		}
+		
+		.largemenu {
+        height: 98px !important;
+        background: linear-gradient(137deg, #FED801 30%, #FFF8CE 100%);
+    }
+    .shortmenu{
+        background: linear-gradient(137deg, #FED801 30%, #FFF8CE 100%);
+    }
 		#languageDropdown{
 			width:120px;
 			color:white;
