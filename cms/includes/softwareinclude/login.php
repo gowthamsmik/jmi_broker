@@ -20,6 +20,7 @@ if ($result->num_rows > 0) {
         $key = rand(111111111, 999999999);
         $_SESSION['sessionkeyadmin'] = $key;
         $_SESSION['sessionadmin'] = $usersession;
+        echo "session".$_SESSION['sessionadmin'];
         $usertype = $row['user_role'];
         echo "success";
 

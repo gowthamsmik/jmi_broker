@@ -1,5 +1,6 @@
 <?php include('includes/header.php');
 $myReferrals = getMyReferralscms();
+$search = isset($_GET['Search']) ? $_GET['Search'] : '';
 ?>
 
 
@@ -8,7 +9,25 @@ $myReferrals = getMyReferralscms();
 		<div class="container-xl">
 			<div class="row g-3 mb-4 align-items-center justify-content-between">
 				<div class="col-auto">
-					<h1 class="app-page-title mb-0">referral Account</h1>
+					<h1 class="app-page-title mb-0">Referral Account</h1>
+				</div>
+				<div class="col-auto">
+
+				</div>
+				<div class="col-auto">
+					<div class="app-search-form" id="searchForm">
+						<form class="app-search-form">
+							<div class="input-group">
+								<input type="text" placeholder="search......" name="Search"
+									class="form-control search-input" id="searchInput" value="<?php echo $search; ?>">
+								<button type="submit" class="btn search-btn btn-primary" value="Search"><i
+										class="fa-solid fa-magnifying-glass"></i></button>
+								<button type="button" class="btn clear-search-btn btn-secondary" onclick="clearSearch()"
+									id="clearSearchButton"><i class="fa-solid fa-x"></i></button>
+							</div>
+						</form>
+					</div>
+
 				</div>
 			</div>
 			<!-- <?php if (count($myReferrals) <= 0): ?>
@@ -122,11 +141,12 @@ $myReferrals = getMyReferralscms();
 
 
 	function loadReferralAccounts(page) {
+		var searchValue = $('#searchInput').val();
 		i = 1;
 		$('#referral-account-table tbody').empty();
 		$('#pagination-container').empty();
 		$.ajax({
-			url: 'includes/softwareinclude/referral-table.php?page=' + page,
+			url: 'includes/softwareinclude/referral-table.php?page=' + page + '&Search=' + searchValue,
 			method: "GET",
 			dataType: 'json',
 			success: function (data) {
@@ -232,7 +252,7 @@ $myReferrals = getMyReferralscms();
 	function updatePagination(totalPages, currentPage, type, updateFunction) {
 
 		$('#pagination-container').empty();
-		if (updateFunction == 'loadTransactions') {
+		if (updateFunction == 'loadTransactions' ) {
 			if (currentPage > 1) {
 				$('#pagination-container').append('<button class="opt-num-btn" onclick="' + updateFunction + '(1, \'' + type + '\')">&laquo;&laquo;</button>');
 			} else {
@@ -310,5 +330,22 @@ $myReferrals = getMyReferralscms();
 
 		}
 	}
-</script>
+	function clearSearch() {
+		$('#searchInput').val(''); // Clear the search input value
+		loadReferralAccounts(1);
+		toggleClearButton(false); // Reload the table with cleared search
+	}
+	$('#searchInput').keyup(function () {
+		var searchValue = $(this).val();
+		toggleClearButton(searchValue.length > 0);
+		// Check if the search value has at least 3 characters
+		if (searchValue.length >= 3 || searchValue.length === 0) {
+			loadReferralAccounts(1);
+		}
+	});
+	function toggleClearButton(visible) {
+    var clearButton = $('#clearSearchButton');
+    clearButton.toggleClass('d-none', !visible);
+}
 
+</script>

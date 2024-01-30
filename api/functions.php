@@ -10,7 +10,9 @@ use MarcialPaulG\Coinbase\Coinbase;
 require_once '../vendor/autoload.php';
 function verifyAuthorization($headers) {
     global $secretKey;
-    global $websiteAccountId;  
+    global $websiteAccountId; 
+    global $conn;
+     
     
     if (!isset($headers['Authorization']) && !isset($headers['authorization'])) {
 
@@ -31,6 +33,18 @@ function verifyAuthorization($headers) {
 
     }
     $websiteAccountId=$decoded->user_id;
+    $websiteAccountId=$decoded->user_id;
+    $stmtUser = $conn->prepare("SELECT * FROM website_accounts WHERE id = ? ");
+    $stmtUser->bind_param('i', $websiteAccountId);
+    $stmtUser->execute();
+    $resultUser = $stmtUser->get_result();
+    $user = $resultUser->fetch_assoc();
+    if( $user['account_status']==2){
+        http_response_code(400);
+        echo json_encode(array("status"=>ERROR_STATUS,"message" => ACCOUNT_DELETED_MESSAGE)); 
+        exit();
+
+    }
     }
     catch(Exception){
         http_response_code(401);

@@ -10,12 +10,28 @@
 
 				</div>
 				<div class="col-auto">
-					<!-- <button class="btn app-btn-secondary">
-						<a class="" href="add-account.php?id=<?php echo urlencode(1); ?>">Add Account</a>
-					</button>
-​
-					<button type="button" class="btn app-btn-secondary" id="deleteAllButton"
-						onclick="deleteWebsiteAccount()" style="display: none;">Delete All</button> -->
+					<div class="row">
+						<div class="col-md-8">
+							<div class="app-search-form" id="searchForm">
+								<form class="app-search-form" method="GET">
+									<div class="input-group">
+										<input type="text" placeholder="Search ..." name="Search"
+											class="form-control search-input" id="searchInput">
+										<button type="submit" class="btn search-btn btn-primary" value="Search"><i
+												class="fa-solid fa-magnifying-glass"></i></button>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<form>
+								<button type="submit" class="btn btn-secondary"><i
+										class="fa-solid fa-times"></i></button>
+							</form>
+						</div>
+					</div>
+
 				</div>
 			</div><!--//row-->
 			<div class="tab-content" id="orders-table-tab-content">
@@ -48,7 +64,8 @@
 										$perPage = 10;
 										$index = 0;
 										$page = isset($_GET['page']) ? $_GET['page'] : 1;
-										$getAllwebsiteaccount = getAllwebsiteaccount($page, $perPage);
+										$searchValue = isset($_GET['Search']) ? $_GET['Search'] : '';
+										$getAllwebsiteaccount = getAllWebsiteAccounts($page, $perPage,$searchValue);
 
 										if ($getAllwebsiteaccount->num_rows > 0) {
 											foreach ($getAllwebsiteaccount as $websiteaccount) {
@@ -163,7 +180,7 @@
 					<nav class="app-pagination">
 							<ul class="pagination justify-content-end">
 					<?php
-                    $totalRecords = getTotalWebsiteAccounts();
+                    $totalRecords = getTotalWebsiteAccounts($searchValue);
                     $limit = 10; // Set the number of records to display per page
                     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
@@ -302,6 +319,31 @@
                     }
                 });
 			}
+			document.addEventListener('DOMContentLoaded', function () {
+			document.getElementById('searchInput').addEventListener('input', function () {
+				if (this.value.length >= 3) {
+					var form = document.getElementById('searchForm');
+					var submitButton = form.querySelector('.search-btn');
+					if (submitButton) {
+						submitButton.click();
+					}
+				}
+			});
+		});
+
+
+		$(document).ready(function () {
+			checkResponseData();
+		});
+
+		function checkResponseData() {
+			var tableBody = document.querySelector('.table.app-table-hover tbody');
+
+			if (tableBody && tableBody.rows.length === 0) {
+				var emptyMessage = '<div class="col-auto p-5 shadow"><h3 class="text-center">Data is empty</h3></div>';
+				$('.table.app-table-hover').replaceWith(emptyMessage);
+			}
+		}
 	</script>
 </div><!--//app-wrapper-->
 <?php include('includes/footer.php'); ?>

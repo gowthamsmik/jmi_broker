@@ -13,30 +13,37 @@
 				<div class="col-auto">
 					<div class="page-utilities">
 						<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							<div class="col">
+								<button type="button" class="btn bgcolor my-3" id="deleteAllenfaqButton"
+									onclick="deletarfaq()" style="display: none;">Delete All</button>
+							</div>
 							<div class="col-auto">
-								<!-- <form class="table-search-form row gx-1 align-items-center">
-										<div class="col-auto">
-											<input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
-										</div>
-										<div class="col-auto">
-											<button type="submit" class="btn app-btn-secondary">Search</button>
-										</div>
-									</form> -->
-
+								
 							</div><!--//col-->
 							<div class="col-auto">
-
-								<!-- <select class="form-select w-auto" >
-										  <option selected value="option-1">All</option>
-										  <option value="option-2">This week</option>
-										  <option value="option-3">This month</option>
-										  <option value="option-4">Last 3 months</option>
-										  
-									</select> -->
+					<div class="row">
+						<div class="col-md-8">
+							<div class="app-search-form" id="searchForm">
+								<form class="app-search-form" method="GET">
+									<div class="input-group">
+										<input type="text" placeholder="Search ..." name="Search"
+											class="form-control search-input" id="searchInput">
+										<button type="submit" class="btn search-btn btn-primary" value="Search"><i
+												class="fa-solid fa-magnifying-glass"></i></button>
+									</div>
+								</form>
 							</div>
-							<div class="col-auto">
+						</div>
 
-							</div>
+						<div class="col-md-4">
+							<form>
+								<button type="submit" class="btn btn-secondary"><i
+										class="fa-solid fa-times"></i></button>
+							</form>
+						</div>
+					</div>
+
+				</div>
 						</div><!--//row-->
 					</div><!--//table-utilities-->
 				</div><!--//col-auto-->
@@ -50,10 +57,10 @@
 					<a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab" href="#orders-cancelled" role="tab" aria-controls="orders-cancelled" aria-selected="false">Cancelled</a>
 				</nav> -->
 
-			<div class="col">
+			<!-- <div class="col">
 			<button type="button" class="btn bgcolor my-3" id="deleteAllarButton" onclick="deletarfaq()"
                     style="display: none;">Удалить все</button>
-			</div>
+			</div> -->
 			<div class="tab-content" id="orders-table-tab-content">
 				<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
 					<div class="app-card app-card-orders-table shadow-sm mb-5">
@@ -77,7 +84,8 @@
 										$perPage = 10;
 										$index = 0;
 										$page = isset($_GET['page']) ? $_GET['page'] : 1;
-										$getAllfaqs = getAllfaqs($page, $perPage);
+										$searchValue = isset($_GET['Search']) ? $_GET['Search'] : '';
+										$getAllfaqs = getAllfaqs($page, $perPage,$searchValue);
 										if ($getAllfaqs->num_rows > 0) {
 											foreach ($getAllfaqs as $thisFaq) { ?>
 												<tr>
@@ -115,7 +123,7 @@
 					<nav class="app-pagination">
 						<ul class="pagination justify-content-end">
 							<?php
-							$totalRecords = getArTotalfaqs();
+							$totalRecords = getArTotalfaqs($searchValue);
 							$limit = 10; // Set the number of records to display per page
 							$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
@@ -261,7 +269,31 @@
             //         }
             //     });
             // }
+			document.addEventListener('DOMContentLoaded', function () {
+			document.getElementById('searchInput').addEventListener('input', function () {
+				if (this.value.length >= 3) {
+					var form = document.getElementById('searchForm');
+					var submitButton = form.querySelector('.search-btn');
+					if (submitButton) {
+						submitButton.click();
+					}
+				}
+			});
+		});
 
+
+		$(document).ready(function () {
+			checkResponseData();
+		});
+
+		function checkResponseData() {
+			var tableBody = document.querySelector('.table.app-table-hover tbody');
+
+			if (tableBody && tableBody.rows.length === 0) {
+				var emptyMessage = '<div class="col-auto p-5 shadow"><h3 class="text-center">Data is empty</h3></div>';
+				$('.table.app-table-hover').replaceWith(emptyMessage);
+			}
+		}
         </script>
 </div><!--//app-wrapper-->
 <?php include('includes/footer.php'); ?>

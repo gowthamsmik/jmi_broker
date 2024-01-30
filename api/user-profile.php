@@ -13,6 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $websiteAccountStmtResult = $websiteAccountStmt->get_result();
     $websiteAccount = $websiteAccountStmtResult->fetch_all(MYSQLI_ASSOC);
 
+    
+    if (empty($websiteAccount[0]['profilePicture'])) {
+        $websiteAccount[0]['profilePicture'] = "assets/images/profiles/default-profile.png";
+    }
 
     
     $sql = "SELECT * FROM fx_accounts where website_accounts_id= ? AND account_radio_type = 1";

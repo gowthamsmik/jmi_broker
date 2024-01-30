@@ -1,12 +1,12 @@
 <?php
-if (isset($_SESSION['sessionkeyadmin'])) {
-    global $currentuserid;
-    $currentuserid = $_SESSION['sessionadmin'];
-    echo "email", $currentuserid;
-    $sessionuser = getuserinfo();
-    echo "sessionuser--" . $sessionuser;
-    $email = $sessionuser["email"];
-}
+// if (isset($_SESSION['sessionkeyadmin'])) {
+//     global $currentuserid;
+//     $currentuserid = $_SESSION['sessionadmin'];
+//     echo "email", $currentuserid;
+//     $sessionuser = getuserinfo($currentuserid);
+//     echo "sessionuser--" .$_SESSION['sessionadmin'];
+//     $email = $sessionuser["email"];
+// }
 include('includes/header.php');
 ?>
 
@@ -38,17 +38,36 @@ include('includes/header.php');
                             </div><!--//col-->
                             <div class="col-auto">
 
-                                <!-- <select class="form-select w-auto" >
-                                          <option selected value="option-1">All</option>
-                                          <option value="option-2">This week</option>
-                                          <option value="option-3">This month</option>
-                                          <option value="option-4">Last 3 months</option>
 
-                                    </select> -->
-                            </div>
-                            <div class="col-auto">
 
                             </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="app-search-form" id="searchForm">
+                                            <form class="app-search-form" method="GET">
+                                                <div class="input-group">
+                                                    <input type="text" placeholder=" search..." name="Search"
+                                        class="form-control search-input" id="searchInput">
+                                                    <button type="submit" class="btn search-btn btn-primary"
+                                                        value="Search"><i
+                                                            class="fa-solid fa-magnifying-glass"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <form>
+                                            <button type="submit" class="btn btn-secondary"><i
+                                                    class="fa-solid fa-times"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
                         </div><!--//row-->
                     </div><!--//table-utilities-->
                 </div><!--//col-auto-->
@@ -88,10 +107,11 @@ include('includes/header.php');
                                         <?php
                                         $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
                                         $limit = 10; // Set the number of records to display per page
-                                        
-                                        $getAllfaqs = getAlldocuments($currentPage, $limit);
+                                        $searchValue = isset($_GET['Search']) ? $_GET['Search'] : '';
+                                        $getAllfaqs = getAlldocuments($currentPage, $limit, $searchValue);
                                         if ($getAllfaqs->num_rows > 0) {
-                                            foreach ($getAllfaqs as $thisFaq) { ?>
+                                            foreach ($getAllfaqs as $thisFaq) {
+                                                ?>
                                                 <tr class="text-center">
                                                     <!-- <td class="cell"><input type="checkbox" class="checkbox"
                                                             data-id="<?php echo $thisFaq['id']; ?>"></td> -->
@@ -100,7 +120,7 @@ include('includes/header.php');
                                                         <?php echo $thisFaq['id']; ?>
                                                     </td>
                                                     <td class="cell"><span class="truncate">
-                                                            <?php echo $email; ?>
+                                                            <?php echo $thisFaq['account_email']; ?>
                                                         </span></td>
                                                     <td class="cell">
                                                         <?php
@@ -195,7 +215,7 @@ include('includes/header.php');
                     <nav class="app-pagination">
                         <ul class="pagination justify-content-end">
                             <?php
-                            $totalRecords = getTotalDocumentCount();
+                            $totalRecords = getTotalDocumentCount($searchValue);
                             $limit = 10; // Set the number of records to display per page
                             $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
@@ -255,13 +275,13 @@ include('includes/header.php');
         $(document).on('click', '.docaction', function () {
 
             var documentId = $(this).data('id');
-            var webid=$(this).data('webid');
+            var webid = $(this).data('webid');
             console.log("documentId===========", documentId);
             alert("Are you sure to Approved this document");
             $.ajax({
                 url: 'includes/softwareinclude/ajax.php',
                 type: 'post',
-                data: { type: 'updatedocument', id: documentId,webid: webid },
+                data: { type: 'updatedocument', id: documentId, webid: webid },
                 dataType: 'json',
                 success: function (res) {
                     console.log("updatedocument", res);
@@ -324,7 +344,7 @@ include('includes/header.php');
 
                 if (confirm('Are you sure you want to delete this record?')) {
                     // Proceed with AJAX call to delete the single record
-                    deleteRecords(recordId,webid);
+                    deleteRecords(recordId, webid);
                 }
             });
 
@@ -334,7 +354,7 @@ include('includes/header.php');
             //     $('.delete-all').toggle(anyCheckboxChecked);
             // }
 
-            function deleteRecords(ids,webid) {
+            function deleteRecords(ids, webid) {
                 // Implement the logic to delete records with the specified IDs using AJAX
                 $.ajax({
                     url: 'includes/softwareinclude/ajax.php',
@@ -357,7 +377,32 @@ include('includes/header.php');
                 });
             }
         });
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('searchInput').addEventListener('input', function () {
+                if (this.value.length >= 3) {
+                    var form = document.getElementById('searchForm');
+                    var submitButton = form.querySelector('.search-btn');
+                    if (submitButton) {
+                        submitButton.click();
+                    }
+                }
+            });
+        });
 
+
+        $(document).ready(function () {
+            checkResponseData();
+        });
+
+        function checkResponseData() {
+            var tableBody = document.querySelector('.table.app-table-hover tbody');
+
+            if (tableBody && tableBody.rows.length === 0) {
+                var emptyMessage = '<div class="col-auto p-5 shadow"><h3 class="text-center">Data is empty</h3></div>';
+                $('.table.app-table-hover').replaceWith(emptyMessage);
+            }
+        }
+        
     </script>
 
     <!-- ... (remaining HTML code) ... -->

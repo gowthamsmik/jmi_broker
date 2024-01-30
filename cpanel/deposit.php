@@ -182,7 +182,7 @@ div.form-control
                         ['image' => '../assets/images/pay-methods/2.png', 'text' => 'epay', 'button_text' => 'deposit'],
                         //['image' => '../assets/images/pay-methods/3.png', 'text' => 'Advcash', 'button_text' => 'deposit'],
                         //['image' => '../assets/images/pay-methods/5.png', 'text' => 'Perfect Money', 'button_text' => 'deposit'],
-                        ['image' => '../assets/images/pay-methods/1.png', 'text' => 'coin_base', 'button_text' => 'deposit'],
+                        // ['image' => '../assets/images/pay-methods/1.png', 'text' => 'coin_base', 'button_text' => 'deposit'],
                         //['image' => '../assets/images/pay-methods/7.png', 'text' => 'Western Union', 'button_text' => 'deposit'],
                         //['image' => '../assets/images/pay-methods/6.png', 'text' => 'Money Gram', 'button_text' => 'deposit'],
                         // Add more data as needed

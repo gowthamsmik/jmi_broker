@@ -138,7 +138,7 @@ $liveAccountsCount = count($liveaccounts);
                             ['image' => '../assets/images/pay-methods/2.png', 'text' => 'Epay', 'button_text' => 'withdraw1'],
                             //['image' => '../assets/images/pay-methods/3.png', 'text' => 'Advcash', 'button_text' => 'Withdraw'],
                             //['image' => '../assets/images/pay-methods/5.png', 'text' => 'Perfect Money', 'button_text' => 'Withdraw'],
-                            ['image' => '../assets/images/pay-methods/1.png', 'text' => 'Coin Base', 'button_text' => 'withdraw1'],
+                            // ['image' => '../assets/images/pay-methods/1.png', 'text' => 'Coin Base', 'button_text' => 'withdraw1'],
                             //['image' => '../assets/images/pay-methods/7.png', 'text' => 'Western Union', 'button_text' => 'Withdraw'],
                             //['image' => '../assets/images/pay-methods/6.png', 'text' => 'Money Gram', 'button_text' => 'Withdraw'],
                             // Add more data as needed

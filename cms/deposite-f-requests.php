@@ -87,22 +87,49 @@
 				<!-- ... (previous code) ... -->
 
 				<div class="mb-3 row">
-					<div class="status-buttons col-6">
+					<div class="status-buttons col-4">
 						<button type="button" class="btn but1 active" onclick="filterTable('all')">All</button>
 						<button type="button" class="btn but2" onclick="filterTable('1')">Done</button>
 						<button type="button" class="btn but3" onclick="filterTable('0')">Pending</button>
 						<button type="button" class="btn but4" onclick="filterTable('9')">Rejected</button>
 					</div>
-					<div class="col-4 ">
-						<button type="button" class="btn btn-primary float-end" id="extractAlldepositeButton">Export CSV</button>
+					<div class="col-2 ">
+						<button type="button" class="btn btn-primary float-end" id="extractAlldepositeButton">Export
+							CSV</button>
 					</div>
 					<div class="col-2">
-                        <?php $sort = isset($_GET['sort']) && $_GET['sort'] == "asc" ? "asc" : "desc";?>
-                        <select name="" id="deposit-fund-request" class="ms-auto me-3 px-3 py-1" onchange="updateSort()">
-                            <option value="asc" <?php echo ($sort == "asc") ? "selected" : ''; ?>>Asc</option>
-                            <option value="desc" <?php echo ($sort == "desc") ? "selected" : ''; ?>>Desc</option>
-                        </select>
-                    </div>
+						<?php $sort = isset($_GET['sort']) && $_GET['sort'] == "asc" ? "asc" : "desc"; ?>
+						<select name="" id="deposit-fund-request" class="ms-auto me-3 px-3 py-1"
+							onchange="updateSort()">
+							<option value="asc" <?php echo ($sort == "asc") ? "selected" : ''; ?>>Asc</option>
+							<option value="desc" <?php echo ($sort == "desc") ? "selected" : ''; ?>>Desc</option>
+						</select>
+					</div>
+					<div class="col-auto">
+						<div class="row">
+							<div class="col-md-8">
+								<div class="app-search-form" id="searchForm">
+									<form class="app-search-form" method="GET">
+										<div class="input-group">
+											<input type="text" placeholder="Account ID ..." name="Search"
+												class="form-control search-input" id="searchInput">
+											<button type="submit" class="btn search-btn btn-primary" value="Search"><i
+													class="fa-solid fa-magnifying-glass"></i></button>
+										</div>
+									</form>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<form>
+									<button type="submit" class="btn btn-secondary"><i
+											class="fa-solid fa-times"></i></button>
+								</form>
+							</div>
+						</div>
+
+					</div>
+
 				</div>
 
 
@@ -138,7 +165,8 @@
 											$perPage = 10;
 											$index = 0;
 											$page = isset($_GET['page']) ? $_GET['page'] : 1;
-											$getAllfundrequests = getAlldepositerequest($page, $perPage,$sort);
+											$searchValue = isset($_GET['Search']) ? $_GET['Search'] : '';
+											$getAllfundrequests = getAlldepositerequest($page, $perPage, $sort, $searchValue);
 											if ($getAllfundrequests->num_rows > 0) {
 												foreach ($getAllfundrequests as $getAllfundrequests) {
 													$index++;
@@ -346,7 +374,7 @@
 						<nav class="app-pagination">
 							<ul class="pagination justify-content-end">
 								<?php
-								$totalRecords = getTotalpagedepositerequest();
+								$totalRecords = getTotalpagedepositerequest($searchValue);
 								$limit = 10; // Set the number of records to display per page
 								$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
@@ -544,10 +572,35 @@
 
 
 			function updateSort() {
-            var selectedValue = document.getElementById("deposit-fund-request").value;
-			
-            window.location.href = "?page=1&sort=" + selectedValue;
-        }
+				var selectedValue = document.getElementById("deposit-fund-request").value;
+
+				window.location.href = "?page=1&sort=" + selectedValue;
+			}
+			document.addEventListener('DOMContentLoaded', function () {
+				document.getElementById('searchInput').addEventListener('input', function () {
+					if (this.value.length >= 3) {
+						var form = document.getElementById('searchForm');
+						var submitButton = form.querySelector('.search-btn');
+						if (submitButton) {
+							submitButton.click();
+						}
+					}
+				});
+			});
+
+
+			$(document).ready(function () {
+				checkResponseData();
+			});
+
+			function checkResponseData() {
+				var tableBody = document.querySelector('.table.app-table-hover tbody');
+
+				if (tableBody && tableBody.rows.length === 0) {
+					var emptyMessage = '<div class="col-auto p-5 shadow"><h3 class="text-center">Data is empty</h3></div>';
+					$('.table.app-table-hover').replaceWith(emptyMessage);
+				}
+			}
 		</script>
 	</div><!--//app-wrapper-->
 	<?php include('includes/footer.php'); ?>

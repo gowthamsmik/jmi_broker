@@ -10,10 +10,9 @@ function sendMailsToAdmin1($mailBody,$mailSubject){
     //require_once '../vendor/autoload.php';
     include('../vendor/autoload.php');
     try{
-    $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('marketing@jmibrokers.com');
-    //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+        $transport = new \Swift_SmtpTransport('smtp.sendgrid.net', 587, 'tls');
+        $transport->setUsername('apikey');
+        $transport->setPassword('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');
     $mailer = new Swift_Mailer($transport);
        
     // $mailTo="support@jmibrokers.com";
@@ -89,10 +88,9 @@ function sendMailsToAdmin1($mailBody,$mailSubject){
 function sendMailsToUserAp($mailBody,$mailSubject,$mailTo){
     include('../vendor/autoload.php');
     try{
-    $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('marketing@jmibrokers.com');
-    //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+        $transport = new \Swift_SmtpTransport('smtp.sendgrid.net', 587, 'tls');
+        $transport->setUsername('apikey');
+        $transport->setPassword('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');
     $mailer = new Swift_Mailer($transport);
        
    
@@ -170,10 +168,9 @@ function sendMailsToUserAp($mailBody,$mailSubject,$mailTo){
 function sendMailsToUserueje($mailTo,$token){
     include('../vendor/autoload.php');
     try{
-    $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
-    $transport->setUsername('marketing@jmibrokers.com');
-    //$transport->setPassword('JMI159BROKERS');
-    $transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
+        $transport = new \Swift_SmtpTransport('smtp.sendgrid.net', 587, 'tls');
+        $transport->setUsername('apikey');
+        $transport->setPassword('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');
     $mailer = new Swift_Mailer($transport);
        
    

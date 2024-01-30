@@ -6,12 +6,12 @@ $token = random_int(100000, 999999);
 $activationcode = $token;
 try {
   require_once 'vendor/autoload.php';
-  $transport = new \Swift_SmtpTransport('smtp-relay.brevo.com', 587, 'tls');
+  $transport = new \Swift_SmtpTransport('smtp.sendgrid.net', 587, 'tls');
   //$transport->setUsername('marketing@jmibrokers.com');
   //$transport->setPassword('JMI159BROKERS');
   //$transport->setPassword('Ngjht$#fgr%ru34gjjv%*%#');
-  $transport->setUsername('jmibrokers@88medias.com');
-  $transport->setPassword('MtacbkgqTF9071sX');
+  $transport->setUsername('apikey');
+  $transport->setPassword('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');
 
   // Create the Mailer using your created Transport
   $mailer = new Swift_Mailer($transport);

@@ -1,9 +1,10 @@
 <?php include('config.php');
 mysqli_set_charset($conn, "utf8mb4");
-function getuserinfo()
+function getuserinfo($currentuserid)
 {
-    global $conn, $currentuserid;
+    global $conn;
     $sql = "SELECT * FROM website_accounts where id = $currentuserid";
+    echo "sql ==".$sql;
     $res = $conn->query($sql);
     while ($row = $res->fetch_assoc()) {
         return $row;
@@ -18,11 +19,17 @@ function getAllPages()
 }
 
 
-function getAllfaqs($page, $perPage)
+function getAllfaqs($page, $perPage,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM faqs  ORDER BY id DESC LIMIT $offset, $perPage";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        question LIKE '%$searchValue%' OR
+        type LIKE '%$searchValue%' )";
+    }
+    $sql = "SELECT * FROM faqs WHERE 1 $searchCondition ORDER BY id DESC LIMIT $offset, $perPage";
 
     $res = $conn->query($sql);
     return $res;
@@ -298,14 +305,29 @@ function getAllLeads()
     $res = $conn->query($sql);
     return $res;
 }
-function getAllwebsiteaccount($page, $perPage)
+function getAllWebsiteAccounts($page, $perPage, $searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM website_accounts ORDER BY id DESC LIMIT $offset, $perPage";
+    $searchCondition = '';
+
+    if (!empty($searchValue)) {
+        $searchCondition = " AND (wa.username LIKE '%$searchValue%' OR 
+                             wa.fullname LIKE '%$searchValue%' OR 
+                             wa.email LIKE '%$searchValue%' OR
+                             fa.account_id LIKE '%$searchValue%')";
+    }
+
+    $sql = "SELECT wa.*, fa.* FROM website_accounts AS wa
+            LEFT JOIN fx_accounts AS fa ON wa.id = fa.website_accounts_id
+            WHERE 1 $searchCondition
+            ORDER BY wa.id DESC LIMIT $offset, $perPage";
+
     $res = $conn->query($sql);
     return $res;
 }
+
+
 function getfxaccount($id)
 {
     global $conn;
@@ -331,17 +353,21 @@ function getfxaccount($id)
 //     return $res;
 // }
 
-function getAlldepositerequest($page, $perPage, $sort)
+function getAlldepositerequest($page, $perPage, $sort,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-
-    $sql = "SELECT * FROM transactions";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        via LIKE '%$searchValue%' OR
+        account LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT * FROM transactions WHERE type=0 $searchCondition";
 
     // Add ORDER BY clause
     $sql .= " ORDER BY id " . ($sort == "desc" ? "DESC" : "ASC");
 
-    // Add LIMIT clause
     $sql .= " LIMIT $offset, $perPage";
 
     $res = $conn->query($sql);
@@ -362,12 +388,17 @@ function getAlldepositerequest($page, $perPage, $sort)
 //     return $res;
 // }
 
-function getAllwithdrawrequest($page, $perPage, $sort)
+function getAllwithdrawrequest($page, $perPage, $sort,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-
-    $sql = "SELECT * FROM transactions";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        via LIKE '%$searchValue%' OR
+        account LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT * FROM transactions WHERE type=1 $searchCondition";
 
     // Add ORDER BY clause
     $sql .= " ORDER BY id " . ($sort == "desc" ? "DESC" : "ASC");
@@ -394,12 +425,17 @@ function getAllwithdrawrequest($page, $perPage, $sort)
 //     return $res;
 // }
 
-function getAllinternalrequest($page, $perPage, $sort)
+function getAllinternalrequest($page, $perPage, $sort,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-
-    $sql = "SELECT * FROM transactions";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        via LIKE '%$searchValue%' OR
+        account LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT * FROM transactions WHERE type=2 $searchCondition";
 
     // Add ORDER BY clause
     $sql .= " ORDER BY id " . ($sort == "desc" ? "DESC" : "ASC");
@@ -415,93 +451,143 @@ function getAllinternalrequest($page, $perPage, $sort)
 
     return $res;
 }
-function getTotalWebsiteAccounts()
+function getTotalWebsiteAccounts($searchValue)
 {
     global $conn;
+    $searchCondition = '';
 
-    $sql = "SELECT COUNT(*) as total FROM website_accounts ";
+    if (!empty($searchValue)) {
+        $searchCondition = " AND (
+                            username LIKE '%$searchValue%' OR 
+                            fullname LIKE '%$searchValue%' OR 
+                            email LIKE '%$searchValue%' OR
+                            account_id LIKE '%$searchValue%')";
+    }
+
+    $sql = "SELECT COUNT(*) as total FROM website_accounts WHERE 1 $searchCondition";
+    // echo $sql."----sql";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getTotalpagedepositerequest()
+
+
+
+
+function getTotalpagedepositerequest($searchValue)
 {
     global $conn;
-
-    $sql = "SELECT COUNT(*) as total FROM transactions WHERE type = '0'";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        via LIKE '%$searchValue%' OR
+        account LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT COUNT(*) as total FROM transactions WHERE type = '0' $searchCondition";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getTotalfaqs()
+function getTotalfaqs($searchValue)
 {
     global $conn;
-
-    $sql = "SELECT COUNT(*) as total FROM faqs ";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        question LIKE '%$searchValue%' OR
+        type LIKE '%$searchValue%' )";
+    }
+    $sql = "SELECT COUNT(*) as total FROM faqs where question is not null $searchCondition";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getRuTotalfaqs()
+function getRuTotalfaqs($searchValue)
 {
     global $conn;
-
-    $sql = "SELECT COUNT(*) as total FROM ru_faqs ";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        question LIKE '%$searchValue%' OR
+        type LIKE '%$searchValue%' )";
+    }
+    $sql = "SELECT COUNT(*) as total FROM faqs where ru_question is not null $searchCondition";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getArTotalfaqs()
+function getArTotalfaqs($searchValue)
 {
     global $conn;
-
-    $sql = "SELECT COUNT(*) as total FROM faqs where ar_question is not null";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        question LIKE '%$searchValue%' OR
+        type LIKE '%$searchValue%' )";
+    }
+    $sql = "SELECT COUNT(*) as total FROM faqs where ar_question is not null $searchCondition";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getTotalpagewithdrawrequest()
+function getTotalpagewithdrawrequest($searchValue)
 {
     global $conn;
-
-    $sql = "SELECT COUNT(*) as total FROM transactions WHERE type = '1'";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        via LIKE '%$searchValue%' OR
+        account LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT COUNT(*) as total FROM transactions WHERE type = '1' $searchCondition";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getTotalpageinternalrequest()
+function getTotalpageinternalrequest($searchValue)
 {
     global $conn;
-
-    $sql = "SELECT COUNT(*) as total FROM transactions WHERE type = '2'";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        via LIKE '%$searchValue%' OR
+        account LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT COUNT(*) as total FROM transactions WHERE type = '2' $searchCondition";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getTotaldemoAccounts()
+function getTotaldemoAccounts($searchValue)
 {
     global $conn;
-
-    $sql = "SELECT COUNT(*) as total FROM fx_accounts WHERE account_radio_type = 0";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (name LIKE account_id '%$searchValue%' OR LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT COUNT(*) as total FROM fx_accounts WHERE account_radio_type = 0 $searchCondition";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getTotalliveAccounts()
+function getTotalliveAccounts($searchValue)
 {
     global $conn;
 
-    $sql = "SELECT COUNT(*) as total FROM fx_accounts WHERE account_radio_type = 1";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (name LIKE account_id '%$searchValue%' OR LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT COUNT(*) as total FROM fx_accounts WHERE account_radio_type = 1 $searchCondition";
     $result = $conn->query($sql);
-
     $row = $result->fetch_assoc();
     return $row['total'];
 }
@@ -618,19 +704,31 @@ function deletedemoAccount($id, $page)
         echo "Record deleted successfully";
     }
 }
-function getAlldemoaccount($page, $perPage)
+function getAlldemoaccount($page, $perPage, $searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM fx_accounts WHERE account_radio_type = 0 ORDER BY id DESC LIMIT $offset, $perPage";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (account_id LIKE '%$searchValue%')";
+    }
+
+    $sql = "SELECT * FROM fx_accounts WHERE account_radio_type = 0 $searchCondition ORDER BY id DESC LIMIT $offset, $perPage";
     $res = $conn->query($sql);
     return $res;
 }
-function getAllliveaccount($page, $perPage)
+
+
+function getAllliveaccount($page, $perPage, $searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM fx_accounts WHERE account_radio_type = 1 ORDER BY id DESC LIMIT $offset, $perPage";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (account_id LIKE '%$searchValue%')";
+    }
+
+    $sql = "SELECT * FROM fx_accounts WHERE account_radio_type = 1 $searchCondition ORDER BY id DESC LIMIT $offset, $perPage";
     $res = $conn->query($sql);
     return $res;
 }
@@ -697,11 +795,18 @@ function update_ar_section_field_meta($filed_name, $value, $group, $section_id)
     $res = $conn->query($sql);
 }
 
-function getAllNews($page, $perPage)
+function getAllNews($page, $perPage,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM news LIMIT $offset, $perPage";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        heading LIKE '%$searchValue%' OR
+        ar_heading LIKE '%$searchValue%' OR
+        ar_heading LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT * FROM news WHERE 1 $searchCondition LIMIT $offset, $perPage";
     $res = $conn->query($sql);
     return $res;
 }
@@ -724,11 +829,11 @@ function add_news($heading, $description, $ar_title, $ar_details, $ru_title, $ru
     // $posted_by = $conn->real_escape_string($posted_by);
     $time = time();
     $sql = "INSERT INTO `news`( `heading`, `description`,`ar_heading`,`ar_description`,`ru_heading`,`ru_description`, `posted_by`, `created_at`, `image`) VALUES ('$heading','$description','$ar_title','$ar_details','$ru_title','$ru_details','$posted_by', '$time', '$news_files')";
-   
+
     $res = $conn->query($sql);
     return $res;
 }
-function update_news($id, $heading, $description,$ar_title,$ar_details,$ru_heading,$ru_details, $posted_by, $news_files)
+function update_news($id, $heading, $description, $ar_title, $ar_details, $ru_heading, $ru_details, $posted_by, $news_files)
 {
     global $conn;
     $now = date('Y-m-d H:i:s');
@@ -895,22 +1000,40 @@ function deleteCallBackRequest($id)
         echo "Error: " . $conn->error;
     }
 }
-function getAllCallBackRequests($page, $perPage)
+function getAllCallBackRequests($page, $perPage,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM callbackrequest ORDER BY id DESC LIMIT $offset, $perPage";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        fullname LIKE '%$searchValue%' OR
+        email LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT * FROM callbackrequest WHERE 1 $searchCondition ORDER BY id DESC LIMIT $offset, $perPage";
     $res = $conn->query($sql);
     return $res;
 }
-function getAllMailListAccounts($page, $perPage)
+function getAllMailListAccounts($page, $perPage, $searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM maillist ORDER BY id DESC LIMIT $offset, $perPage";
+    $searchCondition = "";
+
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR mail LIKE '%$searchValue%' OR name LIKE '%$searchValue%')";
+    }
+
+    $sql = "SELECT * FROM maillist WHERE 1 $searchCondition ORDER BY id DESC LIMIT $offset, $perPage";
     $res = $conn->query($sql);
+
+    if (!$res) {
+        echo "Error: " . $conn->error;
+    }
+
     return $res;
 }
+
 function getAllSearchUrls($page, $perPage)
 {
     global $conn;
@@ -928,10 +1051,15 @@ function getTotalAllSearchUrls()
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getTotalMailListAccounts()
+function getTotalMailListAccounts($searchValue)
 {
     global $conn;
-    $sql = "SELECT COUNT(*) as total FROM maillist ";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        heading LIKE '%$searchValue%' )";
+    }
+    $sql = "SELECT COUNT(*) as total FROM maillist WHERE 1 $searchCondition";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     return $row['total'];
@@ -1070,11 +1198,15 @@ function getAllLandingUsers($searchType, $searchValue, $perPage, $page)
 
 
 
-function getAllTechnicalAnalysis($page, $perPage)
+function getAllTechnicalAnalysis($page, $perPage,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM technicalanalysis ";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (title LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT * FROM technicalanalysis WHERE 1 $searchCondition ";
     $end = ($offset + $perPage);
     $sql .= " LIMIT $offset,$end ";
     $res = $conn->query($sql);
@@ -1083,11 +1215,16 @@ function getAllTechnicalAnalysis($page, $perPage)
     }
     return $res;
 }
-function getAllFundamentalAnalysis($page, $perPage)
+function getAllFundamentalAnalysis($page, $perPage,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM fundamental_analysis ORDER BY id DESC LIMIT $offset, $perPage";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        heading LIKE '%$searchValue%' )";
+    }
+    $sql = "SELECT * FROM fundamental_analysis WHERE 1 $searchCondition ORDER BY id DESC LIMIT $offset, $perPage";
     $res = $conn->query($sql);
     if (!$res) {
         echo "Error: " . $conn->error;
@@ -1095,10 +1232,15 @@ function getAllFundamentalAnalysis($page, $perPage)
     return $res;
 }
 
-function getTotalfundamentalAnalysis()
+function getTotalfundamentalAnalysis($searchValue)
 {
     global $conn;
-    $sql = "SELECT COUNT(*) as total FROM fundamental_analysis WHERE 1=1";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        heading LIKE '%$searchValue%' )";
+    }
+    $sql = "SELECT COUNT(*) as total FROM fundamental_analysis WHERE 1=1 $searchCondition";
     $result = $conn->query($sql);
     if (!$result) {
         echo "Error: " . $conn->error;
@@ -1107,10 +1249,14 @@ function getTotalfundamentalAnalysis()
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getTotalTechnicalAnalysis()
+function getTotalTechnicalAnalysis($searchValue)
 {
     global $conn;
-    $sql = "SELECT COUNT(*) as total FROM technicalanalysis WHERE 1=1";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (title LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT COUNT(*) as total FROM technicalanalysis WHERE 1=1 $searchCondition";
     $result = $conn->query($sql);
     if (!$result) {
         echo "Error: " . $conn->error;
@@ -1403,8 +1549,8 @@ function getfundamentalview($id)
     return $details;
 }
 function updateFundamentalAnalysis($id, $heading, $description, $targetFile)
-{   
-    if($targetFile=='null'){
+{
+    if ($targetFile == 'null') {
         global $conn;
         $now = date('Y-m-d H:i:s');
         $sql = "UPDATE fundamental_analysis SET heading= '$heading',description = '$description' WHERE id='$id'";
@@ -1414,7 +1560,7 @@ function updateFundamentalAnalysis($id, $heading, $description, $targetFile)
             echo "Error: " . $conn->error;
         }
         return $res;
-    }else{
+    } else {
         global $conn;
         $now = date('Y-m-d H:i:s');
         $sql = "UPDATE fundamental_analysis SET heading= '$heading',description = '$description' ,image='$targetFile' WHERE id='$id'";
@@ -1425,7 +1571,7 @@ function updateFundamentalAnalysis($id, $heading, $description, $targetFile)
         }
         return $res;
     }
-    
+
 }
 
 function addoffers($offertype, $title, $details, $offerstatus, $arabic_title, $arabic_details, $targetFile, $russian_title, $russian_details)
@@ -1443,11 +1589,15 @@ function addoffers($offertype, $title, $details, $offerstatus, $arabic_title, $a
     return $res;
 
 }
-function getAlloffers($page, $perPage)
+function getAlloffers($page, $perPage,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM offers_events ORDER BY id DESC LIMIT $offset, $perPage";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (title LIKE '%$searchValue%' )";
+    }
+    $sql = "SELECT * FROM offers_events WHERE 1 $searchCondition ORDER BY id DESC LIMIT $offset, $perPage";
     $res = $conn->query($sql);
     if (!$res) {
         echo "Error: " . $conn->error;
@@ -1571,10 +1721,14 @@ function updateofferstatus($offerStatus, $offerId)
     }
     return $res;
 }
-function getTotalofferAnalysis()
+function getTotalofferAnalysis($searchValue)
 {
     global $conn;
-    $sql = "SELECT COUNT(*) as total FROM offers_events WHERE 1=1";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (title LIKE '%$searchValue%' )";
+    }
+    $sql = "SELECT COUNT(*) as total FROM offers_events WHERE 1=1 $searchCondition";
     $result = $conn->query($sql);
     if (!$result) {
         echo "Error: " . $conn->error;
@@ -1583,10 +1737,16 @@ function getTotalofferAnalysis()
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getTotalcallbackreq()
+function getTotalcallbackreq($searchValue)
 {
     global $conn;
-    $sql = "SELECT COUNT(*) as total FROM callbackrequest WHERE 1=1";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        fullname LIKE '%$searchValue%' OR
+        email LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT COUNT(*) as total FROM callbackrequest WHERE 1=1 $searchCondition";
     $result = $conn->query($sql);
     if (!$result) {
         echo "Error: " . $conn->error;
@@ -1622,10 +1782,14 @@ function getTotaladmins()
     $row = $result->fetch_assoc();
     return $row['total'];
 }
-function getTotalcopytrade()
+function getTotalcopytrade($searchValue)
 {
     global $conn;
-    $sql = "SELECT COUNT(*) as total FROM copy_trade";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT COUNT(*) as total FROM copy_trade WHERE 1 $searchCondition";
     $result = $conn->query($sql);
     if (!$result) {
         echo "Error: " . $conn->error;
@@ -2095,7 +2259,7 @@ function update_status($id, $status, $details_user)
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            $sql="SELECT * FROM transactions WHERE id = $id";
+            $sql = "SELECT * FROM transactions WHERE id = $id";
             $response = $conn->query($sql);
             if (!$response) {
                 $now = date('Y-m-d H:i:s');
@@ -2104,7 +2268,7 @@ function update_status($id, $status, $details_user)
                 VALUES ('$response[website_accounts_id], '0', 'Your Deposit $response[amount] USD Has Been Done Successfully', 'Your Deposit $response[amount] USD Has Been Done Successfully','تم ايداع مبلغ $response[amount] بنجاح تم حذف المستند بجاح','Ваш депозит $response[amount] долларов США был успешно внесен','Ваш депозит $response[amount] долларов США был успешно внесен','/cpanel/transactional-history', '$now')";
                 echo "sqll" . $sql;
                 $res = $conn->query($sql);
-            echo "Update successful.";
+                echo "Update successful.";
             }
         } else {
             echo "Update failed.";
@@ -2127,7 +2291,7 @@ function update_rej_status($id, $status, $details_user)
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            $sql="SELECT * FROM transactions WHERE id = $id";
+            $sql = "SELECT * FROM transactions WHERE id = $id";
             $response = $conn->query($sql);
             if (!$response) {
                 $now = date('Y-m-d H:i:s');
@@ -2136,7 +2300,7 @@ function update_rej_status($id, $status, $details_user)
                 VALUES ('$response[website_accounts_id], '0', 'Your Deposit $response[amount] USD Has Been Done Successfully', 'Your Deposit $response[amount] USD Has Been Done Successfully','تم ايداع مبلغ $response[amount] بنجاح تم حذف المستند بجاح','Ваш депозит $response[amount] долларов США был успешно внесен','Ваш депозит $response[amount] долларов США был успешно внесен','/cpanel/transactional-history', '$now')";
                 echo "sqll" . $sql;
                 $res = $conn->query($sql);
-            echo "Update successful.";
+                echo "Update successful.";
             }
         } else {
             echo "Update failed.";
@@ -2227,22 +2391,54 @@ function getDocumentContent($id)
         return false;
     }
 }
-function getAlldocuments($page = 1, $limit = 10)
+// function getAlldocuments($page = 1, $limit = 10)
+// {
+//     global $conn;
+//     $offset = ($page - 1) * $limit;
+//     $sql = "SELECT * FROM documents ORDER BY id DESC LIMIT $offset, $limit";
+//     $res = $conn->query($sql);
+//     return $res;
+// }
+function getAlldocuments($page , $limit , $searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $limit;
-    $sql = "SELECT * FROM documents ORDER BY id DESC LIMIT $offset, $limit";
+    $searchCondition = "";
+    
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (documents.id LIKE '%$searchValue%' OR
+        website_accounts.email LIKE '%$searchValue%')";
+    }
+
+    $sql = "SELECT documents.*, website_accounts.email AS account_email
+            FROM documents
+            LEFT JOIN website_accounts ON documents.website_accounts_id = website_accounts.id
+            WHERE 1 $searchCondition
+            ORDER BY documents.id DESC
+            LIMIT $offset, $limit";
+
     $res = $conn->query($sql);
+    
     return $res;
 }
-function getTotalDocumentCount()
+
+
+
+function getTotalDocumentCount($searchValue)
 {
     global $conn;
-    $sql = "SELECT COUNT(*) AS count FROM documents";
+    $searchCondition = "";
+    
+    if (!empty($searchValue)) {
+        $searchCondition = "WHERE (id LIKE '%$searchValue%' OR email LIKE '%$searchValue%')";
+    }
+
+    $sql = "SELECT COUNT(*) AS count FROM documents $searchCondition";
     $res = $conn->query($sql);
     $row = $res->fetch_assoc();
     return $row['count'];
 }
+
 function updatedocument($id, $status, $webid)
 {
     global $conn;
@@ -2378,10 +2574,10 @@ function emailQueue()
                     $titles = ['Mr', 'Mrs', 'Miss'];
 
                     // Use the indexed title or default to an empty string if not found
-                    $titleString[]= $titles[$titleIndex] ?? '';
-                    
-                
-                
+                    $titleString[] = $titles[$titleIndex] ?? '';
+
+
+
                 }
                 require_once '../vendor/autoload.php';
                 $transport = new \Swift_SmtpTransport('smtp.office365.com', 587, 'tls');
@@ -2398,7 +2594,7 @@ function emailQueue()
                         $nameToSend = $name[$index] ?? '';
 
                         $titleToSend = $titleString[$index] ?? '';
-                        $sendBody='<!DOCTYPE html>
+                        $sendBody = '<!DOCTYPE html>
                 <html lang="en">
                 
                 <head>
@@ -2413,7 +2609,7 @@ function emailQueue()
                         </div>
                         <img src="https://jmibrokers.com/assets/images/img_mail_template/maintmp.jpg" alt="404" style="width: 100%; height: auto; ">
                         <div style="padding: 0 5% 0 5% ;">
-                            <h2 style="color:#07348f;">Hello <span>' .$titleToSend.'.'.$nameToSend.'</span></h2>
+                            <h2 style="color:#07348f;">Hello <span>' . $titleToSend . '.' . $nameToSend . '</span></h2>
 
                             <p>' . $body . '</p>
                 
@@ -2588,11 +2784,17 @@ function update_ar_package($id, $name, $price, $discount_line, $tag_line, $descr
     $res = $conn->query($sql);
     return $res;
 }
-function getTotalNews()
+function getTotalNews($searchValue)
 {
     global $conn;
-
-    $sql = "SELECT COUNT(*) as total FROM news ";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        heading LIKE '%$searchValue%' OR
+        ar_heading LIKE '%$searchValue%' OR
+        ar_heading LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT COUNT(*) as total FROM news WHERE 1 $searchCondition";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
@@ -2654,19 +2856,32 @@ function deletepackages($ids, $page)
         echo "Records deleted successfully";
     }
 }
-function getAllbecomeourpartner($page, $perPage)
+function getAllbecomeourpartner($page, $perPage,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
-    $sql = "SELECT * FROM becomepartner ORDER BY id DESC LIMIT $offset, $perPage";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        name LIKE '%$searchValue%' OR
+        email LIKE '%$searchValue%' OR
+        company LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT * FROM becomepartner WHERE 1 $searchCondition ORDER BY id DESC LIMIT $offset, $perPage";
     $res = $conn->query($sql);
     return $res;
 }
-function getTotalbecomepartner()
+function getTotalbecomepartner($searchValue)
 {
     global $conn;
-
-    $sql = "SELECT COUNT(*) as total FROM becomepartner ";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        name LIKE '%$searchValue%' OR
+        email LIKE '%$searchValue%' OR
+        company LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT COUNT(*) as total FROM becomepartner WHERE 1 $searchCondition";
     $result = $conn->query($sql);
 
     $row = $result->fetch_assoc();
@@ -2708,11 +2923,15 @@ function deletebecomepartner($ids, $page)
         echo "Records deleted successfully";
     }
 }
-function getAllUserinfo()
+function getAllUserinfo($id,$searchValue)
 {
     global $conn, $currentuserid;
-
-    $sql = "SELECT * FROM website_accounts";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%' OR
+        email LIKE '%$searchValue%' )";
+    }
+    $sql = "SELECT * FROM website_accounts WHERE id=$id $searchCondition";
     $res = $conn->query($sql);
     while ($row = $res->fetch_assoc()) {
         return $row;
@@ -2738,7 +2957,7 @@ function approvetrade($id, $status)
 // {
 //     global $conn;
 //     $offset = ($page - 1) * $perPage;
-    
+
 //     $sql = "SELECT * FROM copy_trade ORDER BY id DESC";
 //     if($sort!="desc")
 //         $sql = "SELECT * FROM copy_trade ORDER BY id ASC";
@@ -2751,12 +2970,16 @@ function approvetrade($id, $status)
 //     return $res;
 // }
 
-function getAllcopytrade($page, $perPage, $sort)
+function getAllcopytrade($page, $perPage, $sort,$searchValue)
 {
     global $conn;
     $offset = ($page - 1) * $perPage;
 
-    $sql = "SELECT * FROM copy_trade";
+    $searchCondition = "";
+    if (!empty($searchValue)) {
+        $searchCondition = "AND (id LIKE '%$searchValue%')";
+    }
+    $sql = "SELECT * FROM copy_trade WHERE 1 $searchCondition";
 
     // Add ORDER BY clause
     $sql .= " ORDER BY id " . ($sort == "desc" ? "DESC" : "ASC");
@@ -2861,20 +3084,21 @@ function deletesingledemoaccount($ids)
     // Return the response as plain text
     echo $response;
 }
-function deletesinglewebsiteaccount($ids)
+function deletesinglewebsiteaccount($id)
 {
     global $conn;
+    echo "id--" . $id;
     try {
-        // Sanitize and validate the input
-
-        $sql = "DELETE FROM website_accounts WHERE id IN ($ids)";
+        $sql = "DELETE FROM website_accounts WHERE id = $id";
         $res = $conn->query($sql);
 
         if (!$res) {
             throw new Exception($conn->error);
         }
 
-        $response = 'success';
+        // Add debugging information
+        // $affectedRows = $conn->affected_rows;
+        $response = 'success: ';
     } catch (Exception $e) {
         $response = 'error: ' . $e->getMessage();
     }
@@ -2882,6 +3106,7 @@ function deletesinglewebsiteaccount($ids)
     // Return the response as plain text
     echo $response;
 }
+
 function getWebsiteAccountsForReferral()
 {
     global $conn;
@@ -3231,7 +3456,8 @@ function getAllunion($page = 1, $limit = 10)
     $res = $conn->query($sql);
     return $res;
 }
-function getaccountwebid($user_id){
+function getaccountwebid($user_id)
+{
     global $conn;
     $sql = "SELECT * FROM website_accounts WHERE id= $user_id";
     $res = $conn->query($sql);
@@ -3421,16 +3647,17 @@ function getStatustransaction($statusValue)
 {
     switch ($statusValue) {
         case '1':
-            return'Done';
+            return 'Done';
         case '0':
             return 'Pending';
         case '9':
             return 'Rejected';
         default:
-        return 'Unknown';
+            return 'Unknown';
     }
 }
-function gettransactionname($transactionType){
+function gettransactionname($transactionType)
+{
     switch ($transactionType) {
         case '0':
             return 'Deposit';
@@ -3439,7 +3666,7 @@ function gettransactionname($transactionType){
         case '2':
             return 'Internal Transfer';
         default:
-        return 'Internal Transfer';
+            return 'Internal Transfer';
     }
 }
 function extractallsearchurl()
@@ -3552,7 +3779,8 @@ function extractallmailer()
     echo json_encode(['success' => true, 'message' => 'CSV extraction successful']);
     exit;
 }
-function getMyReferralscms() {
+function getMyReferralscms()
+{
     global $conn;
     // $referralId = $userId + 10000;
     $sql = "SELECT * FROM website_accounts WHERE invited_by > 10000";

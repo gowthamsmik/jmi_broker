@@ -15,15 +15,8 @@
                     <div class="page-utilities">
                         <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                             <div class="col-auto">
-                                <!-- <form class="table-search-form row gx-1 align-items-center">
-                                        <div class="col-auto">
-                                            <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
-                                        </div>
-                                        <div class="col-auto">
-                                            <button type="submit" class="btn app-btn-secondary">Search</button>
-                                        </div>
-                                    </form> -->
-
+                                <button type="button" class="btn app-btn-secondary my-3" id="deleteAllButton"
+                                    onclick="deleteWebsiteAccount()" style="display: none;">Delete All</button>
                             </div><!--//col-->
                             <div class="col-auto">
 
@@ -36,8 +29,29 @@
                                     </select> -->
                             </div>
                             <div class="col-auto">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="app-search-form" id="searchForm">
+                                        <form class="app-search-form" method="GET">
+                                            <div class="input-group">
+                                                <input type="text" placeholder="Search..." name="Search"
+                                                    class="form-control search-input" id="searchInput">
+                                                <button type="submit" class="btn search-btn btn-primary"
+                                                    value="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
 
+                                <div class="col-md-4">
+                                    <form>
+                                        <button type="submit" class="btn btn-secondary"><i
+                                                class="fa-solid fa-times"></i></button>
+                                    </form>
+                                </div>
                             </div>
+
+                        </div>
                         </div><!--//row-->
                     </div><!--//table-utilities-->
                 </div><!--//col-auto-->
@@ -50,10 +64,7 @@
                     <a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab" href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Pending</a>
                     <a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab" href="#orders-cancelled" role="tab" aria-controls="orders-cancelled" aria-selected="false">Cancelled</a>
                 </nav> -->
-            <div>
-                <button type="button" class="btn app-btn-secondary my-3" id="deleteAllButton"
-                    onclick="deleteWebsiteAccount()" style="display: none;">Delete All</button>
-            </div>
+
             <div class="tab-content" id="orders-table-tab-content">
                 <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                     <div class="app-card app-card-orders-table shadow-sm mb-5">
@@ -81,7 +92,8 @@
                                         $perPage = 10;
                                         $index = 0;
                                         $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                                        $getAllPackages = getAllbecomeourpartner($page, $perPage);
+                                        $searchValue = isset($_GET['Search']) ? $_GET['Search'] : '';
+                                        $getAllPackages = getAllbecomeourpartner($page, $perPage,$searchValue);
                                         if ($getAllPackages->num_rows > 0) {
                                             foreach ($getAllPackages as $thisPackage) {
                                                 $index++;
@@ -134,45 +146,45 @@
                         </div><!--//app-card-body-->
                     </div><!--//app-card-->
                     <nav class="app-pagination">
-                            <ul class="pagination justify-content-end">
-                                <?php
-                                $totalRecords = getTotalbecomepartner();
-                                $limit = 10; // Set the number of records to display per page
-                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                        <ul class="pagination justify-content-end">
+                            <?php
+                            $totalRecords = getTotalbecomepartner($searchValue);
+                            $limit = 10; // Set the number of records to display per page
+                            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-                                // Calculate the total number of pages
-                                $totalPages = ceil($totalRecords / $limit);
+                            // Calculate the total number of pages
+                            $totalPages = ceil($totalRecords / $limit);
 
-                                // Determine the starting and ending page numbers to display
-                                $startPage = max($currentPage - 3, 1);
-                                $endPage = min($startPage + 5, $totalPages);
+                            // Determine the starting and ending page numbers to display
+                            $startPage = max($currentPage - 3, 1);
+                            $endPage = min($startPage + 5, $totalPages);
 
-                                // Display pagination links
-                                echo '<ul class="pagination justify-content-end">';
+                            // Display pagination links
+                            echo '<ul class="pagination justify-content-end">';
 
-                                // First button
-                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
+                            // First button
+                            echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
 
-                                // Previous button
-                                $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
-                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+                            // Previous button
+                            $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+                            echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
 
-                                // Page numbers
-                                for ($i = $startPage; $i <= $endPage; $i++) {
-                                    echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-                                }
+                            // Page numbers
+                            for ($i = $startPage; $i <= $endPage; $i++) {
+                                echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                            }
 
-                                // Next button
-                                $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
-                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+                            // Next button
+                            $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+                            echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
 
-                                // Last button
-                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
+                            // Last button
+                            echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
 
-                                echo '</ul>';
-                                ?>
-                            </ul>
-                        </nav>
+                            echo '</ul>';
+                            ?>
+                        </ul>
+                    </nav>
 
                 </div><!--//tab-pane-->
 
@@ -262,6 +274,31 @@
         window.onload = function () {
             toggleSelectAll();
         };
+        document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('searchInput').addEventListener('input', function () {
+                    if (this.value.length >= 3) {
+                        var form = document.getElementById('searchForm');
+                        var submitButton = form.querySelector('.search-btn');
+                        if (submitButton) {
+                            submitButton.click();
+                        }
+                    }
+                });
+            });
+
+
+            $(document).ready(function () {
+                checkResponseData();
+            });
+
+            function checkResponseData() {
+                var tableBody = document.querySelector('.table.app-table-hover tbody');
+
+                if (tableBody && tableBody.rows.length === 0) {
+                    var emptyMessage = '<div class="col-auto p-5 shadow"><h3 class="text-center">Data is empty</h3></div>';
+                    $('.table.app-table-hover').replaceWith(emptyMessage);
+                }
+            }
     </script>
 </div><!--//app-wrapper-->
 <?php include('includes/footer.php'); ?>

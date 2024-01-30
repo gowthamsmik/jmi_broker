@@ -757,9 +757,8 @@ if ($_POST['type'] == 'deletesingledemoaccount') {
     deletesingledemoaccount($ids);
 }
 if ($_POST['type'] == 'deletesinglewebsiteaccount') {
-    $ids = $_POST['ids'];
-    echo "ids--" . $ids . "--";
-    deletesinglewebsiteaccount($ids);
+    $id = $_POST['ids'];
+    deletesinglewebsiteaccount($id);
 }
 // if ($_POST['type'] == 'open-live') {
 //     extract($_POST);
@@ -862,4 +861,8 @@ if ($_POST['type'] === 'extract-all-copy-trade') {
   if ($_POST['type'] === 'extract-all-mailer') {
     extractallmailer();
       
+  }
+  if($_POST['type'] === 'fetchDemoAccounts'){
+    extract($_POST);
+    getAlldemoaccount($page, $search);
   }

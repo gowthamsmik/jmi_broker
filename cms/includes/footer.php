@@ -36,7 +36,7 @@
             success: function (res) {
                 console.log(res);
                 alert('Page Updated');
-                window.location.href='all-lang-pages.php';
+                window.location.href = 'all-lang-pages.php';
             }
         })
         homepag = true;
@@ -56,7 +56,7 @@
             success: function (res) {
                 console.log(res);
                 alert('Page Updated');
-                window.location.href='all-lang-pages.php';
+                window.location.href = 'all-lang-pages.php';
             }
         })
         homerupag = true;
@@ -76,7 +76,7 @@
             success: function (res) {
                 console.log(res);
                 alert('Page Updated');
-                window.location.href='all-lang-pages.php';
+                window.location.href = 'all-lang-pages.php';
             }
         })
         homearpag = true;
@@ -96,7 +96,7 @@
             success: function (res) {
                 console.log(res);
                 alert('Section Updated');
-                window.location.href='all-lang-sections.php';
+                window.location.href = 'all-lang-sections.php';
             }
         })
         secform = true;
@@ -116,7 +116,7 @@
             success: function (res) {
                 console.log(res);
                 alert('Section Updated');
-                window.location.href='all-lang-sections.php';
+                window.location.href = 'all-lang-sections.php';
             }
         })
         secruform = true;
@@ -136,7 +136,7 @@
             success: function (res) {
                 console.log(res);
                 alert('Section Updated');
-                window.location.href='all-lang-sections.php';
+                window.location.href = 'all-lang-sections.php';
             }
         })
         secarform = true;
@@ -1748,7 +1748,7 @@
         }
         e.preventDefault();
         var notificationId = $(this).data('notification-id');
-        var location=$(this).data('location');
+        var location = $(this).data('location');
         console.log("Notification ID:", notificationId);
 
         $.ajax({
@@ -1764,6 +1764,9 @@
         })
         return notificationupdate = true;
     })
+   
+
+
 </script>
 
 

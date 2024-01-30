@@ -508,5 +508,35 @@ function withdrawValidation($data)
     }
 }
 
+function changeFxAccountPasswordValidation($data)
+{
+    http_response_code(400);
+    $errors = array();
+
+
+    if (!isset($data['newInvestorPassword']) || empty(trim($data['newInvestorPassword']))) {
+        $errors['newInvestorPassword'] = NEW_INVESTOR_PASSWORD_REQUIRED_ERROR_MESSAGE;
+    }
+    
+    if (!isset($data['newRealPassword']) || empty(trim($data['newRealPassword']))) {
+        $errors['newRealPassword'] = NEW_REAL_PASSWORD_REQUIRED_ERROR_MESSAGE;
+    }
+    
+    if (!isset($data['oldRealPassword']) || empty(trim($data['oldRealPassword']))) {
+        $errors['oldRealPassword'] = OLD_REAL_PASSWORD_REQUIRED_ERROR_MESSAGE;
+    }
+
+    if (count($errors) > 0) {
+        echo json_encode(array("status" => ERROR_STATUS, "message" => $errors));
+    }
+}
+function isValidDateFormat($date, $format = 'Y-m-d') {
+    // $dateTime = DateTime::createFromFormat($format, $date);
+    // return $dateTime && $dateTime->format($format) === $date;
+
+    return (strtotime($date) !== false);
+}
+
+
 
 ?>

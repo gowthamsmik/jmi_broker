@@ -122,4 +122,32 @@ define('BANK_NAME_REQUIRED_ERROR_MESSAGE', 'bankName is required and should not 
 define('BANK_SWIFT_REQUIRED_ERROR_MESSAGE', 'bankSwift is required and should not be empty.');
 
 define('BANK_IBAN_REQUIRED_ERROR_MESSAGE', 'bankIban is required and should not be empty.');
+
+define('ACCOUNT_DELETED_MESSAGE', "Your Account is deleted.");
+
+define('NEW_INVESTOR_PASSWORD_REQUIRED_ERROR_MESSAGE', 'newInvestorPassword is required and should not be empty.');
+
+define('NEW_REAL_PASSWORD_REQUIRED_ERROR_MESSAGE', 'newRealPassword required and should not be empty.');
+
+define('OLD_REAL_PASSWORD_REQUIRED_ERROR_MESSAGE', 'oldRealPassword required and should not be empty.');
+
+define('ACCOUNT_NOT_EDITABLE_ERROR_MESSAGE', 'Account not editable');
+
+define('NOT_ENOUGH_MONEY_ERROR_MESSAGE', 'No Enough Money');
+
+define('INVALID_DATA_ERROR_MESSAGE', 'Invalid Data');
+
+define('PASSWORD_CHANGE_ERROR_MESSAGE', 'Password Change Failed.');
+
+define('PASSWORD_CHANGE_SUCCESS_MESSAGE', 'Password Changed Successfully.');
+
+define('ACCOUNT_NOT_DELETE_ERROR_MESSAGE', 'Account! Cannot Delete');
+
+define('ACCOUNT_ALREDY_DELETE_ERROR_MESSAGE', 'Account! Already Deleted');
+
+define('INVALID_DATE_ERROR_MESSAGE', 'Invalid date format. Both fromDate and toDate must be in Y-m-d format.');
+
+define('DATE_REQUIRED_ERROR_MESSAGE', 'Both fromDate and toDate are required for filter.');
+
+
 ?>

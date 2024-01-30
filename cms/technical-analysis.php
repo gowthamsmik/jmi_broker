@@ -1,4 +1,4 @@
-<?php include('includes/header.php'); 
+<?php include('includes/header.php');
 global $hostname; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,14 +92,14 @@ global $hostname; ?>
     <title>Your Form</title>
     <script src="https://<?php echo $hostname; ?>/cms/assets/js/tinymce/tinymce.min.js"></script>
     <script src="https://<?php echo $hostname; ?>/cms/assets/js/tinymce/themes/modern/theme.min.js"></script>
-<script>
-  tinymce.init({
-    selector: 'textarea',
-    plugins: 'preview textcolor image link media code wordcount emoticons', // Add any additional plugins you need
-    toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code',
-    menubar: 'file edit view insert format tools table help',
-  });
-</script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'preview textcolor image link media code wordcount emoticons', // Add any additional plugins you need
+            toolbar: 'undo redo | formatselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code',
+            menubar: 'file edit view insert format tools table help',
+        });
+    </script>
 
 </head>
 
@@ -174,8 +174,41 @@ global $hostname; ?>
                         </div>
                     </div>
                 </form> -->
-                <button type="button" class="btn bgcolor my-3" id="deleteAllButton" onclick="deletetechnicalanalysis()"
-                    style="display: none;">Delete All</button>
+                <div class="row g-3 mb-4 align-items-center justify-content-between">
+                    <div class="col-auto">
+                        <button type="button" class="btn bgcolor my-3" id="deleteAllButton"
+                            onclick="deletetechnicalanalysis()" style="display: none;">Delete All</button>
+                    </div>
+                    <div class="col-auto">
+
+
+                    </div>
+                    <div class="col-auto">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="app-search-form" id="searchForm">
+								<form class="app-search-form" method="GET">
+									<div class="input-group">
+										<input type="text" placeholder="Search ..." name="Search"
+											class="form-control search-input" id="searchInput">
+										<button type="submit" class="btn search-btn btn-primary" value="Search"><i
+												class="fa-solid fa-magnifying-glass"></i></button>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<form>
+								<button type="submit" class="btn btn-secondary"><i
+										class="fa-solid fa-times"></i></button>
+							</form>
+						</div>
+					</div>
+
+				</div>
+                </div><!--//row-->
+
                 <div class="tab-content" id="orders-table-tab-content">
                     <div class="tab-pane fade show active" id="orders-all" role="tabpanel"
                         aria-labelledby="orders-all-tab">
@@ -204,9 +237,10 @@ global $hostname; ?>
 
                                             $index = 0;
                                             $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                            $searchValue = isset($_GET['Search']) ? $_GET['Search'] : '';
                                             // echo "perpage".$perPage;
                                             // echo "page".$page;
-                                            $getAllMailListAccount = getAllTechnicalAnalysis($page, $perPage);
+                                            $getAllMailListAccount = getAllTechnicalAnalysis($page, $perPage, $searchValue);
                                             if ($getAllMailListAccount->num_rows > 0) {
                                                 foreach ($getAllMailListAccount as $mailListAccount) {
                                                     $index++;
@@ -387,46 +421,46 @@ global $hostname; ?>
                             </div>
                         </div>
                         <nav class="app-pagination">
-							<ul class="pagination justify-content-end">
-					<?php
-                    $totalRecords = getTotalTechnicalAnalysis();
-                    $limit = 10; // Set the number of records to display per page
-                    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+                            <ul class="pagination justify-content-end">
+                                <?php
+                                $totalRecords = getTotalTechnicalAnalysis($searchValue);
+                                $limit = 10; // Set the number of records to display per page
+                                $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
-                    // Calculate the total number of pages
-                    $totalPages = ceil($totalRecords / $limit);
+                                // Calculate the total number of pages
+                                $totalPages = ceil($totalRecords / $limit);
 
-                    // Determine the starting and ending page numbers to display
-                    $startPage = max($currentPage - 3, 1);
-                    $endPage = min($startPage + 5, $totalPages);
+                                // Determine the starting and ending page numbers to display
+                                $startPage = max($currentPage - 3, 1);
+                                $endPage = min($startPage + 5, $totalPages);
 
-                    // Display pagination links
-                    echo '<ul class="pagination justify-content-end">';
+                                // Display pagination links
+                                echo '<ul class="pagination justify-content-end">';
 
-                    // First button
-                    echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
+                                // First button
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=1" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a></li>';
 
-                    // Previous button
-                    $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
-                    echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+                                // Previous button
+                                $prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+                                echo '<li class="page-item ' . ($currentPage == 1 ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $prevPage . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
 
-                    // Page numbers
-                    for ($i = $startPage; $i <= $endPage; $i++) {
-                        echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-                    }
+                                // Page numbers
+                                for ($i = $startPage; $i <= $endPage; $i++) {
+                                    echo '<li class="page-item ' . ($currentPage == $i ? 'active' : '') . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                }
 
-                    // Next button
-                    $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
-                    echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+                                // Next button
+                                $nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $nextPage . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
 
-                    // Last button
-                    echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
+                                // Last button
+                                echo '<li class="page-item ' . ($currentPage == $totalPages ? 'disabled' : '') . '"><a class="page-link" href="?page=' . $totalPages . '" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a></li>';
 
-                    echo '</ul>';
-                    ?>
-					</ul>
-				</nav>
-                        
+                                echo '</ul>';
+                                ?>
+                            </ul>
+                        </nav>
+
 
                     </div><!--//tab-pane-->
 
@@ -532,7 +566,31 @@ global $hostname; ?>
                     }
                 });
             }
+            document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('searchInput').addEventListener('input', function () {
+                    if (this.value.length >= 3) {
+                        var form = document.getElementById('searchForm');
+                        var submitButton = form.querySelector('.search-btn');
+                        if (submitButton) {
+                            submitButton.click();
+                        }
+                    }
+                });
+            });
 
+
+            $(document).ready(function () {
+                checkResponseData();
+            });
+
+            function checkResponseData() {
+                var tableBody = document.querySelector('.table.app-table-hover tbody');
+
+                if (tableBody && tableBody.rows.length === 0) {
+                    var emptyMessage = '<div class="col-auto p-5 shadow"><h3 class="text-center">Data is empty</h3></div>';
+                    $('.table.app-table-hover').replaceWith(emptyMessage);
+                }
+            }
         </script>
 
     </div>

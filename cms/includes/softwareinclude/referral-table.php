@@ -5,14 +5,14 @@ session_start();
 $recordsPerPage = 10;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 0;
 $offset = ($page - 1) * $recordsPerPage;
-
+$search = isset($_GET['Search']) ? $_GET['Search'] : '';
 // $referralId = $_SESSION['sessionuserid'] + 10000;
 
 $website_accounts_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($page != 0) {
 
 
-    $referralAccountsQuery = "SELECT * FROM website_accounts ORDER BY id DESC LIMIT ?, ?";
+    $referralAccountsQuery = "SELECT * FROM website_accounts WHERE fullname LIKE '%$search%' OR email LIKE '%$search%' ORDER BY id DESC LIMIT ?, ?";
     $referralAccountsStmt = $conn->prepare($referralAccountsQuery);
     $referralAccountsStmt->bind_param("ii", $offset, $recordsPerPage);
 
@@ -30,7 +30,7 @@ if ($page != 0) {
     // $filteredAccounts now contains the filtered results based on the condition
 
     // Count total records for pagination
-    $stmtTotalRecords = $conn->prepare("SELECT COUNT(*) as total FROM website_accounts");
+    $stmtTotalRecords = $conn->prepare("SELECT COUNT(*) as total FROM website_accounts WHERE fullname LIKE '%$search%'");
     $stmtTotalRecords->execute();
 
     // Check for errors
